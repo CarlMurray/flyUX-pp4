@@ -21,6 +21,15 @@ class Flight(models.Model):
     aircraft = models.ForeignKey("Aircraft", on_delete=models.CASCADE, related_name='aircraft')
     
 class Aircraft(models.Model):
+    
+    AIRCRAFT_TYPES = [
+        ('b737-700','B737-700'),
+        ('b737-600','B737-600'),
+        ('a321-100','A321-100'),
+        ('a321-200','A321-200')
+    ]
+    
     identification = models.CharField(max_length=50)
     seats = models.PositiveIntegerField()
-    ac_type = models.CharField(max_length=50, verbose_name='Aircraft type')
+    aircraft_type = models.CharField(max_length=50, verbose_name='Aircraft type', choices=AIRCRAFT_TYPES )
+

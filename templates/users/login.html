@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <form method='post'>
+        {% csrf_token %}
+        <div>
+            <label for="id_email">Email:</label>
+            <input type="email" name="email" maxlength="254" required id="id_email">
+        </div>
+        <div>
+            <label for="id_password">Password:</label>
+            <input type="password" name="password" maxlength="128" required id="id_password">
+        </div>
+        <button type="submit">Login</button>
+    </form>
+{% endblock content %}

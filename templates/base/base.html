@@ -37,11 +37,11 @@
                         {% if user.is_authenticated %}
                         <div class="flex">
                         <a href="#" class="text-white border-[1px] border-r-white pr-4">Welcome, <strong>{{ user.first_name }}</strong></a>
-                        <a href="#" class="text-white pl-4">Logout</a></div>
+                        <a href="{% url 'logout' %}" class="text-white pl-4">Logout</a></div>
                         {% else %}
                         <a href="#"
                         class="text-white py-auto px-6 rounded-full h-10 flex items-center">Signup</a>
-                        <a href="#"
+                        <a href="{% url 'login' %}"
                         class="bg-white py-auto px-6 rounded-full h-10 flex items-center font-bold text-rose-500">Login</a>
                         {% endif %}
                     </div>

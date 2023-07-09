@@ -6,7 +6,7 @@ iata_validator = RegexValidator(regex=r'[A-Z]+', message='IATA code should be th
 
 class Airport(models.Model):
     name = models.CharField(max_length=50, verbose_name='Airport name')
-    iata = models.CharField(max_length=3, validators=[iata_validator], verbose_name='IATA code')
+    iata = models.CharField(max_length=3, validators=[iata_validator], verbose_name='IATA code', unique=True)
     locality = models.CharField(max_length=50)
     region = models.CharField(max_length=50)
     country = models.CharField(max_length=50)

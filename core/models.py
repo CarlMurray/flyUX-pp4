@@ -11,6 +11,9 @@ class Airport(models.Model):
     region = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
     
+    def __str__(self):
+        return f'{self.name}, {self.iata}'
+        
 class Flight(models.Model):
     flight_number = models.CharField(max_length=50, validators=[flight_number_validator])
     origin = models.ForeignKey("Airport", on_delete=models.CASCADE, related_name='origin')
@@ -19,6 +22,9 @@ class Flight(models.Model):
     arr_time = models.DateTimeField(auto_now=False, auto_now_add=False, verbose_name='Arrival time')
     price = models.DecimalField(max_digits=7, decimal_places=2)
     aircraft = models.ForeignKey("Aircraft", on_delete=models.CASCADE, related_name='aircraft')
+    
+    def __str__(self):
+        return f'{self.flight_number}, {self.origin} --> {self.destination}'
     
 class Aircraft(models.Model):
     
@@ -32,4 +38,7 @@ class Aircraft(models.Model):
     identification = models.CharField(max_length=50)
     seats = models.PositiveIntegerField()
     aircraft_type = models.CharField(max_length=50, verbose_name='Aircraft type', choices=AIRCRAFT_TYPES )
+    
+    def __str__(self):
+        return f'{self.aircraft_type}'
 

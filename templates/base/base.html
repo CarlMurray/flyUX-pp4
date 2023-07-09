@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="flex flex-col justify-between h-screen">
+        <header class="flex items-center w-full mx-auto h-20 bg-rose-500 relative">
+            <nav class="flex justify-between container items-center m-auto border-2 px-4">
+                <div class="flex gap-4">
+                    
+                    <!-- HEADER LOGO -->
+                    <div class="border-2 w-20 flex items-center">
+                        <img src="/static/img/flyux-logo.png" alt="" height="" />
+                    </div>
+
+                    <!-- NAV ITEMS -->
+                    <div class="hidden sm:flex items-center border-2 justify-self-center">
+                        <ul class="flex">
+                            <li>
+                                <a href="#" class="text-white px-4">Explore</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-white px-4 border-x-[1px]">Explore</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-white px-4">Explore</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- SIGNUP LOGIN CTAs-->
+                <div class="hidden sm:block border-2">
+                    <div class="hidden sm:flex">
+                        <a href="#"
+                           class="text-white py-auto px-6 rounded-full h-10 flex items-center">Signup</a>
+                        <a href="#"
+                           class="bg-white py-auto px-6 rounded-full h-10 flex items-center font-bold text-rose-500">Login</a>
+                    </div>
+                </div>
+
+                <!-- MOBILE NAV -->
+                <!-- HAMBURGER ICON -->
+                <div class="sm:hidden">
+                    <div class="sm:hidden flex flex-col items-center justify-between w-10 h-8"
+                         id="hamburger-menu">
+                        <span class="rounded-full w-full px-2 py-0 block h-0 border-2 border-white"></span>
+                        <span class="rounded-full w-full px-2 py-0 block h-0 border-2 border-white"></span>
+                        <span class="rounded-full w-full px-2 py-0 block h-0 border-2 border-white"></span>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- EXPANDED MENU ON CLICK -->
+            <div class="hidden w-screen h-[30vh] bg-rose-500 absolute border-2 top-full items-center justify-center flex"
+                 id="hamburger-menu-expanded">
+                <ul class="flex flex-col items-center gap-10 text-2xl">
+                    <li>
+                        <a href="#" class="text-white px-4">Explore</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-white px-4">Explore</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-white px-4">Explore</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- CONTENT BLOCK -->
+        {% block content %}
+        {% endblock content %}
+
+        <!-- FOOTER -->
+        <footer class="border-2 flex w-screen px-4 align-center bg-rose-500 h-20">
+            <div class="border-2 flex w-full justify-between items-center px-4">
+                <div class="border-2">
+                    <p class="text-sm sm:text-lg text-white">A Django project by Carl Murray</p>
+                </div>
+                <div class="border-2 flex items-center gap-6 justify-between px-4">
+                    <a href="#" class="text-white">Link</a>
+                    <a href="#" class="text-white">Link</a>
+                    <a href="#" class="text-white">Link</a>
+                </div>
+            </div>
+        </footer>
+        <script src="{{static 'js/base.js'}}"></script>
+    </body>
+</html>

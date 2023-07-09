@@ -10,14 +10,14 @@
     </head>
     <body class="flex flex-col justify-between h-screen">
         <header class="flex items-center w-full mx-auto h-20 bg-rose-500 relative">
-            <nav class="flex justify-between container items-center m-auto border-2 px-5">
+            <nav class="flex justify-between container items-center m-auto  px-5">
                 <div class="flex gap-4">
                     <!-- HEADER LOGO -->
-                    <div class="border-2 w-20 flex items-center">
+                    <div class=" w-20 flex items-center">
                         <img src="/static/img/flyux-logo.png" alt="" height="" />
                     </div>
                     <!-- NAV ITEMS -->
-                    <div class="hidden sm:flex items-center border-2 justify-self-center">
+                    <div class="hidden sm:flex items-center  justify-self-center">
                         <ul class="flex">
                             <li>
                                 <a href="#" class="text-white px-4">Explore</a>
@@ -32,17 +32,17 @@
                     </div>
                 </div>
                 <!-- SIGNUP LOGIN CTAs-->
-                <div class="hidden sm:block border-2">
+                <div class="hidden sm:block ">
                     <div class="hidden sm:flex">
                         {% if user.is_authenticated %}
                         <div class="flex">
-                        <a href="#" class="text-white border-[1px] border-r-white pr-4">Welcome, <strong>{{ user.first_name }}</strong></a>
+                        <a href="#" class="text-white border-r-[1px] border-r-white pr-4">Welcome, <strong>{{ user.first_name }}</strong></a>
                         <a href="{% url 'logout' %}" class="text-white pl-4">Logout</a></div>
                         {% else %}
                         <a href="#"
                         class="text-white py-auto px-6 rounded-full h-10 flex items-center">Signup</a>
                         <a href="{% url 'login' %}"
-                        class="bg-white py-auto px-6 rounded-full h-10 flex items-center font-bold text-rose-500">Login</a>
+                        class="bg-rose-500 py-auto px-6 border-[1px] border-white rounded-2xl h-10 flex items-center font-bold text-white">Login</a>
                         {% endif %}
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                 </div>
             </nav>
             <!-- EXPANDED MENU ON CLICK -->
-            <div class="hidden w-screen h-[30vh] bg-rose-500 absolute border-2 top-full items-center justify-center flex"
+            <div class="hidden w-screen h-[30vh] bg-rose-500 absolute  top-full items-center justify-center flex"
                  id="hamburger-menu-expanded">
                 <ul class="flex flex-col items-center gap-10 text-2xl">
                     <li>
@@ -77,12 +77,12 @@
         {% block content %}
         {% endblock content %}
         <!-- FOOTER -->
-        <footer class="border-2 flex w-screen justify-center align-center bg-rose-500 h-20">
-            <div class="border-2 container flex w-full justify-between items-center px-5">
-                <div class="border-2">
+        <footer class=" flex w-screen justify-center align-center bg-rose-500 h-20">
+            <div class=" container flex w-full justify-between items-center px-5">
+                <div class="">
                     <p class="text-sm sm:text-lg text-white">A Django project by Carl Murray</p>
                 </div>
-                <div class="border-2 flex items-center gap-6 justify-between px-4">
+                <div class=" flex items-center gap-6 justify-between px-4">
                     <a href="#" class="text-white">Link</a>
                     <a href="#" class="text-white">Link</a>
                     <a href="#" class="text-white">Link</a>

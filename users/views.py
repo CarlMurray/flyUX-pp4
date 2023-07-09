@@ -18,9 +18,7 @@ def signup_view(request):
 def login_view(request):
     if request.method == 'POST':
         email = request.POST.get('email')
-        print(email)
         password = request.POST.get('password')
-        print(password)
         data = {
             'username':email,
             'password':password
@@ -28,10 +26,8 @@ def login_view(request):
         form = LoginForm(data=data)
         if form.is_valid():
             form = form.cleaned_data
-            print(form)
             user = authenticate(request, email=email, password=password)
             if user is not None:
-                print('yepp')
                 login(request, user)
                 return redirect('home-page')
             else:

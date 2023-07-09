@@ -1,15 +1,36 @@
 {% extends 'base/base.html' %}
 {% block content %}
-    <form method='post'>
-        {% csrf_token %}
-        <div>
-            <label for="id_email">Email:</label>
-            <input type="email" name="email" maxlength="254" required id="id_email">
-        </div>
-        <div>
-            <label for="id_password">Password:</label>
-            <input type="password" name="password" maxlength="128" required id="id_password">
-        </div>
-        <button type="submit">Login</button>
-    </form>
+<div class="container mx-auto flex justify-center px-5">
+    <div class="flex flex-col justify-center w-full mx-auto container p-12 rounded-3xl drop-shadow-lg bg-white max-w-xl">
+        <h3 class="mx-auto text-rose-500 text-3xl font-bold  mb-6">Login</h3>
+        <form method='post' class="flex justify-center mx-auto w-full">
+            {% csrf_token %}
+            <div class="flex flex-col w-3/4 gap-4">
+                <div class="flex flex-col">
+                    {% comment %} <label for="id_email" class="">Email</label> {% endcomment %}
+                    <input type="email"
+                           name="email"
+                           maxlength="254"
+                           required
+                           placeholder="Email"
+                           id="id_email"
+                           class="h-12 px-4 rounded-2xl  border-gray-400 bg-white  focus:drop-shadow-md border-[1px] focus:outline-rose-500">
+                </div>
+                <div class="flex flex-col">
+                    {% comment %} <label for="id_password" class="">Password:</label> {% endcomment %}
+                    <input type="password"
+                           name="password"
+                           maxlength="128"
+                           required
+                           placeholder="Password"
+                           id="id_password"
+                           class="h-12 px-4 rounded-2xl  border-gray-400 bg-white  focus:drop-shadow-md border-[1px] focus:outline-rose-500">
+                </div>
+                <button type="submit"
+                        class="bg-rose-500 py-auto px-6 rounded-full h-12 flex items-center font-bold text-white text-center justify-center">
+                    Login
+                </button>
+            </div>
+        </form>
+    </div></div>
 {% endblock content %}

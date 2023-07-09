@@ -12,12 +12,10 @@
         <header class="flex items-center w-full mx-auto h-20 bg-rose-500 relative">
             <nav class="flex justify-between container items-center m-auto border-2 px-4">
                 <div class="flex gap-4">
-                    
                     <!-- HEADER LOGO -->
                     <div class="border-2 w-20 flex items-center">
                         <img src="/static/img/flyux-logo.png" alt="" height="" />
                     </div>
-
                     <!-- NAV ITEMS -->
                     <div class="hidden sm:flex items-center border-2 justify-self-center">
                         <ul class="flex">
@@ -33,7 +31,6 @@
                         </ul>
                     </div>
                 </div>
-
                 <!-- SIGNUP LOGIN CTAs-->
                 <div class="hidden sm:block border-2">
                     <div class="hidden sm:flex">
@@ -43,7 +40,6 @@
                            class="bg-white py-auto px-6 rounded-full h-10 flex items-center font-bold text-rose-500">Login</a>
                     </div>
                 </div>
-
                 <!-- MOBILE NAV -->
                 <!-- HAMBURGER ICON -->
                 <div class="sm:hidden">
@@ -55,7 +51,6 @@
                     </div>
                 </div>
             </nav>
-
             <!-- EXPANDED MENU ON CLICK -->
             <div class="hidden w-screen h-[30vh] bg-rose-500 absolute border-2 top-full items-center justify-center flex"
                  id="hamburger-menu-expanded">
@@ -72,11 +67,9 @@
                 </ul>
             </div>
         </header>
-
         <!-- CONTENT BLOCK -->
         {% block content %}
         {% endblock content %}
-
         <!-- FOOTER -->
         <footer class="border-2 flex w-screen px-4 align-center bg-rose-500 h-20">
             <div class="border-2 flex w-full justify-between items-center px-4">
@@ -90,6 +83,6 @@
                 </div>
             </div>
         </footer>
-        <script src="{{static 'js/base.js'}}"></script>
+        <script src="{% static 'js/base.js' %}"></script>
     </body>
 </html>

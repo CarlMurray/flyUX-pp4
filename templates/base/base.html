@@ -10,7 +10,7 @@
     </head>
     <body class="flex flex-col justify-between h-screen">
         <header class="flex items-center w-full mx-auto h-20 bg-rose-500 relative">
-            <nav class="flex justify-between container items-center m-auto border-2 px-4">
+            <nav class="flex justify-between container items-center m-auto border-2 px-5">
                 <div class="flex gap-4">
                     <!-- HEADER LOGO -->
                     <div class="border-2 w-20 flex items-center">
@@ -34,10 +34,16 @@
                 <!-- SIGNUP LOGIN CTAs-->
                 <div class="hidden sm:block border-2">
                     <div class="hidden sm:flex">
+                        {% if user.is_authenticated %}
+                        <div class="flex">
+                        <a href="#" class="text-white border-[1px] border-r-white pr-4">Welcome, <strong>{{ user.first_name }}</strong></a>
+                        <a href="#" class="text-white pl-4">Logout</a></div>
+                        {% else %}
                         <a href="#"
-                           class="text-white py-auto px-6 rounded-full h-10 flex items-center">Signup</a>
+                        class="text-white py-auto px-6 rounded-full h-10 flex items-center">Signup</a>
                         <a href="#"
-                           class="bg-white py-auto px-6 rounded-full h-10 flex items-center font-bold text-rose-500">Login</a>
+                        class="bg-white py-auto px-6 rounded-full h-10 flex items-center font-bold text-rose-500">Login</a>
+                        {% endif %}
                     </div>
                 </div>
                 <!-- MOBILE NAV -->
@@ -71,8 +77,8 @@
         {% block content %}
         {% endblock content %}
         <!-- FOOTER -->
-        <footer class="border-2 flex w-screen px-4 align-center bg-rose-500 h-20">
-            <div class="border-2 flex w-full justify-between items-center px-4">
+        <footer class="border-2 flex w-screen justify-center align-center bg-rose-500 h-20">
+            <div class="border-2 container flex w-full justify-between items-center px-5">
                 <div class="border-2">
                     <p class="text-sm sm:text-lg text-white">A Django project by Carl Murray</p>
                 </div>

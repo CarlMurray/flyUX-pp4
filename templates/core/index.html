@@ -2,63 +2,70 @@
 {% block content %}
     <!-- BODY BACKGROUND -->
     <div class="w-screen h-full bg-gray-100">
-    <!-- OVERALL CONTAINER -->
-    <div class="container h-full pt-60 px-5 mx-auto">
-        <!-- OUTER CONTAINER FOR FORM -->
-        <div class="container border-4 p-12 mx-auto h-72 flex items-center">
-            <!-- FORM CONTRAINER -->
-            <div class="container border-2 mx-auto">
-                <form>
-                    <!-- INNER FORM CONTAINER -->
-                    <div class="">
-                        <!-- RADIO INPUT CONTAINER -->
-                        <div class="col-span-4 flex-auto">
-                            <fieldset class="flex gap-6 border-4">
-                                <div class="flex items-center gap-2">
-                                    <input type="radio"
-                                           name="trip_type"
-                                           id="return_trip_radio"
-                                           class="text-rose-500 focus:outline-rose-500 focus:bg-rose-500">
-                                    <label for="return_trip_radio">Return</label>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <input type="radio"
-                                           name="trip_type"
-                                           id="oneway_trip_radio"
-                                           class="text-rose-500 focus:outline-rose-500 focus:bg-rose-500">
-                                    <label for="oneway_trip_radio">One-way</label>
-                                </div>
-                            </fieldset>
+        <!-- OVERALL CONTAINER -->
+        <div class="container h-full pt-16 px-5 mx-auto">
+            <div class="mb-12">
+                <h1 class="text-center text-3xl font-bold">Book a flight</h1>
+                <p class="text-center text-lg">We can bring you anywhere!*</p>
+                <p class="text-center text-xs mt-6">*almost</p>
+            </div>
+            <!-- OUTER CONTAINER FOR FORM -->
+            <div class="container p-8 mx-auto h-auto flex items-center rounded-3xl drop-shadow-lg bg-white">
+                <!-- FORM CONTRAINER -->
+                <div class="container mx-auto">
+                    <form>
+                        <!-- INNER FORM CONTAINER -->
+                        <div class="">
+                            <!-- RADIO INPUT CONTAINER -->
+                            <div class="col-span-4 flex-auto mb-3">
+                                <fieldset class="flex gap-6">
+                                    <div class="flex items-center gap-2">
+                                        <input type="radio"
+                                               name="trip_type"
+                                               id="return_trip_radio"
+                                               class="text-rose-500 focus:outline-rose-500 focus:bg-rose-500 border-gray-400 w-5 h-5"
+                                               checked>
+                                        <label for="return_trip_radio">Return</label>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <input type="radio"
+                                               name="trip_type"
+                                               id="oneway_trip_radio"
+                                               class="text-rose-500 focus:outline-rose-500 focus:bg-rose-500 border-gray-400 w-5 h-5">
+                                        <label for="oneway_trip_radio">One-way</label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="grid grid-cols-4 gap-3">
+                                <input type="text"
+                                       name="origin"
+                                       id=""
+                                       class="col-span-full sm:col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm">
+                                <input type="text"
+                                       name="destination"
+                                       id=""
+                                       class="col-span-full sm:col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm">
+                                <input type="text"
+                                       name="date_from"
+                                       id=""
+                                       class="col-span-2 sm:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm">
+                                <input type="text"
+                                       name="date_to"
+                                       id=""
+                                       class="col-span-2 sm:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm">
+                                <input type="text"
+                                       name="passengers"
+                                       id=""
+                                       class="col-span-4 sm:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm">
+                                <input type="submit"
+                                       name="submit"
+                                       id=""
+                                       class="col-span-4 sm:col-span-1 bg-rose-500 py-auto px-6 rounded-full h-12 flex items-center font-bold text-white text-center justify-center drop-shadow-sm">
+                            </div>
                         </div>
-                        <div class="grid grid-cols-4 gap-3">
-                            <input type="text"
-                                   name="origin"
-                                   id=""
-                                   class="col-span-full sm:col-span-2 h-12 px-4 rounded-2xl  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500">
-                            <input type="text"
-                                   name="destination"
-                                   id=""
-                                   class="col-span-full sm:col-span-2 h-12 px-4 rounded-2xl  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500">
-                            <input type="text"
-                                   name="date_from"
-                                   id=""
-                                   class="col-span-2 sm:col-span-1 h-12 px-4 rounded-2xl  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500">
-                            <input type="text"
-                                   name="date_to"
-                                   id=""
-                                   class="col-span-2 sm:col-span-1 h-12 px-4 rounded-2xl  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500">
-                            <input type="text"
-                                   name="passengers"
-                                   id=""
-                                   class="col-span-4 sm:col-span-1 h-12 px-4 rounded-2xl  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500">
-                            <input type="submit"
-                                   name="submit"
-                                   id=""
-                                   class="col-span-4 sm:col-span-1 h-12 px-4 rounded-2xl  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500">
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div></div>
+    </div>
 {% endblock content %}

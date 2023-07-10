@@ -13,7 +13,8 @@
             <div class="container p-8 mx-auto h-auto flex items-center rounded-3xl drop-shadow-lg bg-white">
                 <!-- FORM CONTRAINER -->
                 <div class="container mx-auto">
-                    <form>
+                    <form method='post'>
+                        {% csrf_token %}
                         <!-- INNER FORM CONTAINER -->
                         <div class="">
                             <!-- RADIO INPUT CONTAINER -->

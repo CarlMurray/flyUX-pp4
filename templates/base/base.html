@@ -6,7 +6,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
+        <!-- TAILWIND CSS FRAMEWORK-->
         <script src="https://cdn.tailwindcss.com"></script>
+        <!-- FLOWBITE CSS FRAMEWORK -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css"
+              rel="stylesheet" />
     </head>
     <body class="flex flex-col justify-between h-screen">
         <header class="flex items-center w-full mx-auto h-20 bg-rose-500 relative">
@@ -35,14 +39,15 @@
                 <div class="hidden sm:block ">
                     <div class="hidden sm:flex">
                         {% if user.is_authenticated %}
-                        <div class="flex">
-                        <a href="#" class="text-white border-r-[1px] border-r-white pr-4">Welcome, <strong>{{ user.first_name }}</strong></a>
-                        <a href="{% url 'logout' %}" class="text-white pl-4">Logout</a></div>
+                            <div class="flex">
+                                <a href="#" class="text-white border-r-[1px] border-r-white pr-4">Welcome, <strong>{{ user.first_name }}</strong></a>
+                                <a href="{% url 'logout' %}" class="text-white pl-4">Logout</a>
+                            </div>
                         {% else %}
-                        <a href="#"
-                        class="text-white py-auto px-6 rounded-full h-10 flex items-center">Signup</a>
-                        <a href="{% url 'login' %}"
-                        class="bg-rose-500 py-auto px-6 border-[1px] border-white rounded-2xl h-10 flex items-center font-bold text-white">Login</a>
+                            <a href="#"
+                               class="text-white py-auto px-6 rounded-full h-10 flex items-center">Signup</a>
+                            <a href="{% url 'login' %}"
+                               class="bg-rose-500 py-auto px-6 border-[1px] border-white rounded-2xl h-10 flex items-center font-bold text-white">Login</a>
                         {% endif %}
                     </div>
                 </div>
@@ -80,15 +85,26 @@
         <footer class=" flex w-screen justify-center align-center bg-rose-500 h-20">
             <div class=" container flex w-full justify-between items-center px-5">
                 <div class="">
-                    <p class="text-sm font-thin text-white">A Django project by <span class="font-normal">Carl Murray</span></p>
+                    <p class="text-sm font-thin text-white">
+                        A Django project by <span class="font-normal">Carl Murray</span>
+                    </p>
                 </div>
-                <div class=" flex items-center gap-6 justify-between px-4">
-                    <a href="https://carlmurray.design/" class="text-white"><img src="{% static 'img/footer/footer-portfolio-icon.svg' %}" alt="Portfolio icon"></a>
-                    <a href="https://github.com/CarlMurray/flyUX-pp4" class="text-white"><img src="{% static 'img/footer/footer-github-icon.svg' %}" alt=""></a>
-                    <a href="https://www.linkedin.com/in/carljmurray/" class="text-white"><img src="{% static 'img/footer/footer-linkedin-icon.svg' %}" alt=""></a>
+                <div class=" flex items-center gap-6 justify-between pl-4">
+                    <a href="https://carlmurray.design/" class="text-white">
+                        <img src="{% static 'img/footer/footer-portfolio-icon.svg' %}"
+                             alt="Portfolio icon">
+                    </a>
+                    <a href="https://github.com/CarlMurray/flyUX-pp4" class="text-white">
+                        <img src="{% static 'img/footer/footer-github-icon.svg' %}" alt="">
+                    </a>
+                    <a href="https://www.linkedin.com/in/carljmurray/" class="text-white">
+                        <img src="{% static 'img/footer/footer-linkedin-icon.svg' %}" alt="">
+                    </a>
                 </div>
             </div>
         </footer>
         <script src="{% static 'js/base.js' %}"></script>
+        <!-- FLOWBITE CSS FRAMEWORK -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
     </body>
 </html>

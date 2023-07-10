@@ -1,42 +1,44 @@
 {% extends 'base/base.html' %}
 {% block content %}
-    <div class="container mx-auto flex justify-center px-5">
-        <div class="flex flex-col justify-center w-full mx-auto container p-12 rounded-3xl drop-shadow-lg bg-white max-w-xl">
-            <!-- LOGIN HEADER -->
-            <h3 class="mx-auto text-rose-500 text-3xl font-bold  mb-6">Login</h3>
-            <!-- FORM -->
-            <form method='post' class="flex justify-center mx-auto w-full">
-                {% csrf_token %}
-                <!-- FORM FIELDS CONTAINER -->
-                <div class="flex flex-col w-3/4 gap-4">
-                    <!-- EMAIL FIELD -->
-                    <div class="flex flex-col">
-                        {% comment %} <label for="id_email" class="">Email</label> {% endcomment %}
-                        <input type="email"
-                               name="email"
-                               maxlength="254"
-                               required
-                               placeholder="Email"
-                               id="id_email"
-                               class="h-12 px-4 rounded-2xl  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-rose-500 focus:outline-0 focus:ring-0">
+    <div class="bg-gray-100 h-full flex items-center">
+        <div class="container mx-auto flex justify-center px-5">
+            <div class="flex flex-col justify-center w-full mx-auto container p-6 sm:p-12 rounded-3xl drop-shadow-lg bg-white max-w-xl">
+                <!-- LOGIN HEADER -->
+                <h3 class="mx-auto text-rose-500 text-3xl font-bold  mb-6">Login</h3>
+                <!-- FORM -->
+                <form method='post' class="flex justify-center mx-auto w-full">
+                    {% csrf_token %}
+                    <!-- FORM FIELDS CONTAINER -->
+                    <div class="flex flex-col w-full sm:w-3/4 gap-4">
+                        <!-- EMAIL FIELD -->
+                        <div class="flex flex-col">
+                            {% comment %} <label for="id_email" class="">Email</label> {% endcomment %}
+                            <input type="email"
+                                   name="email"
+                                   maxlength="254"
+                                   required
+                                   placeholder="Email"
+                                   id="id_email"
+                                   class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-rose-500 focus:outline-0 focus:ring-0">
+                        </div>
+                        <!-- PASSWORD FIELD -->
+                        <div class="flex flex-col">
+                            {% comment %} <label for="id_password" class="">Password:</label> {% endcomment %}
+                            <input type="password"
+                                   name="password"
+                                   maxlength="128"
+                                   required
+                                   placeholder="Password"
+                                   id="id_password"
+                                   class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-rose-500 focus:outline-0 focus:ring-0">
+                        </div>
+                        <button type="submit"
+                                class="bg-rose-500 py-auto px-6 rounded-full h-12 flex items-center font-bold text-white text-center justify-center">
+                            Login
+                        </button>
                     </div>
-                    <!-- PASSWORD FIELD -->
-                    <div class="flex flex-col">
-                        {% comment %} <label for="id_password" class="">Password:</label> {% endcomment %}
-                        <input type="password"
-                               name="password"
-                               maxlength="128"
-                               required
-                               placeholder="Password"
-                               id="id_password"
-                               class="h-12 px-4 rounded-2xl  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-rose-500 focus:outline-0 focus:ring-0">
-                    </div>
-                    <button type="submit"
-                            class="bg-rose-500 py-auto px-6 rounded-full h-12 flex items-center font-bold text-white text-center justify-center">
-                        Login
-                    </button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock content %}

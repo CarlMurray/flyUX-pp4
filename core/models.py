@@ -18,8 +18,9 @@ class Flight(models.Model):
     flight_number = models.CharField(max_length=50, validators=[flight_number_validator])
     origin = models.ForeignKey("Airport", on_delete=models.CASCADE, related_name='origin')
     destination = models.ForeignKey("Airport", on_delete=models.CASCADE, related_name='destination')
-    dep_time = models.DateTimeField(auto_now=False, auto_now_add=False, verbose_name='Departure time')
-    arr_time = models.DateTimeField(auto_now=False, auto_now_add=False, verbose_name='Arrival time')
+    outbound_date = models.DateField(auto_now=False, auto_now_add=False)
+    dep_time = models.TimeField(auto_now=False, auto_now_add=False, verbose_name='Departure time')
+    arr_time = models.TimeField(auto_now=False, auto_now_add=False, verbose_name='Arrival time')
     price = models.DecimalField(max_digits=7, decimal_places=2)
     aircraft = models.ForeignKey("Aircraft", on_delete=models.CASCADE, related_name='aircraft')
     

@@ -39,28 +39,38 @@
                             <div class="grid grid-cols-4 gap-3">
                                 <input type="text"
                                        name="origin"
-                                       id=""
+                                       id="" placeholder="Origin"
                                        class="col-span-full sm:col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm">
                                 <input type="text"
                                        name="destination"
-                                       id=""
+                                       id="" placeholder="Destination"
                                        class="col-span-full sm:col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm">
+                                <!-- OUTBOUND DATE-->
                                 <input type="text"
-                                       name="date_from"
-                                       id=""
-                                       class="col-span-2 sm:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm">
+                                       name="date_outbound"
+                                       id="flatpickr-date-outbound"
+                                       class="flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm"
+                                       type="text"
+                                       placeholder="Outbound Date"
+                                       data-id="datetime"
+                                       readonly="readonly">
+                                <!-- RETURN DATE -->
                                 <input type="text"
-                                       name="date_to"
-                                       id=""
-                                       class="col-span-2 sm:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm">
+                                       name="date_return"
+                                       id="flatpickr-date-return"
+                                       class="flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm"
+                                       type="text"
+                                       placeholder="Return Date"
+                                       data-id="datetime"
+                                       readonly="readonly">
                                 <input type="text"
                                        name="passengers"
-                                       id=""
-                                       class="col-span-4 sm:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm">
+                                       id="" placeholder="Passengers"
+                                       class="col-span-4 sm:col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm">
                                 <input type="submit"
                                        name="submit"
                                        id=""
-                                       class="col-span-4 sm:col-span-1 bg-rose-500 py-auto px-6 rounded-full h-12 flex items-center font-bold text-white text-center justify-center drop-shadow-sm">
+                                       class="col-span-4 sm:col-span-2 md:col-span-1 bg-rose-500 py-auto px-6 rounded-full h-12 flex items-center font-bold text-white text-center justify-center drop-shadow-sm">
                             </div>
                         </div>
                     </form>

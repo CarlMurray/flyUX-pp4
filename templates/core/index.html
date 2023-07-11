@@ -13,7 +13,7 @@
             <div class="container p-8 mx-auto h-auto flex items-center rounded-3xl drop-shadow-lg bg-white">
                 <!-- FORM CONTRAINER -->
                 <div class="container mx-auto">
-                    <form method='post'>
+                    <form action="{% url 'search-results' %}" method="get">
                         {% csrf_token %}
                         <!-- INNER FORM CONTAINER -->
                         <div class="">
@@ -24,6 +24,7 @@
                                         <input type="radio"
                                                name="trip_type"
                                                id="return_trip_radio"
+                                               value="return"
                                                class="text-primary focus:outline-primary focus:bg-primary border-gray-400 w-5 h-5"
                                                checked>
                                         <label for="return_trip_radio" class="text-text">Return</label>
@@ -32,6 +33,7 @@
                                         <input type="radio"
                                                name="trip_type"
                                                id="oneway_trip_radio"
+                                               value="oneway"
                                                class="text-primary focus:outline-primary focus:bg-primary border-gray-400 w-5 h-5">
                                         <label for="oneway_trip_radio" class="text-text">One-way</label>
                                     </div>
@@ -40,11 +42,13 @@
                             <div class="grid grid-cols-4 gap-3">
                                 <input type="text"
                                        name="origin"
-                                       id="" placeholder="Origin"
+                                       id=""
+                                       placeholder="Origin"
                                        class="col-span-full sm:col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm">
                                 <input type="text"
                                        name="destination"
-                                       id="" placeholder="Destination"
+                                       id=""
+                                       placeholder="Destination"
                                        class="col-span-full sm:col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm">
                                 <!-- OUTBOUND DATE-->
                                 <input type="text"
@@ -66,7 +70,8 @@
                                        readonly="readonly">
                                 <input type="text"
                                        name="passengers"
-                                       id="" placeholder="Passengers"
+                                       id=""
+                                       placeholder="Passengers"
                                        class="col-span-4 sm:col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm">
                                 <input type="submit"
                                        name="submit"

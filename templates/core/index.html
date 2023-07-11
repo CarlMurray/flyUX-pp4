@@ -5,9 +5,9 @@
         <!-- OVERALL CONTAINER -->
         <div class="container h-full pt-16 px-5 mx-auto">
             <div class="mb-12">
-                <h1 class="text-center text-3xl font-bold">Book a flight</h1>
-                <p class="text-center text-lg">We can bring you anywhere!*</p>
-                <p class="text-center text-xs mt-6">*almost</p>
+                <h1 class="text-center text-3xl font-bold text-text">Book a flight</h1>
+                <p class="text-center text-lg text-text">We can bring you anywhere!*</p>
+                <p class="text-center text-xs mt-6 text-text">*almost</p>
             </div>
             <!-- OUTER CONTAINER FOR FORM -->
             <div class="container p-8 mx-auto h-auto flex items-center rounded-3xl drop-shadow-lg bg-white">
@@ -24,16 +24,16 @@
                                         <input type="radio"
                                                name="trip_type"
                                                id="return_trip_radio"
-                                               class="text-rose-500 focus:outline-rose-500 focus:bg-rose-500 border-gray-400 w-5 h-5"
+                                               class="text-primary focus:outline-primary focus:bg-primary border-gray-400 w-5 h-5"
                                                checked>
-                                        <label for="return_trip_radio">Return</label>
+                                        <label for="return_trip_radio" class="text-text">Return</label>
                                     </div>
                                     <div class="flex items-center gap-2">
                                         <input type="radio"
                                                name="trip_type"
                                                id="oneway_trip_radio"
-                                               class="text-rose-500 focus:outline-rose-500 focus:bg-rose-500 border-gray-400 w-5 h-5">
-                                        <label for="oneway_trip_radio">One-way</label>
+                                               class="text-primary focus:outline-primary focus:bg-primary border-gray-400 w-5 h-5">
+                                        <label for="oneway_trip_radio" class="text-text">One-way</label>
                                     </div>
                                 </fieldset>
                             </div>
@@ -41,16 +41,16 @@
                                 <input type="text"
                                        name="origin"
                                        id="" placeholder="Origin"
-                                       class="col-span-full sm:col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm">
+                                       class="col-span-full sm:col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm">
                                 <input type="text"
                                        name="destination"
                                        id="" placeholder="Destination"
-                                       class="col-span-full sm:col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm">
+                                       class="col-span-full sm:col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm">
                                 <!-- OUTBOUND DATE-->
                                 <input type="text"
                                        name="date_outbound"
                                        id="flatpickr-date-outbound"
-                                       class="flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm"
+                                       class="flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
                                        type="text"
                                        placeholder="Outbound Date"
                                        data-id="datetime"
@@ -59,7 +59,7 @@
                                 <input type="text"
                                        name="date_return"
                                        id="flatpickr-date-return"
-                                       class="flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm"
+                                       class="flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
                                        type="text"
                                        placeholder="Return Date"
                                        data-id="datetime"
@@ -67,11 +67,11 @@
                                 <input type="text"
                                        name="passengers"
                                        id="" placeholder="Passengers"
-                                       class="col-span-4 sm:col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-rose-500 drop-shadow-sm">
+                                       class="col-span-4 sm:col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm">
                                 <input type="submit"
                                        name="submit"
                                        id=""
-                                       class="col-span-4 sm:col-span-2 md:col-span-1 bg-rose-500 py-auto px-6 rounded-full h-12 flex items-center font-bold text-white text-center justify-center drop-shadow-sm">
+                                       class="col-span-4 sm:col-span-2 md:col-span-1 bg-primary py-auto px-6 rounded-full h-12 flex items-center font-bold text-white text-center justify-center drop-shadow-sm">
                             </div>
                         </div>
                     </form>

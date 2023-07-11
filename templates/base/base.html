@@ -8,26 +8,55 @@
         <title>Document</title>
         <!-- TAILWIND CSS FRAMEWORK-->
         <script src="https://cdn.tailwindcss.com"></script>
+        <!-- CUSTOMISE TAILWIND -->
+        <script>
+      tailwind.config = {
+        theme: {
+          screens: {
+            sm: "640px",
+            // => @media (min-width: 640px) { ... }
+
+            md: "768px",
+            // => @media (min-width: 768px) { ... }
+
+            lg: "1024px",
+            // => @media (min-width: 1024px) { ... }
+
+            xl: "1280px",
+            // => @media (min-width: 1280px) { ... }
+
+            "2xl": "1280px",
+            // => @media (min-width: 1536px) { ... }
+          },
+          extend: {
+            colors: {
+              primary: "#FF5C6B",
+              text: "#404040",
+            },
+          },
+        },
+      };
+        </script>
         <!-- FLOWBITE CSS FRAMEWORK -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css"
               rel="stylesheet" />
         <!-- FLATPICKR DATE PICKER -->
         <link rel="stylesheet"
-              href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+              href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
         <link rel="stylesheet"
-              href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css">
+              href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css" />
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     </head>
     <body class="flex flex-col justify-between h-screen">
-        <header class="flex items-center w-full mx-auto h-20 bg-rose-500 relative">
-            <nav class="flex justify-between container items-center m-auto  px-5">
+        <header class="flex items-center w-full mx-auto h-20 bg-primary relative">
+            <nav class="flex justify-between container items-center m-auto px-5">
                 <div class="flex gap-4">
                     <!-- HEADER LOGO -->
-                    <div class=" w-20 flex items-center">
+                    <div class="w-20 flex items-center">
                         <img src="/static/img/flyux-logo.png" alt="" height="" />
                     </div>
                     <!-- NAV ITEMS -->
-                    <div class="hidden sm:flex items-center  justify-self-center">
+                    <div class="hidden sm:flex items-center justify-self-center">
                         <ul class="flex">
                             <li>
                                 <a href="#" class="text-white px-4">Explore</a>
@@ -42,7 +71,7 @@
                     </div>
                 </div>
                 <!-- SIGNUP LOGIN CTAs-->
-                <div class="hidden sm:block ">
+                <div class="hidden sm:block">
                     <div class="hidden sm:flex">
                         {% if user.is_authenticated %}
                             <div class="flex">
@@ -53,7 +82,7 @@
                             <a href="#"
                                class="text-white py-auto px-6 rounded-full h-10 flex items-center">Signup</a>
                             <a href="{% url 'login' %}"
-                               class="bg-rose-500 py-auto px-6 border-[1px] border-white rounded-2xl h-10 flex items-center font-bold text-white">Login</a>
+                               class="bg-primary py-auto px-6 border-[1px] border-white rounded-2xl h-10 flex items-center font-bold text-white">Login</a>
                         {% endif %}
                     </div>
                 </div>
@@ -69,7 +98,7 @@
                 </div>
             </nav>
             <!-- EXPANDED MENU ON CLICK -->
-            <div class="hidden w-screen h-[30vh] bg-rose-500 absolute  top-full items-center justify-center flex"
+            <div class="hidden w-screen h-[30vh] bg-primary absolute top-full items-center justify-center flex"
                  id="hamburger-menu-expanded">
                 <ul class="flex flex-col items-center gap-10 text-2xl">
                     <li>
@@ -88,23 +117,23 @@
         {% block content %}
         {% endblock content %}
         <!-- FOOTER -->
-        <footer class=" flex w-screen justify-center align-center bg-rose-500 h-20">
-            <div class=" container flex w-full justify-between items-center px-5">
+        <footer class="flex w-screen justify-center align-center bg-primary h-20">
+            <div class="container flex w-full justify-between items-center px-5">
                 <div class="">
                     <p class="text-sm font-thin text-white">
                         A Django project by <span class="font-normal">Carl Murray</span>
                     </p>
                 </div>
-                <div class=" flex items-center gap-6 justify-between pl-4">
+                <div class="flex items-center gap-6 justify-between pl-4">
                     <a href="https://carlmurray.design/" class="text-white">
                         <img src="{% static 'img/footer/footer-portfolio-icon.svg' %}"
-                             alt="Portfolio icon">
+                             alt="Portfolio icon" />
                     </a>
                     <a href="https://github.com/CarlMurray/flyUX-pp4" class="text-white">
-                        <img src="{% static 'img/footer/footer-github-icon.svg' %}" alt="">
+                        <img src="{% static 'img/footer/footer-github-icon.svg' %}" alt="" />
                     </a>
                     <a href="https://www.linkedin.com/in/carljmurray/" class="text-white">
-                        <img src="{% static 'img/footer/footer-linkedin-icon.svg' %}" alt="">
+                        <img src="{% static 'img/footer/footer-linkedin-icon.svg' %}" alt="" />
                     </a>
                 </div>
             </div>

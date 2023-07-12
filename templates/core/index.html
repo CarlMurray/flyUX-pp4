@@ -41,17 +41,18 @@
                                 </fieldset>
                             </div>
                             <div class="grid grid-cols-4 gap-3">
-                                <div class="col-span-full sm:col-span-2 relative">
+                                <div class="col-span-full sm:col-span-2 relative airport-input-container">
                                     <input type="text"
                                            name="origin"
                                            id="origin"
                                            placeholder="Origin"
-                                           class="z-20 relative w-full h-12 px-4 rounded-full border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm">
-                                    <div id="airports-list"
-                                         class="hidden absolute top-1/2 border-2 w-full p-4 pt-8 z-10 rounded-b-3xl bg-gray-100">
-                                        <div>
-                                            {% for airport in airports %}<div>{{ airport }}</div>{% endfor %}
-                                        </div>
+                                           class="z-40 relative w-full h-12 px-4 rounded-full border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm">
+                                    <div id="airports-list-origin"
+                                         class="hidden absolute top-1/2 border-2 w-full p-4 pt-8 z-30 rounded-b-3xl bg-white drop-shadow-md">
+                                        {% for airport in airports %}
+                                            <div class="text-text text-sm my-2 airport-list-item">{{ airport }}</div>
+                                            <hr>
+                                        {% endfor %}
                                     </div>
                                 </div>
                                 <div class="col-span-full sm:col-span-2 relative">
@@ -60,11 +61,12 @@
                                            id="destination"
                                            placeholder="Destination"
                                            class="z-20 relative w-full h-12 px-4 rounded-full border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm">
-                                    <div id="airports-list1"
-                                         class="hidden absolute top-1/2 border-2 w-full p-4 pt-8 z-10 rounded-b-3xl bg-gray-100">
-                                        <div>
-                                            {% for airport in airports %}<div>{{ airport }}</div>{% endfor %}
-                                        </div>
+                                    <div id="airports-list-destination"
+                                         class="hidden absolute top-1/2 border-2 w-full p-4 pt-8 z-10 rounded-b-3xl bg-white drop-shadow-md">
+                                            {% for airport in airports %}
+                                                <div class="text-text text-sm my-2 airport-list-item">{{ airport }}</div>
+                                                <hr>
+                                            {% endfor %}
                                     </div>
                                 </div>
                                 <!-- OUTBOUND DATE-->

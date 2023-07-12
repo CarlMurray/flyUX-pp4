@@ -1,33 +1,25 @@
-let airportInputs = document.querySelectorAll("#origin, #destination");
-let airportsList = document.querySelectorAll("#airports-list, #airports-list1");
-// SHOW AIRPORTS ON FOCUS
-// for (item of origin){
-    
-
-// item.addEventListener("focus", function (e) {
-//     airportsList.classList.remove("hidden");
-//     // HIDE AIRPORTS ON BLUR
-//     item.addEventListener("blur", function (e) {
-//         airportsList.classList.add("hidden");
-//     });
-// });
+let airportOrigin = document.querySelector("#origin");
+let airportDestination = document.querySelector("#destination");
+let airportsListOrigin = document.querySelector("#airports-list-origin");
+let airportsListDestination = document.querySelector("#airports-list-destination");
+let airportListItems = document.querySelectorAll('.airport-list-item')
 
 
-airportInputs.forEach((item) => {
-    item.addEventListener('focus', function (e) {
-        airportsList[item].classList.remove("hidden");
-        // HIDE AIRPORTS ON BLUR
-        item.addEventListener("blur", function (e) {
-            airportsList.classList.add("hidden");
-        });
+document.addEventListener('click', (e) => {
+    if (e.target == airportOrigin || e.target == airportDestination) {
+      e.target.nextElementSibling.classList.remove('hidden');
+    } else if (e.target != airportOrigin && e.target != airportsListOrigin || e.target != airportDestination && e.target != airportsListDestination) {
+        airportsListOrigin.classList.add('hidden');
+        airportsListDestination.classList.add('hidden');
+    }
+  });
+  
+  airportListItems.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      console.log(item.innerText);
+      let value = item.innerText;
+      let inputField = item.parentNode.previousElementSibling
+      console.dir(inputField)
+      inputField.value = value;
     });
-})
-
-// let showAirportsInputMenu = () => {
-//     // SHOW AIRPORTS ON FOCUS
-//     airportsList.classList.remove("hidden");
-//     // HIDE AIRPORTS ON BLUR
-//     item.addEventListener("blur", function (e) {
-//         airportsList.classList.add("hidden");
-//     });
-// }
+  });

@@ -6,4 +6,17 @@
     {{ date_return }}
     {{ trip_type }}
     {{ flight_origin }}
+    {% for flight in flight_results %}
+        <div class="bg-white drop-shadow-md w-1/2 p-4 border-[1px] border-primary rounded-2xl">{{ flight }}</div>
+    {% endfor %}
+    {% for flight in flight_results %}
+        <div class="bg-white drop-shadow-md w-1/2 p-4 border-[1px] border-primary rounded-2xl">
+            {{ flight.flight_number }}
+            {{ flight.origin }}
+            {{ flight.destination }}
+            {{ flight.outbound_date }}
+            {{ flight.dep_time }}
+            {{ flight.arr_time }}
+        </div>
+    {% endfor %}
 {% endblock content %}

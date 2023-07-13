@@ -4,11 +4,14 @@
     <!-- BODY BACKGROUND -->
     <div class="w-screen h-full bg-gray-100">
         <!-- OVERALL CONTAINER -->
-        <div class="container h-full pt-16 px-5 mx-auto">
+        <div class="relative container h-full pt-16 px-5 mx-auto">
             <div class="mb-12">
                 <h1 class="text-center text-3xl font-bold text-text">Book a flight</h1>
                 <p class="text-center text-lg text-text">We can bring you anywhere!*</p>
                 <p class="text-center text-xs mt-6 text-text">*almost</p>
+            </div>
+            <div class="absolute top-20 border-2 w-full">
+                <img class="mx-auto" src="{% static 'img/planes-home.svg' %}" alt="" width="1000">
             </div>
             <!-- OUTER CONTAINER FOR FORM -->
             <div class="container p-8 mx-auto h-auto flex items-center rounded-3xl drop-shadow-lg bg-white">

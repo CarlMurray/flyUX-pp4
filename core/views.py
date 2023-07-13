@@ -7,8 +7,8 @@ def home_page(request):
 
 def search_results_view(request):
     trip_type = request.GET['trip_type']
-    origin = request.GET['origin'][-3:] # GETS IATA CODE
-    destination = request.GET['destination'][-3:] # GETS IATA CODE
+    origin = request.GET['origin'][-4:-1] # GETS IATA CODE
+    destination = request.GET['destination'][-4:-1] # GETS IATA CODE
     date_outbound = request.GET['date_outbound']
     date_return = request.GET['date_return']
     flight_origin = Airport.objects.filter(iata=origin.upper()).get()

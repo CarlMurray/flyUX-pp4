@@ -1,22 +1,39 @@
 {% extends 'base/base.html' %}
+{% load static %}
 {% block content %}
-    {{ origin }}
-    {{ destination }}
-    {{ date_outbound }}
-    {{ date_return }}
-    {{ trip_type }}
-    {{ flight_origin }}
-    {% for flight in flight_results %}
-        <div class="bg-white drop-shadow-md w-1/2 p-4 border-[1px] border-primary rounded-2xl">{{ flight }}</div>
-    {% endfor %}
-    {% for flight in flight_results %}
-        <div class="bg-white drop-shadow-md w-1/2 p-4 border-[1px] border-primary rounded-2xl">
-            {{ flight.flight_number }}
-            {{ flight.origin }}
-            {{ flight.destination }}
-            {{ flight.outbound_date }}
-            {{ flight.dep_time }}
-            {{ flight.arr_time }}
+    <div class="bg-gray-100 w-screen h-full mx-auto">
+        <div class="container mx-auto h-full px-5">
+            {% for flight in flight_results %}
+                <div class="bg-white drop-shadow-md w-full h-36 border-2 border-primary rounded-full my-8 flex justify-between items-center pl-16">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-md font-semibold">{{ flight.origin }}</div>
+                            <div class="text-4xl font-bold">{{ flight.dep_time|time:'H:i' }}</div>
+                        </div>
+                        <div class="mx-8">
+                            <div class="text-center font-light">[Duration]</div>
+                            <img src="{% static 'img/flight-duration-illo.svg' %}"
+                                 alt=""
+                                 width="227px"
+                                 height="27px"
+                                 class="">
+                        </div>
+                        <div>
+                            <div class="text-md font-semibold">{{ flight.destination }}</div>
+                            <div class="text-4xl font-bold">{{ flight.arr_time|time:'H:i' }}</div>
+                        </div>
+                    </div>
+                    {% comment %} <div>{{ flight.outbound_date }}</div> {% endcomment %}
+                    <div>
+                        Flight no.
+                        <br>
+                        {{ flight.flight_number }}
+                    </div>
+                    <div class="aspect-square border-2 h-full bg-primary text-white rounded-full flex items-center justify-center text-3xl font-bold">
+                        €{{ flight.price }} <small class="font-normal">pp</small>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+    </div>
 {% endblock content %}

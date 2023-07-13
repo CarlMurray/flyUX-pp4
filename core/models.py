@@ -12,7 +12,7 @@ class Airport(models.Model):
     country = models.CharField(max_length=50)
     
     def __str__(self):
-        return f'{self.name}, {self.iata}'
+        return f'{self.name} ({self.iata})'
         
 class Flight(models.Model):
     flight_number = models.CharField(max_length=50, validators=[flight_number_validator])
@@ -21,7 +21,7 @@ class Flight(models.Model):
     outbound_date = models.DateField(auto_now=False, auto_now_add=False)
     dep_time = models.TimeField(auto_now=False, auto_now_add=False, verbose_name='Departure time')
     arr_time = models.TimeField(auto_now=False, auto_now_add=False, verbose_name='Arrival time')
-    price = models.DecimalField(max_digits=7, decimal_places=2)
+    price = models.DecimalField(max_digits=7, decimal_places=0)
     aircraft = models.ForeignKey("Aircraft", on_delete=models.CASCADE, related_name='aircraft')
     
     def __str__(self):

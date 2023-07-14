@@ -18,7 +18,10 @@ document.addEventListener('click', (e) => {
     item.addEventListener('click', (e) => {
       console.log(item.innerText);
       let value = item.innerText;
-      let inputField = item.parentNode.previousElementSibling
+      let parent = item.parentNode
+      console.log('Parent:')
+      console.dir(parent)
+      let inputField = parent.parentNode.previousElementSibling
       console.dir(inputField)
       inputField.value = value;
     });

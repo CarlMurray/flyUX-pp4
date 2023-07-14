@@ -41,18 +41,20 @@
                                 </fieldset>
                             </div>
                             <div class="grid grid-cols-4 gap-3">
-                                <div class="col-span-full sm:col-span-2 relative airport-input-container">
+                                <div class="col-span-full sm:col-span-2 relative airport-input-container over">
                                     <input type="text"
                                            name="origin"
                                            id="origin"
                                            placeholder="Origin"
                                            class="z-40 relative w-full h-12 px-4 rounded-full border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm">
                                     <div id="airports-list-origin"
-                                         class="hidden absolute top-1/2 border-2 w-full p-4 pt-8 z-30 rounded-b-3xl bg-white drop-shadow-md">
-                                        {% for airport in airports %}
-                                            <div class="text-text text-sm my-2 airport-list-item">{{ airport }}</div>
-                                            <hr>
-                                        {% endfor %}
+                                         class="hidden absolute top-1/2 border-2 w-full p-4 pt-8 z-30 rounded-b-3xl bg-white drop-shadow-md h-72 overflow-hidden">
+                                        <div class="overflow-auto h-full">
+                                            {% for airport in airports %}
+                                                <div class="text-text text-sm my-2 airport-list-item">{{ airport }}</div>
+                                                <hr>
+                                            {% endfor %}
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-span-full sm:col-span-2 relative">
@@ -62,18 +64,21 @@
                                            placeholder="Destination"
                                            class="z-20 relative w-full h-12 px-4 rounded-full border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm">
                                     <div id="airports-list-destination"
-                                         class="hidden absolute top-1/2 border-2 w-full p-4 pt-8 z-10 rounded-b-3xl bg-white drop-shadow-md">
+                                         class="hidden absolute top-1/2 border-2 w-full p-4 pt-8 z-10 rounded-b-3xl bg-white drop-shadow-md h-72 overflow-hidden">
+                                        <div class="overflow-auto h-full">
                                             {% for airport in airports %}
                                                 <div class="text-text text-sm my-2 airport-list-item">{{ airport }}</div>
                                                 <hr>
                                             {% endfor %}
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- OUTBOUND DATE-->
                                 <input type="text"
                                        name="outbound_date"
                                        id="flatpickr-date-outbound"
-                                       class="flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"                                       placeholder="Outbound Date"
+                                       class="flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
+                                       placeholder="Outbound Date"
                                        data-id="datetime"
                                        readonly="readonly">
                                 <!-- RETURN DATE -->

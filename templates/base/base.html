@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -47,13 +47,15 @@
               href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css" />
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     </head>
-    <body class="flex flex-col justify-between h-screen">
+    <body class="flex flex-col min-h-full bg-gray-100">
         <header class="flex items-center w-full mx-auto h-20 bg-primary relative">
             <nav class="flex justify-between container items-center m-auto px-5">
                 <div class="flex gap-4">
                     <!-- HEADER LOGO -->
                     <div class="w-20 flex items-center">
-                        <a href="{% url 'home-page' %}"><img src="/static/img/flyux-logo.png" alt="" height="" /></a>
+                        <a href="{% url 'home-page' %}">
+                            <img src="/static/img/flyux-logo.png" alt="" height="" />
+                        </a>
                     </div>
                     <!-- NAV ITEMS -->
                     <div class="hidden sm:flex items-center justify-self-center">
@@ -114,10 +116,10 @@
             </div>
         </header>
         <!-- CONTENT BLOCK -->
-        {% block content %}
-        {% endblock content %}
+            {% block content %}
+            {% endblock content %}
         <!-- FOOTER -->
-        <footer class="flex w-screen justify-center align-center bg-primary h-20">
+        <footer class="flex w-full justify-center mt-auto align-center bg-primary h-20">
             <div class="container flex w-full justify-between items-center px-5">
                 <div class="">
                     <p class="text-sm font-thin text-white">

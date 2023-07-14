@@ -1,17 +1,17 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="bg-gray-100 w-screen h-full mx-auto">
-        <div class="container mx-auto h-full px-5">
+<div class="">
+        <div class="container mx-auto px-5">
             {% for flight in flight_results %}
-                <div class="bg-white drop-shadow-md w-full h-36 border-2 border-primary rounded-full my-8 flex justify-between items-center pl-16">
-                    <div class="flex items-center justify-between">
+                <div class="bg-white drop-shadow-md w-full h-52 sm:h-36 border-2 border-primary sm:rounded-full flex sm:flex-row flex-col justify-between items-center sm:pl-8 md:pl-16 rounded-3xl overflow-clip" id="{{ flight.id }}">
+                    <div class="flex items-center justify-between p-4">
                         <div>
-                            <div class="text-md font-semibold">{{ flight.origin }}</div>
-                            <div class="text-4xl font-bold">{{ flight.dep_time|time:'H:i' }}</div>
+                            <div class="text-xs md:text-md font-semibold text-text">{{ flight.origin }}</div>
+                            <div class="text-xl md:text-4xl font-bold text-text">{{ flight.dep_time|time:'H:i' }}</div>
                         </div>
                         <div class="mx-8">
-                            <div class="text-center font-light">[Duration]</div>
+                            <div class="text-center font-light text-sm md:text-md text-text">[Duration]</div>
                             <img src="{% static 'img/flight-duration-illo.svg' %}"
                                  alt=""
                                  width="227px"
@@ -19,21 +19,20 @@
                                  class="">
                         </div>
                         <div>
-                            <div class="text-md font-semibold">{{ flight.destination }}</div>
-                            <div class="text-4xl font-bold">{{ flight.arr_time|time:'H:i' }}</div>
+                            <div class="text-xs md:text-md font-semibold text-text">{{ flight.destination }}</div>
+                            <div class="text-xl md:text-4xl font-bold text-text">{{ flight.arr_time|time:'H:i' }}</div>
                         </div>
                     </div>
                     {% comment %} <div>{{ flight.outbound_date }}</div> {% endcomment %}
-                    <div>
+                    <div class="text-sm text-center pb-4 sm:pb-0 sm:pr-4 text-text">
                         Flight no.
-                        <br>
+                        <br class="hidden sm:block">
                         {{ flight.flight_number }}
                     </div>
-                    <div class="aspect-square border-2 h-full bg-primary text-white rounded-full flex items-center justify-center text-3xl font-bold">
+                    <div class="sm:aspect-square sm:w-auto w-full sm:border-2 border-white h-full bg-primary text-white sm:rounded-full flex items-center justify-center text-3xl font-bold">
                         €{{ flight.price }} <small class="font-normal">pp</small>
                     </div>
                 </div>
             {% endfor %}
-        </div>
-    </div>
+        </div></div>
 {% endblock content %}

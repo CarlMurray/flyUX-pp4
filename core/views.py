@@ -9,18 +9,17 @@ def search_results_view(request):
     trip_type = request.GET['trip_type']
     origin = request.GET['origin'][-4:-1] # GETS IATA CODE
     destination = request.GET['destination'][-4:-1] # GETS IATA CODE
-    date_outbound = request.GET['date_outbound']
-    date_return = request.GET['date_return']
+    outbound_date = request.GET['outbound_date']
+    return_date = request.GET['return_date']
     flight_origin = Airport.objects.filter(iata=origin.upper()).get()
-    print(flight_origin)
-    flight_results = Flight.objects.filter(origin=flight_origin)
+    flight_destination = Airport.objects.filter(iata=destination.upper()).get()
+    flight_results = Flight.objects.filter(
+        origin=flight_origin,
+        destination=flight_destination,        
+        outbound_date=outbound_date
+        )
+    print(flight_results)
     context = {
-        'trip_type':trip_type,
-        'origin':origin,
-        'destination':destination,
-        'date_outbound':date_outbound,
-        'date_return':date_return,
-        'flight_origin':flight_origin,
         'flight_results':flight_results
     }
     return render(request, 'core/search-results.html', context)

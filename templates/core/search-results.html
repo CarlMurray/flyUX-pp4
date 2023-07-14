@@ -1,10 +1,31 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
-<div class="">
+    <div class="">
         <div class="container mx-auto px-5">
+            <div>
+                <div class="mt-4">
+                    <h2 class="text-text text-sm sm:text-lg font-light">Select outbound flight</h2>
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-text text-sm sm:text-2xl font-bold">{{ origin }} - {{ destination }}</h3>
+                </div>
+                {% comment %} <div class="w-full h-20 rounded-full border-2 border-gray-200 shadow-inner">
+                    <div class="text-center text-3xl">{{ outbound_date|date:'j M' }}</div>
+                    <div class="text-center text-3xl">€{{ lowest_price|floatformat:'0' }}</div>
+                </div> {% endcomment %}
+                <div class="w-full h-20 rounded-full border-2 border-gray-200 shadow-inner grid grid-cols-5 grid-rows-1 items-center">
+                    {% for date in slider_date_list %}
+                        <div class="">
+                            <div class="text-center text-xl">{{ date|date:'j M' }}</div>
+                            {% comment %} <div class="text-center text-3xl">€{{ lowest_price|floatformat:'0' }}</div> {% endcomment %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
             {% for flight in flight_results %}
-                <div class="bg-white drop-shadow-md w-full h-52 sm:h-36 border-2 border-primary sm:rounded-full flex sm:flex-row flex-col justify-between items-center sm:pl-8 md:pl-16 rounded-3xl overflow-clip" id="{{ flight.id }}">
+                <div class="bg-white drop-shadow-md w-full h-52 sm:h-36 border-2 border-primary sm:rounded-full flex sm:flex-row flex-col justify-between items-center sm:pl-8 md:pl-16 rounded-3xl overflow-clip my-6"
+                     id="{{ flight.id }}">
                     <div class="flex items-center justify-between p-4">
                         <div>
                             <div class="text-xs md:text-md font-semibold text-text">{{ flight.origin }}</div>
@@ -34,5 +55,6 @@
                     </div>
                 </div>
             {% endfor %}
-        </div></div>
+        </div>
+    </div>
 {% endblock content %}

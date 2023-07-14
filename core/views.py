@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Flight, Airport
+from datetime import datetime, timedelta
 
 def home_page(request):
     airports = Airport.objects.all()
@@ -18,8 +19,21 @@ def search_results_view(request):
         destination=flight_destination,        
         outbound_date=outbound_date
         )
-    print(flight_results)
+    sorted_price = flight_results.values_list('price')
+    lowest_price = float(sorted_price.order_by('price').first()[0])
+    slider_date_list = [] 
+    slider_date_range = range(-2, 3)
+    for x in slider_date_range:
+        date = datetime.strptime(outbound_date, '%Y-%m-%d') + timedelta(days=x)
+        slider_date_list.append(date)
+    print(slider_date_list)
+    
     context = {
-        'flight_results':flight_results
+        'origin':request.GET['origin'],
+        'destination':request.GET['destination'],
+        'outbound_date':datetime.strptime(outbound_date, '%Y-%m-%d'),
+        'lowest_price':lowest_price,
+        'flight_results':flight_results,
+        'slider_date_list':slider_date_list
     }
     return render(request, 'core/search-results.html', context)

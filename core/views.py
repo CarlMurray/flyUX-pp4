@@ -29,9 +29,11 @@ def search_results_view(request):
     print(slider_date_list)
     
     context = {
+        'trip_type':trip_type,
         'origin':request.GET['origin'],
         'destination':request.GET['destination'],
         'outbound_date':datetime.strptime(outbound_date, '%Y-%m-%d'),
+        'return_date':return_date,
         'lowest_price':lowest_price,
         'flight_results':flight_results,
         'slider_date_list':slider_date_list

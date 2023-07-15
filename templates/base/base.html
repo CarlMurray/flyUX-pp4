@@ -48,26 +48,26 @@
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     </head>
     <body class="flex flex-col min-h-full bg-gray-100">
-        <header class="flex items-center w-full mx-auto h-20 bg-primary relative">
-            <nav class="flex justify-between container items-center m-auto px-5">
+        <header class="relative flex items-center w-full h-20 mx-auto bg-primary">
+            <nav class="container flex items-center justify-between px-5 m-auto">
                 <div class="flex gap-4">
                     <!-- HEADER LOGO -->
-                    <div class="w-20 flex items-center">
+                    <div class="flex items-center w-20">
                         <a href="{% url 'home-page' %}">
                             <img src="/static/img/flyux-logo.png" alt="" height="" />
                         </a>
                     </div>
                     <!-- NAV ITEMS -->
-                    <div class="hidden sm:flex items-center justify-self-center">
+                    <div class="items-center hidden sm:flex justify-self-center">
                         <ul class="flex">
                             <li>
-                                <a href="#" class="text-white px-4">Explore</a>
+                                <a href="#" class="px-4 text-white">Explore</a>
                             </li>
                             <li>
                                 <a href="#" class="text-white px-4 border-x-[1px]">Explore</a>
                             </li>
                             <li>
-                                <a href="#" class="text-white px-4">Explore</a>
+                                <a href="#" class="px-4 text-white">Explore</a>
                             </li>
                         </ul>
                     </div>
@@ -78,11 +78,11 @@
                         {% if user.is_authenticated %}
                             <div class="flex">
                                 <a href="#" class="text-white border-r-[1px] border-r-white pr-4">Welcome, <strong>{{ user.first_name }}</strong></a>
-                                <a href="{% url 'logout' %}" class="text-white pl-4">Logout</a>
+                                <a href="{% url 'logout' %}" class="pl-4 text-white">Logout</a>
                             </div>
                         {% else %}
                             <a href="#"
-                               class="text-white py-auto px-6 rounded-full h-10 flex items-center">Signup</a>
+                               class="flex items-center h-10 px-6 text-white rounded-full py-auto">Signup</a>
                             <a href="{% url 'login' %}"
                                class="bg-primary py-auto px-6 border-[1px] border-white rounded-2xl h-10 flex items-center font-bold text-white">Login</a>
                         {% endif %}
@@ -91,11 +91,11 @@
                 <!-- MOBILE NAV -->
                 <!-- HAMBURGER ICON -->
                 <div class="sm:hidden">
-                    <div class="sm:hidden flex flex-col items-center justify-between w-10 h-8"
+                    <div class="flex flex-col items-center justify-between w-10 h-8 sm:hidden"
                          id="hamburger-menu">
-                        <span class="rounded-full w-full px-2 py-0 block h-0 border-2 border-white"></span>
-                        <span class="rounded-full w-full px-2 py-0 block h-0 border-2 border-white"></span>
-                        <span class="rounded-full w-full px-2 py-0 block h-0 border-2 border-white"></span>
+                        <span class="block w-full h-0 px-2 py-0 border-2 border-white rounded-full"></span>
+                        <span class="block w-full h-0 px-2 py-0 border-2 border-white rounded-full"></span>
+                        <span class="block w-full h-0 px-2 py-0 border-2 border-white rounded-full"></span>
                     </div>
                 </div>
             </nav>
@@ -104,13 +104,13 @@
                  id="hamburger-menu-expanded">
                 <ul class="flex flex-col items-center gap-10 text-2xl">
                     <li>
-                        <a href="#" class="text-white px-4">Explore</a>
+                        <a href="#" class="px-4 text-white">Explore</a>
                     </li>
                     <li>
-                        <a href="#" class="text-white px-4">Explore</a>
+                        <a href="#" class="px-4 text-white">Explore</a>
                     </li>
                     <li>
-                        <a href="#" class="text-white px-4">Explore</a>
+                        <a href="#" class="px-4 text-white">Explore</a>
                     </li>
                 </ul>
             </div>
@@ -119,14 +119,14 @@
             {% block content %}
             {% endblock content %}
         <!-- FOOTER -->
-        <footer class="flex w-full justify-center mt-auto align-center bg-primary h-20">
-            <div class="container flex w-full justify-between items-center px-5">
+        <footer class="flex justify-center w-full h-20 mt-auto align-center bg-primary">
+            <div class="container flex items-center justify-between w-full px-5">
                 <div class="">
                     <p class="text-sm font-thin text-white">
                         A Django project by <span class="font-normal">Carl Murray</span>
                     </p>
                 </div>
-                <div class="flex items-center gap-6 justify-between pl-4">
+                <div class="flex items-center justify-between gap-6 pl-4">
                     <a href="https://carlmurray.design/" class="text-white">
                         <img src="{% static 'img/footer/footer-portfolio-icon.svg' %}"
                              alt="Portfolio icon" />

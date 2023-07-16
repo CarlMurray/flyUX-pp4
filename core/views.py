@@ -24,8 +24,8 @@ def search_results_view(request):
         destination=flight_origin,        
         outbound_date=return_date
         )
-    sorted_price = flight_results.values_list('price')
-    lowest_price = float(sorted_price.order_by('price').first()[0])
+    # sorted_price = flight_results.values_list('price')
+    # lowest_price = float(sorted_price.order_by('price').first()[0])
     
     def create_alt_date_range(leg_date):
         slider_date_list = [] 
@@ -42,7 +42,7 @@ def search_results_view(request):
         'destination':request.GET['destination'],
         'outbound_date':datetime.strptime(outbound_date, '%Y-%m-%d'),
         'return_date':datetime.strptime(return_date, '%Y-%m-%d'),
-        'lowest_price':lowest_price,
+        # 'lowest_price':lowest_price,
         'flight_results':flight_results,
         'slider_date_list':create_alt_date_range(outbound_date),
         'slider_date_list_return':create_alt_date_range(return_date),

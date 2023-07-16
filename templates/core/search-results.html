@@ -13,7 +13,7 @@
                value="{{ outbound_date|date:'Y-m-d' }}"
                id="alt-date-input-outbound">
         <input type="hidden" name="return_date" value="{{ return_date|date:'Y-m-d' }}" id="alt-date-input-return">
-        >
+        
     </form>
     <div class="">
         <div class="container px-5 mx-auto">
@@ -48,8 +48,8 @@
             </div>
             <!-- SHOW AVAILABLE FLIGHTS -->
             {% for flight in flight_results %}
-                <div class="flex flex-col items-center justify-between w-full my-6 bg-white border-2 drop-shadow-md h-52 sm:h-36 border-primary sm:rounded-full sm:flex-row sm:pl-8 md:pl-16 rounded-3xl overflow-clip"
-                     id="{{ flight.id }}">
+                <div data-selected-outbound="False" data-flight-leg="outbound" class="flex flex-col items-center justify-between w-full my-6 bg-white border-2 drop-shadow-md h-52 sm:h-36 border-primary sm:rounded-full sm:flex-row sm:pl-8 md:pl-16 rounded-3xl overflow-clip"
+                     id="{{ flight.flight_number }}">
                     <div class="flex items-center justify-between p-4">
                         <div>
                             <div class="text-xs font-semibold md:text-md text-text">{{ flight.origin }}</div>
@@ -111,8 +111,8 @@
             </div>
             
             {% for flight in flight_results_return %}
-                <div class="flex flex-col items-center justify-between w-full my-6 bg-white border-2 drop-shadow-md h-52 sm:h-36 border-primary sm:rounded-full sm:flex-row sm:pl-8 md:pl-16 rounded-3xl overflow-clip"
-                     id="{{ flight.id }}">
+                <div data-selected-return="False" data-flight-leg="return" class="flex flex-col items-center justify-between w-full my-6 bg-white border-2 drop-shadow-md h-52 sm:h-36 border-primary sm:rounded-full sm:flex-row sm:pl-8 md:pl-16 rounded-3xl overflow-clip"
+                     id="{{ flight.flight_number }}">
                     <div class="flex items-center justify-between p-4">
                         <div>
                             <div class="text-xs font-semibold md:text-md text-text">{{ flight.origin }}</div>
@@ -142,6 +142,12 @@
                     </div>
                 </div>
             {% endfor %}
+            <form id="selected-flights" action="" method="get">
+                <input type="hidden" name="selected-outbound-flight" value="">
+                <input type="hidden" name="selected-return-flight" value="">
+            </form>
+            <div class="flex justify-end">
+            <button id="confirm-flights-button" class="p-4 mb-8 font-bold text-white rounded-full bg-primary">Review flights</button></div>
         </div>
     </div>
 {% endblock content %}

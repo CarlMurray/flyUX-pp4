@@ -24,6 +24,6 @@ urlpatterns = [
     path("", core_views.home_page, name='home-page'),
     path("login/", users_views.login_view, name="login"),
     path("logout/", users_views.logout_view, name="logout"),
-    path("signup/", users_views.signup_view, name="signup"),
+    path("register/", users_views.register_view, name="register"),
     path("search_results/", core_views.search_results_view, name="search-results"),
 ]

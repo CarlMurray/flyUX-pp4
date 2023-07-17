@@ -1,0 +1,83 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <div class="flex items-center w-screen m-auto mx-auto bg-gray-100">
+        <div class="container flex justify-center px-5 mx-auto">
+            <div class="container flex flex-col justify-center w-full max-w-xl p-6 mx-auto bg-white sm:p-12 rounded-3xl drop-shadow-lg">
+                <!-- LOGIN HEADER -->
+                <h3 class="mx-auto mb-6 text-3xl font-bold text-primary">Create account</h3>
+                <!-- FORM -->
+                <form method='post' class="flex justify-center w-full mx-auto">
+                    {% csrf_token %}
+                    <!-- FORM FIELDS CONTAINER -->
+                    <div class="flex flex-col w-full gap-4 sm:w-3/4">
+                        <!-- EMAIL FIELD -->
+                        <div class="flex flex-col">
+                            <input type="email"
+                                   name="email"
+                                   maxlength="254"
+                                   autofocus=""
+                                   required
+                                   id="id_email"
+                                   placeholder="Email"
+                                   class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                        </div>
+                        <!-- FIRST NAME FIELD -->
+                        <div class="flex flex-col">
+                            <input type="text"
+                                   name="first_name"
+                                   maxlength="50"
+                                   required=""
+                                   id="id_first_name"
+                                   placeholder="First name"
+                                   class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                        </div>
+                        <!-- LAST NAME FIELD -->
+                        <div class="flex flex-col">
+                            <input type="text"
+                                   name="last_name"
+                                   maxlength="50"
+                                   required=""
+                                   id="id_last_name"
+                                   placeholder="Last name"
+                                   class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                        </div>
+                        <!-- PASSWORD -->
+                        <div class="flex flex-col">
+                            <input type="password"
+                                   name="password1"
+                                   autocomplete="new-password"
+                                   required=""
+                                   id="id_password1"
+                                   placeholder="Password"
+                                   class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                        </div>
+                        <!-- PASSWORD CONFIRM -->
+                        <div class="flex flex-col">
+                            <input type="password"
+                                   name="password2"
+                                   autocomplete="new-password"
+                                   required=""
+                                   id="id_password2"
+                                   placeholder="Confirm password"
+                                   class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                        </div>
+                        <div class="p-4">
+                            <span class="text-xs text-gray-700">
+                                <ul class="list-disc">
+                                    <li>Your password can’t be too similar to your other personal information.</li>
+                                    <li>Your password must contain at least 8 characters.</li>
+                                    <li>Your password can’t be a commonly used password.</li>
+                                    <li>Your password can’t be entirely numeric.</li>
+                                </ul>
+                            </span>
+                        </div>
+                        <button type="submit"
+                                class="flex items-center justify-center h-12 px-6 font-bold text-center text-white rounded-full bg-primary py-auto">
+                            Create account
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import User
 from django.contrib.auth import logout, login, authenticate
 from flyux import urls
-from .forms import LoginForm
+from .forms import LoginForm, RegistrationForm
 from django.forms import Form
 
 
@@ -35,3 +35,17 @@ def login_view(request):
         else:
             print('TBD')
     return render(request, 'users/login.html')
+
+
+def register_view(request):
+    # RETURN HOME IF USER TRIES TO REGISTER WHILE SIGNED IN
+    if request.user.is_authenticated:
+            return redirect('home-page')
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home-page')
+    form = RegistrationForm()    
+    return render(request, 'users/register.html', {'form':form})

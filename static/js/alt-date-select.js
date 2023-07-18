@@ -73,7 +73,7 @@ returnFlights.forEach(function(item){
     item.addEventListener('click', function(){
         // ON CLICK, ITERATE THROUGH ALL RETURN FLIGHTS AND SET FALSE
         // TO ENSURE ONLY ONE FLIGHT CAN BE SELECTED
-        outboundFlights.forEach(function(each){
+        returnFlights.forEach(function(each){
             each.setAttribute('data-selected-returrn', 'False')
             each.classList.remove(selectedClass)
 

@@ -75,8 +75,18 @@ WSGI_APPLICATION = "flyux.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
+
 DATABASES = {
-    "default": {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'iihmntmo',
+        'USER': 'iihmntmo',
+        'PASSWORD': 'zNDZUCExbsjQqGvpFVANkb-zWJowu4gs',
+        'HOST': 'trumpet.db.elephantsql.com',
+        'PORT': '5432',
+    },
+    "local": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }

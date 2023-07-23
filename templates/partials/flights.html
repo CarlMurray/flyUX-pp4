@@ -1,0 +1,37 @@
+{% load static %}
+{% for flight in flight_results %}
+
+<!-- SHOW AVAILABLE FLIGHTS -->
+    <div data-selected-outbound="False"
+         data-flight-leg="outbound"
+         class="flex flex-col items-center justify-between w-full my-6 bg-white border-2 drop-shadow-md h-52 sm:h-36 border-primary sm:rounded-full sm:flex-row sm:pl-8 md:pl-16 rounded-3xl overflow-clip"
+         id="{{ flight.flight_number }}">
+        <div class="flex items-center justify-between p-4">
+            <div>
+                <div class="text-xs font-semibold md:text-md text-text">{{ flight.origin }}</div>
+                <div class="text-xl font-bold md:text-4xl text-text">{{ flight.dep_time|time:'H:i' }}</div>
+            </div>
+            <div class="mx-8">
+                <div class="text-sm font-light text-center md:text-md text-text">[Duration]</div>
+                <img src="{% static 'img/flight-duration-illo.svg' %}"
+                     alt=""
+                     width="227px"
+                     height="27px"
+                     class="">
+            </div>
+            <div>
+                <div class="text-xs font-semibold md:text-md text-text">{{ flight.destination }}</div>
+                <div class="text-xl font-bold md:text-4xl text-text">{{ flight.arr_time|time:'H:i' }}</div>
+            </div>
+        </div>
+        {% comment %} <div>{{ flight.outbound_date }}</div> {% endcomment %}
+        <div class="pb-4 text-sm text-center sm:pb-0 sm:pr-4 text-text">
+            Flight no.
+            <br class="hidden sm:block">
+            {{ flight.flight_number }}
+        </div>
+        <div class="flex items-center justify-center w-full h-full text-3xl font-bold text-white border-white sm:aspect-square sm:w-auto sm:border-2 bg-primary sm:rounded-full">
+            €{{ flight.price }} <small class="font-normal">pp</small>
+        </div>
+    </div>
+    {% endfor %}

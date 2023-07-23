@@ -49,3 +49,21 @@ def search_results_view(request):
         'flight_results_return':flight_results_return,
     }
     return render(request, 'core/search-results.html', context)
+
+
+def passenger_details_view(request):
+    return render(request, 'core/passenger-details.html')
+
+def alt_dates(request):
+    date = request.GET['date']
+    origin = request.GET['origin'][-4:-1] # GETS IATA CODE
+    destination = request.GET['destination'][-4:-1] # GETS IATA CODE
+    flight_origin = Airport.objects.filter(iata=origin.upper()).get()
+    flight_destination = Airport.objects.filter(iata=destination.upper()).get()
+
+    flight_results = Flight.objects.filter(
+    origin=flight_origin,
+    destination=flight_destination,        
+    outbound_date=date
+    )
+    return render(request, 'partials/flights.html', {'flight_results':flight_results})

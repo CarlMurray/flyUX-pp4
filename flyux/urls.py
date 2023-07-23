@@ -26,4 +26,6 @@ urlpatterns = [
     path("logout/", users_views.logout_view, name="logout"),
     path("register/", users_views.register_view, name="register"),
     path("search_results/", core_views.search_results_view, name="search-results"),
+    path("passenger_details/", core_views.passenger_details_view, name="passenger-details"),
+    path("search_results/alt_dates/", core_views.alt_dates, name="alt-dates"),
 ]

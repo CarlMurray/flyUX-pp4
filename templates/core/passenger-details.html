@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <div class="container px-5 py-8 mx-auto">
+        <h1 class="text-3xl font-bold text-text">Passenger Details</h1>
+        <div class="w-full p-8 mt-8 bg-white shadow-lg rounded-3xl">
+            <p class="text-2xl font-bold text-text">Passenger 1</p>
+            <p class="text-text">We need these details to confirm your identity - please make sure they match your passport.</p>
+            <div class="flex gap-4 mt-4">
+                <select name=""
+                        id=""
+                        class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-0">
+                    <option selected disabled>Title</option>
+                    <option value="">Mr.</option>
+                    <option value="">Ms.</option>
+                </select>
+                <input type="text"
+                       placeholder="First name"
+                       class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
+                <input type="text"
+                       placeholder="Last name"
+                       class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
+            </div>
+        </div>
+        <div class="w-full p-8 mt-8 bg-white shadow-lg rounded-3xl">
+            <p class="text-2xl font-bold text-text">Trip Contact</p>
+            <p class="text-text">We need your email address to keep you updated about your trip.</p>
+            <div class="flex gap-4 mt-4">
+                <input type="email"
+                placeholder="Email"
+                class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
+                <input type="email"
+                placeholder="Confirm email"
+                class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
+            </div>
+        </div>
+    </div>
+{% endblock content %}

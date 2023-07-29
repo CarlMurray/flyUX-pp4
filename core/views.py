@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Flight, Airport
 from datetime import datetime, timedelta
+from utils.altdates import create_alt_date_range
 
 def home_page(request):
     airports = Airport.objects.all()
@@ -27,15 +28,6 @@ def search_results_view(request):
     # sorted_price = flight_results.values_list('price')
     # lowest_price = float(sorted_price.order_by('price').first()[0])
     
-    def create_alt_date_range(leg_date):
-        slider_date_list = [] 
-        slider_date_range = range(-2, 3)
-        for x in slider_date_range:
-            date = datetime.strptime(leg_date, '%Y-%m-%d') + timedelta(days=x)
-            slider_date_list.append(date)
-        print(slider_date_list)
-        return slider_date_list
-    print(return_date)
     context = {
         'trip_type':trip_type,
         'origin':request.GET['origin'],
@@ -55,6 +47,7 @@ def passenger_details_view(request):
     return render(request, 'core/passenger-details.html')
 
 def alt_dates(request):
+    leg = request.GET['leg']
     date = request.GET['date']
     origin = request.GET['origin'][-4:-1] # GETS IATA CODE
     destination = request.GET['destination'][-4:-1] # GETS IATA CODE
@@ -66,4 +59,16 @@ def alt_dates(request):
     destination=flight_destination,        
     outbound_date=date
     )
-    return render(request, 'partials/flights.html', {'flight_results':flight_results})
+    print(f'THIS IS THE SELECTED DATE: {date}')
+    print(type(date))
+    slider_date_list = create_alt_date_range(date)
+    # print(slider_date_list)
+    context = {
+        'flight_results':flight_results, 
+        'slider_date_list':slider_date_list, 
+        'date':datetime.strptime(date, '%Y-%m-%d'), 
+        'origin':flight_origin, 
+        'destination':flight_destination, 
+        'leg':leg
+        }
+    return render(request, 'partials/flights.html', context)

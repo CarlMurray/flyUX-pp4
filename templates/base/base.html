@@ -116,8 +116,8 @@
             </div>
         </header>
         <!-- CONTENT BLOCK -->
-            {% block content %}
-            {% endblock content %}
+        {% block content %}
+        {% endblock content %}
         <!-- FOOTER -->
         <footer class="flex justify-center w-full h-20 mt-auto align-center bg-primary">
             <div class="container flex items-center justify-between w-full px-5">
@@ -144,8 +144,10 @@
         <!-- FLOWBITE CSS FRAMEWORK -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
         <!-- HTMX -->
-        <script src="https://unpkg.com/htmx.org@1.9.3" integrity="sha384-lVb3Rd/Ca0AxaoZg5sACe8FJKF0tnUgR2Kd7ehUOG5GCcROv5uBIZsOqovBAcWua" crossorigin="anonymous"></script>
         {% block scripts %}
+            <script src="https://unpkg.com/htmx.org@1.9.3"
+                    integrity="sha384-lVb3Rd/Ca0AxaoZg5sACe8FJKF0tnUgR2Kd7ehUOG5GCcROv5uBIZsOqovBAcWua"
+                    crossorigin="anonymous"></script>
         {% endblock scripts %}
     </body>
 </html>

@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 
-flight_number_validator = RegexValidator(regex=r'UX\d\d\d', message='Flight number must be in the format UX000')
+flight_number_validator = RegexValidator(regex=r'UX\d\d\d\d', message='Flight number must be in the format UX0000')
 iata_validator = RegexValidator(regex=r'[A-Z]+', message='IATA code should be three uppercase letters')
 
 class Airport(models.Model):

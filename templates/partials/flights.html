@@ -25,7 +25,7 @@
     <div id="" class="">
         {% for flight in flight_results %}
             <!-- SHOW AVAILABLE FLIGHTS -->
-            <div class="flight-card-container flex mt-6 border-2 rounded-t-[4.5rem] rounded-b-[4.5rem] flex-wrap flex-col">
+            <div class="flight-card-container flex mt-6 rounded-t-[4.5rem] rounded-b-[4.5rem] flex-wrap flex-col bg-white transition-all duration-500">
                 <div data-selected-{{ leg }}="False" data-flight-leg="{{ leg }}" class="flex flex-col items-center justify-between w-full bg-white border-2 flex-0 drop-shadow-md h-52 sm:h-36 border-primary sm:rounded-full sm:flex-row sm:pl-8 md:pl-16 rounded-3xl overflow-clip" id="{{ flight.flight_number }}">
                     <div class="flex items-center justify-between p-4">
                         <div>
@@ -55,11 +55,80 @@
                         €{{ flight.price }} <small class="font-normal">pp</small>
                     </div>
                 </div>
-                <div class="flex flex-grow hidden p-4 border-2 border-red-500 flight-fares">
-                    <div class="grid w-full grid-cols-3 grid-rows-1 gap-4">
-                        <div class="h-full col-span-1 border-2 rounded-xl ">test</div>
-                        <div class="h-full col-span-1 border-2 rounded-xl "></div>
-                        <div class="h-full col-span-1 border-2 rounded-xl "></div>
+                <div class="flex flex-col flex-grow hidden p-4 md:p-4 lg:p-10 sm:flex-row flight-fares">
+                    <div class="grid w-full grid-cols-1 grid-rows-3 gap-2 md:grid-cols-3 md:grid-rows-1 md:gap-4 lg:gap-10">
+                        <div class="flex flex-col justify-between h-full col-span-1 p-8 text-sm bg-white border-2 shadow-lg rounded-3xl md:text-md">
+                            <div>
+                                <p class="mb-4 text-xl font-bold md:mb-6 md:text-3xl text-primary">Standard</p>
+                                <ul class="leading-4">
+                                    <li class="my-4 list-disc list-inside">
+                                        Small carry-on item
+                                        <br>
+                                        <small class="ml-[23px]">40cm x 20cm x 20cm</small>
+                                        <br>
+                                        <small><a href="#"
+   class="underline decoration-primary underline-offset-4 text-primary ml-[23px]">See baggage policy</a></small>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button class="p-4 bg-primary rounded-xl">
+                                <p class="text-2xl font-bold leading-4 text-white">€{{ flight.price }}</p>
+                                <p class="text-sm font-light text-white">per person</p>
+                            </button>
+                        </div>
+                        <div class="flex flex-col justify-between h-full col-span-1 p-8 text-sm bg-white border-2 shadow-lg rounded-3xl md:text-md">
+                            <div>
+                                <p class="mb-4 text-xl font-bold md:mb-6 md:text-3xl text-primary">Plus</p>
+                                <ul class="leading-4">
+                                    <li class="my-4 list-disc list-inside">
+                                        Small carry-on item
+                                        <br>
+                                        <small class="ml-[23px]">40cm x 20cm x 20cm</small>
+                                        <br>
+                                        <small><a href="#"
+   class="underline decoration-primary underline-offset-4 text-primary ml-[23px]">See baggage policy</a></small>
+                                    </li>
+                                    <li class="my-4 list-disc list-inside">
+                                        Cabin bag
+                                        <br>
+                                        <small class="ml-[23px]">10kg; 50cm x 40cm x 30cm</small>
+                                        <br>
+                                    </li>
+                                    <li class="my-4 list-disc list-inside">Reserved seat</li>
+                                </ul>
+                            </div>
+                            <button class="p-4 bg-primary rounded-xl">
+                                <p class="text-2xl font-bold leading-4 text-white">€{{ flight.price|add:"16" }}</p>
+                                <p class="text-sm font-light text-white">per person</p>
+                            </button>
+                        </div>
+                        <div class="flex flex-col justify-between h-full col-span-1 p-8 text-sm bg-white border-2 shadow-lg rounded-3xl md:text-md">
+                            <div>
+                                <p class="mb-4 text-xl font-bold md:mb-6 md:text-3xl text-primary">Premium</p>
+                                <ul class="leading-4">
+                                    <li class="my-4 list-disc list-inside">
+                                        Small carry-on item
+                                        <br>
+                                        <small class="ml-[23px]">40cm x 20cm x 20cm</small>
+                                        <br>
+                                        <small><a href="#"
+   class="underline decoration-primary underline-offset-4 text-primary ml-[23px]">See baggage policy</a></small>
+                                    </li>
+                                    <li class="my-4 list-disc list-inside">20kg check-in bag</li>
+                                    <li class="my-4 list-disc list-inside">
+                                        Cabin bag
+                                        <br>
+                                        <small class="ml-[23px]">10kg; 50cm x 40cm x 30cm</small>
+                                        <br>
+                                    </li>
+                                    <li class="my-4 list-disc list-inside">Reserved seat</li>
+                                </ul>
+                            </div>
+                            <button class="p-4 bg-primary rounded-xl">
+                                <p class="text-2xl font-bold leading-4 text-white">€{{ flight.price|add:"33" }}</p>
+                                <p class="text-sm font-light text-white">per person</p>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

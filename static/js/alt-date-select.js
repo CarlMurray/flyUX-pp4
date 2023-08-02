@@ -20,7 +20,7 @@ const toggleFlightFares = function () {
                 console.log(flightFaresContainer);
                 // HIDE FARES
                 flightFaresContainer.classList.toggle("hidden");
-                this.classList.remove("h-[40rem]", "rounded-b-[1rem]");
+                this.classList.remove("rounded-b-[3rem]", "shadow-xl");
                 this.setAttribute("data-expanded", "False");
             }
             //  ELSE IF SELECTED FLIGHT NOT ALREADY EXPANDED:
@@ -30,14 +30,14 @@ const toggleFlightFares = function () {
                 // HIDE THE PREVIOUSLY SELECTED FLIGHT
                 if (alreadySelected) {
                     alreadySelected.setAttribute("data-expanded", "False");
-                    alreadySelected.classList.remove("h-[40rem]", "rounded-b-[1rem]");
+                    alreadySelected.classList.remove("rounded-b-[3rem]", "shadow-xl");
                     alreadySelected.childNodes[3].classList.toggle("hidden");
                 }
                 // SHOW THE CURRENTLY SELECTED FLIGHT
                 this.setAttribute("data-expanded", "True");
                 console.log(this.getAttribute("data-expanded"));
-                this.classList.toggle("h-[40rem]");
-                this.classList.toggle("rounded-b-[1rem]");
+                this.classList.toggle("rounded-b-[3rem]");
+                this.classList.toggle("shadow-xl");
                 console.dir(this.childNodes[3]);
                 this.childNodes[3].classList.toggle("hidden");
             }
@@ -62,7 +62,7 @@ document.addEventListener("htmx:afterSettle", function (e) {
 // --------
 
 // DEFINE CLASS FOR SELECTED FLIGHT
-let selectedClass = "border-green-500";
+// let selectedClass = "border-green-500";
 
 const reattachOutboundListeners = function () {
     // SELECT OUTBOUND FLIGHTS
@@ -75,11 +75,11 @@ const reattachOutboundListeners = function () {
             // TO ENSURE ONLY ONE FLIGHT CAN BE SELECTED
             outboundFlights.forEach(function (each) {
                 each.setAttribute("data-selected-outbound", "False");
-                each.classList.remove(selectedClass);
+                // each.classList.remove(selectedClass);
             });
             // SET SELECTED FLIGHT TO TRUE
             this.setAttribute("data-selected-outbound", "True");
-            this.classList.add(selectedClass);
+            // this.classList.add(selectedClass);
             selectedOutboundFlight.setAttribute("value", this.id);
         });
     });
@@ -100,11 +100,11 @@ const reattachReturnListeners = function () {
             // TO ENSURE ONLY ONE FLIGHT CAN BE SELECTED
             returnFlights.forEach(function (each) {
                 each.setAttribute("data-selected-return", "False");
-                each.classList.remove(selectedClass);
+                // each.classList.remove(selectedClass);
             });
             // SET SELECTED FLIGHT TO TRUE
             this.setAttribute("data-selected-return", "True");
-            this.classList.add(selectedClass);
+            // this.classList.add(selectedClass);
             selectedReturnFlight.setAttribute("value", this.id);
         });
     });

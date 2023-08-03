@@ -275,6 +275,13 @@ const addFareButtonListeners = function () {
     });
 }
 
+confirmFlightsBtn.addEventListener('click', function(){
+    outboundFare = sessionStorage.getItem('outbound_fare')
+    outboundFlight = sessionStorage.getItem('outbound_flight')
+    returnFare = sessionStorage.getItem('return_fare')
+    returnFlight = sessionStorage.getItem('return_flight')
+    location.href = `/passenger_details/?outbound_flight=${outboundFlight}&outbound_fare=${outboundFare}&return_flight=${returnFlight}&return_fare=${returnFare}`
+})
 
 // ATTACHES EVENT LISTNERS ON INITIAL LOAD
 const main = function () {

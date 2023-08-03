@@ -156,6 +156,7 @@ const addSelectedFlight = function(selected) {
     console.log(selectedFlight)
     // HIDES FLIGHTS NOT SELECTED
     topParent.classList.add('hidden')
+    // REMOVE FARES CONTAINER STYLES WHEN HIDING SO NOT PRE-EXPANDED WHEN EDITTING FLIGHT
     selectedFlight.nextElementSibling.classList.toggle("max-h-[100rem]")
     selectedFlight.parentElement.classList.toggle("rounded-b-[3rem]")
     selectedFlight.parentElement.classList.toggle("shadow-xl")
@@ -168,12 +169,23 @@ const addSelectedFlight = function(selected) {
 
     editFlightSelection()
 
+    // IF TWO FLIGHTS SELECTED, ENABLE NEXT PAGE CTA
+    if (document.querySelector("#outbound-selected") && document.querySelector("#return-selected")){
+        nextBtn = document.querySelector("#confirm-flights-button")
+        nextBtn.removeAttribute('disabled')
+    }
+    else {
+        nextBtn.setAttribute('disabled', '')
+    }
 
 }
 
 // CLICK HANDLER FOR EDIT FLIGHT BTN
 const editFlight = function(e) {
     console.log('EDIT!')
+    // DISABLE NEXT PAGE CTA WHEN EDITING FLIGHTS
+    nextBtn = document.querySelector("#confirm-flights-button")
+    nextBtn.setAttribute('disabled', '')
     console.log(this)
     let leg = this.getAttribute('data-leg')
     console.log(leg)
@@ -220,6 +232,7 @@ const createSelectedFlightCard = function(flight, selectedFare) {
 
     card = document.createElement('div')
     card.setAttribute('id', `${leg}-selected`)
+    card.setAttribute('data-is-flight-selected', 'True')
     card.innerHTML = `<div class="flex flex-col items-center justify-between w-full bg-white border-2 border-green-500 flight-details-card flex-0 drop-shadow-md h-52 sm:h-36 sm:rounded-full sm:flex-row sm:pl-8 md:pl-16 rounded-3xl overflow-clip">
     <div class="flex items-center justify-between p-4">
         <div>

@@ -9,6 +9,9 @@
 
 
 # Bugs
+
+- Couldn't animate fares card transition. Tried animating from hidden, height=0 etc. Solution: Remove 'hidden' class and set overflow:hidden with height=0. Transition height above max needed.
+
 - Alt date selector bug - cards not expanding. Event listener was being added twice therefore when clicked the styles were toggled repeatedly meaning nothing was happening. Fixed by creating seperate click handler function so it doesn't get added repeatedly. Used dev tools to see what event listeners were added to diagnose problem. Ref: https://stackoverflow.com/questions/41720943/rebind-javascript-events-and-addeventlistener-fires-twice
 
 Before:

@@ -123,11 +123,49 @@ confirmFlightsBtn.addEventListener("click", function () {
     sessionStorage.setItem("outbound_flight", outboundFlight);
     sessionStorage.setItem("return_flight", returnFlight);
 });
+
+let selectedFare;
+let selectedFareLeg;
+
+// HANDLE FARE SELECTION
+const selectFare = function (e) {
+    selectedFare = this.getAttribute('data-fare-type')
+    selectedFareLeg = this.getAttribute('data-leg')
+    console.log(selectedFare, selectedFareLeg)
+    // STORE SELECTED FARE IN SESSION STORAGE
+    sessionStorage.setItem(selectedFareLeg+'_fare', selectedFare)
+    // GET TOP LEVEL PARENT ELEMENT
+    let parent = getParent(this, selectedFareLeg)
+    parent.classList.add('hidden')
+
+}
+
+// GET TOP LEVEL PARENT ELEMENT
+const getParent = function(node, selectedFareLeg) {
+        let parent = node.parentElement
+        while (parent.getAttribute('id') !== `${selectedFareLeg}-flights`){
+            parent = parent.parentElement
+        }
+        console.log(parent)
+        return parent
+    
+}
+
+// ADD EVENT LISTENER TO FARE BUTTONS
+const addFareButtonListeners = function () {
+    let fareSelectionButtons = document.querySelectorAll('[data-fare-type]')
+    fareSelectionButtons.forEach(button => {
+        button.addEventListener('click', selectFare)
+    });
+}
+
+
 // ATTACHES EVENT LISTNERS ON INITIAL LOAD
 const main = function () {
     reattachOutboundListeners();
     reattachReturnListeners();
     toggleFlightFares();
+    addFareButtonListeners()
 };
 
 window.addEventListener("load", main);

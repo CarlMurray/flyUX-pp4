@@ -12,7 +12,7 @@ const clickHandler = function (e) {
     // IF CONTAINER ALREADY EXPANDED:
     if (this.getAttribute("data-expanded") === "True") {
         // HIDE FARES
-        faresWrapper.classList.toggle('max-h-[50rem]');
+        faresWrapper.classList.toggle('max-h-[100rem]');
         this.classList.remove("rounded-b-[3rem]", "shadow-xl");
         this.setAttribute("data-expanded", "False");
     }
@@ -25,13 +25,13 @@ const clickHandler = function (e) {
             alreadySelected.setAttribute("data-expanded", "False");
             alreadySelected.classList.remove("rounded-b-[3rem]", "shadow-xl");
             let faresWrapperSelected = alreadySelected.querySelector('.flight-fares-wrapper')
-            faresWrapperSelected.classList.toggle('max-h-[50rem]')
+            faresWrapperSelected.classList.toggle('max-h-[100rem]')
         }
         // SHOW THE CURRENTLY SELECTED FLIGHT
         this.setAttribute("data-expanded", "True");
         this.classList.toggle("rounded-b-[3rem]");
         this.classList.toggle("shadow-xl");
-        faresWrapper.classList.toggle('max-h-[50rem]')
+        faresWrapper.classList.toggle('max-h-[100rem]')
     }
 }
 

@@ -8,6 +8,7 @@ def home_page(request):
     return render(request, 'core/index.html', {'airports':airports})
 
 def search_results_view(request):
+    request.session['passengers'] = request.GET['passengers']
     trip_type = request.GET['trip_type']
     origin = request.GET['origin'][-4:-1] # GETS IATA CODE
     destination = request.GET['destination'][-4:-1] # GETS IATA CODE
@@ -44,6 +45,11 @@ def search_results_view(request):
 
 
 def passenger_details_view(request):
+    request.session['outbound_flight'] = request.GET['outbound_flight']
+    request.session['outbound_fare'] = request.GET['outbound_fare']
+    request.session['return_flight'] = request.GET['return_flight']
+    request.session['return_fare'] = request.GET['return_fare']
+    print(dict(request.session))
     return render(request, 'core/passenger-details.html')
 
 def alt_dates(request):
@@ -59,8 +65,8 @@ def alt_dates(request):
     destination=flight_destination,        
     outbound_date=date
     )
-    print(f'THIS IS THE SELECTED DATE: {date}')
-    print(type(date))
+    # print(f'THIS IS THE SELECTED DATE: {date}')
+    # print(type(date))
     slider_date_list = create_alt_date_range(date)
     # print(slider_date_list)
     context = {

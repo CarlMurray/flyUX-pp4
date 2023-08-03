@@ -27,7 +27,7 @@
             <!-- SHOW AVAILABLE FLIGHTS -->
             <div class="flight-card-container flex mt-6 rounded-t-[4.5rem] rounded-b-[4.5rem] flex-wrap flex-col bg-white transition-all duration-500">
                 <!-- FLIGHT DETAILS CARD -->
-                <div data-selected-{{ leg }}="False" data-flight-leg="{{ leg }}" class="flex flex-col items-center justify-between w-full bg-white border-2 flight-details-card flex-0 drop-shadow-md h-52 sm:h-36 border-primary sm:rounded-full sm:flex-row sm:pl-8 md:pl-16 rounded-3xl overflow-clip" id="{{ flight.flight_number }}">
+                <div data-selected-{{ leg }}="False" data-flight-leg="{{ leg }}" data-flight-date="{{ flight.outbound_date|date:'j M Y' }}" data-flight-origin="{{ flight.origin }}" data-flight-destination="{{ flight.destination }}" data-flight-deptime="{{ flight.dep_time|time:'H:i' }}" data-flight-arrtime="{{ flight.arr_time|time:'H:i' }}" data-price-standard="{{ flight.standard_fare }}" data-price-plus="{{ flight.plus_fare }}" data-price-premium="{{ flight.premium_fare }}" class="flex flex-col items-center justify-between w-full bg-white border-2 flight-details-card flex-0 drop-shadow-md h-52 sm:h-36 border-primary sm:rounded-full sm:flex-row sm:pl-8 md:pl-16 rounded-3xl overflow-clip" id="{{ flight.flight_number }}">
                     <div class="flex items-center justify-between p-4">
                         <div>
                             <div class="text-xs font-semibold md:text-md text-text">{{ flight.origin }}</div>
@@ -75,7 +75,10 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <button data-leg="{{leg}}" data-fare-type="standard" class="p-4 bg-primary rounded-xl">
+                                <button data-leg="{{ leg }}"
+                                        data-flight-number="{{ flight.flight_number }}"
+                                        data-fare-type="Standard"
+                                        class="p-4 bg-primary rounded-xl">
                                     <p class="text-2xl font-bold leading-4 text-white">€{{ flight.price }}</p>
                                     <p class="text-sm font-light text-white">per person</p>
                                 </button>
@@ -102,7 +105,10 @@
                                         <li class="my-4 list-disc list-inside">Reserved seat</li>
                                     </ul>
                                 </div>
-                                <button data-leg="{{leg}}" data-fare-type="plus" class="p-4 bg-primary rounded-xl">
+                                <button data-leg="{{ leg }}"
+                                        data-flight-number="{{ flight.flight_number }}"
+                                        data-fare-type="Plus"
+                                        class="p-4 bg-primary rounded-xl">
                                     <p class="text-2xl font-bold leading-4 text-white">€{{ flight.plus_fare }}</p>
                                     <p class="text-sm font-light text-white">per person</p>
                                 </button>
@@ -130,7 +136,10 @@
                                         <li class="my-4 list-disc list-inside">Reserved seat</li>
                                     </ul>
                                 </div>
-                                <button data-leg="{{leg}}" data-fare-type="premium" class="p-4 bg-primary rounded-xl">
+                                <button data-leg="{{ leg }}"
+                                        data-flight-number="{{ flight.flight_number }}"
+                                        data-fare-type="Premium"
+                                        class="p-4 bg-primary rounded-xl">
                                     <p class="text-2xl font-bold leading-4 text-white">€{{ flight.premium_fare }}</p>
                                     <p class="text-sm font-light text-white">per person</p>
                                 </button>

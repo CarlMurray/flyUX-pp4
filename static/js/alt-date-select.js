@@ -134,21 +134,124 @@ const selectFare = function (e) {
     console.log(selectedFare, selectedFareLeg)
     // STORE SELECTED FARE IN SESSION STORAGE
     sessionStorage.setItem(selectedFareLeg+'_fare', selectedFare)
+    addSelectedFlight(this, selectedFare)
     // GET TOP LEVEL PARENT ELEMENT
-    let parent = getParent(this, selectedFareLeg)
-    parent.classList.add('hidden')
+    // let parent = getParent(this, selectedFareLeg)
+    // // HIDES FLIGHTS NOT SELECTED
+    // parent.classList.add('hidden')
+    // // CREATE NEW ELEMENT FOR SELECTED FLIGHT
+    // card = createSelectedFlightCard()
+    // // INSERT NEW ELEMENT FOR SELECTED FLIGHT
+    // parent.insertAdjacentElement('beforebegin', card)
+
+}
+
+const addSelectedFlight = function(selected) {
+    let topParent = getParent(selected, 'id', `${selectedFareLeg}-flights`)
+    let flightNumber = selected.getAttribute('data-flight-number')
+    console.log(flightNumber)
+    let selectedFlight = document.querySelector(`#${flightNumber}`)
+    let selectedFare = selected.getAttribute('data-fare-type')
+    console.log(selectedFare)
+    console.log(selectedFlight)
+    // HIDES FLIGHTS NOT SELECTED
+    topParent.classList.add('hidden')
+    selectedFlight.nextElementSibling.classList.toggle("max-h-[100rem]")
+    selectedFlight.parentElement.classList.toggle("rounded-b-[3rem]")
+    selectedFlight.parentElement.classList.toggle("shadow-xl")
+    selectedFlight.parentElement.setAttribute("data-expanded", "False")
+
+    // CREATE NEW ELEMENT FOR SELECTED FLIGHT
+    card = createSelectedFlightCard(selectedFlight, selectedFare)
+    // INSERT NEW ELEMENT FOR SELECTED FLIGHT
+    topParent.insertAdjacentElement('beforebegin', card)
+
+    editFlightSelection()
+
+
+}
+
+// CLICK HANDLER FOR EDIT FLIGHT BTN
+const editFlight = function(e) {
+    console.log('EDIT!')
+    console.log(this)
+    let leg = this.getAttribute('data-leg')
+    console.log(leg)
+    let flightSearchResults = document.querySelector(`#${leg}-flights`)
+    console.dir(flightSearchResults)
+    flightSearchResults.classList.remove('hidden')
+    let selectedFlight = document.querySelector(`#${leg}-selected`)
+    console.dir(selectedFlight)
+    selectedFlight.remove()
+
+}
+
+// FUNCTION TO EDIT FLIGHT
+const editFlightSelection = function () {
+    editButton = document.querySelectorAll('.flight-edit-button')
+    console.dir(editButton)
+    editButton.forEach(btn => {
+        btn.addEventListener('click', editFlight)
+    });
 
 }
 
 // GET TOP LEVEL PARENT ELEMENT
-const getParent = function(node, selectedFareLeg) {
+const getParent = function(node, attribute, value) {
         let parent = node.parentElement
-        while (parent.getAttribute('id') !== `${selectedFareLeg}-flights`){
+        while (parent.getAttribute(attribute) !== value){
             parent = parent.parentElement
         }
         console.log(parent)
         return parent
     
+}
+
+const createSelectedFlightCard = function(flight, selectedFare) {
+    origin = flight.getAttribute('data-flight-origin')
+    destination = flight.getAttribute('data-flight-destination')
+    depTime = flight.getAttribute('data-flight-deptime')
+    arrTime = flight.getAttribute('data-flight-arrtime')
+    price = flight.getAttribute(`data-price-${selectedFare}`)
+    flightNumber = flight.getAttribute('id')
+    fare = selectedFare
+    date = flight.getAttribute('data-flight-date')
+    leg = flight.getAttribute('data-flight-leg')
+
+    card = document.createElement('div')
+    card.setAttribute('id', `${leg}-selected`)
+    card.innerHTML = `<div class="flex flex-col items-center justify-between w-full bg-white border-2 border-green-500 flight-details-card flex-0 drop-shadow-md h-52 sm:h-36 sm:rounded-full sm:flex-row sm:pl-8 md:pl-16 rounded-3xl overflow-clip">
+    <div class="flex items-center justify-between p-4">
+        <div>
+            <div class="text-xs font-semibold md:text-md text-text">${origin}</div>
+            <div class="text-xl font-bold md:text-4xl text-text">${depTime}</div>
+        </div>
+        <div class="mx-8">
+            <div class="text-sm font-light text-center md:text-md text-text">[Duration]</div>
+<hr class="w-[200px]">        
+</div>
+        <div>
+            <div class="text-xs font-semibold md:text-md text-text">${destination}</div>
+            <div class="text-xl font-bold md:text-4xl text-text">${arrTime}</div>
+        </div>
+    </div>
+    <div class="pb-4 text-sm text-center sm:pb-0 sm:pr-4 text-text flex-grow">
+        Flight no.
+        <br class="hidden sm:block">
+        ${flightNumber}
+    </div>
+    <div class="ml-auto mr-8 text-right">
+        <p class="text-normal text-text text-lg">${fare}</p>
+        <p class="text-primary text-2xl font-bold">€${price}pp</p>
+        <p class="text-text font-bold text-md">${date}</p>
+    </div>
+    <div class="flex items-center justify-center w-full h-full text-xl font-normal bg-white text-primary sm:aspect-square sm:w-auto sm:rounded-full">
+        <span class="w-0 h-4/6 border-[1px] ml-0"></span>
+        <p class="w-2/3 text-center mx-auto p-2 cursor-pointer flight-edit-button" data-leg=${leg}>Edit</p>
+    </div>
+</div>
+`
+    return card
 }
 
 // ADD EVENT LISTENER TO FARE BUTTONS

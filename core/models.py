@@ -27,6 +27,16 @@ class Flight(models.Model):
     def __str__(self):
         return f'{self.flight_number}, {self.origin} --> {self.destination}'
     
+    def standard_fare(self):
+        return self.price
+    
+    def plus_fare(self):
+        return self.price + 17
+    
+    def premium_fare(self):
+        return self.price + 31
+    
+    
 class Aircraft(models.Model):
     
     AIRCRAFT_TYPES = [

@@ -26,6 +26,7 @@
         {% for flight in flight_results %}
             <!-- SHOW AVAILABLE FLIGHTS -->
             <div class="flight-card-container flex mt-6 rounded-t-[4.5rem] rounded-b-[4.5rem] flex-wrap flex-col bg-white transition-all duration-500">
+                <!-- FLIGHT DETAILS CARD -->
                 <div data-selected-{{ leg }}="False" data-flight-leg="{{ leg }}" class="flex flex-col items-center justify-between w-full bg-white border-2 flex-0 drop-shadow-md h-52 sm:h-36 border-primary sm:rounded-full sm:flex-row sm:pl-8 md:pl-16 rounded-3xl overflow-clip" id="{{ flight.flight_number }}">
                     <div class="flex items-center justify-between p-4">
                         <div>
@@ -55,9 +56,11 @@
                         €{{ flight.price }} <small class="font-normal">pp</small>
                     </div>
                 </div> 
+                <!-- FARES CONTAINER -->
                 <div class="overflow-hidden transition-all duration-500 ease-in-out max-h-0 flight-fares-wrapper">
                 <div class="flex flex-col flex-grow p-4 md:p-4 lg:p-10 sm:flex-row flight-fares">
                     <div class="grid w-full grid-cols-1 grid-rows-3 gap-2 md:grid-cols-3 md:grid-rows-1 md:gap-4 lg:gap-10">
+                        <!-- STANDARD FARE -->
                         <div class="flex flex-col justify-between h-full col-span-1 p-8 text-sm bg-white border-2 shadow-lg rounded-3xl md:text-md">
                             <div>
                                 <p class="mb-4 text-xl font-bold md:mb-6 md:text-3xl text-primary">Standard</p>
@@ -72,11 +75,12 @@
                                     </li>
                                 </ul>
                             </div>
-                            <button class="p-4 bg-primary rounded-xl">
+                            <button data-fare-type="standard" class="p-4 bg-primary rounded-xl">
                                 <p class="text-2xl font-bold leading-4 text-white">€{{ flight.price }}</p>
                                 <p class="text-sm font-light text-white">per person</p>
                             </button>
                         </div>
+                        <!-- PLUS FARE -->
                         <div class="flex flex-col justify-between h-full col-span-1 p-8 text-sm bg-white border-2 shadow-lg rounded-3xl md:text-md">
                             <div>
                                 <p class="mb-4 text-xl font-bold md:mb-6 md:text-3xl text-primary">Plus</p>
@@ -98,11 +102,12 @@
                                     <li class="my-4 list-disc list-inside">Reserved seat</li>
                                 </ul>
                             </div>
-                            <button class="p-4 bg-primary rounded-xl">
-                                <p class="text-2xl font-bold leading-4 text-white">€{{ flight.price|add:"16" }}</p>
+                            <button data-fare-type="plus" class="p-4 bg-primary rounded-xl">
+                                <p class="text-2xl font-bold leading-4 text-white">€{{ flight.plus_fare }}</p>
                                 <p class="text-sm font-light text-white">per person</p>
                             </button>
                         </div>
+                        <!-- PREMIUM FARE -->
                         <div class="flex flex-col justify-between h-full col-span-1 p-8 text-sm bg-white border-2 shadow-lg rounded-3xl md:text-md">
                             <div>
                                 <p class="mb-4 text-xl font-bold md:mb-6 md:text-3xl text-primary">Premium</p>
@@ -125,8 +130,8 @@
                                     <li class="my-4 list-disc list-inside">Reserved seat</li>
                                 </ul>
                             </div>
-                            <button class="p-4 bg-primary rounded-xl">
-                                <p class="text-2xl font-bold leading-4 text-white">€{{ flight.price|add:"33" }}</p>
+                            <button data-fare-type="premium" class="p-4 bg-primary rounded-xl">
+                                <p class="text-2xl font-bold leading-4 text-white">€{{ flight.premium_fare }}</p>
                                 <p class="text-sm font-light text-white">per person</p>
                             </button>
                         </div>

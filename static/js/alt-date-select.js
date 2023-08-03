@@ -8,13 +8,13 @@ let selectedReturnFlight = document.querySelector(
 );
 
 const clickHandler = function (e) {
-    let faresWrapper = this.querySelector('.flight-fares-wrapper')
+    let faresWrapper = this.parentNode.querySelector('.flight-fares-wrapper')
     // IF CONTAINER ALREADY EXPANDED:
-    if (this.getAttribute("data-expanded") === "True") {
+    if (this.parentNode.getAttribute("data-expanded") === "True") {
         // HIDE FARES
         faresWrapper.classList.toggle('max-h-[100rem]');
-        this.classList.remove("rounded-b-[3rem]", "shadow-xl");
-        this.setAttribute("data-expanded", "False");
+        this.parentNode.classList.remove("rounded-b-[3rem]", "shadow-xl");
+        this.parentNode.setAttribute("data-expanded", "False");
     }
     //  ELSE IF SELECTED FLIGHT NOT ALREADY EXPANDED:
     else {
@@ -28,9 +28,9 @@ const clickHandler = function (e) {
             faresWrapperSelected.classList.toggle('max-h-[100rem]')
         }
         // SHOW THE CURRENTLY SELECTED FLIGHT
-        this.setAttribute("data-expanded", "True");
-        this.classList.toggle("rounded-b-[3rem]");
-        this.classList.toggle("shadow-xl");
+        this.parentNode.setAttribute("data-expanded", "True");
+        this.parentNode.classList.toggle("rounded-b-[3rem]");
+        this.parentNode.classList.toggle("shadow-xl");
         faresWrapper.classList.toggle('max-h-[100rem]')
     }
 }
@@ -38,7 +38,7 @@ const clickHandler = function (e) {
 // TO TOGGLE FARE SELECTION ON CLICK
 const toggleFlightFares = function () {
     let flightCardContainers = document.querySelectorAll(
-        ".flight-card-container"
+        ".flight-details-card"
     );
     flightCardContainers.forEach((card) => {
         card.addEventListener("click", clickHandler);

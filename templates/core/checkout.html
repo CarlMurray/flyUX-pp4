@@ -2,9 +2,9 @@
 {% load static %}
 {% block content %}
     <div class="container h-full px-5 mx-auto mt-12">
-        <div class="grid grid-cols-1 gap-10 sm:grid-cols-2">
-            <div class="col-span-1 p-6 bg-white shadow-lg rounded-3xl">
-                <p class="text-3xl font-light text-primary">Order Summary</p>
+        <div class="grid grid-cols-1 gap-10 lg:grid-cols-2">
+            <div class="col-span-1 p-6 border-2 rounded-3xl">
+                <p class="text-3xl font-light text-text">Order Summary</p>
                 <hr class="my-4">
                 {% for flight, fare, price in flights %}
                     <div>
@@ -24,29 +24,41 @@
                 {% endfor %}
                 <p class="text-xl font-bold text-primary">Total: €{{ total_price }}</p>
             </div>
-            <div class="col-span-1">
-                <p class="mb-4 text-3xl font-bold text-primary">Payment details</p>
-                <form action="" class="grid grid-cols-2 gap-4">
+            <div class="col-span-1 p-6 bg-white shadow-lg rounded-3xl">
+                <p class="mb-4 text-3xl font-bold text-primary ">Payment details</p>
+                <form action="" method="post" class="grid grid-cols-2 gap-4">
+                    {% csrf_token %}
                     <input type="text"
                            name=""
-                           id=""
-                           class="col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
+                           id="card-name"
+                           class="col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
+                           placeholder="Name on card"
+                           minlength="1"
+                           required>
                     <input type="text"
                            name=""
-                           id=""
-                           class="col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
+                           id="card-number"
+                           class="col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
+                           placeholder="Card number"
+                           minlength="20"
+                           maxlength="20"
+                           required>
                     <input type="text"
                            name=""
-                           id=""
-                           class="col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
+                           id="card-cvc"
+                           class="col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
+                           placeholder="CVC"
+                           minlength="3"
+                           maxlength="3"
+                           required>
                     <input type="text"
                            name=""
-                           id=""
-                           class="col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
-                    <input type="text"
-                           name=""
-                           id=""
-                           class="col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
+                           id="card-expiry"
+                           class="col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
+                           placeholder="Expiry"
+                           minlength="7"
+                           maxlength="9"
+                           required>
                     <button type="submit"
                             name=""
                             id=""
@@ -58,3 +70,7 @@
         </div>
     </div>
 {% endblock content %}
+{% block scripts %}
+    <script src="{% static 'js/payform.js' %}"></script>
+    <script src="{% static 'js/checkout.js' %}"></script>
+{% endblock scripts %}

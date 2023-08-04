@@ -29,4 +29,5 @@ urlpatterns = [
     path("passenger_details/", core_views.passenger_details_view, name="passenger-details"),
     path("search_results/alt_dates/", core_views.alt_dates, name="alt-dates"),
     path("checkout/", core_views.checkout_view, name="checkout"),
+    path("order_confirmation/", core_views.order_confirmation_view, name="order-confirmation"),
 ]

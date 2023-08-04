@@ -132,5 +132,13 @@ def checkout_view(request):
         'flights':((outbound_flight, outbound_fare, outbound_price), (return_flight, return_fare, return_price)),
         'num_passengers':request.session['num_passengers']
     }
+    # STORE FLIGHT INFO IN SESSIONS FOR REUSE IN OTHER VIEWS
+    # request.session['booking_info'] = context
+    if request.method == 'GET':
+        return render(request, 'core/checkout.html', context)
+    return redirect('order-confirmation')
 
-    return render(request, 'core/checkout.html', context)
+
+def order_confirmation_view(request):
+    context = {}
+    return render(request, 'core/order-confirmation.html', context)

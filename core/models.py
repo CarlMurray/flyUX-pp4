@@ -36,6 +36,14 @@ class Flight(models.Model):
     def premium_fare(self):
         return self.price + 31
     
+    def get_fare(self, fare):
+        if fare == 'Standard':
+            return self.price
+        if fare == 'Plus':
+            return self.price + 17
+        if fare == 'Premium':
+            return self.price + 31
+    
     
 class Aircraft(models.Model):
     

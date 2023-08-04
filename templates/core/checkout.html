@@ -1,11 +1,32 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="container px-5 mx-auto">
-        <div class="grid grid-cols-2 gap-10">
+    <div class="container h-full px-5 mx-auto mt-12">
+        <div class="grid grid-cols-1 gap-10 sm:grid-cols-2">
+            <div class="col-span-1 p-6 bg-white shadow-lg rounded-3xl">
+                <p class="text-3xl font-light text-primary">Order Summary</p>
+                <hr class="my-4">
+                {% for flight, fare, price in flights %}
+                    <div>
+                        <p class="text-lg font-bold text-text">{{ flight.origin }} - {{ flight.destination }}</p>
+                        <p>
+                            {{ flight.outbound_date }} | {{ flight.dep_time }} |
+                            {% if num_passengers == '1' %}
+                                {{ num_passengers }} Passenger
+                            {% else %}
+                                {{ num_passengers }} Passengers
+                            {% endif %}
+                            | {{ flight.flight_number }}
+                        </p>
+                        <p>{{ num_passengers }}x {{ fare }} fare - €{{ price }}pp</p>
+                    </div>
+                    <hr class="my-4">
+                {% endfor %}
+                <p class="text-xl font-bold text-primary">Total: €{{ total_price }}</p>
+            </div>
             <div class="col-span-1">
-                <p class="text-3xl font-bold text-primary">Payment details</p>
-                <form action="" class="grid grid-cols-2 gap-2">
+                <p class="mb-4 text-3xl font-bold text-primary">Payment details</p>
+                <form action="" class="grid grid-cols-2 gap-4">
                     <input type="text"
                            name=""
                            id=""
@@ -30,26 +51,9 @@
                             name=""
                             id=""
                             class="col-span-2 h-12 px-4 rounded-full  bg-primary text-white text-bold  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
-                        Pay
+                        Pay €{{ total_price }}
                     </button>
                 </form>
-            </div>
-            <div class="col-span-1 p-6 bg-white shadow-lg rounded-3xl">
-                <p>Order Summary</p>
-                {% for flight in flights %}
-                    <div>
-                        <p>{{ flight.origin }} - {{ flight.destination }}</p>
-                        <p>
-                            {{ flight.outbound_date }} | {{ flight.dep_time }} |
-                            {% if num_passengers == '1' %}
-                                {{ num_passengers }} Passenger
-                            {% else %}
-                                {{ num_passengers }} Passengers
-                            {% endif %}
-                            | {{ flight.flight_number }}
-                        </p>
-                    </div>
-                {% endfor %}
             </div>
         </div>
     </div>

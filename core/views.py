@@ -114,8 +114,11 @@ def checkout_view(request):
     outbound_flight = Flight.objects.get(flight_number=request.session['outbound_flight'])
     print(outbound_flight)
     outbound_fare = request.session['outbound_fare']
+    outbound_price = outbound_flight.get_fare(outbound_fare)
     return_flight = Flight.objects.get(flight_number=request.session['return_flight'])
     return_fare = request.session['return_fare']
+    return_price = return_flight.get_fare(return_fare)
+    total_price = int(request.session['num_passengers']) * outbound_price + int(request.session['num_passengers']) * return_price
     
     context = {
         'passengers':passengers,
@@ -123,7 +126,10 @@ def checkout_view(request):
         'outbound_fare':outbound_fare,
         'return_flight':return_flight,
         'return_fare':return_fare,
-        'flights':(outbound_flight, return_flight),
+        'outbound_price':outbound_price,
+        'return_price':return_price,
+        'total_price':total_price,
+        'flights':((outbound_flight, outbound_fare, outbound_price), (return_flight, return_fare, return_price)),
         'num_passengers':request.session['num_passengers']
     }
 

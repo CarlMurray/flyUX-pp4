@@ -1,0 +1,56 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container px-5 mx-auto">
+        <div class="grid grid-cols-2 gap-10">
+            <div class="col-span-1">
+                <p class="text-3xl font-bold text-primary">Payment details</p>
+                <form action="" class="grid grid-cols-2 gap-2">
+                    <input type="text"
+                           name=""
+                           id=""
+                           class="col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
+                    <input type="text"
+                           name=""
+                           id=""
+                           class="col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
+                    <input type="text"
+                           name=""
+                           id=""
+                           class="col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
+                    <input type="text"
+                           name=""
+                           id=""
+                           class="col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
+                    <input type="text"
+                           name=""
+                           id=""
+                           class="col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
+                    <button type="submit"
+                            name=""
+                            id=""
+                            class="col-span-2 h-12 px-4 rounded-full  bg-primary text-white text-bold  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
+                        Pay
+                    </button>
+                </form>
+            </div>
+            <div class="col-span-1 p-6 bg-white shadow-lg rounded-3xl">
+                <p>Order Summary</p>
+                {% for flight in flights %}
+                    <div>
+                        <p>{{ flight.origin }} - {{ flight.destination }}</p>
+                        <p>
+                            {{ flight.outbound_date }} | {{ flight.dep_time }} |
+                            {% if num_passengers == '1' %}
+                                {{ num_passengers }} Passenger
+                            {% else %}
+                                {{ num_passengers }} Passengers
+                            {% endif %}
+                            | {{ flight.flight_number }}
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

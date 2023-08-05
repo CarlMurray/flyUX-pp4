@@ -11,7 +11,7 @@ def home_page(request):
 
 
 def search_results_view(request):
-    request.session['passengers'] = request.GET['passengers']
+    request.session['num_passengers'] = int(request.GET['passengers'])
     trip_type = request.GET['trip_type']
     origin = request.GET['origin'][-4:-1]  # GETS IATA CODE
     destination = request.GET['destination'][-4:-1]  # GETS IATA CODE
@@ -55,7 +55,8 @@ def passenger_details_view(request):
         request.session['return_flight'] = request.GET['return_flight']
         request.session['return_fare'] = request.GET['return_fare']
         # print(dict(request.session))
-        passengers = int(request.session['passengers'])
+        print(request.session['passengers'])
+        passengers = int(request.session['num_passengers'])
         passengers_range = range(1, passengers+1)
         # print(passengers_range)
         return render(request, 'core/passenger-details.html', {'passengers': passengers_range, 'num_passengers':passengers})

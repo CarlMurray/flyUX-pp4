@@ -93,3 +93,5 @@ const toggleFlightFares = function () {
     });
 };
 ```
+
+Bug: Could not load Booking model in Admin. Due to 90k rows in DB. Added ModelAdmin config to fix. Reference: https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#django.contrib.admin.ModelAdmin.autocomplete_fields

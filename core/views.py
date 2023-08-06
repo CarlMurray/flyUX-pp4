@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Flight, Airport
+from .models import Flight, Airport, Passenger, Booking
 from datetime import datetime, timedelta
 from utils.altdates import create_alt_date_range
 from .forms import PassengerForm
-
 
 def home_page(request):
     airports = Airport.objects.all()
@@ -77,6 +76,7 @@ def passenger_details_view(request):
                 passengers[passenger_key] = form
         # print(passengers)
         request.session['passengers'] = passengers
+        request.session['trip_email'] = request.POST['trip-email']
         print(dict(request.session))
         return redirect('checkout')
             
@@ -120,6 +120,8 @@ def checkout_view(request):
     return_fare = request.session['return_fare']
     return_price = return_flight.get_fare(return_fare)
     total_price = int(request.session['num_passengers']) * outbound_price + int(request.session['num_passengers']) * return_price
+    request.session['outbound_flight_object'] = outbound_flight.id
+    request.session['return_flight_object'] = return_flight.id
     
     context = {
         'passengers':passengers,
@@ -141,5 +143,25 @@ def checkout_view(request):
 
 
 def order_confirmation_view(request):
+    request.session['outbound_flight_object']
+    request.session['return_flight_object']
+
+    booking = Booking(
+        outbound_flight_id=request.session['outbound_flight_object'], 
+        return_flight_id=request.session['return_flight_object'],
+        customer=request.user,
+        trip_email = request.session['trip_email'],
+        status_confirmed = True,
+        )
+    booking.save()
+    print(request.session['passengers'])
+    passengers = request.session['passengers'].items()
+    passenger_objects = []
+    for passenger, name in passengers:
+        print(passenger, name)
+        p = Passenger(first=name['first'], last=name['last'], booking=booking)
+        passenger_objects.append(p)
+        p.save()
+
     context = {}
     return render(request, 'core/order-confirmation.html', context)

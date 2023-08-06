@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from users.models import User
+import uuid
 
 flight_number_validator = RegexValidator(regex=r'UX\d\d\d\d\d', message='Flight number must be in the format UX00000')
 iata_validator = RegexValidator(regex=r'[A-Z]+', message='IATA code should be three uppercase letters')
@@ -60,4 +62,23 @@ class Aircraft(models.Model):
     
     def __str__(self):
         return f'{self.aircraft_type}'
+    
+class Passenger(models.Model):
+    booking = models.ForeignKey("Booking", null=True, blank=True, on_delete=models.CASCADE)
+    first = models.CharField(max_length=100)
+    last = models.CharField(max_length=100)
 
+    def __str__(self):
+        return f'{self.first} {self.last}'
+
+class Booking(models.Model):
+    reference = models.UUIDField(default=uuid.uuid4)
+    time_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    outbound_flight = models.ForeignKey("Flight", on_delete=models.SET_NULL, null=True, blank=True, related_name="booking_outbound")
+    return_flight = models.ForeignKey("Flight", on_delete=models.SET_NULL, null=True, blank=True, related_name="booking_return")
+    customer = models.ForeignKey("users.User", on_delete=models.SET_NULL, null=True, blank=True)
+    status_confirmed = models.BooleanField(blank=True, default=False)
+    trip_email = models.EmailField(max_length=254, blank=True, null=True)
+
+    def __str__(self):
+        return f'Reference: {self.reference.hex[:10]}; {self.outbound_flight.origin} - {self.outbound_flight.destination}; {self.customer}'

@@ -41,12 +41,14 @@
                                 </fieldset>
                             </div>
                             <div class="grid grid-cols-4 gap-3">
-                                <div class="relative col-span-full sm:col-span-2 airport-input-container over">
+                                <div class="relative caret-transparent col-span-full sm:col-span-2 airport-input-container over">
                                     <input type="text"
                                            name="origin"
                                            id="origin"
                                            placeholder="Origin"
-                                           class="z-40 relative w-full h-12 px-4 rounded-full border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm">
+                                           class="z-40 relative w-full h-12 px-4 rounded-full border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
+                                        
+                                           required>
                                     <div id="airports-list-origin"
                                          class="absolute z-30 hidden w-full p-4 pt-8 overflow-hidden bg-white border-2 top-1/2 rounded-b-3xl drop-shadow-md h-72">
                                         <div class="h-full overflow-auto">
@@ -62,7 +64,9 @@
                                            name="destination"
                                            id="destination"
                                            placeholder="Destination"
-                                           class="z-20 relative w-full h-12 px-4 rounded-full border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm">
+                                           class="caret-transparent z-20 relative w-full h-12 px-4 rounded-full border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
+                                        
+                                           required>
                                     <div id="airports-list-destination"
                                          class="absolute z-10 hidden w-full p-4 pt-8 overflow-hidden bg-white border-2 top-1/2 rounded-b-3xl drop-shadow-md h-72">
                                         <div class="h-full overflow-auto">
@@ -77,18 +81,20 @@
                                 <input type="text"
                                        name="outbound_date"
                                        id="flatpickr-date-outbound"
-                                       class="flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
+                                       class="caret-transparent flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
                                        placeholder="Outbound Date"
                                        data-id="datetime"
-                                       readonly="readonly">
+                                    
+                                       required>
                                 <!-- RETURN DATE -->
                                 <input type="text"
                                        name="return_date"
                                        id="flatpickr-date-return"
-                                       class="flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
+                                       class="caret-transparent flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
                                        placeholder="Return Date"
                                        data-id="datetime"
-                                       readonly="readonly">
+                                    
+                                       required>
                                 {% comment %} <input type="text"
         name="passengers"
         id=""
@@ -96,7 +102,8 @@
         class="col-span-4 sm:col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"> {% endcomment %}
                                 <select name="passengers"
                                         id=""
-                                        class="col-span-4 sm:col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm">
+                                        class="col-span-4 sm:col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
+                                        required>
                                     <option value="" selected disabled>Passengers</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -109,7 +116,7 @@
                                 </select>
                                 <input type="submit"
                                        name="submit"
-                                       id=""
+                                       id="submit"
                                        class="flex items-center justify-center h-12 col-span-4 px-6 font-bold text-center text-white rounded-full sm:col-span-2 md:col-span-1 bg-primary py-auto drop-shadow-sm">
                             </div>
                         </div>

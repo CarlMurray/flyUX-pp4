@@ -8,5 +8,5 @@ hamburgerMenu.addEventListener("click", function () {
   } else hamburgerMenuExpanded.classList.add("hidden");
 });
 
-let date_picker_from = flatpickr("#flatpickr-date-outbound", {});
-let date_picker_to = flatpickr("#flatpickr-date-return", {});
+// let date_picker_from = flatpickr("#flatpickr-date-outbound", {});
+// let date_picker_to = flatpickr("#flatpickr-date-return", {});

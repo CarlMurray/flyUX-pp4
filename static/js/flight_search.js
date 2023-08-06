@@ -4,6 +4,17 @@ let airportsListOrigin = document.querySelector("#airports-list-origin");
 let airportsListDestination = document.querySelector("#airports-list-destination");
 let airportListItems = document.querySelectorAll('.airport-list-item')
 
+// REQUIRED FOR FORM VALIDATION - DISABLES READONLY
+let date_picker_from = flatpickr("#flatpickr-date-outbound", {allowInput:true});
+let date_picker_to = flatpickr("#flatpickr-date-return", {allowInput:true});
+
+// DISABLE USER KEY INPUT FOR FORM FIELDS
+let dateFromInput = document.querySelector('#flatpickr-date-outbound')
+let dateToInput = document.querySelector('#flatpickr-date-return')
+dateFromInput.onkeypress = () => false
+dateToInput.onkeypress = () => false
+airportOrigin.onkeypress = () => false
+airportDestination.onkeypress = () => false
 
 document.addEventListener('click', (e) => {
     if (e.target == airportOrigin || e.target == airportDestination) {
@@ -11,9 +22,7 @@ document.addEventListener('click', (e) => {
     } else if (e.target != airportOrigin && e.target != airportsListOrigin || e.target != airportDestination && e.target != airportsListDestination) {
         airportsListOrigin.classList.add('hidden');
         airportsListDestination.classList.add('hidden');
-    }
-  });
-  
+    }})
   airportListItems.forEach((item) => {
     item.addEventListener('click', (e) => {
       console.log(item.innerText);
@@ -26,3 +35,25 @@ document.addEventListener('click', (e) => {
       inputField.value = value;
     });
   });
+
+// FLATPICKR DATE INPUT VALIDATION
+let dates = document.querySelectorAll('[data-id="datetime"]')
+let submit = document.querySelector('#submit')
+let form = document.querySelector('form')
+
+// SEARCH FORM VALIDATION
+const validateForm = function(e){
+  e.preventDefault()
+  if (airportDestination.value === airportOrigin.value){
+    airportDestination.setCustomValidity('Destination cannot be same as origin')
+  } 
+  else {
+    airportDestination.setCustomValidity('')
+  }
+  form.checkValidity()
+  form.reportValidity()
+  form.requestSubmit()
+
+}
+
+submit.addEventListener('click', validateForm)

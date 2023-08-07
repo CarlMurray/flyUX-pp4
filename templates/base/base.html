@@ -81,7 +81,7 @@
                             {% else %}
                             <a href="{% url 'register' %}"
                             class="flex items-center h-10 px-6 text-white rounded-full py-auto">Signup</a>
-                            <a href="{% url 'login' %}"
+                            <a href="{% url 'login' %}?next={{request.get_full_path}}"
                             class="bg-primary py-auto px-6 border-[1px] border-white rounded-2xl h-10 flex items-center font-bold text-white">Login</a>
                             {% endif %}
                         </div>

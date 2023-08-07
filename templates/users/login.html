@@ -32,6 +32,10 @@
                                    id="id_password"
                                    class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
                         </div>
+                        {% if request.GET.next %}
+                        <!-- FOR REDIRECT AFTER LOGIN -->
+                        <input type="hidden" name="next" value="{{request.GET.urlencode}}">
+                        {% endif %}
                         <button type="submit"
                                 class="flex items-center justify-center h-12 px-6 font-bold text-center text-white rounded-full bg-primary py-auto">
                             Login

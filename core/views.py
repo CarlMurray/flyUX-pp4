@@ -54,7 +54,7 @@ def passenger_details_view(request):
         request.session['return_flight'] = request.GET['return_flight']
         request.session['return_fare'] = request.GET['return_fare']
         # print(dict(request.session))
-        print(request.session['passengers'])
+        # print(request.session['passengers'])
         passengers = int(request.session['num_passengers'])
         passengers_range = range(1, passengers+1)
         # print(passengers_range)

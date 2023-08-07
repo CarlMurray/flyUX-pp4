@@ -16,6 +16,11 @@ def signup_view(request):
 
 
 def login_view(request):
+    # STORE PREV URL FOR REDIRECT AFTER LOGIN, TRIMSS '?next='
+    request.session['next_url'] = request.GET.urlencode(safe='/?=&')[5:]
+    # print(request.GET['next'])
+    # print('THIS IS THE STRING')
+    # print(request.session['next_url'])
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -29,11 +34,12 @@ def login_view(request):
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home-page')
+                return redirect(request.session['next_url'])
             else:
                 print('ERROR MSG TO BE ADDED')
         else:
             print('TBD')
+    print(request.session['next_url'])
     return render(request, 'users/login.html')
 
 

@@ -3,6 +3,7 @@ from .models import Flight, Airport, Passenger, Booking
 from datetime import datetime, timedelta
 from utils.altdates import create_alt_date_range
 from .forms import PassengerForm
+from django.http import HttpResponse
 
 def home_page(request):
     airports = Airport.objects.all()
@@ -171,3 +172,19 @@ def bookings_view(request):
     bookings = Booking.objects.filter(customer=request.user)
     context={'bookings':bookings}
     return render(request, 'core/bookings.html', context)
+
+def bookings_edit_view(request, booking_id):
+        
+    booking = Booking.objects.get(id=booking_id)
+    if request.method == "DELETE":
+        booking.delete()
+        response = HttpResponse()
+        response.headers['HX-Redirect'] = "/bookings/"
+        return response
+    passengers = Passenger.objects.filter(booking=booking)
+    print(passengers)
+    context={
+        'booking':booking,
+        'passengers':passengers
+    }
+    return render(request, 'core/bookings-edit.html', context)

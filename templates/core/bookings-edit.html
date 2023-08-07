@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<div id="container" class="container relative items-center h-full px-5 mx-auto my-12" hx-confirm="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <div class="flex items-center justify-between">
+        <div>
+            <p class="text-3xl font-bold text-primary">Booking</p>
+            <p class="text-xl font-bold text-text">Reference: {{booking.get_shorthand}}</p>
+        </div>
+        <button hx-swap="" hx-delete="/bookings/edit/{{booking.id}}" class="flex items-center h-12 p-3 text-center  border-[1px] rounded-full border-primary">Cancel Booking</button>
+    </div>
+    <hr class="my-2">
+    <p class="text-lg font-bold text-primary">Flights</p>
+    <div>
+        <p class="font-bold text-md text-text">Outbound</p>
+        <p>{{booking.outbound_flight}}</p>
+        <p>{{booking.outbound_flight.outbound_date}}</p>
+    </div>
+    <div>
+        <p class="font-bold text-md text-text">Return</p>
+        <p>{{booking.return_flight}}</p>
+        <p>{{booking.return_flight.return_date}}</p>
+    </div>
+    <div>
+        <p class="text-lg font-bold text-primary">Passengers</p>
+        {% for passenger in passengers %}
+        <p>{{passenger}}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+{{block.super}}
+<script src="{% static 'js/booking-edit.js' %}"></script>
+{% endblock scripts %}

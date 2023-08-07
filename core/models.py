@@ -82,3 +82,6 @@ class Booking(models.Model):
 
     def __str__(self):
         return f'Reference: {self.reference.hex[:10]}; {self.outbound_flight.origin} - {self.outbound_flight.destination}; {self.customer}'
+    
+    def get_shorthand(self):
+        return str(self.reference)[:8].upper()

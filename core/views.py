@@ -165,3 +165,9 @@ def order_confirmation_view(request):
 
     context = {}
     return render(request, 'core/order-confirmation.html', context)
+
+
+def bookings_view(request):
+    bookings = Booking.objects.filter(customer=request.user)
+    context={'bookings':bookings}
+    return render(request, 'core/bookings.html', context)

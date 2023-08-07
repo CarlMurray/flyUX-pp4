@@ -1,35 +1,57 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
-<div id="container" class="container relative items-center h-full px-5 mx-auto my-12" hx-confirm="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-    <div class="flex items-center justify-between">
-        <div>
-            <p class="text-3xl font-bold text-primary">Booking</p>
-            <p class="text-xl font-bold text-text">Reference: {{booking.get_shorthand}}</p>
+    <div id="container"
+         class="container relative items-center h-full px-5 mx-auto my-12"
+         hx-confirm=""
+         hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-2xl font-bold sm:text-3xl text-primary">Booking</p>
+                <p class="font-bold sm:text-xl text-md text-text">Reference: {{ booking.get_shorthand }}</p>
+            </div>
+            <button hx-swap=""
+                    hx-delete="/bookings/edit/{{ booking.id }}"
+                    class="flex items-center h-12 p-3 text-center  border-[1px] rounded-full border-primary">
+                Cancel Booking
+            </button>
         </div>
-        <button hx-swap="" hx-delete="/bookings/edit/{{booking.id}}" class="flex items-center h-12 p-3 text-center  border-[1px] rounded-full border-primary">Cancel Booking</button>
+        <hr class="my-2">
+        <div class="mb-4">
+            <p class="mb-2 font-bold text-md text-primary">Outbound</p>
+            <div class="flex flex-col w-full p-8 bg-white shadow-lg md:flex-row ">
+                <p class="font-bold">{{ booking.outbound_flight.origin }} to {{ booking.outbound_flight.destination }}</p>
+                <div class="flex text-sm md:ml-auto">
+                    <p class="">{{ booking.outbound_flight.outbound_date }}</p>
+                    <p class="mx-2">&#x2022</p>
+                    <p>{{ booking.outbound_flight.dep_time|time:'H:i' }} - {{ booking.outbound_flight.arr_time|time:'H:i' }}</p>
+                    <p class="mx-2">&#x2022</p>
+                    <p>{{ booking.outbound_flight.flight_number }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="mb-4">
+            <p class="mb-2 font-bold text-md text-primary">Return</p>
+            <div class="flex flex-col w-full p-8 bg-white shadow-lg md:flex-row ">
+                <p class="font-bold">{{ booking.return_flight.origin }} to {{ booking.return_flight.destination }}</p>
+                <div class="flex text-sm md:ml-auto">
+                    <p class="">{{ booking.return_flight.outbound_date }}</p>
+                    <p class="mx-2">&#x2022</p>
+                    <p>{{ booking.return_flight.dep_time|time:'H:i' }} - {{ booking.return_flight.arr_time|time:'H:i' }}</p>
+                    <p class="mx-2">&#x2022</p>
+                    <p>{{ booking.return_flight.flight_number }}</p>
+                </div>
+            </div>
+        </div>
+        <div>
+            <p class="text-lg font-bold text-primary">Passengers</p>
+            <ol class="list-decimal">
+            {% for passenger in passengers %}<li class="list-inside">{{ passenger }}</li>{% endfor %}
+        </ol>
+        </div>
     </div>
-    <hr class="my-2">
-    <p class="text-lg font-bold text-primary">Flights</p>
-    <div>
-        <p class="font-bold text-md text-text">Outbound</p>
-        <p>{{booking.outbound_flight}}</p>
-        <p>{{booking.outbound_flight.outbound_date}}</p>
-    </div>
-    <div>
-        <p class="font-bold text-md text-text">Return</p>
-        <p>{{booking.return_flight}}</p>
-        <p>{{booking.return_flight.return_date}}</p>
-    </div>
-    <div>
-        <p class="text-lg font-bold text-primary">Passengers</p>
-        {% for passenger in passengers %}
-        <p>{{passenger}}</p>
-        {% endfor %}
-    </div>
-</div>
 {% endblock content %}
 {% block scripts %}
-{{block.super}}
-<script src="{% static 'js/booking-edit.js' %}"></script>
+    {{ block.super }}
+    <script src="{% static 'js/booking-edit.js' %}"></script>
 {% endblock scripts %}

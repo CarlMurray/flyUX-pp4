@@ -5,9 +5,9 @@ const confirmDelete = (evt) => {
     evt.preventDefault()
     // CREATE POPUP CONFIRMATION DIALOG
     let dialog = document.createElement('dialog')
-    dialog.classList.add('w-5/6', 'md:w-2/3')
+    dialog.classList.add('w-5/6', 'md:w-2/3', 'absolute', 'top-1/2', '-translate-y-1/2')
     dialog.innerHTML = 
-    "<div class='flex flex-col gap-4 justify-center p-6 w-full bg-white rounded-lg shadow-lg border-primary border-2 absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2'>\
+    "<div class='flex flex-col gap-4 justify-center p-6 w-full bg-white rounded-lg shadow-lg border-primary border-2 '>\
     <p class='text-primary font-bold text-2xl text-center'>Cancel Booking</p>\
     <p class='text-center font-bold'>Are you sure you want to cancel this booking? You cannot undo this action.</p>\
     <p class='text-center'>Your card will be refunded within 7 days.</p>\

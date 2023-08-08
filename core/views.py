@@ -173,7 +173,7 @@ def bookings_view(request):
     context={'bookings':bookings}
     return render(request, 'core/bookings.html', context)
 
-def bookings_edit_view(request, booking_id):
+def bookings_detail_view(request, booking_id):
         
     booking = Booking.objects.get(id=booking_id)
     if request.method == "DELETE":
@@ -187,4 +187,17 @@ def bookings_edit_view(request, booking_id):
         'booking':booking,
         'passengers':passengers
     }
-    return render(request, 'core/bookings-edit.html', context)
+    return render(request, 'core/bookings-detail.html', context)
+
+def bookings_edit_view(request, booking_id):
+    # GET THE BOOKING OBJ AND ASSOCIATED PASSENGERS
+    booking = Booking.objects.get(id=booking_id)
+    passengers = Passenger.objects.filter(booking=booking)
+    # SAVES EDITED PASSENGER INFO IF 'POST' REQUEST
+    if request.method == "POST":
+        for passenger in passengers:
+            passenger.first = request.POST[f'first-{passenger.id}']
+            passenger.last = request.POST[f'last-{passenger.id}']
+            passenger.save()
+    # 'GET' AND 'DELETE' REQUESTS USE SAME CONTEXT DATA
+    return render(request, 'partials/passengers-edit.html', {'passengers':passengers, 'booking':booking})

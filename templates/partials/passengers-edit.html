@@ -1,0 +1,50 @@
+<!-- GET REQUEST MEANS USERS WANTS TO EDIT - SHOW EDIT FORM -->
+{% if request.method == 'GET' %}
+    <form action="" class="w-[400px]" hx-target="this" hx-swap="outerHTML">
+        <div class="flex items-center justify-between w-full">
+            <p class="text-lg font-bold text-primary">Passengers</p>
+            <div class="flex justify-end w-full gap-2">
+                <!-- 'Cancel' BTN USES HX-DELETE TO DIFFERENTIATE FROM OTHER REQUESTS IN VIEW + TEMPLATE -->
+                <button hx-delete="/bookings/detail/edit/{{ booking.id }}"
+                        class="w-[90px] px-4 py-2 rounded-full border-[1px] border-primary text-text">Cancel</button>
+                <!-- 'Done' BTN USES HX-POST -->
+                <button hx-post="/bookings/detail/edit/{{ booking.id }}"
+                        class="w-[90px] px-4 py-2 rounded-full border-[1px] border-primary text-white bg-primary font-bold">
+                    Done
+                </button>
+            </div>
+        </div>
+        <ol class="list-decimal">
+            <!-- RENDER PASSENGER NAMES WITH INPUTS -->
+            {% for passenger in passengers %}
+                <li class="grid grid-cols-2 gap-2">
+                    <input class="bg-transparent border-primary border-x-0 border-t-0 border-b-[1px] col-span-1"
+                           type="text"
+                           name="first-{{ passenger.id }}"
+                           id="first-{{ passenger.id }}"
+                           value="{{ passenger.first }}">
+                    <input class="bg-transparent border-primary border-x-0 border-t-0 border-b-[1px] col-span-1"
+                           type="text"
+                           name="last-{{ passenger.id }}"
+                           id="last-{{ passenger.id }}"
+                           value="{{ passenger.last }}">
+                </li>
+            {% endfor %}
+        </ol>
+    </form>
+    <!-- 'POST' MEANS USER SAVED EDITS; 'DELETE' MEANS USERS CANCELLED EDITS -->
+{% elif request.method == 'POST' or request.method == 'DELETE' %}
+    <div hx-target="this" hx-swap="outerHTML" class="w-[400px]">
+        <div class="flex items-center justify-between">
+            <p class="text-lg font-bold text-primary">Passengers</p>
+            <button class="rounded-full py-2 px-4 border-[1px] border-primary"
+                    hx-get="/bookings/detail/edit/{{ booking.id }}">Edit Passengers</button>
+        </div>
+        <ol class="list-decimal w-[400px]">
+            {% for passenger in passengers %}
+                <li class="py-2 list-inside">{{ passenger }}</li>
+                <hr class="border-gray-200">
+            {% endfor %}
+        </ol>
+    </div>
+{% endif %}

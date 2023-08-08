@@ -31,5 +31,6 @@ urlpatterns = [
     path("checkout/", core_views.checkout_view, name="checkout"),
     path("order_confirmation/", core_views.order_confirmation_view, name="order-confirmation"),
     path("bookings/", core_views.bookings_view, name="bookings"),
-    path("bookings/edit/<int:booking_id>", core_views.bookings_edit_view, name="bookings-edit"),
+    path("bookings/detail/<int:booking_id>", core_views.bookings_detail_view, name="bookings-detail"),
+    path("bookings/detail/edit/<int:booking_id>", core_views.bookings_edit_view, name="bookings-edit"),
 ]

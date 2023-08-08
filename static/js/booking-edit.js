@@ -39,5 +39,10 @@ const handleClick = (e, evt, dialog) => {
         dialog.open = false
     }
 }
-
-document.addEventListener('htmx:confirm', confirmDelete)
+let cancelBtn = document.querySelector('#cancel-booking')
+document.addEventListener('htmx:confirm', function(e){
+    if (e.detail.elt === cancelBtn){
+        confirmDelete(e)
+        console.log('WOWWOWOWO')
+    }
+})

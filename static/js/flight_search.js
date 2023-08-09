@@ -56,4 +56,11 @@ const validateForm = function(e){
 
 }
 
+// ADD GREY TEXT COLOUR TO PASSENGERS PLACEHOLDER - NOT POSSIBLE TO DO WITH HTML/CSS ONLY
+let passengersInput = document.querySelector('[name="passengers"]')
+passengersInput.addEventListener('click', function(e){
+  // REMOVE GRAY ON CLICK
+  passengersInput.classList.remove('text-gray-400')
+})
+
 submit.addEventListener('click', validateForm)

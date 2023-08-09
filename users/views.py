@@ -9,24 +9,17 @@ from django.forms import Form
 def logout_view(request):
     logout(request)
     return redirect('home-page')
-    
-    
-def signup_view(request):
-    pass
 
 
 def login_view(request):
     # STORE PREV URL FOR REDIRECT AFTER LOGIN, TRIMSS '?next='
     request.session['next_url'] = request.GET.urlencode(safe='/?=&')[5:]
-    # print(request.GET['next'])
-    # print('THIS IS THE STRING')
-    # print(request.session['next_url'])
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
         data = {
-            'username':email,
-            'password':password
+            'username': email,
+            'password': password
         }
         form = LoginForm(data=data)
         if form.is_valid():
@@ -44,14 +37,25 @@ def login_view(request):
 
 
 def register_view(request):
+    request.session['next_url'] = request.GET.urlencode(safe='/?=&')[5:]
     # RETURN HOME IF USER TRIES TO REGISTER WHILE SIGNED IN
     if request.user.is_authenticated:
-            return redirect('home-page')
+        return redirect('home-page')
+    # IF CLICKING SIGNUP LINK
+    if request.method == 'GET':
+        form = RegistrationForm()
+        return render(request, 'users/register.html', {'form': form})
+    # IF SIGNING UP FROM PASSENGER DETAILS PAGE
+    if request.POST.get('next'):
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('/passenger_details/?' + request.POST.get('next'))
+    # IF SUBMITTING REGISTER FORM FROM REGISTER PAGE
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home-page')
-    form = RegistrationForm()    
-    return render(request, 'users/register.html', {'form':form})
+            return redirect(request.session['next_url'])

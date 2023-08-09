@@ -50,41 +50,41 @@
     <body class="flex flex-col min-h-full bg-gray-100">
         <header class="relative flex items-center w-full h-20 mx-auto bg-primary">
             <nav class="container flex items-center justify-between px-5 m-auto">
-                    <!-- HEADER LOGO -->
-                    <div class="flex items-center flex-1 w-20 basis-['250px']">
-                        <a href="{% url 'home-page' %}" class="w-20">
-                            <img src="/static/img/flyux-logo.png" alt="" height=""/>
-                        </a>
-                    </div>
-                    <!-- NAV ITEMS -->
-                    <div class="absolute items-center justify-center hidden -translate-x-1/2 left-1/2 md:flex">
-                        <ul class="flex">
-                            <li>
-                                <a href="{% url 'bookings' %}" class="px-4 text-white">Bookings</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-white px-4 border-x-[1px]">Blog</a>
-                            </li>
-                            <li>
-                                <a href="#" class="px-4 text-white">About</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- SIGNUP LOGIN CTAs-->
-                    <div class="hidden md:flex shrink-0">
-                        <div class="justify-end hidden sm:flex">
-                            {% if user.is_authenticated %}
+                <!-- HEADER LOGO -->
+                <div class="flex items-center flex-1 w-20 basis-['250px']">
+                    <a href="{% url 'home-page' %}" class="w-20">
+                        <img src="/static/img/flyux-logo.png" alt="" height="" />
+                    </a>
+                </div>
+                <!-- NAV ITEMS -->
+                <div class="absolute items-center justify-center hidden -translate-x-1/2 left-1/2 md:flex">
+                    <ul class="flex">
+                        <li>
+                            <a href="{% url 'bookings' %}" class="px-4 text-white">Bookings</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-white px-4 border-x-[1px]">Blog</a>
+                        </li>
+                        <li>
+                            <a href="#" class="px-4 text-white">About</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- SIGNUP LOGIN CTAs-->
+                <div class="hidden md:flex shrink-0">
+                    <div class="justify-end hidden sm:flex">
+                        {% if user.is_authenticated %}
                             <div class="flex">
                                 <a href="#" class="text-white border-r-[1px] border-r-white pr-4">Welcome, <strong>{{ user.first_name }}</strong></a>
                                 <a href="{% url 'logout' %}" class="pl-4 text-white">Logout</a>
                             </div>
-                            {% else %}
-                            <a href="{% url 'register' %}"
-                            class="flex items-center h-10 px-6 text-white rounded-full py-auto">Signup</a>
-                            <a href="{% url 'login' %}?next={{request.get_full_path}}"
-                            class="bg-primary py-auto px-6 border-[1px] border-white rounded-2xl h-10 flex items-center font-bold text-white">Login</a>
-                            {% endif %}
-                        </div>
+                        {% else %}
+                            <a href="{% url 'register' %}?next={{ request.get_full_path }}"
+                               class="flex items-center h-10 px-6 text-white rounded-full py-auto">Signup</a>
+                            <a href="{% url 'login' %}?next={{ request.get_full_path }}"
+                               class="bg-primary py-auto px-6 border-[1px] border-white rounded-2xl h-10 flex items-center font-bold text-white">Login</a>
+                        {% endif %}
+                    </div>
                 </div>
                 <!-- MOBILE NAV -->
                 <!-- HAMBURGER ICON -->

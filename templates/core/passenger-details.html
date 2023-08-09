@@ -1,11 +1,105 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="container px-5 py-8 mx-auto">
-        <h1 class="text-3xl font-bold text-text">Passenger Details</h1>
+    <div class="container relative flex-1 flex-grow px-5 mx-auto">
+        {% if not request.user.is_authenticated %}
+            <dialog class="fixed flex w-full py-8 bg-transparent backdrop:backdrop-blur-sm">
+                <div class="container flex flex-col justify-center w-full max-w-xl p-6 mx-auto bg-white sm:p-12 rounded-3xl drop-shadow-lg">
+                    <!-- LOGIN HEADER -->
+                    <h3 class="mx-auto mb-6 text-3xl font-bold text-primary">Create account</h3>
+                    <!-- FORM -->
+                    <form method='post'
+                          action="{% url 'register' %}"
+                          class="flex justify-center w-full mx-auto">
+                        {% csrf_token %}
+                        <!-- FORM FIELDS CONTAINER -->
+                        <div class="flex flex-col w-full gap-4 sm:w-3/4">
+                            <!-- FOR REDIRECT AFTER LOGIN -->
+                            <input type="hidden" name="next" value="{{ request.GET.urlencode }}">
+                            <!-- EMAIL FIELD -->
+                            <div class="flex flex-col">
+                                <input type="email"
+                                       name="email"
+                                       maxlength="254"
+                                       autofocus=""
+                                       required
+                                       id="id_email"
+                                       placeholder="Email"
+                                       class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                            </div>
+                            <!-- FIRST NAME FIELD -->
+                            <div class="flex flex-col">
+                                <input type="text"
+                                       name="first_name"
+                                       maxlength="50"
+                                       required=""
+                                       id="id_first_name"
+                                       placeholder="First name"
+                                       class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                            </div>
+                            <!-- LAST NAME FIELD -->
+                            <div class="flex flex-col">
+                                <input type="text"
+                                       name="last_name"
+                                       maxlength="50"
+                                       required=""
+                                       id="id_last_name"
+                                       placeholder="Last name"
+                                       class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                            </div>
+                            <!-- PASSWORD -->
+                            <div class="flex flex-col">
+                                <input type="password"
+                                       name="password1"
+                                       autocomplete="new-password"
+                                       required=""
+                                       id="id_password1"
+                                       placeholder="Password"
+                                       class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                            </div>
+                            <!-- PASSWORD CONFIRM -->
+                            <div class="flex flex-col">
+                                <input type="password"
+                                       name="password2"
+                                       autocomplete="new-password"
+                                       required=""
+                                       id="id_password2"
+                                       placeholder="Confirm password"
+                                       class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                            </div>
+                            <div class="p-4">
+                                <span class="text-xs text-gray-700">
+                                    <ul class="list-disc">
+                                        <li>Your password can’t be too similar to your other personal information.</li>
+                                        <li>Your password must contain at least 8 characters.</li>
+                                        <li>Your password can’t be a commonly used password.</li>
+                                        <li>Your password can’t be entirely numeric.</li>
+                                    </ul>
+                                </span>
+                            </div>
+                            <button type="submit"
+                                    class="flex items-center justify-center h-12 px-6 font-bold text-center text-white rounded-full bg-primary py-auto">
+                                Create account
+                            </button>
+                            <p class="leading-3 text-center text-md">Already have an account? <a href="{% url 'login' %}?next={{ request.get_full_path }}" class="font-bold text-primary">Login</a></p>
+                            
+
+                        </div>
+                    </form>
+                </div>
+            </dialog>
+            <script>
+                let modal = document.querySelector('dialog')
+                modal.showModal()
+
+            </script>
+        {% endif %}
+        <h1 class="mt-8 text-3xl font-bold text-text">Passenger Details</h1>
         <form action="" method="post">
             {% csrf_token %}
-            <input type="hidden" name="number-of-passengers" value="{{num_passengers}}">
+            <input type="hidden"
+                   name="number-of-passengers"
+                   value="{{ num_passengers }}">
             {% for passenger in passengers %}
                 <div class="w-full p-8 mt-8 bg-white shadow-lg rounded-3xl">
                     <p class="text-2xl font-bold text-text">Passenger {{ passenger }}</p>
@@ -16,10 +110,11 @@
                                placeholder="First name"
                                class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
                                required>
-                       <input type="text"
+                        <input type="text"
                                name="passenger-{{ passenger }}-last"
                                placeholder="Last name"
-                               class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1" required>
+                               class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
+                               required>
                     </div>
                 </div>
             {% endfor %}
@@ -30,21 +125,26 @@
                     <input type="email"
                            name="trip-email"
                            placeholder="Email"
-                           class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1" required>
+                           class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
+                           required>
                     <input type="email"
                            name="trip-email2"
                            placeholder="Confirm email"
-                           class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1" required>
+                           class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
+                           required>
                 </div>
             </div>
             {% comment %} <button type="submit">submit</button> {% endcomment %}
             <div class="flex justify-end my-8">
-                <button id="submit" type="submit"
-                        class="w-full px-6 py-4 font-bold text-white rounded-full sm:w-auto sm: bg-primary disabled:bg-gray-500">Review & Pay</button>
+                <button id="submit"
+                        type="submit"
+                        class="w-full px-6 py-4 font-bold text-white rounded-full sm:w-auto sm: bg-primary disabled:bg-gray-500">
+                    Review & Pay
+                </button>
             </div>
         </form>
     </div>
 {% endblock content %}
 {% block scripts %}
-<script src="{% static 'js/passenger-details.js' %}"></script>
+    <script src="{% static 'js/passenger-details.js' %}"></script>
 {% endblock scripts %}

@@ -121,6 +121,7 @@ def checkout_view(request):
     return_fare = request.session['return_fare']
     return_price = return_flight.get_fare(return_fare)
     total_price = int(request.session['num_passengers']) * outbound_price + int(request.session['num_passengers']) * return_price
+    # STORE FLIGHT INFO IN SESSIONS FOR REUSE IN OTHER VIEWS
     request.session['outbound_flight_object'] = outbound_flight.id
     request.session['return_flight_object'] = return_flight.id
     
@@ -136,34 +137,31 @@ def checkout_view(request):
         'flights':((outbound_flight, outbound_fare, outbound_price), (return_flight, return_fare, return_price)),
         'num_passengers':request.session['num_passengers']
     }
-    # STORE FLIGHT INFO IN SESSIONS FOR REUSE IN OTHER VIEWS
-    # request.session['booking_info'] = context
     if request.method == 'GET':
         return render(request, 'core/checkout.html', context)
-    return redirect('order-confirmation')
-
-
-def order_confirmation_view(request):
-    request.session['outbound_flight_object']
-    request.session['return_flight_object']
-
-    booking = Booking(
+    # IF PAYMENT FORM SUBMITTED CREATE BOOKING AND PASSENGER OBJs
+    elif request.method == 'POST':
+        booking = Booking(
         outbound_flight_id=request.session['outbound_flight_object'], 
         return_flight_id=request.session['return_flight_object'],
         customer=request.user,
         trip_email = request.session['trip_email'],
         status_confirmed = True,
         )
-    booking.save()
-    print(request.session['passengers'])
-    passengers = request.session['passengers'].items()
-    passenger_objects = []
-    for passenger, name in passengers:
-        print(passenger, name)
-        p = Passenger(first=name['first'], last=name['last'], booking=booking)
-        passenger_objects.append(p)
-        p.save()
+        booking.save()
+        print(request.session['passengers'])
+        passengers = request.session['passengers'].items()
+        passenger_objects = []
+        for passenger, name in passengers:
+            print(passenger, name)
+            p = Passenger(first=name['first'], last=name['last'], booking=booking)
+            passenger_objects.append(p)
+            p.save()
 
+        return redirect('order-confirmation')
+
+
+def order_confirmation_view(request):
     context = {}
     return render(request, 'core/order-confirmation.html', context)
 

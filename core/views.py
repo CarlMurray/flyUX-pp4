@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from utils.altdates import create_alt_date_range
 from .forms import PassengerForm
 from django.http import HttpResponse
+import time
 
 
 def home_page(request):
@@ -99,6 +100,8 @@ def alt_dates(request):
         'destination': flight_destination,
         'leg': leg
     }
+    # ARTIFICIAL LOADING DELAY FOR VISUAL CONSISTENCY
+    time.sleep(0.5)
     return render(request, 'partials/flights.html', context)
 
 

@@ -46,6 +46,19 @@
         <link rel="stylesheet"
               href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css" />
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        
+        <!-- CUSTOM HTMX LOADING INDICATOR STYLES-->
+        <style>
+            .my-indicator{
+                display:none;
+            }
+            .htmx-request .my-indicator{
+                display:flex;
+            }
+            .htmx-request.my-indicator{
+                display:flex;
+            }
+        </style>
     </head>
     <body class="flex flex-col min-h-full bg-gray-100">
         <header class="relative flex items-center w-full h-20 mx-auto bg-primary">

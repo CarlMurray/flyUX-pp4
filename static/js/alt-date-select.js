@@ -72,6 +72,19 @@ const reattachOutboundListeners = function () {
     // SELECT OUTBOUND FLIGHTS
     outboundFlights = document.querySelectorAll('[data-flight-leg="outbound"]');
 
+    // SELECT RETURN ALTDATES
+    outboundAltDates = document.querySelectorAll('[hx-target="#outbound-flights"]')
+    console.log(outboundAltDates)
+
+    outboundAltDates.forEach(date => {
+        date.addEventListener('click', function(e){
+            outboundFlights.forEach(flight => {
+                flight.classList.add('hidden')
+            })
+        })
+    });
+
+
     // ADD CLICK LISTENER TO EACH OUTBOUND FLIGHT
     outboundFlights.forEach(function (item) {
         item.addEventListener("click", function () {
@@ -96,6 +109,18 @@ const reattachOutboundListeners = function () {
 const reattachReturnListeners = function () {
     // SELECT RETURN FLIGHTS
     returnFlights = document.querySelectorAll('[data-flight-leg="return"]');
+
+    // SELECT RETURN ALTDATES
+    returnAltDates = document.querySelectorAll('[hx-target="#return-flights"]')
+    console.log(returnAltDates)
+
+    returnAltDates.forEach(date => {
+        date.addEventListener('click', function(e){
+            returnFlights.forEach(flight => {
+                flight.classList.add('hidden')
+            })
+        })
+    });
 
     // ADD CLICK LISTENER TO EACH RETURN FLIGHT
     returnFlights.forEach(function (item) {
@@ -290,5 +315,11 @@ const main = function () {
     toggleFlightFares();
     addFareButtonListeners()
 };
+
+document.addEventListener('htmx:load',function(e){
+console.log('requesting')
+console.log(e)
+e.preventDefault()
+})
 
 window.addEventListener("load", main);

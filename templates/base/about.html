@@ -1,5 +1,8 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% block title %}
+    About
+{% endblock title %}
 {% block content %}
     <div class="container flex flex-col items-center justify-between px-5 pt-20 mx-auto md:flex-row">
         <div class="flex-1 md:w-1/2">
@@ -14,10 +17,13 @@
             <p>
                 Revisiting the project a year later, I am now using it as a foundation to build upon and bring it from Figma prototype, to a fully functioning Django-based web application, combining my passions for user-centric design and web development to build a holistic solution.
             </p>
-            <p><span>Technologies used: </span>Python, Django, htmx, JavaScript, Tailwind CSS, PostgreSQL, Heroku</p>
+            <p>
+                <span>Technologies used:</span>Python, Django, htmx, JavaScript, Tailwind CSS, PostgreSQL, Heroku
+            </p>
         </div>
         <div class="max-w-[60%] md:pl-8 lg:max-w-[35%] flex-1 my-10 md:my-0">
-            <img src="{% static 'img/process.png' %}" alt="Circular diagram showing the the development process including research, design and build">
+            <img src="{% static 'img/process.png' %}"
+                 alt="Circular diagram showing the the development process including research, design and build">
         </div>
     </div>
 {% endblock content %}

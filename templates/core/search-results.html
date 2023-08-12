@@ -1,5 +1,8 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% block title %}
+    Search Flights
+{% endblock title %}
 {% block content %}
     <!-- HIDDEN FORM FOR ALT DATE SELECTION -->
     <div class="">
@@ -22,29 +25,30 @@
             <!-- SHOW AVAILABLE FLIGHTS -->
             {% include 'partials/flights.html' with date=outbound_date leg='outbound' %}
             {% if trip_type == 'return' %}
-            <!---------------------------->
-            <!-- RETURN FLIGHTS RESULTS -->
-            <!---------------------------->
-            <hr class="my-12">
-            <!-- PAGE HEADER -->
-            <div class="mt-4">
-                <h2 class="text-sm font-light text-text sm:text-lg">
-                    Select <strong class="font-semibold text-primary">return</strong> flight
-                </h2>
-            </div>
-            <div class="mb-4">
-                <h3 class="text-sm font-bold text-text sm:text-2xl">{{ destination }} - {{ origin }}</h3>
-            </div>
-            {% include 'partials/flights.html' with date=return_date slider_date_list=slider_date_list_return flight_results=flight_results_return leg='return' origin=destination destination=origin %}
+                <!---------------------------->
+                <!-- RETURN FLIGHTS RESULTS -->
+                <!---------------------------->
+                <hr class="my-12">
+                <!-- PAGE HEADER -->
+                <div class="mt-4">
+                    <h2 class="text-sm font-light text-text sm:text-lg">
+                        Select <strong class="font-semibold text-primary">return</strong> flight
+                    </h2>
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-sm font-bold text-text sm:text-2xl">{{ destination }} - {{ origin }}</h3>
+                </div>
+                {% include 'partials/flights.html' with date=return_date slider_date_list=slider_date_list_return flight_results=flight_results_return leg='return' origin=destination destination=origin %}
             {% endif %}
             <form id="selected-flights" action="" method="get">
-                <input type="hidden" name="trip_type" value="{{trip_type}}">
+                <input type="hidden" name="trip_type" value="{{ trip_type }}">
                 <input type="hidden" name="selected-outbound-flight" value="">
                 <input type="hidden" name="selected-return-flight" value="">
             </form>
             <div class="flex justify-end my-8">
                 <button id="confirm-flights-button"
-                        class="px-6 py-4 font-bold text-white rounded-full bg-primary disabled:bg-gray-500" disabled>Add passenger details</button>
+                        class="px-6 py-4 font-bold text-white rounded-full bg-primary disabled:bg-gray-500"
+                        disabled>Add passenger details</button>
             </div>
         </div>
     </div>

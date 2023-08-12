@@ -1,55 +1,44 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% block title %}
+    Bookings
+{% endblock title %}
 {% block content %}
-<div class="container h-full px-5 mx-auto my-12">
-    <p class="text-3xl text-primary">Bookings</p> <hr class="mt-4 mb-8 border-gray-300">
-<div class="relative overflow-x-auto bg-white rounded-lg shadow-md">
-    <table class="w-full text-xs text-left sm:text-sm">
-        <thead class="text-white uppercase bg-primary">
-            <tr>
-                <th scope="col" class="px-1 py-3 sm:px-6">
-                    Reference
-                </th>
-                <th scope="col" class="px-1 py-3 sm:px-6">
-                    Outbound
-                </th>
-                <th scope="col" class="px-1 py-3 sm:px-6">
-                    Outbound Date
-                </th>
-                <th scope="col" class="px-1 py-3 sm:px-6">
-                    Return Trip
-                </th>
-                <th scope="col" class="px-1 py-3 sm:px-6">
-                    Action
-                </th>
-            </tr>
-        </thead>
-        {% for booking in bookings %}
-        <tbody>
-            <tr class="border-b">
-                <th scope="row" class="px-1 py-4 font-medium sm:px-6 ">
-                    {{booking.get_shorthand}}
-                </th>
-                <td class="px-1 py-4 sm:px-6">
-                    {{booking.outbound_flight}}
-                </td>
-                <td class="px-1 py-4 sm:px-6">
-                    {{booking.outbound_flight.outbound_date}}
-                </td>
-                <td class="px-1 py-4 sm:px-6">
-                    {% if booking.return_flight %}
-                    Yes
-                    {% else %}
-                    No
-                    {% endif %}
-                </td>
-                <td class="px-1 py-4 sm:px-6">
-                    <a href="{% url 'bookings-detail' booking_id=booking.id %}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-</div>
+    <div class="container h-full px-5 mx-auto my-12">
+        <p class="text-3xl text-primary">Bookings</p>
+        <hr class="mt-4 mb-8 border-gray-300">
+        <div class="relative overflow-x-auto bg-white rounded-lg shadow-md">
+            <table class="w-full text-xs text-left sm:text-sm">
+                <thead class="text-white uppercase bg-primary">
+                    <tr>
+                        <th scope="col" class="px-1 py-3 sm:px-6">Reference</th>
+                        <th scope="col" class="px-1 py-3 sm:px-6">Outbound</th>
+                        <th scope="col" class="px-1 py-3 sm:px-6">Outbound Date</th>
+                        <th scope="col" class="px-1 py-3 sm:px-6">Return Trip</th>
+                        <th scope="col" class="px-1 py-3 sm:px-6">Action</th>
+                    </tr>
+                </thead>
+                {% for booking in bookings %}
+                    <tbody>
+                        <tr class="border-b">
+                            <th scope="row" class="px-1 py-4 font-medium sm:px-6 ">{{ booking.get_shorthand }}</th>
+                            <td class="px-1 py-4 sm:px-6">{{ booking.outbound_flight }}</td>
+                            <td class="px-1 py-4 sm:px-6">{{ booking.outbound_flight.outbound_date }}</td>
+                            <td class="px-1 py-4 sm:px-6">
+                                {% if booking.return_flight %}
+                                    Yes
+                                {% else %}
+                                    No
+                                {% endif %}
+                            </td>
+                            <td class="px-1 py-4 sm:px-6">
+                                <a href="{% url 'bookings-detail' booking_id=booking.id %}"
+                                   class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock content %}

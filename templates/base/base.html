@@ -5,7 +5,15 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>
+            {% block title %}
+                Book a flight
+            {% endblock title %}
+            | flyUX
+        </title>
+        <link rel="shortcut icon"
+              type="image/png"
+              href="{% static 'img/favicon.ico' %}" />
         <!-- TAILWIND CSS FRAMEWORK-->
         <script src="https://cdn.tailwindcss.com"></script>
         <!-- CUSTOMISE TAILWIND -->
@@ -115,9 +123,9 @@
                 <ul class="flex flex-col items-center gap-10 text-2xl">
                     <li>
                         {% if user.is_authenticated %}
-                            
-                                <p class="text-white ">Welcome, <strong>{{ user.first_name }}</strong></p>
-                            
+                            <p class="text-white ">
+                                Welcome, <strong>{{ user.first_name }}</strong>
+                            </p>
                         </li>
                         <li>
                             <a href="{% url 'logout' %}" class="text-white ">Logout</a>

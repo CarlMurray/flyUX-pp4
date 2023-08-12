@@ -1,5 +1,8 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% block title %}
+    Passenger Details
+{% endblock title %}
 {% block content %}
     <div class="container relative flex-1 flex-grow px-5 mx-auto">
         {% if not request.user.is_authenticated %}
@@ -81,9 +84,10 @@
                                     class="flex items-center justify-center h-12 px-6 font-bold text-center text-white rounded-full bg-primary py-auto">
                                 Create account
                             </button>
-                            <p class="leading-3 text-center text-md">Already have an account? <a href="{% url 'login' %}?next={{ request.get_full_path }}" class="font-bold text-primary">Login</a></p>
-                            
-
+                            <p class="leading-3 text-center text-md">
+                                Already have an account? <a href="{% url 'login' %}?next={{ request.get_full_path }}"
+    class="font-bold text-primary">Login</a>
+                            </p>
                         </div>
                     </form>
                 </div>

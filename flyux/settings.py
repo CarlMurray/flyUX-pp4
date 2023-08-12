@@ -154,3 +154,5 @@ import django_on_heroku
 django_on_heroku.settings(locals())
 
 LOGIN_URL = 'login'
+
+CONN_MAX_AGE = 0

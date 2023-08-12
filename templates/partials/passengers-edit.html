@@ -6,12 +6,12 @@
             <div class="flex justify-end w-full gap-2">
                 <!-- 'Cancel' BTN USES HX-DELETE TO DIFFERENTIATE FROM OTHER REQUESTS IN VIEW + TEMPLATE -->
                 <button hx-delete="/bookings/detail/edit/{{ booking.id }}"
-                        class="w-[90px] px-4 py-2 rounded-full border-[1px] border-primary text-text">Cancel</button>
+                        class="w-[90px] px-4 py-2 rounded-full border-[1px] border-primary text-text"
+                        aria-label="Cancel changes">Cancel</button>
                 <!-- 'Done' BTN USES HX-POST -->
                 <button hx-post="/bookings/detail/edit/{{ booking.id }}"
-                        class="w-[90px] px-4 py-2 rounded-full border-[1px] border-primary text-white bg-primary font-bold">
-                    Done
-                </button>
+                        class="w-[90px] px-4 py-2 rounded-full border-[1px] border-primary text-white bg-primary font-bold"
+                        aria-label="Confirm changes">Done</button>
             </div>
         </div>
         <ol class="list-decimal">
@@ -22,12 +22,14 @@
                            type="text"
                            name="first-{{ passenger.id }}"
                            id="first-{{ passenger.id }}"
-                           value="{{ passenger.first }}">
+                           value="{{ passenger.first }}"
+                           aria-label="First name: {{ passenger.first }}">
                     <input class="bg-transparent border-primary border-x-0 border-t-0 border-b-[1px] col-span-1"
                            type="text"
                            name="last-{{ passenger.id }}"
                            id="last-{{ passenger.id }}"
-                           value="{{ passenger.last }}">
+                           value="{{ passenger.last }}"
+                           aria-label="Last name: {{ passenger.last }}">
                 </li>
             {% endfor %}
         </ol>

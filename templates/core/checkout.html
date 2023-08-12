@@ -37,6 +37,7 @@
                            class="col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
                            placeholder="Name on card"
                            minlength="1"
+                           aria-label="Name on card"
                            required>
                     <input type="text"
                            name=""
@@ -45,6 +46,7 @@
                            placeholder="Card number"
                            minlength="20"
                            maxlength="20"
+                           aria-label="Card number"
                            required>
                     <input type="text"
                            name=""
@@ -53,6 +55,7 @@
                            placeholder="CVC"
                            minlength="3"
                            maxlength="3"
+                           aria-label="Card CVC security code"
                            required>
                     <input type="text"
                            name=""
@@ -61,10 +64,12 @@
                            placeholder="Expiry"
                            minlength="7"
                            maxlength="9"
+                           aria-label="Card expiry"
                            required>
                     <button type="submit"
                             name=""
                             id=""
+                            aria-label="Pay €{{ total_price }}"
                             class="col-span-2 h-12 px-4 rounded-full  bg-primary text-white text-bold  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
                         Pay €{{ total_price }}
                     </button>

@@ -28,6 +28,7 @@
                                        required
                                        id="id_email"
                                        placeholder="Email"
+                                       aria-label="Email address"
                                        class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
                             </div>
                             <!-- FIRST NAME FIELD -->
@@ -38,6 +39,7 @@
                                        required=""
                                        id="id_first_name"
                                        placeholder="First name"
+                                       aria-label="First name"
                                        class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
                             </div>
                             <!-- LAST NAME FIELD -->
@@ -48,6 +50,7 @@
                                        required=""
                                        id="id_last_name"
                                        placeholder="Last name"
+                                       aria-label="Last name"
                                        class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
                             </div>
                             <!-- PASSWORD -->
@@ -58,6 +61,7 @@
                                        required=""
                                        id="id_password1"
                                        placeholder="Password"
+                                       aria-label="Password"
                                        class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
                             </div>
                             <!-- PASSWORD CONFIRM -->
@@ -68,6 +72,7 @@
                                        required=""
                                        id="id_password2"
                                        placeholder="Confirm password"
+                                       aria-label="Confirm password"
                                        class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
                             </div>
                             <div class="p-4">
@@ -81,6 +86,7 @@
                                 </span>
                             </div>
                             <button type="submit"
+                                    aria-label="Submit"
                                     class="flex items-center justify-center h-12 px-6 font-bold text-center text-white rounded-full bg-primary py-auto">
                                 Create account
                             </button>
@@ -113,11 +119,13 @@
                                name="passenger-{{ passenger }}-first"
                                placeholder="First name"
                                class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
+                               aria-label="Passenger {{ passenger }} - first name"
                                required>
                         <input type="text"
                                name="passenger-{{ passenger }}-last"
                                placeholder="Last name"
                                class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
+                               aria-label="Passenger {{ passenger }} - last name"
                                required>
                     </div>
                 </div>
@@ -130,11 +138,13 @@
                            name="trip-email"
                            placeholder="Email"
                            class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
+                           aria-label="Trip contact email address"
                            required>
                     <input type="email"
                            name="trip-email2"
                            placeholder="Confirm email"
                            class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
+                           aria-label="Confirm email address"
                            required>
                 </div>
             </div>
@@ -142,6 +152,7 @@
             <div class="flex justify-end my-8">
                 <button id="submit"
                         type="submit"
+                        aria-label="Review & Pay"
                         class="w-full px-6 py-4 font-bold text-white rounded-full sm:w-auto sm: bg-primary disabled:bg-gray-500">
                     Review & Pay
                 </button>

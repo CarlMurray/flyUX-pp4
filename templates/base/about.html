@@ -1,19 +1,23 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="container px-5 mx-auto">
-        <div class="mt-20 md:w-1/2">
+    <div class="container flex flex-col items-center justify-between px-5 pt-20 mx-auto md:flex-row">
+        <div class="flex-1 md:w-1/2">
             <h1 class="text-3xl font-bold text-primary">About this Project</h1>
             <hr class="my-4">
             <p class="mb-4">
                 This Django web development project is a continuation of a UX Design project I completed during my Diploma with the UX Design Institute which goes through the full UX process from research all the way to prototyping and handover.
             </p>
-           
             <p class="mb-4">
                 The end result was a user-friendly flight booking flow which was informed by user research and prototyped to a medium fidelity in Figma.
             </p>
             <p>
                 Revisiting the project a year later, I am now using it as a foundation to build upon and bring it from Figma prototype, to a fully functioning Django-based web application, combining my passions for user-centric design and web development to build a holistic solution.
             </p>
-        </div>    </div>
+            <p><span>Technologies used: </span>Python, Django, htmx, JavaScript, Tailwind CSS, PostgreSQL, Heroku</p>
+        </div>
+        <div class="max-w-[60%] md:pl-8 lg:max-w-[35%] flex-1 my-10 md:my-0">
+            <img src="{% static 'img/process.png' %}" alt="Circular diagram showing the the development process including research, design and build">
+        </div>
+    </div>
 {% endblock content %}

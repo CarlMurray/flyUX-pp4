@@ -46,13 +46,13 @@
             </div>
         </div>
         {% endif %}
-        <div hx-target="this" hx-swap="outerHTML" class="w-[400px]">
+        <div hx-target="this" hx-swap="outerHTML" class="max-w-[400px]">
             <div class="flex items-center justify-between">
                 <p class="text-lg font-bold text-primary">Passengers</p>
                 <button class="rounded-full py-2 px-4 border-[1px] border-primary"
                         hx-get="/bookings/detail/edit/{{ booking.id }}">Edit Passengers</button>
             </div>
-            <ol class="list-decimal w-[400px]">
+            <ol class="list-decimal max-w-[400px]">
                 {% for passenger in passengers %}
                     <li class="py-2 list-inside">{{ passenger }}</li>
                     <hr class="border-gray-200">

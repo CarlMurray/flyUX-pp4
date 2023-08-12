@@ -1,6 +1,6 @@
 <!-- GET REQUEST MEANS USERS WANTS TO EDIT - SHOW EDIT FORM -->
 {% if request.method == 'GET' %}
-    <form action="" class="w-[400px]" hx-target="this" hx-swap="outerHTML">
+    <form action="" class="max-w-[400px]" hx-target="this" hx-swap="outerHTML">
         <div class="flex items-center justify-between w-full">
             <p class="text-lg font-bold text-primary">Passengers</p>
             <div class="flex justify-end w-full gap-2">
@@ -34,13 +34,13 @@
     </form>
     <!-- 'POST' MEANS USER SAVED EDITS; 'DELETE' MEANS USERS CANCELLED EDITS -->
 {% elif request.method == 'POST' or request.method == 'DELETE' %}
-    <div hx-target="this" hx-swap="outerHTML" class="w-[400px]">
+    <div hx-target="this" hx-swap="outerHTML" class="max-w-[400px]">
         <div class="flex items-center justify-between">
             <p class="text-lg font-bold text-primary">Passengers</p>
             <button class="rounded-full py-2 px-4 border-[1px] border-primary"
                     hx-get="/bookings/detail/edit/{{ booking.id }}">Edit Passengers</button>
         </div>
-        <ol class="list-decimal w-[400px]">
+        <ol class="list-decimal max-w-[400px]">
             {% for passenger in passengers %}
                 <li class="py-2 list-inside">{{ passenger }}</li>
                 <hr class="border-gray-200">

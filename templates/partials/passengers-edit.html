@@ -6,11 +6,11 @@
             <div class="flex justify-end w-full gap-2">
                 <!-- 'Cancel' BTN USES HX-DELETE TO DIFFERENTIATE FROM OTHER REQUESTS IN VIEW + TEMPLATE -->
                 <button hx-delete="/bookings/detail/edit/{{ booking.id }}"
-                        class="w-[90px] px-4 py-2 rounded-full border-[1px] border-primary text-text"
+                        class="w-[90px] px-4 py-2 rounded-full border-[1px] border-primary text-text cursor-pointer hover:scale-[103%] transition-all"
                         aria-label="Cancel changes">Cancel</button>
                 <!-- 'Done' BTN USES HX-POST -->
                 <button hx-post="/bookings/detail/edit/{{ booking.id }}"
-                        class="w-[90px] px-4 py-2 rounded-full border-[1px] border-primary text-white bg-primary font-bold"
+                        class="w-[90px] px-4 py-2 rounded-full border-[1px] border-primary text-white bg-primary font-bold cursor-pointer hover:scale-[103%] transition-all"
                         aria-label="Confirm changes">Done</button>
             </div>
         </div>
@@ -39,7 +39,7 @@
     <div hx-target="this" hx-swap="outerHTML" class="max-w-[400px]">
         <div class="flex items-center justify-between">
             <p class="text-lg font-bold text-primary">Passengers</p>
-            <button class="rounded-full py-2 px-4 border-[1px] border-primary"
+            <button class="rounded-full py-2 px-4 border-[1px] border-primary hover:bg-primary hover:text-white transition-all duration-300"
                     hx-get="/bookings/detail/edit/{{ booking.id }}">Edit Passengers</button>
         </div>
         <ol class="list-decimal max-w-[400px]">

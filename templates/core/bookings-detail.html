@@ -16,7 +16,7 @@
                     hx-confirm=""
                     hx-delete="/bookings/detail/{{ booking.id }}"
                     id="cancel-booking"
-                    class="flex items-center h-12 p-3 text-center  border-[1px] rounded-full border-primary">
+                    class="flex items-center h-12 p-3 text-center  border-[1px] rounded-full border-primary hover:bg-primary hover:text-white transition-all duration-300">
                 Cancel Booking
             </button>
         </div>
@@ -52,7 +52,7 @@
         <div hx-target="this" hx-swap="outerHTML" class="max-w-[400px]">
             <div class="flex items-center justify-between">
                 <p class="text-lg font-bold text-primary">Passengers</p>
-                <button class="rounded-full py-2 px-4 border-[1px] border-primary"
+                <button class="rounded-full py-2 px-4 border-[1px] border-primary hover:bg-primary hover:text-white transition-all duration-300"
                         hx-get="/bookings/detail/edit/{{ booking.id }}"
                         aria-label="Edit passengers">Edit Passengers</button>
             </div>

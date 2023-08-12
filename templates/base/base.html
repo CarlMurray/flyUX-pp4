@@ -46,7 +46,6 @@
         <link rel="stylesheet"
               href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css" />
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-        
         <!-- CUSTOM HTMX LOADING INDICATOR STYLES-->
         <style>
             .my-indicator{
@@ -111,17 +110,36 @@
                 </div>
             </nav>
             <!-- EXPANDED MENU ON CLICK -->
-            <div class="hidden w-screen h-[30vh] bg-primary absolute top-full items-center justify-center flex"
+            <div class="absolute z-20 flex items-center justify-center hidden w-screen p-12 bg-primary top-full"
                  id="hamburger-menu-expanded">
                 <ul class="flex flex-col items-center gap-10 text-2xl">
                     <li>
-                        <a href="#" class="px-4 text-white">Explore</a>
+                        {% if user.is_authenticated %}
+                            
+                                <p class="text-white ">Welcome, <strong>{{ user.first_name }}</strong></p>
+                            
+                        </li>
+                        <li>
+                            <a href="{% url 'logout' %}" class="text-white ">Logout</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{% url 'register' %}?next={{ request.get_full_path }}"
+                               class="flex items-center h-10 px-6 text-white rounded-full py-auto">Signup</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'login' %}?next={{ request.get_full_path }}"
+                               class="bg-primary py-auto px-6 border-[1px] border-white rounded-2xl h-10 flex items-center font-bold text-white">Login</a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <a href="{% url 'bookings' %}" class="px-4 text-white">Bookings</a>
                     </li>
                     <li>
-                        <a href="#" class="px-4 text-white">Explore</a>
+                        <a href="#" class="px-4 text-white">Blog</a>
                     </li>
                     <li>
-                        <a href="#" class="px-4 text-white">Explore</a>
+                        <a href="#" class="px-4 text-white">About</a>
                     </li>
                 </ul>
             </div>

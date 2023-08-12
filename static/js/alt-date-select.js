@@ -7,6 +7,9 @@ let selectedReturnFlight = document.querySelector(
     '[name="selected-return-flight"]'
 );
 
+let tripType = document.querySelector('[name="trip_type"]').value
+console.log(tripType)
+
 const clickHandler = function (e) {
     let faresWrapper = this.parentNode.querySelector('.flight-fares-wrapper')
     // IF CONTAINER ALREADY EXPANDED:
@@ -194,6 +197,7 @@ const addSelectedFlight = function(selected) {
 
     editFlightSelection()
 
+    if (tripType === 'return'){
     // IF TWO FLIGHTS SELECTED, ENABLE NEXT PAGE CTA
     if (document.querySelector("#outbound-selected") && document.querySelector("#return-selected")){
         nextBtn = document.querySelector("#confirm-flights-button")
@@ -202,6 +206,17 @@ const addSelectedFlight = function(selected) {
     else {
         nextBtn.setAttribute('disabled', '')
     }
+}
+    else {
+    // IF ONE FLIGHTS SELECTED, ENABLE NEXT PAGE CTA
+    if (document.querySelector("#outbound-selected")){
+        nextBtn = document.querySelector("#confirm-flights-button")
+        nextBtn.removeAttribute('disabled')
+    }
+    else {
+        nextBtn.setAttribute('disabled', '')
+    }
+}
 
 }
 
@@ -211,14 +226,14 @@ const editFlight = function(e) {
     // DISABLE NEXT PAGE CTA WHEN EDITING FLIGHTS
     nextBtn = document.querySelector("#confirm-flights-button")
     nextBtn.setAttribute('disabled', '')
-    console.log(this)
+    // console.log(this)
     let leg = this.getAttribute('data-leg')
-    console.log(leg)
+    // console.log(leg)
     let flightSearchResults = document.querySelector(`#${leg}-flights`)
-    console.dir(flightSearchResults)
+    // console.dir(flightSearchResults)
     flightSearchResults.classList.remove('hidden')
     let selectedFlight = document.querySelector(`#${leg}-selected`)
-    console.dir(selectedFlight)
+    // console.dir(selectedFlight)
     selectedFlight.remove()
 
 }

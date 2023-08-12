@@ -63,4 +63,20 @@ passengersInput.addEventListener('click', function(e){
   passengersInput.classList.remove('text-gray-400')
 })
 
+let tripRadioSelects = document.querySelectorAll('[type="radio"]')
+tripRadioSelects.forEach(radio => {
+  radio.addEventListener('click', function(e){
+    let tripType = e.target.value
+    if (tripType === 'oneway'){
+      dateToInput.setAttribute('disabled' , true)
+      dateToInput.classList.add('hidden')
+      dateFromInput.classList.add('md:col-span-2', 'col-span-4')
+    }
+    else {
+      dateToInput.setAttribute('disabled' , false)
+      dateToInput.classList.remove('hidden')
+      dateFromInput.classList.remove('md:col-span-2', 'col-span-4')
+    }
+  })
+});
 submit.addEventListener('click', validateForm)

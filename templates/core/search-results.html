@@ -21,6 +21,7 @@
             </div>
             <!-- SHOW AVAILABLE FLIGHTS -->
             {% include 'partials/flights.html' with date=outbound_date leg='outbound' %}
+            {% if trip_type == 'return' %}
             <!---------------------------->
             <!-- RETURN FLIGHTS RESULTS -->
             <!---------------------------->
@@ -35,7 +36,9 @@
                 <h3 class="text-sm font-bold text-text sm:text-2xl">{{ destination }} - {{ origin }}</h3>
             </div>
             {% include 'partials/flights.html' with date=return_date slider_date_list=slider_date_list_return flight_results=flight_results_return leg='return' origin=destination destination=origin %}
+            {% endif %}
             <form id="selected-flights" action="" method="get">
+                <input type="hidden" name="trip_type" value="{{trip_type}}">
                 <input type="hidden" name="selected-outbound-flight" value="">
                 <input type="hidden" name="selected-return-flight" value="">
             </form>

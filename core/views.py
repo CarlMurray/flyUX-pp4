@@ -237,3 +237,7 @@ def bookings_edit_view(request, booking_id):
             passenger.save()
     # 'GET' AND 'DELETE' REQUESTS USE SAME CONTEXT DATA
     return render(request, 'partials/passengers-edit.html', {'passengers': passengers, 'booking': booking})
+
+
+def about_view(request):
+    return render(request, 'base/about.html')

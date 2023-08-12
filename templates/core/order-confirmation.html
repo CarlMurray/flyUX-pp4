@@ -1,4 +1,12 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
+    <div class="container flex flex-col items-center self-stretch justify-center flex-grow h-full px-5 mx-auto ">
+        <p class="text-3xl font-bold text-center text-primary">Cleared for takeoff!</p>
+        <p class="text-lg text-center">
+            You booking reference is <strong>{{ booking.get_shorthand }}</strong>
+        </p>
+        <a href="{% url 'bookings' %}"
+           class="flex items-center h-12 px-4 mt-4 text-white rounded-full bg-primary">View Bookings</a>
+    </div>
 {% endblock content %}

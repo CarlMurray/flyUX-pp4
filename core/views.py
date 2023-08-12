@@ -189,11 +189,14 @@ def checkout_view(request):
             passenger_objects.append(p)
             p.save()
 
-        return redirect('order-confirmation')
+        return redirect('order-confirmation', id=booking.id)
 
 
-def order_confirmation_view(request):
-    context = {}
+def order_confirmation_view(request, id):
+    booking = Booking.objects.get(id=id)
+    context = {
+        'booking':booking
+    }
     return render(request, 'core/order-confirmation.html', context)
 
 

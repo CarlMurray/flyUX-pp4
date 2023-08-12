@@ -273,34 +273,49 @@ const createSelectedFlightCard = function(flight, selectedFare) {
     card = document.createElement('div')
     card.setAttribute('id', `${leg}-selected`)
     card.setAttribute('data-is-flight-selected', 'True')
-    card.innerHTML = `<div class="flex flex-col items-center justify-between w-full bg-white border-2 border-green-500 flight-details-card flex-0 drop-shadow-md h-52 sm:h-36 sm:rounded-full sm:flex-row sm:pl-8 md:pl-16 rounded-3xl overflow-clip">
-    <div class="flex items-center justify-between p-4">
+    card.innerHTML = `
+    <div class="bg-white border-2 border-green-500 drop-shadow-md flex flex-0 flex-col flight-details-card items-center justify-between md:pl-16 overflow-clip p-6 rounded-3xl sm:flex-row sm:h-36 sm:pl-8 sm:rounded-full w-full">
+    <div class="flex items-center justify-between sm:p-4 sm:w-auto w-full">
         <div>
             <div class="text-xs font-semibold md:text-md text-text">${origin}</div>
             <div class="text-xl font-bold md:text-4xl text-text">${depTime}</div>
         </div>
         <div class="mx-8">
-            <div class="text-sm font-light text-center md:text-md text-text">[Duration]</div>
-<hr class="w-[200px]">        
-</div>
+        <div class="text-sm font-light text-center md:text-md text-text">[Duration]</div>
+        <img src="/static/img/flight-duration-illo.svg" alt="" width="227px" height="27px" class="">
+    </div>
+
         <div>
             <div class="text-xs font-semibold md:text-md text-text">${destination}</div>
             <div class="text-xl font-bold md:text-4xl text-text">${arrTime}</div>
         </div>
     </div>
-    <div class="pb-4 text-sm text-center sm:pb-0 sm:pr-4 text-text flex-grow">
+    <div class="hidden sm:block flex-grow lg:text-sm pb-4 sm:pb-0 sm:pr-4 text-center text-text text-xs">
         Flight no.
         <br class="hidden sm:block">
         ${flightNumber}
     </div>
-    <div class="ml-auto mr-8 text-right">
-        <p class="text-normal text-text text-lg">${fare}</p>
-        <p class="text-primary text-2xl font-bold">€${price}pp</p>
-        <p class="text-text font-bold text-md">${date}</p>
+    <div class="hidden sm:block ml-auto mr-4 text-right">
+        <p class="lg:text-lg text-normal text-sm text-text">${fare}</p>
+        <p class="font-bold lg:text-2xl text-lg text-primary">€${price}pp</p>
+        <p class="font-bold lg:text-md text-sm text-text">${date}</p>
     </div>
-    <div class="flex items-center justify-center w-full h-full text-xl font-normal bg-white text-primary sm:aspect-square sm:w-auto sm:rounded-full">
-        <span class="w-0 h-4/6 border-[1px] ml-0"></span>
-        <p class="w-2/3 text-center mx-auto p-2 cursor-pointer flight-edit-button" data-leg=${leg}>Edit</p>
+    <div class="flex items-center justify-between my-4 sm:hidden w-full">
+    <div class="">
+    <p class="lg:text-lg text-normal text-sm text-text">${fare}</p>
+    <p class="font-bold lg:text-2xl text-lg text-primary">€${price}pp</p>
+    <p class="font-bold lg:text-md text-sm text-text">${date}</p>
+    </div>
+    <div class="lg:text-sm pb-4 sm:pb-0 sm:pr-4 text-center text-text text-xs">
+        Flight no.
+        <br class="hidden sm:block">
+        ${flightNumber}
+    </div>
+    </div>
+    <div class="bg-white flex flex-col font-normal h-full items-center justify-center sm:border-l-2 sm:flex-row sm:w-32 text-primary text-xl w-full">
+        
+        <hr class="sm:hidden w-full">
+<p class="cursor-pointer sm:p-2 flight-edit-button mx-auto p-2 pb-0 pt-4 text-center w-2/3" data-leg="outbound">Edit</p>
     </div>
 </div>
 `

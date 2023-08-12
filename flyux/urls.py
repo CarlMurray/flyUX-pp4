@@ -19,6 +19,9 @@ from django.urls import path
 from core import views as core_views
 from users import views as users_views
 
+# CUSTOM 403 ERROR
+handler403 = "users.views.permission_denied_view"
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", core_views.home_page, name='home-page'),

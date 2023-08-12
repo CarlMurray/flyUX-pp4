@@ -59,3 +59,7 @@ def register_view(request):
             user = form.save()
             login(request, user)
             return redirect(request.session['next_url'])
+
+
+def permission_denied_view(request, exception):
+    return render(request, 'base/403.html')

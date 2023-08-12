@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+from django.urls import reverse
+
 
 load_dotenv()
 
@@ -150,3 +152,5 @@ AUTH_USER_MODEL = "users.User"
 # Configure Django App for Heroku.
 import django_on_heroku
 django_on_heroku.settings(locals())
+
+LOGIN_URL = 'login'

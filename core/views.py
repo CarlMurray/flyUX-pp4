@@ -5,6 +5,9 @@ from utils.altdates import create_alt_date_range
 from .forms import PassengerForm
 from django.http import HttpResponse
 import time
+from django.core.exceptions import PermissionDenied
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 
 def home_page(request):
@@ -164,15 +167,19 @@ def order_confirmation_view(request):
     return render(request, 'core/order-confirmation.html', context)
 
 
+@login_required
 def bookings_view(request):
     bookings = Booking.objects.filter(customer=request.user)
     context = {'bookings': bookings}
     return render(request, 'core/bookings.html', context)
 
 
+@login_required
 def bookings_detail_view(request, booking_id):
-
     booking = Booking.objects.get(id=booking_id)
+    # CHECK THAT USER IS AUTHORISED TO VIEW BOOKING
+    if request.user != booking.customer:
+        raise PermissionDenied
     if request.method == "DELETE":
         booking.delete()
         response = HttpResponse()
@@ -187,6 +194,7 @@ def bookings_detail_view(request, booking_id):
     return render(request, 'core/bookings-detail.html', context)
 
 
+@login_required
 def bookings_edit_view(request, booking_id):
     # GET THE BOOKING OBJ AND ASSOCIATED PASSENGERS
     booking = Booking.objects.get(id=booking_id)

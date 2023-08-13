@@ -81,7 +81,7 @@ class Booking(models.Model):
     trip_email = models.EmailField(max_length=254, blank=True, null=True)
 
     def __str__(self):
-        return f'Reference: {self.reference.hex[:10]}; {self.outbound_flight.origin} - {self.outbound_flight.destination}; {self.customer}'
+        return f'Reference: {self.reference.hex[:8].upper()}; {self.outbound_flight.origin} - {self.outbound_flight.destination}; {self.customer}'
     
     def get_shorthand(self):
         return str(self.reference)[:8].upper()

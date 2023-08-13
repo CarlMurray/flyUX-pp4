@@ -120,13 +120,15 @@
                                placeholder="First name"
                                class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
                                aria-label="Passenger {{ passenger }} - first name"
-                               required>
+                               required
+                               {% if forloop.first %}value="{{ request.user.first_name }}"{% endif %}>
                         <input type="text"
                                name="passenger-{{ passenger }}-last"
                                placeholder="Last name"
                                class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
                                aria-label="Passenger {{ passenger }} - last name"
-                               required>
+                               required
+                               {% if forloop.first %}value="{{ request.user.last_name }}"{% endif %}>
                     </div>
                 </div>
             {% endfor %}
@@ -136,6 +138,7 @@
                 <div class="grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2">
                     <input type="email"
                            name="trip-email"
+                           value="{{ request.user.email }}"
                            placeholder="Email"
                            class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
                            aria-label="Trip contact email address"

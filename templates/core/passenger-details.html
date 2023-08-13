@@ -112,7 +112,7 @@
                    value="{{ num_passengers }}">
             {% for passenger in passengers %}
                 <div class="w-full p-8 mt-8 bg-white shadow-lg rounded-3xl">
-                    <p class="text-2xl font-bold text-text">Passenger {{ passenger }}</p>
+                    <h2 class="text-2xl font-bold text-text">Passenger {{ passenger }}</h2>
                     <p class="text-text">We need these details to confirm your identity - please make sure they match your passport.</p>
                     <div class="grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2">
                         <input type="text"
@@ -131,7 +131,7 @@
                 </div>
             {% endfor %}
             <div class="w-full p-8 mt-8 bg-white shadow-lg rounded-3xl ">
-                <p class="text-2xl font-bold text-text">Trip Contact</p>
+                <h2 class="text-2xl font-bold text-text">Trip Contact</h2>
                 <p class="text-text">We need your email address to keep you updated about your trip.</p>
                 <div class="grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2">
                     <input type="email"

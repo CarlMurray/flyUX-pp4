@@ -65,6 +65,19 @@
             .htmx-request.my-indicator{
                 display:flex;
             }
+            .flatpickr-mobile:before  {
+                content: attr(placeholder);
+                color: #9ca3af;
+                width:100%;
+              }
+              .flatpickr-mobile:focus[value]:not([value=""]):before {
+                display: none;
+              }
+              
+              input[type="hidden"][value]:not([value=""]) + .flatpickr-mobile:before {
+                display: none; 
+              }
+              
         </style>
     </head>
     <body class="flex flex-col min-h-full bg-gray-100">

@@ -19,7 +19,7 @@
                      alt="Backdrop image showing illustrated airplanes sweeping across the background with short dashed lines trailing from behind in a smooth arc">
             </div>
             <!-- OUTER CONTAINER FOR FORM -->
-            <div class="container relative flex items-center h-auto p-8 mx-auto bg-white rounded-3xl drop-shadow-lg mb-8">
+            <div class="container relative flex items-center h-auto p-8 mx-auto mb-8 bg-white rounded-3xl drop-shadow-lg">
                 <!-- FORM CONTRAINER -->
                 <div class="container mx-auto">
                     <form action="{% url 'search-results' %}" method="get" autocomplete="off">
@@ -88,24 +88,26 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id="flatpickr-date-outbound-container" class="col-span-4 sm:col-span-2 md:col-span-1">
                                 <!-- OUTBOUND DATE-->
                                 <input type="text"
                                        name="outbound_date"
                                        id="flatpickr-date-outbound"
-                                       class="hover:drop-shadow-md transition-all caret-transparent flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
+                                       class="hover:drop-shadow-md w-full transition-all caret-transparent flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
                                        placeholder="Outbound Date"
                                        data-id="datetime"
                                        aria-label="Outbound date"
-                                       required>
+                                       required></div>
                                 <!-- RETURN DATE -->
+                                <div id="flatpickr-date-return-container" class="col-span-4 sm:col-span-2 md:col-span-1">
                                 <input type="text"
                                        name="return_date"
                                        id="flatpickr-date-return"
-                                       class="hover:drop-shadow-md transition-all caret-transparent flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
+                                       class="hover:drop-shadow-md w-full transition-all caret-transparent flatpickr flatpickr-input active  h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
                                        placeholder="Return Date"
                                        data-id="datetime"
                                        aria-label="Return date"
-                                       required>
+                                       required></div>
                                 {% comment %} <input type="text"
         name="passengers"
         id=""

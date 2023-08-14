@@ -31,7 +31,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://flyux-b4bb85443186.herokuapp.com/', '*.herokuapp.com']
+# '*' TO ALLOW FOR LOCAL MOBILE TESTING
+ALLOWED_HOSTS = ['*','https://flyux-b4bb85443186.herokuapp.com/', '*.herokuapp.com', 'https://flyux.carlmurray.design/']
 
 
 # Application definition

@@ -95,3 +95,19 @@ const toggleFlightFares = function () {
 ```
 
 Bug: Could not load Booking model in Admin. Due to 90k rows in DB. Added ModelAdmin config to fix. Reference: https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#django.contrib.admin.ModelAdmin.autocomplete_fields
+
+
+Bug where placeholder wouldn't show on mobile devices - due to flatpickr. Workaround found https://jsfiddle.net/Sova12309/7bmpy9jc/9/
+
+            .flatpickr-mobile:before  {
+                content: attr(placeholder);
+                color: #9ca3af;
+                width:100%;
+              }
+              .flatpickr-mobile:focus[value]:not([value=""]):before {
+                display: none;
+              }
+              
+              input[type="hidden"][value]:not([value=""]) + .flatpickr-mobile:before {
+                display: none; 
+              }

@@ -11,6 +11,8 @@ let date_picker_to = flatpickr("#flatpickr-date-return", {allowInput:true});
 // DISABLE USER KEY INPUT FOR FORM FIELDS
 let dateFromInput = document.querySelector('#flatpickr-date-outbound-container')
 let dateToInput = document.querySelector('#flatpickr-date-return-container')
+let dateFromInputField = document.querySelector('#flatpickr-date-outbound')
+let dateToInputField = document.querySelector('#flatpickr-date-return')
 dateFromInput.onkeypress = () => false
 dateToInput.onkeypress = () => false
 airportOrigin.onkeypress = () => false
@@ -68,13 +70,13 @@ tripRadioSelects.forEach(radio => {
   radio.addEventListener('click', function(e){
     let tripType = e.target.value
     if (tripType === 'oneway'){
-      dateToInput.setAttribute('disabled' , true)
+      dateToInputField.setAttribute('disabled' , true)
       dateToInput.classList.add('hidden')
       dateFromInput.classList.add('sm:col-span-4','md:col-span-2')
       console.log(tripType)
     }
     else {
-      dateToInput.setAttribute('disabled' , false)
+      dateToInputField.setAttribute('disabled' , false)
       dateToInput.classList.remove('hidden')
       dateFromInput.classList.remove('sm:col-span-4','md:col-span-2')
       console.log(tripType)

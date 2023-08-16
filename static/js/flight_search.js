@@ -76,7 +76,7 @@ tripRadioSelects.forEach(radio => {
       console.log(tripType)
     }
     else {
-      dateToInputField.setAttribute('disabled' , false)
+      dateToInputField.removeAttribute('disabled')
       dateToInput.classList.remove('hidden')
       dateFromInput.classList.remove('sm:col-span-4','md:col-span-2')
       console.log(tripType)

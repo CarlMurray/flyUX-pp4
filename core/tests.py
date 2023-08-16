@@ -218,6 +218,64 @@ class HomePageViewTestCase(TestCase):
         Tests context passed from home_page view to template.
         Asserts that airports Queryset same as context.
         """
-        request = self.client.get("")
+        response = self.client.get("")
         airports = Airport.objects.all()
-        self.assertQuerysetEqual(request.context["airports"], airports, ordered=False)
+        self.assertQuerysetEqual(response.context["airports"], airports, ordered=False)
+
+
+class SearchResultsViewTestCase(TestCase):
+    """
+    Test case for testing search_results view.
+    """
+    def setUp(self):
+        """
+        Creates Airports for tests.
+        Defines Client().
+        """
+        self.client = Client()
+        Airport.objects.bulk_create(
+            [
+                Airport(
+                    name="Origin",
+                    iata="ORG",
+                    locality="Org",
+                    region="Ogn",
+                    country="Orgtest",
+                ),
+                Airport(
+                    name="Destination",
+                    iata="DST",
+                    locality="Dest",
+                    region="Dst",
+                    country="Dsttest",
+                ),
+            ]
+        )
+
+
+    def test_num_passengers(self):
+        """
+        Tests that num_passengers is an int.
+        """
+        response = self.client.get('/search_results/', {
+            'passengers':'5',
+            'trip_type':'return',
+            'origin':'(ORG)',
+            'destination':'(DST)',
+            'outbound_date':'2023-01-10',
+            'return_date':'2023-02-10',
+            })
+        self.assertDictEqual(dict(self.client.session), {'num_passengers': 5, 'trip_type': 'return'})
+
+    def test_oneway_trip(self):
+        """
+        Tests context for one-way trip option.
+        """
+        response = self.client.get('/search_results/', {
+            'passengers':'5',
+            'trip_type':'oneway',
+            'origin':'(ORG)',
+            'destination':'(DST)',
+            'outbound_date':'2023-01-10',
+            })
+        self.assertDictEqual(dict(self.client.session), {'num_passengers': 5, 'trip_type': 'oneway'})

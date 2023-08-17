@@ -518,3 +518,15 @@ class AltDatesViewTestCase(TestCase):
         response = self.client.get("/search_results/alt_dates/", data)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed("partials/flights.html")
+
+
+class AboutPageViewTestCase(TestCase):
+    """
+    Tests template and status code for about page view.
+    """
+
+    def test_about_view(self):
+        self.client = Client()
+        response = self.client.get("/about/")
+        self.assertTemplateUsed("base/about.html")
+        self.assertEqual(response.status_code, 200)

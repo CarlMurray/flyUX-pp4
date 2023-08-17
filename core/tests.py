@@ -16,7 +16,6 @@ class AiportTestCase(TestCase):
 
     def test_airport_str(self):
         a = Airport.objects.get(iata="TST")
-        print(a)
         self.assertEqual(str(a), "Testport (TST)")
 
 
@@ -174,6 +173,7 @@ class HomePageViewTestCase(TestCase):
     """
     Test case for testing home_page view.
     """
+
     def setUp(self):
         """
         Creates Airports for tests.
@@ -203,8 +203,8 @@ class HomePageViewTestCase(TestCase):
     def test_home_page_templates(self):
         """
         Tests templates used for home_page view.
-        Simulates a request to home_page. 
-        Adds each template name to template_list. 
+        Simulates a request to home_page.
+        Adds each template name to template_list.
         Compares template_list with template name strings.
         """
         request = self.client.get("")
@@ -227,6 +227,7 @@ class SearchResultsViewTestCase(TestCase):
     """
     Test case for testing search_results view.
     """
+
     def setUp(self):
         """
         Creates Airports for tests.
@@ -252,39 +253,49 @@ class SearchResultsViewTestCase(TestCase):
             ]
         )
 
-
     def test_num_passengers(self):
         """
         Tests that num_passengers is an int.
         """
-        response = self.client.get('/search_results/', {
-            'passengers':'5',
-            'trip_type':'return',
-            'origin':'(ORG)',
-            'destination':'(DST)',
-            'outbound_date':'2023-01-10',
-            'return_date':'2023-02-10',
-            })
-        self.assertDictEqual(dict(self.client.session), {'num_passengers': 5, 'trip_type': 'return'})
+        response = self.client.get(
+            "/search_results/",
+            {
+                "passengers": "5",
+                "trip_type": "return",
+                "origin": "(ORG)",
+                "destination": "(DST)",
+                "outbound_date": "2023-01-10",
+                "return_date": "2023-02-10",
+            },
+        )
+        self.assertDictEqual(
+            dict(self.client.session), {"num_passengers": 5, "trip_type": "return"}
+        )
 
     def test_oneway_trip(self):
         """
         Tests context for one-way trip option.
         """
-        response = self.client.get('/search_results/', {
-            'passengers':'5',
-            'trip_type':'oneway',
-            'origin':'(ORG)',
-            'destination':'(DST)',
-            'outbound_date':'2023-01-10',
-            })
-        self.assertDictEqual(dict(self.client.session), {'num_passengers': 5, 'trip_type': 'oneway'})
+        response = self.client.get(
+            "/search_results/",
+            {
+                "passengers": "5",
+                "trip_type": "oneway",
+                "origin": "(ORG)",
+                "destination": "(DST)",
+                "outbound_date": "2023-01-10",
+            },
+        )
+        self.assertDictEqual(
+            dict(self.client.session), {"num_passengers": 5, "trip_type": "oneway"}
+        )
 
 
 class PassengerDetailsViewTestCase(TestCase):
     """
     Test case for testing passenger_details view.
     """
+
     def setUp(self):
         """
         Initiates Client().
@@ -293,7 +304,7 @@ class PassengerDetailsViewTestCase(TestCase):
         """
         self.client = Client()
         session = self.client.session
-        session['num_passengers'] = 2
+        session["num_passengers"] = 2
         session.save()
         Aircraft.objects.create(
             identification="TEST123",
@@ -341,7 +352,6 @@ class PassengerDetailsViewTestCase(TestCase):
             aircraft=Aircraft.objects.first(),
         )
 
-
     def test_passenger_details_session_data_get(self):
         """
         Simulates a GET request handled by passenger_details view.
@@ -349,24 +359,25 @@ class PassengerDetailsViewTestCase(TestCase):
         and correct template used.
         """
         data = {
-            'outbound_flight':'UX00001',
-            'outbound_fare':'Plus',
-            'return_flight':'UX00002',
-            'return_fare':'Plus',
-            }
-        response = self.client.get('/passenger_details/', data)
-        self.assertDictEqual(dict(self.client.session), {
-            'num_passengers':2,
-            'next_url':'outbound_flight=UX00001&outbound_fare=Plus&return_flight=UX00002&return_fare=Plus',
-            'outbound_flight':'UX00001',
-            'outbound_fare':'Plus',
-            'return_flight':'UX00002',
-            'return_fare':'Plus',
-            })
+            "outbound_flight": "UX00001",
+            "outbound_fare": "Plus",
+            "return_flight": "UX00002",
+            "return_fare": "Plus",
+        }
+        response = self.client.get("/passenger_details/", data)
+        self.assertDictEqual(
+            dict(self.client.session),
+            {
+                "num_passengers": 2,
+                "next_url": "outbound_flight=UX00001&outbound_fare=Plus&return_flight=UX00002&return_fare=Plus",
+                "outbound_flight": "UX00001",
+                "outbound_fare": "Plus",
+                "return_flight": "UX00002",
+                "return_fare": "Plus",
+            },
+        )
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed('core/passenger-details.html')
-
-
+        self.assertTemplateUsed("core/passenger-details.html")
 
     def test_passenger_details_session_data_post(self):
         """
@@ -374,22 +385,136 @@ class PassengerDetailsViewTestCase(TestCase):
         Tests that session data is as expected and HTTP response is 302.
         """
         data = {
-            'number-of-passengers':2,
-            'passenger-1-first':'Test',
-            'passenger-1-last':'McTesterson',
-            'passenger-2-first':'Tester',
-            'passenger-2-last':'McTesting',
-            'trip-email':'test@testing.com',
-            }
-        response = self.client.post('/passenger_details/', data)
-        self.assertDictEqual(dict(self.client.session), {
-            'num_passengers':'2',
-            'passengers':{
-                'passenger-1':{'first':'Test', 'last':'McTesterson'},
-                'passenger-2':{'first':'Tester', 'last':'McTesting'},
+            "number-of-passengers": 2,
+            "passenger-1-first": "Test",
+            "passenger-1-last": "McTesterson",
+            "passenger-2-first": "Tester",
+            "passenger-2-last": "McTesting",
+            "trip-email": "test@testing.com",
+        }
+        response = self.client.post("/passenger_details/", data)
+        self.assertDictEqual(
+            dict(self.client.session),
+            {
+                "num_passengers": "2",
+                "passengers": {
+                    "passenger-1": {"first": "Test", "last": "McTesterson"},
+                    "passenger-2": {"first": "Tester", "last": "McTesting"},
+                },
+                "trip_email": "test@testing.com",
             },
-            'trip_email':'test@testing.com',
-            })
+        )
         self.assertEqual(response.status_code, 302)
 
 
+class AltDatesViewTestCase(TestCase):
+    """
+    Test case for alt_dates view. Tests htmx requests on search results page.
+    """
+
+    def setUp(self):
+        """
+        Initiates Client and test data.
+        """
+        self.client = Client()
+        Aircraft.objects.create(
+            identification="TEST123",
+            seats=100,
+            aircraft_type=Aircraft.AIRCRAFT_TYPES[0][1],
+        )
+
+        Airport.objects.bulk_create(
+            [
+                Airport(
+                    name="Origin",
+                    iata="ORG",
+                    locality="Org",
+                    region="Ogn",
+                    country="Orgtest",
+                ),
+                Airport(
+                    name="Destination",
+                    iata="DST",
+                    locality="Dest",
+                    region="Dst",
+                    country="Dsttest",
+                ),
+            ]
+        )
+
+        Flight.objects.create(
+            flight_number="UX00001",
+            origin=Airport.objects.get(iata="ORG"),
+            destination=Airport.objects.get(iata="DST"),
+            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            dep_time=datetime.now(),
+            arr_time=datetime.now(),
+            price=100,
+            aircraft=Aircraft.objects.first(),
+        )
+        Flight.objects.create(
+            flight_number="UX00002",
+            origin=Airport.objects.get(iata="DST"),
+            destination=Airport.objects.get(iata="ORG"),
+            outbound_date=datetime.strptime("2023-01-10", "%Y-%m-%d"),
+            dep_time=datetime.now(),
+            arr_time=datetime.now(),
+            price=100,
+            aircraft=Aircraft.objects.first(),
+        )
+
+    def test_flight_results(self):
+        """
+        Tests that Flight results for the chosen alt_date are as intended.
+        """
+        data = {
+            "leg": "outbound",
+            "origin": "(ORG)",
+            "destination": "(DST)",
+            "date": "2023-01-05",
+        }
+        response = self.client.get("/search_results/alt_dates/", data)
+        flight_results = response.context["flight_results"]
+        self.assertQuerysetEqual(
+            flight_results,
+            Flight.objects.filter(flight_number="UX00001"),
+            ordered=False,
+        )
+
+    def test_slider_date_list(self):
+        """
+        Tests that new list of dates shown in alt_date_slider on search results
+        page is as intended.
+        """
+        data = {
+            "leg": "outbound",
+            "origin": "(ORG)",
+            "destination": "(DST)",
+            "date": "2023-01-05",
+        }
+        response = self.client.get("/search_results/alt_dates/", data)
+        date_list = response.context["slider_date_list"]
+        self.assertListEqual(
+            date_list,
+            [
+                datetime.strptime("2023-01-03", "%Y-%m-%d"),
+                datetime.strptime("2023-01-04", "%Y-%m-%d"),
+                datetime.strptime("2023-01-05", "%Y-%m-%d"),
+                datetime.strptime("2023-01-06", "%Y-%m-%d"),
+                datetime.strptime("2023-01-07", "%Y-%m-%d"),
+            ],
+        )
+
+    def test_template_and_response(self):
+        """
+        Tests that correct response and template used.
+        """
+        data = {
+            "leg": "outbound",
+            "origin": "(ORG)",
+            "destination": "(DST)",
+            "date": "2023-01-05",
+        }
+        response = self.client.get("/search_results/alt_dates/", data)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed("partials/flights.html")

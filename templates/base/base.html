@@ -113,6 +113,11 @@
                                 <a href="#" class="text-white border-r-[1px] border-r-white pr-4">Welcome, <strong>{{ user.first_name }}</strong></a>
                                 <a href="{% url 'logout' %}" class="pl-4 text-white">Logout</a>
                             </div>
+                        {% elif request.path == '/login/' or request.path == '/register/' %}
+                            <a href="{% url 'register' %}?next={{ request.path }}"
+                               class="flex items-center h-10 px-6 text-white rounded-full py-auto">Signup</a>
+                            <a href="{% url 'login' %}?next={{ request.path }}"
+                               class="bg-primary py-auto px-6 border-[1px] border-white rounded-full h-10 flex items-center font-bold text-white">Login</a>
                         {% else %}
                             <a href="{% url 'register' %}?next={{ request.get_full_path }}"
                                class="flex items-center h-10 px-6 text-white rounded-full py-auto">Signup</a>

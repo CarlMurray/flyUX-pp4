@@ -14,6 +14,8 @@ def logout_view(request):
 def login_view(request):
     # STORE PREV URL FOR REDIRECT AFTER LOGIN, TRIMSS '?next='
     request.session['next_url'] = request.GET.urlencode(safe='/?=&')[5:]
+    if request.user.is_authenticated:
+        return redirect('home-page')
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')

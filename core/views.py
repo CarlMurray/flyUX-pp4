@@ -117,7 +117,7 @@ def alt_dates(request):
     time.sleep(0.5)
     return render(request, 'partials/flights.html', context)
 
-
+@login_required
 def checkout_view(request):
     passengers = request.session['passengers']
     outbound_flight = Flight.objects.get(

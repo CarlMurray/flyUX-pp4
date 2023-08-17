@@ -228,7 +228,7 @@ const editFlight = function(e) {
     nextBtn.setAttribute('disabled', '')
     // console.log(this)
     let leg = this.getAttribute('data-leg')
-    // console.log(leg)
+    console.log(leg)
     let flightSearchResults = document.querySelector(`#${leg}-flights`)
     // console.dir(flightSearchResults)
     flightSearchResults.classList.remove('hidden')
@@ -315,7 +315,7 @@ const createSelectedFlightCard = function(flight, selectedFare) {
     <div class="bg-white flex flex-col font-normal h-full items-center justify-center sm:border-l-2 sm:flex-row sm:w-32 text-primary text-xl w-full">
         
         <hr class="sm:hidden w-full">
-<p class="cursor-pointer sm:p-2 flight-edit-button mx-auto p-2 pb-0 pt-4 text-center w-2/3" data-leg="outbound">Edit</p>
+<p class="cursor-pointer sm:p-2 flight-edit-button mx-auto p-2 pb-0 pt-4 text-center w-2/3" data-leg="${leg}">Edit</p>
     </div>
 </div>
 `

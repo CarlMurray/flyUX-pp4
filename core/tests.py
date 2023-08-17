@@ -279,3 +279,117 @@ class SearchResultsViewTestCase(TestCase):
             'outbound_date':'2023-01-10',
             })
         self.assertDictEqual(dict(self.client.session), {'num_passengers': 5, 'trip_type': 'oneway'})
+
+
+class PassengerDetailsViewTestCase(TestCase):
+    """
+    Test case for testing passenger_details view.
+    """
+    def setUp(self):
+        """
+        Initiates Client().
+        Defines session and adds num_passengers for testing.
+        Creates test data from models.
+        """
+        self.client = Client()
+        session = self.client.session
+        session['num_passengers'] = 2
+        session.save()
+        Aircraft.objects.create(
+            identification="TEST123",
+            seats=100,
+            aircraft_type=Aircraft.AIRCRAFT_TYPES[0][1],
+        )
+
+        Airport.objects.bulk_create(
+            [
+                Airport(
+                    name="Origin",
+                    iata="ORG",
+                    locality="Org",
+                    region="Ogn",
+                    country="Orgtest",
+                ),
+                Airport(
+                    name="Destination",
+                    iata="DST",
+                    locality="Dest",
+                    region="Dst",
+                    country="Dsttest",
+                ),
+            ]
+        )
+
+        Flight.objects.create(
+            flight_number="UX00001",
+            origin=Airport.objects.get(iata="ORG"),
+            destination=Airport.objects.get(iata="DST"),
+            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            dep_time=datetime.now(),
+            arr_time=datetime.now(),
+            price=100,
+            aircraft=Aircraft.objects.first(),
+        )
+        Flight.objects.create(
+            flight_number="UX00002",
+            origin=Airport.objects.get(iata="DST"),
+            destination=Airport.objects.get(iata="ORG"),
+            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            dep_time=datetime.now(),
+            arr_time=datetime.now(),
+            price=100,
+            aircraft=Aircraft.objects.first(),
+        )
+
+
+    def test_passenger_details_session_data_get(self):
+        """
+        Simulates a GET request handled by passenger_details view.
+        Tests that session data is as expected; HTTP response is 200,
+        and correct template used.
+        """
+        data = {
+            'outbound_flight':'UX00001',
+            'outbound_fare':'Plus',
+            'return_flight':'UX00002',
+            'return_fare':'Plus',
+            }
+        response = self.client.get('/passenger_details/', data)
+        self.assertDictEqual(dict(self.client.session), {
+            'num_passengers':2,
+            'next_url':'outbound_flight=UX00001&outbound_fare=Plus&return_flight=UX00002&return_fare=Plus',
+            'outbound_flight':'UX00001',
+            'outbound_fare':'Plus',
+            'return_flight':'UX00002',
+            'return_fare':'Plus',
+            })
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed('core/passenger-details.html')
+
+
+
+    def test_passenger_details_session_data_post(self):
+        """
+        Simulates a POST request handled by passenger_details view.
+        Tests that session data is as expected and HTTP response is 302.
+        """
+        data = {
+            'number-of-passengers':2,
+            'passenger-1-first':'Test',
+            'passenger-1-last':'McTesterson',
+            'passenger-2-first':'Tester',
+            'passenger-2-last':'McTesting',
+            'trip-email':'test@testing.com',
+            }
+        response = self.client.post('/passenger_details/', data)
+        self.assertDictEqual(dict(self.client.session), {
+            'num_passengers':'2',
+            'passengers':{
+                'passenger-1':{'first':'Test', 'last':'McTesterson'},
+                'passenger-2':{'first':'Tester', 'last':'McTesting'},
+            },
+            'trip_email':'test@testing.com',
+            })
+        self.assertEqual(response.status_code, 302)
+
+

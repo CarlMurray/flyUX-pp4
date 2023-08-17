@@ -63,18 +63,18 @@ def search_results_view(request):
 def passenger_details_view(request):
     if request.method == 'GET':
         request.session['next_url'] = request.GET.urlencode(safe='/?=&')
-        request.session['outbound_flight'] = request.GET['outbound_flight']
-        request.session['outbound_fare'] = request.GET['outbound_fare']
-        request.session['return_flight'] = request.GET['return_flight']
-        request.session['return_fare'] = request.GET['return_fare']
+        request.session['outbound_flight'] = request.GET.get('outbound_flight')
+        request.session['outbound_fare'] = request.GET.get('outbound_fare')
+        request.session['return_flight'] = request.GET.get('return_flight')
+        request.session['return_fare'] = request.GET.get('return_fare')
         passengers = request.session['num_passengers']
-        passengers_range = range(1, int(passengers+1))
+        passengers_range = range(1, (int(passengers)+1))
         return render(request, 'core/passenger-details.html', {'passengers': passengers_range, 'num_passengers': passengers})
     else:
         num_passengers = request.POST['number-of-passengers']
         request.session['num_passengers'] = num_passengers
         passengers = {}
-        for p in range(1, int(num_passengers)+1):
+        for p in range(1, (int(num_passengers)+1)):
             first = request.POST[f'passenger-{p}-first']
             last = request.POST[f'passenger-{p}-last']
             data = {'first': first, 'last': last}
@@ -86,7 +86,7 @@ def passenger_details_view(request):
                 passenger_key = f'passenger-{p}'
                 passengers[passenger_key] = form
         request.session['passengers'] = passengers
-        request.session['trip_email'] = request.POST['trip-email']
+        request.session['trip_email'] = request.POST.get('trip-email')
         print(dict(request.session))
         return redirect('checkout')
 

@@ -5,7 +5,7 @@ from utils.altdates import create_alt_date_range
 from .forms import PassengerForm
 from django.http import HttpResponse
 import time
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import BadRequest
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
@@ -69,6 +69,8 @@ def passenger_details_view(request):
         request.session['return_fare'] = request.GET.get('return_fare')
         passengers = request.session['num_passengers']
         passengers_range = range(1, (int(passengers)+1))
+        if int(passengers) > 8 or int(passengers) < 1:
+            raise BadRequest
         return render(request, 'core/passenger-details.html', {'passengers': passengers_range, 'num_passengers': passengers})
     else:
         num_passengers = request.POST['number-of-passengers']

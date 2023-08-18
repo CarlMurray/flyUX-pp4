@@ -237,8 +237,8 @@ def bookings_edit_view(request, booking_id):
     # SAVES EDITED PASSENGER INFO IF 'POST' REQUEST
     if request.method == "POST":
         for passenger in passengers:
-            passenger.first = request.POST[f'first-{passenger.id}']
-            passenger.last = request.POST[f'last-{passenger.id}']
+            passenger.first = request.POST.get(f'first-{passenger.id}')
+            passenger.last = request.POST.get(f'last-{passenger.id}')
             passenger.save()
     # 'GET' AND 'DELETE' REQUESTS USE SAME CONTEXT DATA
     return render(request, 'partials/passengers-edit.html', {'passengers': passengers, 'booking': booking})

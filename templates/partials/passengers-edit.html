@@ -10,6 +10,8 @@
                         aria-label="Cancel changes">Cancel</button>
                 <!-- 'Done' BTN USES HX-POST -->
                 <button hx-post="/bookings/detail/edit/{{ booking.id }}"
+                        hx-validate="true"
+                        id="edit-passengers-submit"
                         class="w-[90px] px-4 py-2 rounded-full border-[1px] border-primary text-white bg-primary font-bold cursor-pointer hover:scale-[103%] transition-all"
                         aria-label="Confirm changes">Done</button>
             </div>
@@ -24,6 +26,7 @@
                            id="first-{{ passenger.id }}"
                            value="{{ passenger.first }}"
                            aria-label="First name: {{ passenger.first }}"
+                           pattern="\S+"
                            required>
                     <input class="bg-transparent border-primary border-x-0 border-t-0 border-b-[1px] col-span-1"
                            type="text"
@@ -31,6 +34,7 @@
                            id="last-{{ passenger.id }}"
                            value="{{ passenger.last }}"
                            aria-label="Last name: {{ passenger.last }}"
+                           pattern="\S+"
                            required>
                 </li>
             {% endfor %}

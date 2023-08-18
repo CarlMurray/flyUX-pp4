@@ -5,9 +5,28 @@
 {% endblock title %}
 {% block content %}
     <div class="container h-full px-5 mx-auto my-12">
-        {% for post in posts %}
-        <p>{{post.title}}</p>
-        <img src="{{post.cover_image.url}}">
-        {% endfor %}
+        <div class="py-12">
+            <div class="px-6 m-auto xl:container md:px-12 xl:px-6">
+                <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    {% for post in posts %}
+                        <div class="p-6 bg-white shadow-xl sm:p-8 rounded-3xl">
+                            <div class="relative overflow-hidden rounded-xl">
+                                <img src="{{ post.cover_image.url }}"
+                                     width=""
+                                     height=""
+                                     class="object-cover object-top w-full h-64 transition duration-500 group-hover:scale-105" />
+                            </div>
+                            <div class="relative mt-6">
+                                <h3 class="text-2xl font-semibold text-text">{{post.title}}</h3>
+                                <p class="mt-6 mb-8 text-text">{{post.content|truncatewords:14}}</p>
+                                <a class="inline-block" href="#">
+                                    <span class="text-primary">Read more</span>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
-    {% endblock content %}
+{% endblock content %}

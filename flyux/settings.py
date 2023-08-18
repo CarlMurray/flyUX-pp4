@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "users",
     "core",
     "blog",
+    "markdownfield",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

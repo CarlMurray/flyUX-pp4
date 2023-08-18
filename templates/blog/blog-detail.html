@@ -1,0 +1,12 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+    {{ post.title }}
+{% endblock title %}
+{% block content %}
+    <div class="container h-full px-5 mx-auto my-12">
+        <h1>{{ post.title }}</h1>
+        <img src="{{ post.cover_image.url }}">
+        {{ post.content_rendered | safe }}
+    </div>
+{% endblock content %}

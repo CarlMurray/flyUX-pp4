@@ -38,6 +38,7 @@ urlpatterns = [
     path("bookings/detail/edit/<int:booking_id>", core_views.bookings_edit_view, name="bookings-edit"),
     path("about/", core_views.about_view, name="about"),
     path("blog/", blog_views.blog_view, name="blog"),
+    path("blog/<int:id>", blog_views.blog_detail, name='blog-detail')
 ]
 
 if settings.DEBUG:

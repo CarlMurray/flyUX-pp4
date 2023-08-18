@@ -40,6 +40,7 @@ ALLOWED_HOSTS = ['*','https://flyux-b4bb85443186.herokuapp.com/', '*.herokuapp.c
 INSTALLED_APPS = [
     "users",
     "core",
+    "blog",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -157,3 +158,7 @@ django_on_heroku.settings(locals())
 LOGIN_URL = 'login'
 
 CONN_MAX_AGE = 0
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'

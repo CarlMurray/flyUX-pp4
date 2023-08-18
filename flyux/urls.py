@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import path
 from core import views as core_views
 from users import views as users_views
+from blog import views as blog_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -34,4 +37,8 @@ urlpatterns = [
     path("bookings/detail/<int:booking_id>", core_views.bookings_detail_view, name="bookings-detail"),
     path("bookings/detail/edit/<int:booking_id>", core_views.bookings_edit_view, name="bookings-edit"),
     path("about/", core_views.about_view, name="about"),
+    path("blog/", blog_views.blog_view, name="blog"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

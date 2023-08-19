@@ -95,7 +95,10 @@
                 <div class="absolute items-center justify-center hidden -translate-x-1/2 left-1/2 md:flex">
                     <ul class="flex">
                         <li>
-                            <a href="{% url 'bookings' %}" class="px-4 text-white">Bookings</a>
+                            <a href="{% url 'home-page' %}" class="px-4 text-white">Home</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'bookings' %}" class="px-4 text-white border-x-[1px]">Bookings</a>
                         </li>
                         <li>
                             <a href="{% url 'blog' %}" class="text-white px-4 border-x-[1px]">Blog</a>
@@ -160,6 +163,9 @@
                                class="px-4 text-white">Login</a>
                         </li>
                     {% endif %}
+                    <li>
+                        <a href="{% url 'home-page' %}" class="px-4 text-white">Home</a>
+                    </li>
                     <li>
                         <a href="{% url 'bookings' %}" class="px-4 text-white">Bookings</a>
                     </li>

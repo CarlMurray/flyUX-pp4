@@ -4,9 +4,18 @@
     {{ post.title }}
 {% endblock title %}
 {% block content %}
-    <div class="container h-full px-5 mx-auto my-12">
-        <h1>{{ post.title }}</h1>
-        <img src="{{ post.cover_image.url }}">
-        {{ post.content_rendered | safe }}
+<div class="relative flex items-center w-screen overflow-hidden sm:max-h-80">
+    <div class="absolute w-full h-full opacity-50 bg-gradient-to-r from-40% from-primary to-fuchsia-500"></div>
+    <img class="object-cover w-full h-full" src="{{ post.cover_image.url }}">
+    <h1 class="container absolute px-5 text-4xl font-bold text-center text-white -translate-x-1/2 left-1/2">{{ post.title }}</h1>
+</div>
+    <div class="container h-full px-5 mx-auto">
+        <main class="my-16">
+            {{ post.content_rendered | safe }}
+        </main>
     </div>
 {% endblock content %}
+{% block scripts %}
+{{block.super}}
+<script src="{% static 'js/blog-post.js' %}"></script>
+{% endblock scripts %}

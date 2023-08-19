@@ -8,6 +8,7 @@ import time
 from django.core.exceptions import BadRequest
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def home_page(request):
@@ -22,6 +23,8 @@ def search_results_view(request):
     origin = request.GET['origin'][-4:-1]  # GETS IATA CODE
     destination = request.GET['destination'][-4:-1]  # GETS IATA CODE
     outbound_date = request.GET['outbound_date']
+    request.session['outbound_date'] = outbound_date
+    request.session['outbound_previous_date'] =outbound_date # STORES PREVIOUS DATE FOR ALT DATE VALIDATION
     passengers = request.GET['passengers']
     flight_origin = Airport.objects.filter(iata=origin.upper()).get()
     flight_destination = Airport.objects.filter(iata=destination.upper()).get()
@@ -32,6 +35,9 @@ def search_results_view(request):
     )
     if trip_type == 'return':
         return_date = request.GET['return_date']
+        request.session['return_date'] = return_date
+        request.session['return_previous_date'] = return_date # STORES PREVIOUS DATE FOR ALT DATE VALIDATION
+
         flight_results_return = Flight.objects.filter(
             origin=flight_destination,
             destination=flight_origin,
@@ -100,7 +106,39 @@ def alt_dates(request):
     destination = request.GET['destination'][-4:-1]  # GETS IATA CODE
     flight_origin = Airport.objects.filter(iata=origin.upper()).get()
     flight_destination = Airport.objects.filter(iata=destination.upper()).get()
+    request.session[f'{leg}_date'] = request.GET['date']
+    if request.session['trip_type'] == 'return':
+        if (datetime.strptime(request.session['outbound_date'], '%Y-%m-%d') > datetime.strptime(request.session['return_date'], '%Y-%m-%d')):
+            print('INVALID')
+            if leg == 'outbound':
+                leg_string = 'Outbound'
+                other_leg = 'return'
+                tense_string = 'before'
+            else: 
+                leg_string = 'Return'
+                other_leg = 'outbound'
+                tense_string = 'after'
+            messages.error(request, f'{leg_string} flight date must be {tense_string} {other_leg} date')
+            date = request.session[f'{leg}_previous_date']
 
+            flight_results = Flight.objects.filter(
+                origin=flight_origin,
+                destination=flight_destination,
+                outbound_date=date
+            )
+            slider_date_list = create_alt_date_range(date)
+            context = {
+                'flight_results': flight_results,
+                'slider_date_list': slider_date_list,
+                'date': datetime.strptime(date, '%Y-%m-%d'),
+                'origin': flight_origin,
+                'destination': flight_destination,
+                'leg': leg
+            }
+
+            return render(request, 'partials/flights.html', context)
+
+        
     flight_results = Flight.objects.filter(
         origin=flight_origin,
         destination=flight_destination,
@@ -117,7 +155,9 @@ def alt_dates(request):
     }
     # ARTIFICIAL LOADING DELAY FOR VISUAL CONSISTENCY
     time.sleep(0.5)
+    request.session[f'{leg}_previous_date'] = date
     return render(request, 'partials/flights.html', context)
+
 
 @login_required
 def checkout_view(request):
@@ -150,17 +190,17 @@ def checkout_view(request):
             'flights': ((outbound_flight, outbound_fare, outbound_price), (return_flight, return_fare, return_price)),
             'num_passengers': request.session['num_passengers']
         }
-    
+
     else:
         context = {
-        'passengers': passengers,
-        'outbound_flight': outbound_flight,
-        'outbound_fare': outbound_fare,
-        'outbound_price': outbound_price,
-        'total_price': total_price,
-        'flights': [(outbound_flight, outbound_fare, outbound_price)],
-        'num_passengers': request.session['num_passengers']
-    }
+            'passengers': passengers,
+            'outbound_flight': outbound_flight,
+            'outbound_fare': outbound_fare,
+            'outbound_price': outbound_price,
+            'total_price': total_price,
+            'flights': [(outbound_flight, outbound_fare, outbound_price)],
+            'num_passengers': request.session['num_passengers']
+        }
     if request.method == 'GET':
         return render(request, 'core/checkout.html', context)
     # IF PAYMENT FORM SUBMITTED CREATE BOOKING AND PASSENGER OBJs
@@ -197,7 +237,7 @@ def checkout_view(request):
 def order_confirmation_view(request, id):
     booking = Booking.objects.get(id=id)
     context = {
-        'booking':booking
+        'booking': booking
     }
     return render(request, 'core/order-confirmation.html', context)
 

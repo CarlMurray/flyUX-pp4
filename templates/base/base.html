@@ -141,9 +141,9 @@
                 </div>
             </nav>
             <!-- EXPANDED MENU ON CLICK -->
-            <div class="absolute z-50 flex items-center justify-center hidden w-screen p-12 bg-primary top-full"
+            <div class="absolute z-50 flex items-center justify-center w-screen overflow-hidden transition-all duration-500 ease-in-out bg-primary top-full max-h-0"
                  id="hamburger-menu-expanded">
-                <ul class="flex flex-col items-center gap-10 text-2xl">
+                <ul id="hamburger-nav-links" class="flex flex-col items-center gap-10 text-2xl">
                     <li>
                         {% if user.is_authenticated %}
                             <p class="text-white ">

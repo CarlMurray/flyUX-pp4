@@ -4,10 +4,12 @@ from django.contrib.auth import logout, login, authenticate
 from flyux import urls
 from .forms import LoginForm, RegistrationForm
 from django.forms import Form
+from django.contrib import messages
 
 
 def logout_view(request):
     logout(request)
+    messages.info(request, 'You have been logged out.')
     return redirect('home-page')
 
 

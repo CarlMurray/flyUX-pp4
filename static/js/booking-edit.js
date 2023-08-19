@@ -15,8 +15,8 @@ const confirmDelete = (evt) => {
     <p class='text-center font-bold'>Are you sure you want to cancel this booking? You cannot undo this action.</p>\
     <p class='text-center'>Your card will be refunded within 7 days.</p>\
     <div class='flex justify-center gap-2 mt-2'>\
-    <button id='no' class='dialog-btn w-auto px-4 py-2 border-primary border-[1px] bg-white text-text rounded-full'>No, go back</button>\
-    <button id='yes' class='dialog-btn w-auto px-4 py-2 border-primary border-2 bg-primary text-white font-bold rounded-full'>Yes, cancel</button>\
+    <button id='no' class='dialog-btn w-auto px-4 py-2 border-primary border-[1px] bg-white text-text rounded-full transition-all hover:bg-primary hover:text-white duration-300'>No, go back</button>\
+    <button id='yes' class='dialog-btn w-auto px-4 py-2 border-primary border-2 bg-primary text-white font-bold rounded-full transition-all duration-300 hover:bg-[#FB257F]'>Yes, cancel</button>\
     </div>\
     </div>"
     // APPEND DIALOG TO CONTAINER

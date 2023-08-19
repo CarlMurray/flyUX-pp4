@@ -2,17 +2,17 @@
 {% if request.method == 'GET' %}
     <form action="" class="max-w-[400px]" hx-target="this" hx-swap="outerHTML">
         <div class="flex items-center justify-between w-full">
-            <p class="text-lg font-bold text-primary">Passengers</p>
+            <p class="text-xl font-bold text-primary">Passengers</p>
             <div class="flex justify-end w-full gap-2">
                 <!-- 'Cancel' BTN USES HX-DELETE TO DIFFERENTIATE FROM OTHER REQUESTS IN VIEW + TEMPLATE -->
                 <button hx-delete="/bookings/detail/edit/{{ booking.id }}"
-                        class="w-[90px] px-4 py-2 rounded-full border-[1px] border-primary text-text cursor-pointer hover:scale-[103%] transition-all"
+                        class="w-[90px] px-4 py-2 rounded-full border-[1px] border-primary text-text cursor-pointer transition-all hover:bg-primary hover:text-white duration-300"
                         aria-label="Cancel changes">Cancel</button>
                 <!-- 'Done' BTN USES HX-POST -->
                 <button hx-post="/bookings/detail/edit/{{ booking.id }}"
                         hx-validate="true"
                         id="edit-passengers-submit"
-                        class="w-[90px] px-4 py-2 rounded-full border-[1px] border-primary text-white bg-primary font-bold cursor-pointer hover:scale-[103%] transition-all"
+                        class="w-[90px] px-4 py-2 rounded-full border-[1px] border-primary text-white bg-primary font-bold cursor-pointer transition-all duration-300 hover:bg-[#FB257F]"
                         aria-label="Confirm changes">Done</button>
             </div>
         </div>

@@ -9,105 +9,58 @@
 
 
 # Bugs
+1. When styling the flight search result cards, there was some difficulty in adding a transition to animate the expansion of the card when clicked, to show the fares. It was found that it is not possible to transition from `display:hidden`, nor is it possible to transition from heigh:0 to height:auto. A workaround was implemented by setting `max-height:0` with `overflow:hidden` then using JavaScript to add `max-height:100rem` (or any other large value) along with `transition:all` to animate the card expansion and collapse.
+2. The "alternate date selector" on the flight results page works by sending an AJAX request (via htmx) when an alternate date is clicked, and responding with HTML with the new flight data for the given date. When the new HTML is loaded from the response, the click event listeners need to be re-attached to the new flight card elements so that they expand when clicked, to show the fares. However, when initially trying to implement this re-attachment, an issue arose where the flight cards would not expand every second time an alternate date was selected. Following some troubleshooting, it was found that the click event listeners were compounding, thus negating each other (i.e. as if a user clicked the card twice in rapid succession). Using `console.log` and Chrome Dev Tools for debugging enabled me to see which events were firing so that the issue could be identified and solved by defining the click handler function outside of the event listner function. [Relevant Stack Overflow thread.](https://stackoverflow.com/questions/41720943/rebind-javascript-events-and-addeventlistener-fires-twice)
+3.  The `Flight`s table contains 90,000 rows of data and when implementing the `Booking`s CRUD functionality, there were severe issues experienced particularly in the admin panel when trying to view/edit `Booking`s which resulted in indefinite loading times as the `Flight`s data was loaded. Django has a number of built-in solutions for this issue and a solution was implemented by defining `search_fields` and `autocomplete_fields` in the `ModelAdmin` configurations for the `Flight` and `Booking` models. [Django Documentation Reference](https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#django.contrib.admin.ModelAdmin.autocomplete_fields)
+4. When testing the site on mobile, a bug was identified where the date input field placeholder text would not display. Following some research and troubleshooting, it was found that this is a known issue with Flatpickr and a workaround was found as [referenced in this JSfiddle](https://jsfiddle.net/Sova12309/7bmpy9jc/9/).
 
-- Couldn't animate fares card transition. Tried animating from hidden, height=0 etc. Solution: Remove 'hidden' class and set overflow:hidden with height=0. Transition height above max needed.
+<details>
+<summary>Code Snippet Implemented</summary>
 
-- Alt date selector bug - cards not expanding. Event listener was being added twice therefore when clicked the styles were toggled repeatedly meaning nothing was happening. Fixed by creating seperate click handler function so it doesn't get added repeatedly. Used dev tools to see what event listeners were added to diagnose problem. Ref: https://stackoverflow.com/questions/41720943/rebind-javascript-events-and-addeventlistener-fires-twice
+```css
 
-Before:
-```javascript
-// TO TOGGLE FARE SELECTION ON CLICK
-const toggleFlightFares = function () {
-    let flightCardContainers = document.querySelectorAll(
-        ".flight-card-container"
-    );
-    flightCardContainers.forEach((card) => {
-        card.addEventListener("click", function () {
-            let faresWrapper = this.querySelector('.flight-fares-wrapper')
-            // IF CONTAINER ALREADY EXPANDED:
-            if (this.getAttribute("data-expanded") === "True") {
-                // HIDE FARES
-                faresWrapper.classList.toggle('max-h-[50rem]');
-                this.classList.remove("rounded-b-[3rem]", "shadow-xl");
-                this.setAttribute("data-expanded", "False");
-            }
-            //  ELSE IF SELECTED FLIGHT NOT ALREADY EXPANDED:
-            else {
-                // SELECT THE FLIGHT THAT WAS PREVIOUSLY SELECTED, IF ANY
-                let alreadySelected = document.querySelector('[data-expanded="True"]');
-                // HIDE THE PREVIOUSLY SELECTED FLIGHT
-                if (alreadySelected) {
-                    alreadySelected.setAttribute("data-expanded", "False");
-                    alreadySelected.classList.remove("rounded-b-[3rem]", "shadow-xl");
-                    let faresWrapperSelected = alreadySelected.querySelector('.flight-fares-wrapper')
-                    faresWrapperSelected.classList.toggle('max-h-[50rem]')
-                }
-                // SHOW THE CURRENTLY SELECTED FLIGHT
-                this.setAttribute("data-expanded", "True");
-                this.classList.toggle("rounded-b-[3rem]");
-                this.classList.toggle("shadow-xl");
-                faresWrapper.classList.toggle('max-h-[50rem]')
-            }
-        });
-    });
-};
+.flatpickr-mobile:before {
+    content: attr(placeholder);
+    color: #9ca3af;
+    width:100%;
+    }
+
+.flatpickr-mobile:focus[value]:not([value=""]):before {
+    display: none;
+    }
+    
+input[type="hidden"][value]:not([value=""]) + .flatpickr-mobile:before {
+    display: none; 
+    }
+
 ```
 
-After:
-```javascript
-const clickHandler = function (e) {
-    let faresWrapper = this.querySelector('.flight-fares-wrapper')
-    // IF CONTAINER ALREADY EXPANDED:
-    if (this.getAttribute("data-expanded") === "True") {
-        // HIDE FARES
-        faresWrapper.classList.toggle('max-h-[50rem]');
-        this.classList.remove("rounded-b-[3rem]", "shadow-xl");
-        this.setAttribute("data-expanded", "False");
-    }
-    //  ELSE IF SELECTED FLIGHT NOT ALREADY EXPANDED:
-    else {
-        // SELECT THE FLIGHT THAT WAS PREVIOUSLY SELECTED, IF ANY
-        let alreadySelected = document.querySelector('[data-expanded="True"]');
-        // HIDE THE PREVIOUSLY SELECTED FLIGHT
-        if (alreadySelected) {
-            alreadySelected.setAttribute("data-expanded", "False");
-            alreadySelected.classList.remove("rounded-b-[3rem]", "shadow-xl");
-            let faresWrapperSelected = alreadySelected.querySelector('.flight-fares-wrapper')
-            faresWrapperSelected.classList.toggle('max-h-[50rem]')
-        }
-        // SHOW THE CURRENTLY SELECTED FLIGHT
-        this.setAttribute("data-expanded", "True");
-        this.classList.toggle("rounded-b-[3rem]");
-        this.classList.toggle("shadow-xl");
-        faresWrapper.classList.toggle('max-h-[50rem]')
-    }
-}
+</details>
 
-// TO TOGGLE FARE SELECTION ON CLICK
-const toggleFlightFares = function () {
-    let flightCardContainers = document.querySelectorAll(
-        ".flight-card-container"
-    );
-    flightCardContainers.forEach((card) => {
-        card.addEventListener("click", clickHandler);
-    });
-};
-```
+---
 
-Bug: Could not load Booking model in Admin. Due to 90k rows in DB. Added ModelAdmin config to fix. Reference: https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#django.contrib.admin.ModelAdmin.autocomplete_fields
+## Technologies Used
+This section outlines the various technologies used throughout the project and the purpose each serves.
 
+### Core Development Technologies
+- Django used as a full-stack framwork for developing the app.
+- JavaScript used for client-side interaction and validation.
+- HTML/CSS + Django Template Language used for building out site pages.
 
-Bug where placeholder wouldn't show on mobile devices - due to flatpickr. Workaround found https://jsfiddle.net/Sova12309/7bmpy9jc/9/
+### Libraries, Frameworks and Packages
+- Tailwind CSS - used to style elements throughout the site.
+- Flowbite - a Tailwind-based open-source library; used for small number of minor components in the site (radio select, dropdown select)
+- htmx - an open-source lightweight library used to fetch and load content dynamically via AJAX requests. Utilised specifically for fetching new `Flight` data and `Passenger`s edit form.
+- Flatpickr - a JavaScript library which provides the date picker styles and functionality on the Homepage.
 
-            .flatpickr-mobile:before  {
-                content: attr(placeholder);
-                color: #9ca3af;
-                width:100%;
-              }
-              .flatpickr-mobile:focus[value]:not([value=""]):before {
-                display: none;
-              }
-              
-              input[type="hidden"][value]:not([value=""]) + .flatpickr-mobile:before {
-                display: none; 
-              }
+#### Python/Django Packages
+- Gunicorn - provides HTTP server
+- psycopg2 - provides PostgreSQL connection
+- Pillow - used for image processing (Model ImageField)
+- Whitenoise - used for serving static files
+- Coverage - used for testing and analysis
+- Django Markdown Field - adds a markdown-compatible text field to admin panel (for BlogPost model)
+
+### Infrastructural Technologies
+- PostgreSQL (via Digital Ocean) - used for database.
+- Heroku - used for hosting the application.

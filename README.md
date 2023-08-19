@@ -43,24 +43,32 @@ input[type="hidden"][value]:not([value=""]) + .flatpickr-mobile:before {
 This section outlines the various technologies used throughout the project and the purpose each serves.
 
 ### Core Development Technologies
-- Django used as a full-stack framwork for developing the app.
-- JavaScript used for client-side interaction and validation.
-- HTML/CSS + Django Template Language used for building out site pages.
+- [Django](https://www.djangoproject.com/) used as a full-stack framwork for developing the app.
+- [JavaScript](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) used for client-side interaction and validation.
+- [HTML](https://html.spec.whatwg.org/)/[CSS](https://www.w3.org/Style/CSS/Overview.en.html) + [Django Template Language](https://docs.djangoproject.com/en/4.2/ref/templates/language/) used for building out site pages.
 
 ### Libraries, Frameworks and Packages
-- Tailwind CSS - used to style elements throughout the site.
-- Flowbite - a Tailwind-based open-source library; used for small number of minor components in the site (radio select, dropdown select)
-- htmx - an open-source lightweight library used to fetch and load content dynamically via AJAX requests. Utilised specifically for fetching new `Flight` data and `Passenger`s edit form.
-- Flatpickr - a JavaScript library which provides the date picker styles and functionality on the Homepage.
+- [Tailwind CSS](https://tailwindcss.com/) - used to style elements throughout the site.
+- [Flowbite](https://htmx.org/) - a Tailwind-based open-source library; used very sparingly for small number of minor components in the site (radio select, dropdown select)
+- [htmx](https://htmx.org/) - an open-source lightweight library used to fetch and load content dynamically via AJAX requests. Utilised specifically for fetching new `Flight` data and `Passenger`s edit form.
+- [Flatpickr](https://flatpickr.js.org/) - a JavaScript library which provides the date picker styles and functionality on the Homepage.
+- [Payform](https://github.com/jondavidjohn/payform) - a JavaScript library used for formatting the Payment Details form inputs.
 
 #### Python/Django Packages
-- Gunicorn - provides HTTP server
-- psycopg2 - provides PostgreSQL connection
-- Pillow - used for image processing (Model ImageField)
-- Whitenoise - used for serving static files
-- Coverage - used for testing and analysis
-- Django Markdown Field - adds a markdown-compatible text field to admin panel (for BlogPost model)
+- [Gunicorn](https://pypi.org/project/gunicorn/) - provides HTTP server
+- [psycopg2](https://pypi.org/project/psycopg2/) - provides PostgreSQL connection
+- [Pillow](https://pypi.org/project/Pillow/) - used for image processing (Model ImageField)
+- [Whitenoise](https://pypi.org/project/whitenoise/) - used for serving static files
+- [Coverage](https://pypi.org/project/coverage/) - used for testing and analysis
+- [Django Markdown Field](https://pypi.org/project/django-markdownfield/) - adds a markdown-compatible text field to admin panel (for BlogPost model)
 
 ### Infrastructural Technologies
-- PostgreSQL (via Digital Ocean) - used for database.
-- Heroku - used for hosting the application.
+- [PostgreSQL](https://www.postgresql.org/) (via Digital Ocean) - used for database.
+- [Heroku](https://www.heroku.com/) - used for hosting the application.
+
+# Credits
+- [Unsplash](https://unsplash.com/) - used for sourcing Blog photographic images.
+- [ChatGPT](https://openai.com/chatgpt) - used for generating all Blog text content.
+- [Favicon.io](https://favicon.io/) - used to create favicon.
+- [Payform](https://github.com/jondavidjohn/payform) - used for Payment Details input formatting.
+- [Mockaroo](https://www.mockaroo.com/) - used for creating model data.

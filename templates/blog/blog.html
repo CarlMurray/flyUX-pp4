@@ -4,9 +4,17 @@
     Travel Blog
 {% endblock title %}
 {% block content %}
+    <div class="relative flex items-center w-screen overflow-hidden sm:max-h-80">
+        <div class="absolute w-full h-full opacity-50 bg-gradient-to-r from-40% from-primary to-fuchsia-500"></div>
+        <img class="object-cover w-full h-full"
+             src="{% static 'img/blog-cover.webp' %}">
+        <h1 class="container absolute px-5 text-xl font-bold text-center text-white -translate-x-1/2 sm:text-4xl left-1/2">
+            Discover your next adventure
+        </h1>
+    </div>
     <div class="container h-full px-5 mx-auto my-12">
         <div class="py-12">
-            <div class="px-6 m-auto xl:container md:px-12 xl:px-6">
+            <main class="px-6 m-auto xl:container md:px-12 xl:px-6">
                 <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {% for post in posts %}
                         <div class="flex flex-col p-6 transition-all duration-300 ease-in-out bg-white shadow-sm hover:scale-[1.03] hover:shadow-xl sm:p-8 rounded-3xl">
@@ -19,16 +27,15 @@
                             <div class="flex flex-col justify-between flex-grow mt-6">
                                 <div>
                                     <h3 class="text-2xl font-semibold text-text">{{ post.title }}</h3>
-                                    <p class="mt-6 mb-8 text-text">{{ post.content|truncatewords:14 }}</p>
+                                    <p class="mt-6 mb-8 text-text">{{ post.content|safe|truncatewords:14 }}</p>
                                 </div>
-                                
-                                    <span class="text-xl font-semibold text-primary"><a class="p-4 -m-4 underline transition-all duration-500 decoration-transparent hover:decoration-primary underline-offset-0 hover:underline-offset-8" href="{% url 'blog-detail' id=post.id %}">Read more</a></span>
-                                
+                                <span class="text-xl font-semibold text-primary"><a class="p-4 -m-4 underline transition-all duration-500 decoration-transparent hover:decoration-primary underline-offset-0 hover:underline-offset-8"
+   href="{% url 'blog-detail' id=post.id %}">Read more</a></span>
                             </div>
                         </div>
                     {% endfor %}
                 </div>
-            </div>
+            </main>
         </div>
     </div>
 {% endblock content %}

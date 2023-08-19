@@ -5,7 +5,7 @@ from utils.altdates import create_alt_date_range
 from .forms import PassengerForm
 from django.http import HttpResponse
 import time
-from django.core.exceptions import BadRequest
+from django.core.exceptions import BadRequest, PermissionDenied
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -258,6 +258,7 @@ def bookings_detail_view(request, booking_id):
     if request.method == "DELETE":
         booking.delete()
         response = HttpResponse()
+        messages.success(request, 'You cancelled a booking. Keep an eye on your account for your refund!')
         response.headers['HX-Redirect'] = "/bookings/"
         return response
     passengers = Passenger.objects.filter(booking=booking)

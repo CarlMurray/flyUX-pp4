@@ -19,18 +19,21 @@ hamburgerMenu.addEventListener("click", function () {
 // let date_picker_from = flatpickr("#flatpickr-date-outbound", {});
 // let date_picker_to = flatpickr("#flatpickr-date-return", {});
 
-let infoMessage = document.querySelector('#info-message')
 const hideMessage = (message) => {
-  message.classList.add('max-h-screen')
-  message.classList.remove('-translate-y-[500px]')
+  // message.classList.add('max-h-screen')
+  message.classList.remove('-translate-y-[1000px]')
   setTimeout(function(){ 
     message.classList.add('opacity-0')
-    message.classList.remove('max-h-screen')
+//     message.classList.remove('max-h-screen')
     setTimeout(function(){
       message.parentElement.classList.add('hidden')
 
     }, 1000)
- }, 3000);
+ }, 5000);
 }
+
+window.onload = (e)=>{
+  let infoMessage = document.querySelector('#message')
+
 if (infoMessage){
-hideMessage(infoMessage)}
+hideMessage(infoMessage)}}

@@ -3,10 +3,12 @@ let airportDestination = document.querySelector("#destination");
 let airportsListOrigin = document.querySelector("#airports-list-origin");
 let airportsListDestination = document.querySelector("#airports-list-destination");
 let airportListItems = document.querySelectorAll('.airport-list-item')
-
+let dateToday = new Date();
+let dateTodayString = dateToday.getFullYear() + "-" + (dateToday.getMonth() + 1) + "-" + dateToday.getDate()
+let enabledDates = [{from:dateTodayString, to:"2024-07-01"}]
 // REQUIRED FOR FORM VALIDATION - DISABLES READONLY
-let date_picker_from = flatpickr("#flatpickr-date-outbound", {allowInput:true});
-let date_picker_to = flatpickr("#flatpickr-date-return", {allowInput:true});
+let date_picker_from = flatpickr("#flatpickr-date-outbound", {allowInput:true, enable:enabledDates});
+let date_picker_to = flatpickr("#flatpickr-date-return", {allowInput:true, enable:enabledDates});
 
 // DISABLE USER KEY INPUT FOR FORM FIELDS
 let dateFromInput = document.querySelector('#flatpickr-date-outbound-container')
@@ -46,12 +48,19 @@ let form = document.querySelector('form')
 // SEARCH FORM VALIDATION
 const validateForm = function(e){
   e.preventDefault()
+  if (new Date(dateFromInputField.value) > new Date(dateToInputField.value)){
+    dateToInputField.setCustomValidity('Return date cannot be before departure date')
+  }
+  else {
+    dateToInputField.setCustomValidity('')
+  }
   if (airportDestination.value === airportOrigin.value){
     airportDestination.setCustomValidity('Destination cannot be same as origin')
   } 
   else {
     airportDestination.setCustomValidity('')
   }
+
   form.checkValidity()
   form.reportValidity()
   form.requestSubmit()

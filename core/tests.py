@@ -562,6 +562,31 @@ class AltDatesViewTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed("partials/flights.html")
 
+    def test_invalid_date_selection(self):
+        """
+        Tests that same flight results as previous request are returned if invalid dates are selected.
+        """
+        session = self.client.session
+        session['trip_type'] = 'return'
+        session['outbound_date'] = '2023-01-05'
+        session['outbound_previous_date'] = '2023-01-05'
+        session['return_date'] = '2023-01-06'
+        session.save()
+        data = {
+            "leg": "outbound",
+            "origin": "(ORG)",
+            "destination": "(DST)",
+            "date": "2023-01-07",
+        }
+        response = self.client.get("/search_results/alt_dates/", data)
+        flight_results = response.context["flight_results"]
+        self.assertQuerysetEqual(
+            flight_results,
+            Flight.objects.filter(outbound_date="2023-01-05"),
+            ordered=False,
+        )
+        
+        
 
 class AboutPageViewTestCase(TestCase):
     """

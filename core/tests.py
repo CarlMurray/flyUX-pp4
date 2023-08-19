@@ -269,7 +269,15 @@ class SearchResultsViewTestCase(TestCase):
             },
         )
         self.assertDictEqual(
-            dict(self.client.session), {"num_passengers": 5, "trip_type": "return"}
+            dict(self.client.session),
+            {
+                "num_passengers": 5,
+                "trip_type": "return",
+                "outbound_date": "2023-01-10",
+                "outbound_previous_date": "2023-01-10",
+                "return_date": "2023-02-10",
+                "return_previous_date": "2023-02-10",
+            },
         )
 
     def test_oneway_trip(self):
@@ -287,7 +295,13 @@ class SearchResultsViewTestCase(TestCase):
             },
         )
         self.assertDictEqual(
-            dict(self.client.session), {"num_passengers": 5, "trip_type": "oneway"}
+            dict(self.client.session),
+            {
+                "num_passengers": 5,
+                "trip_type": "oneway",
+                "outbound_date": "2023-01-10",
+                "outbound_previous_date": "2023-01-10",
+            },
         )
 
 
@@ -405,6 +419,32 @@ class PassengerDetailsViewTestCase(TestCase):
             },
         )
         self.assertEqual(response.status_code, 302)
+        
+    def test_valid_num_passengers(self):
+        """
+        Tests that passenger_details view returns 200 for valid num_passengers.
+        Tests range of 0-10 and appends result to check_list.
+        Tests that check_list is as expected.
+        """
+        data = {
+            "outbound_flight": "UX00001",
+            "outbound_fare": "Plus",
+            "return_flight": "UX00002",
+            "return_fare": "Plus",
+        }
+        session = self.client.session
+        check_list = []
+        for n in range(0, 10):
+            session['num_passengers'] = n
+            session.save()
+            response = self.client.get("/passenger_details/", data)
+            if response.status_code == 200:
+                check_list.append(True)
+            else:
+                check_list.append(False)
+        print(check_list)
+        self.assertListEqual(check_list, [False, True, True, True, True, True, True, True, True, False])
+            
 
 
 class AltDatesViewTestCase(TestCase):
@@ -417,6 +457,9 @@ class AltDatesViewTestCase(TestCase):
         Initiates Client and test data.
         """
         self.client = Client()
+        session = self.client.session
+        session["trip_type"] = "oneway"
+        session.save()
         Aircraft.objects.create(
             identification="TEST123",
             seats=100,

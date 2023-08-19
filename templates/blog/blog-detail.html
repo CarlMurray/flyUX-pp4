@@ -4,18 +4,43 @@
     {{ post.title }}
 {% endblock title %}
 {% block content %}
-<div class="relative flex items-center w-screen overflow-hidden sm:max-h-80">
-    <div class="absolute w-full h-full opacity-50 bg-gradient-to-r from-40% from-primary to-fuchsia-500"></div>
-    <img class="object-cover w-full h-full" src="{{ post.cover_image.url }}">
-    <h1 class="container absolute px-5 text-4xl font-bold text-center text-white -translate-x-1/2 left-1/2">{{ post.title }}</h1>
-</div>
+    <div class="relative flex items-center w-screen overflow-hidden sm:max-h-80">
+        <div class="absolute w-full h-full opacity-50 bg-gradient-to-r from-40% from-primary to-fuchsia-500"></div>
+        <img class="object-cover w-full h-full" src="{{ post.cover_image.url }}">
+        <h1 class="container absolute px-5 text-4xl font-bold text-center text-white -translate-x-1/2 left-1/2">
+            {{ post.title }}
+        </h1>
+    </div>
     <div class="container h-full px-5 mx-auto">
         <main class="my-16">
             {{ post.content_rendered | safe }}
         </main>
+        <section class="mb-16">
+            <h2>More related content</h2>
+            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {% for post in more_posts %}
+                    <div class="flex flex-col p-6 transition-all duration-300 ease-in-out bg-white shadow-sm hover:scale-[1.03] hover:shadow-xl sm:p-8 rounded-3xl">
+                        <div class="relative overflow-hidden rounded-xl">
+                            <img src="{{ post.cover_image.url }}"
+                                 width=""
+                                 height=""
+                                 class="object-cover object-top w-full h-64 transition duration-500 group-hover:scale-105" />
+                        </div>
+                        <div class="flex flex-col justify-between flex-grow mt-6">
+                            <div>
+                                <h3 class="text-2xl font-semibold text-text">{{ post.title }}</h3>
+                                <p class="mt-6 mb-8 text-text">{{ post.content|truncatewords:14 }}</p>
+                            </div>
+                            <span class="text-xl font-semibold text-primary"><a class="p-4 -m-4 underline transition-all duration-500 decoration-transparent hover:decoration-primary underline-offset-0 hover:underline-offset-8"
+   href="{% url 'blog-detail' id=post.id %}">Read more</a></span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
     </div>
 {% endblock content %}
 {% block scripts %}
-{{block.super}}
-<script src="{% static 'js/blog-post.js' %}"></script>
+    {{ block.super }}
+    <script src="{% static 'js/blog-post.js' %}"></script>
 {% endblock scripts %}

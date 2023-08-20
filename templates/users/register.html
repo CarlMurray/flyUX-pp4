@@ -3,7 +3,7 @@
     Register
 {% endblock title %}
 {% block content %}
-    <div class="flex items-center w-screen m-auto mx-auto bg-gray-100">
+    <div class="flex items-center w-screen py-12 m-auto mx-auto bg-gray-100">
         <div class="container flex justify-center px-5 mx-auto">
             <div class="container flex flex-col justify-center w-full max-w-xl p-6 mx-auto bg-white sm:p-12 rounded-3xl drop-shadow-lg">
                 <!-- SIGN UP HEADER -->
@@ -23,51 +23,85 @@
                                    id="id_email"
                                    placeholder="Email"
                                    aria-label="Email"
-                                   class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                                   class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0"
+                                   {% if form.email.value is not None %}value="{{ form.email.value }}"{% endif %}>
+                            {% if form.email.errors %}
+                                <div class="mt-2">
+                                    {% for error in form.email.errors %}<p class="text-sm text-red-600 ">{{ error }}</p>{% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                         <!-- FIRST NAME FIELD -->
                         <div class="flex flex-col">
                             <input type="text"
                                    name="first_name"
                                    maxlength="50"
-                                   required=""
+                                   pattern="^[^\s].*$"
+                                   required
                                    id="id_first_name"
                                    placeholder="First name"
                                    aria-label="First name"
-                                   class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                                   class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0"
+                                   oninvalid="this.setCustomValidity('First name must contain at least 1 character and can\'t start with a space')"
+                                   oninput="this.setCustomValidity('')"
+                                   {% if form.first_name.value is not None %}value="{{ form.first_name.value }}"{% endif %}>
+                            {% if form.first_name.errors %}
+                                <div class="mt-2">
+                                    {% for error in form.first_name.errors %}<p class="text-sm text-red-600 ">{{ error }}</p>{% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                         <!-- LAST NAME FIELD -->
                         <div class="flex flex-col">
                             <input type="text"
                                    name="last_name"
                                    maxlength="50"
-                                   required=""
+                                   pattern="^[^\s].*$"
+                                   required
                                    id="id_last_name"
                                    placeholder="Last name"
                                    aria-label="Last name"
-                                   class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                                   class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0"
+                                   oninvalid="this.setCustomValidity('Last name must contain at least 1 character and can\'t start with a space')"
+                                   oninput="this.setCustomValidity('')"
+                                   {% if form.last_name.value is not None %}value="{{ form.last_name.value }}"{% endif %}>
+                            {% if form.last_name.errors %}
+                                <div class="mt-2">
+                                    {% for error in form.last_name.errors %}<p class="text-sm text-red-600 ">{{ error }}</p>{% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                         <!-- PASSWORD -->
                         <div class="flex flex-col">
                             <input type="password"
                                    name="password1"
                                    autocomplete="new-password"
-                                   required=""
+                                   required
                                    id="id_password1"
                                    placeholder="Password"
                                    aria-label="Password"
                                    class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                            {% if form.password1.errors %}
+                                <div class="mt-2">
+                                    {% for error in form.password1.errors %}<p class="text-sm text-red-600 ">{{ error }}</p>{% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                         <!-- PASSWORD CONFIRM -->
                         <div class="flex flex-col">
                             <input type="password"
                                    name="password2"
                                    autocomplete="new-password"
-                                   required=""
+                                   required
                                    id="id_password2"
                                    placeholder="Confirm password"
                                    aria-label="Confirm password"
                                    class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                            {% if form.password2.errors %}
+                                <div class="mt-2">
+                                    {% for error in form.password2.errors %}<p class="text-sm text-red-600 ">{{ error }}</p>{% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                         <!-- PASSWORD INSTRUCTIONS -->
                         <div class="p-4">
@@ -86,6 +120,9 @@
                                 class="flex items-center justify-center h-12 px-6 font-bold text-center text-white rounded-full bg-primary py-auto">
                             Create account
                         </button>
+                        <p class="leading-3 text-center text-md">
+                            Already have an account? <a href="{% url 'login' %}" class="font-bold text-primary">Login</a>
+                        </p>
                     </div>
                 </form>
             </div>

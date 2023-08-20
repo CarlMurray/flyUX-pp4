@@ -184,7 +184,7 @@
         {% if messages %}
             {% for message in messages %}
                 <div class="relative" id="message-container">
-                    <div class="container absolute px-5 mx-auto transition-all duration-500 -translate-y-[1000px] -translate-x-1/2 left-1/2"
+                    <div class="container absolute px-5 mx-auto transition-all duration-500 -translate-y-[1000px] -translate-x-1/2 left-1/2 z-50"
                          id="message">
                         <div class="flex items-center p-3 my-3 text-sm border {% if message.tags == 'info' %} text-blue-800  border-blue-800 bg-blue-50 {% elif message.tags == 'success' %}text-green-800 border border-green-800 bg-green-50 {% elif message.tags == 'error' %}text-red-800 border-red-900 bg-red-50  {% endif %}rounded-lg "
                              role="alert">

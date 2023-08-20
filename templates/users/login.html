@@ -3,7 +3,7 @@
     Login
 {% endblock title %}
 {% block content %}
-    <div class="flex items-center w-screen m-auto mx-auto bg-gray-100">
+    <div class="flex items-center w-screen py-12 m-auto mx-auto bg-gray-100">
         <div class="container flex justify-center px-5 mx-auto">
             <div class="container flex flex-col justify-center w-full max-w-xl p-6 mx-auto bg-white sm:p-12 rounded-3xl drop-shadow-lg">
                 <!-- LOGIN HEADER -->
@@ -44,6 +44,9 @@
                                 class="flex items-center justify-center h-12 px-6 font-bold text-center text-white rounded-full bg-primary py-auto">
                             Login
                         </button>
+                        <p class="leading-3 text-center text-md">
+                            Need an account? <a href="{% url 'register' %}" class="font-bold text-primary">Signup</a>
+                        </p>
                     </div>
                 </form>
             </div>

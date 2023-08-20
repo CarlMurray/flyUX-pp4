@@ -34,7 +34,10 @@ def login_view(request):
     request.session["next_url"] = request.GET.urlencode(safe="/?=&")[5:]
     # CHECK IF USER IS ALREADY LOGGED IN AND REDIRECT TO HOME PAGE
     if request.user.is_authenticated:
+        messages.info(request, "Woo! You're already logged in!")
         return redirect("home-page")
+    if request.method == "GET":
+        form = LoginForm()
     # IF SENDING LOGIN FORM
     if request.method == "POST":
         email = request.POST.get("email")
@@ -48,11 +51,12 @@ def login_view(request):
             # IF USER EXISTS, LOG IN AND REDIRECT TO PREV URL
             if user is not None:
                 login(request, user)
+                messages.success(request, "Woo! You have been logged in!")
                 return redirect(request.session["next_url"])
-            # ELSE, RETURN ERROR MESSAGE AND RENDER LOGIN PAGE
-            else:
-                messages.error(request, "Invalid email or password.")
-    return render(request, "users/login.html")
+        # ELSE, RETURN ERROR MESSAGE AND RENDER LOGIN PAGE
+        else:
+            messages.error(request, "Oops! Invalid email or password.")
+    return render(request, "users/login.html", {"form": form})
 
 
 def register_view(request):
@@ -74,17 +78,16 @@ def register_view(request):
     if request.method == "GET":
         form = RegistrationForm()
         return render(request, "users/register.html", {"form": form})
-    # IF SIGNING UP FROM PASSENGER DETAILS PAGE
-    if request.POST.get("next"):
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect("/passenger_details/?" + request.POST.get("next"))
-    # IF SUBMITTING REGISTER FORM FROM REGISTER PAGE
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
+            # IF SIGNING UP FROM PASSENGER DETAILS PAGE
+            if request.POST.get("next"):
+                return redirect("/passenger_details/?" + request.POST.get("next"))
+
+            # IF SUBMITTING REGISTER FORM FROM REGISTER PAGE
             return redirect(request.session["next_url"])
+    messages.error(request, "Invalid information - please check your details and try again.")
+    return render(request, "users/register.html", {"form": form})

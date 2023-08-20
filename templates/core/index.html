@@ -29,7 +29,9 @@
                             <!-- RADIO INPUT CONTAINER -->
                             <div class="flex-auto col-span-4 mb-3">
                                 <fieldset class="flex gap-6">
+                                    <!-- LEGEND FOR ACCESSIBILITY, HIDDEN -->
                                     <legend class="w-[1px] h-[1px] absolute overflow-hidden">Select a trip type</legend>
+                                    <!-- RETURN TRIP RADIO -->
                                     <div class="flex items-center gap-2">
                                         <input type="radio"
                                                name="trip_type"
@@ -40,6 +42,7 @@
                                                checked>
                                         <label for="return_trip_radio" class="text-text">Return</label>
                                     </div>
+                                    <!-- ONEWAY TRIP RADIO -->
                                     <div class="flex items-center gap-2">
                                         <input type="radio"
                                                name="trip_type"
@@ -51,7 +54,9 @@
                                     </div>
                                 </fieldset>
                             </div>
+                            <!-- AIRPORT INPUT CONTAINER -->
                             <div class="grid grid-cols-4 gap-3">
+                                <!-- ORIGIN -->
                                 <div class="relative caret-transparent col-span-full sm:col-span-2 airport-input-container over">
                                     <input type="text"
                                            name="origin"
@@ -60,6 +65,7 @@
                                            class="hover:drop-shadow-md transition-all z-40 relative w-full h-12 px-4 rounded-full border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
                                            aria-label="Select Origin"
                                            required>
+                                    <!-- AIRPORT LIST -->
                                     <div id="airports-list-origin"
                                          class="absolute z-30 hidden w-full p-4 pt-8 overflow-hidden bg-white border-2 top-1/2 rounded-b-3xl drop-shadow-md h-72">
                                         <div class="h-full overflow-auto">
@@ -70,6 +76,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- DESTINATION -->
                                 <div class="relative col-span-full sm:col-span-2">
                                     <input type="text"
                                            name="destination"
@@ -78,6 +85,7 @@
                                            class="hover:drop-shadow-md transition-all caret-transparent z-20 relative w-full h-12 px-4 rounded-full border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
                                            aria-label="Select Destination"
                                            required>
+                                    <!-- AIRPORT LIST -->
                                     <div id="airports-list-destination"
                                          class="absolute z-10 hidden w-full p-4 pt-8 overflow-hidden bg-white border-2 top-1/2 rounded-b-3xl drop-shadow-md h-72">
                                         <div class="h-full overflow-auto">
@@ -88,31 +96,31 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="flatpickr-date-outbound-container" class="col-span-4 sm:col-span-2 md:col-span-1">
-                                <!-- OUTBOUND DATE-->
-                                <input type="text"
-                                       name="outbound_date"
-                                       id="flatpickr-date-outbound"
-                                       class="hover:drop-shadow-md w-full transition-all caret-transparent flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
-                                       placeholder="Outbound Date"
-                                       data-id="datetime"
-                                       aria-label="Outbound date"
-                                       required></div>
+                                <div id="flatpickr-date-outbound-container"
+                                     class="col-span-4 sm:col-span-2 md:col-span-1">
+                                    <!-- OUTBOUND DATE-->
+                                    <input type="text"
+                                           name="outbound_date"
+                                           id="flatpickr-date-outbound"
+                                           class="hover:drop-shadow-md w-full transition-all caret-transparent flatpickr flatpickr-input active col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
+                                           placeholder="Outbound Date"
+                                           data-id="datetime"
+                                           aria-label="Outbound date"
+                                           required>
+                                </div>
                                 <!-- RETURN DATE -->
-                                <div id="flatpickr-date-return-container" class="col-span-4 sm:col-span-2 md:col-span-1">
-                                <input type="text"
-                                       name="return_date"
-                                       id="flatpickr-date-return"
-                                       class="hover:drop-shadow-md w-full transition-all caret-transparent flatpickr flatpickr-input active  h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
-                                       placeholder="Return Date"
-                                       data-id="datetime"
-                                       aria-label="Return date"
-                                       required></div>
-                                {% comment %} <input type="text"
-        name="passengers"
-        id=""
-        placeholder="Passengers"
-        class="col-span-4 sm:col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"> {% endcomment %}
+                                <div id="flatpickr-date-return-container"
+                                     class="col-span-4 sm:col-span-2 md:col-span-1">
+                                    <input type="text"
+                                           name="return_date"
+                                           id="flatpickr-date-return"
+                                           class="hover:drop-shadow-md w-full transition-all caret-transparent flatpickr flatpickr-input active  h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
+                                           placeholder="Return Date"
+                                           data-id="datetime"
+                                           aria-label="Return date"
+                                           required>
+                                </div>
+                                <!-- PASSENGERS -->
                                 <select name="passengers"
                                         id=""
                                         class="hover:drop-shadow-md transition-all disabled: text-gray-400 col-span-4 sm:col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
@@ -128,6 +136,7 @@
                                     <option value="7">7 Passengers</option>
                                     <option value="8">8 Passengers</option>
                                 </select>
+                                <!-- SUBMIT -->
                                 <input type="submit"
                                        value="Search Flights"
                                        name="submit"

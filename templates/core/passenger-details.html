@@ -4,98 +4,100 @@
     Passenger Details
 {% endblock title %}
 {% block content %}
-        {% if not request.user.is_authenticated %}
-            <dialog class="fixed flex flex-col px-6 py-8 bg-white backdrop:backdrop-blur-sm rounded-3xl">
-                    <!-- LOGIN HEADER -->
-                    <h3 class="mx-auto mb-6 text-3xl font-bold text-primary">Create account</h3>
-                    <!-- FORM -->
-                    <form method='post'
-                          action="{% url 'register' %}"
-                          class="flex justify-center w-full mx-auto">
-                        {% csrf_token %}
-                        <!-- FORM FIELDS CONTAINER -->
-                        <div class="flex flex-col w-full gap-4 sm:w-3/4">
-                            <!-- FOR REDIRECT AFTER LOGIN -->
-                            <input type="hidden" name="next" value="{{ request.GET.urlencode }}">
-                            <!-- EMAIL FIELD -->
-                            <div class="flex flex-col">
-                                <input type="email"
-                                       name="email"
-                                       maxlength="254"
-                                       autofocus=""
-                                       required
-                                       id="id_email"
-                                       placeholder="Email"
-                                       aria-label="Email address"
-                                       class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
-                            </div>
-                            <!-- FIRST NAME FIELD -->
-                            <div class="flex flex-col">
-                                <input type="text"
-                                       name="first_name"
-                                       maxlength="50"
-                                       required=""
-                                       id="id_first_name"
-                                       placeholder="First name"
-                                       aria-label="First name"
-                                       class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
-                            </div>
-                            <!-- LAST NAME FIELD -->
-                            <div class="flex flex-col">
-                                <input type="text"
-                                       name="last_name"
-                                       maxlength="50"
-                                       required=""
-                                       id="id_last_name"
-                                       placeholder="Last name"
-                                       aria-label="Last name"
-                                       class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
-                            </div>
-                            <!-- PASSWORD -->
-                            <div class="flex flex-col">
-                                <input type="password"
-                                       name="password1"
-                                       autocomplete="new-password"
-                                       required=""
-                                       id="id_password1"
-                                       placeholder="Password"
-                                       aria-label="Password"
-                                       class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
-                            </div>
-                            <!-- PASSWORD CONFIRM -->
-                            <div class="flex flex-col">
-                                <input type="password"
-                                       name="password2"
-                                       autocomplete="new-password"
-                                       required=""
-                                       id="id_password2"
-                                       placeholder="Confirm password"
-                                       aria-label="Confirm password"
-                                       class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
-                            </div>
-                            <div class="p-4">
-                                <span class="text-xs text-gray-700">
-                                    <ul class="list-disc">
-                                        <li>Your password can’t be too similar to your other personal information.</li>
-                                        <li>Your password must contain at least 8 characters.</li>
-                                        <li>Your password can’t be a commonly used password.</li>
-                                        <li>Your password can’t be entirely numeric.</li>
-                                    </ul>
-                                </span>
-                            </div>
-                            <button type="submit"
-                                    aria-label="Submit"
-                                    class="flex items-center justify-center h-12 px-6 font-bold text-center text-white rounded-full bg-primary py-auto">
-                                Create account
-                            </button>
-                            <p class="leading-3 text-center text-md">
-                                Already have an account? <a href="{% url 'login' %}?next={{ request.get_full_path }}"
+    <!-- IF NOT LOGGED IN, SIGNUP DIALOG -->
+    {% if not request.user.is_authenticated %}
+        <dialog class="fixed flex flex-col px-6 py-8 bg-white backdrop:backdrop-blur-sm rounded-3xl">
+            <!-- LOGIN HEADER -->
+            <h3 class="mx-auto mb-6 text-3xl font-bold text-primary">Create account</h3>
+            <!-- FORM -->
+            <form method='post'
+                  action="{% url 'register' %}"
+                  class="flex justify-center w-full mx-auto">
+                {% csrf_token %}
+                <!-- FORM FIELDS CONTAINER -->
+                <div class="flex flex-col w-full gap-4 sm:w-3/4">
+                    <!-- FOR REDIRECT AFTER LOGIN -->
+                    <input type="hidden" name="next" value="{{ request.GET.urlencode }}">
+                    <!-- EMAIL FIELD -->
+                    <div class="flex flex-col">
+                        <input type="email"
+                               name="email"
+                               maxlength="254"
+                               autofocus=""
+                               required
+                               id="id_email"
+                               placeholder="Email"
+                               aria-label="Email address"
+                               class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                    </div>
+                    <!-- FIRST NAME FIELD -->
+                    <div class="flex flex-col">
+                        <input type="text"
+                               name="first_name"
+                               maxlength="50"
+                               required=""
+                               id="id_first_name"
+                               placeholder="First name"
+                               aria-label="First name"
+                               class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                    </div>
+                    <!-- LAST NAME FIELD -->
+                    <div class="flex flex-col">
+                        <input type="text"
+                               name="last_name"
+                               maxlength="50"
+                               required=""
+                               id="id_last_name"
+                               placeholder="Last name"
+                               aria-label="Last name"
+                               class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                    </div>
+                    <!-- PASSWORD -->
+                    <div class="flex flex-col">
+                        <input type="password"
+                               name="password1"
+                               autocomplete="new-password"
+                               required=""
+                               id="id_password1"
+                               placeholder="Password"
+                               aria-label="Password"
+                               class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                    </div>
+                    <!-- PASSWORD CONFIRM -->
+                    <div class="flex flex-col">
+                        <input type="password"
+                               name="password2"
+                               autocomplete="new-password"
+                               required=""
+                               id="id_password2"
+                               placeholder="Confirm password"
+                               aria-label="Confirm password"
+                               class="h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0">
+                    </div>
+                    <div class="p-4">
+                        <span class="text-xs text-gray-700">
+                            <ul class="list-disc">
+                                <li>Your password can’t be too similar to your other personal information.</li>
+                                <li>Your password must contain at least 8 characters.</li>
+                                <li>Your password can’t be a commonly used password.</li>
+                                <li>Your password can’t be entirely numeric.</li>
+                            </ul>
+                        </span>
+                    </div>
+                    <button type="submit"
+                            aria-label="Submit"
+                            class="flex items-center justify-center h-12 px-6 font-bold text-center text-white rounded-full bg-primary py-auto">
+                        Create account
+                    </button>
+                    <p class="leading-3 text-center text-md">
+                        Already have an account? <a href="{% url 'login' %}?next={{ request.get_full_path }}"
     class="font-bold text-primary">Login</a>
-                            </p>
-                        </div>
-                    </form>
-            </dialog>
-            <script>
+                    </p>
+                </div>
+            </form>
+        </dialog>
+        <!-- SCRIPT FOR MODAL CONTROL -->
+        <script>
                 let modal = document.querySelector('dialog')
                 modal.showModal()
                 <!-- PREVENTS CLOSE BY ESC KEY -->
@@ -103,16 +105,18 @@
                     event.preventDefault();
                 });
 
-            </script>
-        {% endif %}
-        <div class="container relative flex-1 flex-grow px-5 mx-auto">
-
+        </script>
+    {% endif %}
+    <!-- MAIN CONTENT -->
+    <div class="container relative flex-1 flex-grow px-5 mx-auto">
         <h1 class="mt-8 text-3xl font-bold text-text">Passenger Details</h1>
         <form action="" method="post">
             {% csrf_token %}
+            <!-- HIDDEN INPUT TO STORE NUM PASSENGERS -->
             <input type="hidden"
                    name="number-of-passengers"
                    value="{{ num_passengers }}">
+            <!-- LOOP THROUGH PASSENGERS -->
             {% for passenger in passengers %}
                 <div class="w-full p-8 mt-8 bg-white shadow-lg rounded-3xl">
                     <h2 class="text-2xl font-bold text-text">Passenger {{ passenger }}</h2>
@@ -135,6 +139,7 @@
                     </div>
                 </div>
             {% endfor %}
+            <!-- TRIP CONTACT -->
             <div class="w-full p-8 mt-8 bg-white shadow-lg rounded-3xl ">
                 <h2 class="text-2xl font-bold text-text">Trip Contact</h2>
                 <p class="text-text">We need your email address to keep you updated about your trip.</p>
@@ -154,7 +159,7 @@
                            required>
                 </div>
             </div>
-            {% comment %} <button type="submit">submit</button> {% endcomment %}
+            <!-- CTA -->
             <div class="flex justify-end my-8">
                 <button id="submit"
                         type="submit"

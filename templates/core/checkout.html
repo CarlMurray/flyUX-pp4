@@ -7,8 +7,10 @@
     <div class="container h-full px-5 mx-auto mt-12">
         <div class="grid grid-cols-1 gap-10 lg:grid-cols-2">
             <div class="col-span-1 p-6 border-2 rounded-3xl">
+                <!-- ORDER SUMMARY -->
                 <h1 class="text-3xl font-light text-text">Order Summary</h1>
                 <hr class="my-4">
+                <!-- FLIGHT DETAILS -->
                 {% for flight, fare, price in flights %}
                     <div>
                         <h2 class="text-lg font-bold text-text">{{ flight.origin }} - {{ flight.destination }}</h2>
@@ -25,12 +27,15 @@
                     </div>
                     <hr class="my-4">
                 {% endfor %}
+                <!-- TOTAL PRICE -->
                 <h3 class="text-xl font-bold text-primary">Total: €{{ total_price }}</h3>
             </div>
+            <!-- PAYMENT DETAILS FORM -->
             <div class="col-span-1 p-6 bg-white shadow-lg rounded-3xl">
                 <h2 class="mb-4 text-3xl font-bold text-primary ">Payment details</h2>
                 <form action="" method="post" class="grid grid-cols-2 gap-4">
                     {% csrf_token %}
+                    <!-- CARD NAME -->
                     <input type="text"
                            name=""
                            id="card-name"
@@ -39,6 +44,7 @@
                            minlength="1"
                            aria-label="Name on card"
                            required>
+                    <!-- CARD NUMBER -->
                     <input type="text"
                            name=""
                            id="card-number"
@@ -48,6 +54,7 @@
                            maxlength="20"
                            aria-label="Card number"
                            required>
+                    <!-- CARD CVC -->
                     <input type="text"
                            name=""
                            id="card-cvc"
@@ -57,6 +64,7 @@
                            maxlength="3"
                            aria-label="Card CVC security code"
                            required>
+                    <!-- CARD EXPIRY -->
                     <input type="text"
                            name=""
                            id="card-expiry"
@@ -66,6 +74,7 @@
                            maxlength="9"
                            aria-label="Card expiry"
                            required>
+                    <!-- PAY BUTTON -->
                     <button type="submit"
                             name=""
                             id=""

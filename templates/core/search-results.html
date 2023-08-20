@@ -4,11 +4,10 @@
     Search Flights
 {% endblock title %}
 {% block content %}
-    <!-- HIDDEN FORM FOR ALT DATE SELECTION -->
     <div class="">
         <div class="container px-5 mx-auto">
             <div>
-                <!-- PAGE HEADER -->
+                <!-- OUTBOUND FLIGHTS RESULTS  -->
                 <div class="mt-4">
                     <h2 class="text-lg font-light text-text sm:text-xl">
                         Select <strong class="font-bold text-primary">outbound</strong> flight
@@ -17,17 +16,12 @@
                 <div class="mb-4">
                     <h3 class="text-sm font-bold text-text sm:text-2xl">{{ origin }} - {{ destination }}</h3>
                 </div>
-                {% comment %} <div class="w-full h-20 border-2 border-gray-200 rounded-full shadow-inner">
-                    <div class="text-3xl text-center">{{ outbound_date|date:'j M' }}</div>
-                    <div class="text-3xl text-center">€{{ lowest_price|floatformat:'0' }}</div>
-                </div> {% endcomment %}
             </div>
-            <!-- SHOW AVAILABLE FLIGHTS -->
+            <!-- SHOW AVAILABLE OUTBOUND FLIGHTS -->
             {% include 'partials/flights.html' with date=outbound_date leg='outbound' %}
+            <!-- IF TRIP TYPE IS RETURN -->
             {% if trip_type == 'return' %}
-                <!---------------------------->
                 <!-- RETURN FLIGHTS RESULTS -->
-                <!---------------------------->
                 <hr class="my-12">
                 <!-- PAGE HEADER -->
                 <div class="mt-4">
@@ -38,13 +32,16 @@
                 <div class="mb-4">
                     <h3 class="text-sm font-bold text-text sm:text-2xl">{{ destination }} - {{ origin }}</h3>
                 </div>
+                <!-- SHOW AVAILABLE RETURN FLIGHTS -->
                 {% include 'partials/flights.html' with date=return_date slider_date_list=slider_date_list_return flight_results=flight_results_return leg='return' origin=destination destination=origin %}
             {% endif %}
+            <!-- HIDDEN FORM TO SUBMIT SELECTED FLIGHTS -->
             <form id="selected-flights" action="" method="get">
                 <input type="hidden" name="trip_type" value="{{ trip_type }}">
                 <input type="hidden" name="selected-outbound-flight" value="">
                 <input type="hidden" name="selected-return-flight" value="">
             </form>
+            <!-- CONFIRM FLIGHTS BUTTON -->
             <div class="flex justify-end my-8">
                 <button id="confirm-flights-button"
                         class="px-6 py-4 font-bold text-white rounded-full bg-primary disabled:bg-gray-500"

@@ -524,6 +524,7 @@ class AltDatesViewTestCase(TestCase):
             Flight.objects.filter(flight_number="UX00001"),
             ordered=False,
         )
+
     def test_flight_results(self):
         """
         Tests that Flight results for the chosen alt_date are as intended.
@@ -603,7 +604,7 @@ class AltDatesViewTestCase(TestCase):
             Flight.objects.filter(outbound_date="2023-01-05"),
             ordered=False,
         )
-        
+
     def test_invalid_date_selection_return(self):
         """
         Tests that same flight results as previous request are returned if invalid dates are selected.
@@ -823,7 +824,9 @@ class OrderConfirmationViewTestCase(TestCase):
         Tests that order confirmation view context contains correct booking.
         """
         self.client.force_login(user=User.objects.get(first_name="test"))
-        booking = Booking.objects.get(outbound_flight=Flight.objects.get(flight_number="UX00001"))
+        booking = Booking.objects.get(
+            outbound_flight=Flight.objects.get(flight_number="UX00001")
+        )
         response = self.client.get(f"/order_confirmation/{booking.id}")
         self.assertEqual(response.context["booking"], booking)
 
@@ -837,7 +840,9 @@ class OrderConfirmationViewTestCase(TestCase):
             last_name="test",
             password="12345",
         )
-        booking = Booking.objects.get(outbound_flight=Flight.objects.get(flight_number="UX00001"))
+        booking = Booking.objects.get(
+            outbound_flight=Flight.objects.get(flight_number="UX00001")
+        )
         self.client.force_login(user=User.objects.get(first_name="unauth"))
         response = self.client.get(f"/order_confirmation/{booking.id}")
         self.assertEqual(response.status_code, 403)
@@ -897,36 +902,38 @@ class BookingsViewTestCase(TestCase):
             last_name="test",
             password="12345",
         )
-        
+
         User.objects.create_user(
             email="testuser2@test.com",
             first_name="test2",
             last_name="test2",
             password="12345",
         )
-        
+
         Booking.objects.create(
             outbound_flight=Flight.objects.get(flight_number="UX00001"),
             return_flight=Flight.objects.get(flight_number="UX00002"),
             customer=User.objects.get(first_name="test"),
         )
-        
+
         Booking.objects.create(
             outbound_flight=Flight.objects.get(flight_number="UX00001"),
             return_flight=Flight.objects.get(flight_number="UX00002"),
             customer=User.objects.get(first_name="test2"),
         )
-    
+
     def test_bookings_view_context(self):
         """
         Tests that only user's bookings are returned.
         """
-        self.client.force_login(user=User.objects.get(first_name='test'))
-        response = self.client.get('/bookings/')
-        print(response.context)
-        self.assertQuerysetEqual(response.context['bookings'], Booking.objects.filter(customer=response.context['user']))
-        
-        
+        self.client.force_login(user=User.objects.get(first_name="test"))
+        response = self.client.get("/bookings/")
+        self.assertQuerysetEqual(
+            response.context["bookings"],
+            Booking.objects.filter(customer=response.context["user"]),
+        )
+
+
 class BookingsDetailViewTestCase(TestCase):
     def setUp(self):
         self.client = Client()
@@ -981,20 +988,20 @@ class BookingsDetailViewTestCase(TestCase):
             last_name="test",
             password="12345",
         )
-        
+
         User.objects.create_user(
             email="testuser2@test.com",
             first_name="test2",
             last_name="test2",
             password="12345",
         )
-        
+
         Booking.objects.create(
             outbound_flight=Flight.objects.get(flight_number="UX00001"),
             return_flight=Flight.objects.get(flight_number="UX00002"),
             customer=User.objects.get(first_name="test"),
         )
-        
+
         Booking.objects.create(
             outbound_flight=Flight.objects.get(flight_number="UX00001"),
             return_flight=Flight.objects.get(flight_number="UX00002"),
@@ -1005,32 +1012,35 @@ class BookingsDetailViewTestCase(TestCase):
         """
         Tests that an unauthorised user cannot access the bookings detail page.
         """
-        self.client.force_login(User.objects.get(first_name='test'))
-        booking = Booking.objects.get(customer=User.objects.get(first_name='test2'))
-        response = self.client.get(f'/bookings/detail/{booking.id}')
+        self.client.force_login(User.objects.get(first_name="test"))
+        booking = Booking.objects.get(customer=User.objects.get(first_name="test2"))
+        response = self.client.get(f"/bookings/detail/{booking.id}")
         self.assertEqual(response.status_code, 403)
-        
+
     def test_cancel_booking(self):
         """
         Tests that a booking can be cancelled and deleted from database.
         """
-        self.client.force_login(User.objects.get(first_name='test'))
-        booking = Booking.objects.get(customer=User.objects.get(first_name='test'))
-        response = self.client.delete(f'/bookings/detail/{booking.id}')
-        self.assertQuerysetEqual(Booking.objects.filter(customer=User.objects.get(first_name='test')), [])
+        self.client.force_login(User.objects.get(first_name="test"))
+        booking = Booking.objects.get(customer=User.objects.get(first_name="test"))
+        response = self.client.delete(f"/bookings/detail/{booking.id}")
+        self.assertQuerysetEqual(
+            Booking.objects.filter(customer=User.objects.get(first_name="test")), []
+        )
         self.assertEqual(response.status_code, 200)
-        
+
     def test_authorised_user(self):
         """
         Tests that an authorised user can access the bookings detail page.
         """
-        self.client.force_login(User.objects.get(first_name='test'))
-        booking = Booking.objects.get(customer=User.objects.get(first_name='test'))
-        response = self.client.get(f'/bookings/detail/{booking.id}')
+        self.client.force_login(User.objects.get(first_name="test"))
+        booking = Booking.objects.get(customer=User.objects.get(first_name="test"))
+        response = self.client.get(f"/bookings/detail/{booking.id}")
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'core/bookings-detail.html')
-        self.assertEqual(response.context['booking'], booking)
-        
+        self.assertTemplateUsed(response, "core/bookings-detail.html")
+        self.assertEqual(response.context["booking"], booking)
+
+
 class BookingsEditViewTestCase(TestCase):
     def setUp(self):
         self.client = Client()
@@ -1085,64 +1095,64 @@ class BookingsEditViewTestCase(TestCase):
             last_name="test",
             password="12345",
         )
-        
+
         User.objects.create_user(
             email="testuser2@test.com",
             first_name="test2",
             last_name="test2",
             password="12345",
         )
-        
+
         Booking.objects.create(
             outbound_flight=Flight.objects.get(flight_number="UX00001"),
             return_flight=Flight.objects.get(flight_number="UX00002"),
             customer=User.objects.get(first_name="test"),
         )
-        
+
         Booking.objects.create(
             outbound_flight=Flight.objects.get(flight_number="UX00001"),
             return_flight=Flight.objects.get(flight_number="UX00002"),
             customer=User.objects.get(first_name="test2"),
         )
-        
+
         Passenger.objects.create(
-            booking = Booking.objects.get(customer=User.objects.get(first_name='test')),
+            booking=Booking.objects.get(customer=User.objects.get(first_name="test")),
             first="test_first",
             last="test_last",
         )
-        
+
     def test_unauthorised_user(self):
         """
         Tests that an unauthorised user cannot access the bookings edit page.
         """
-        self.client.force_login(User.objects.get(first_name='test'))
-        booking = Booking.objects.get(customer=User.objects.get(first_name='test2'))
-        response = self.client.get(f'/bookings/detail/{booking.id}')
+        self.client.force_login(User.objects.get(first_name="test"))
+        booking = Booking.objects.get(customer=User.objects.get(first_name="test2"))
+        response = self.client.get(f"/bookings/detail/{booking.id}")
         self.assertEqual(response.status_code, 403)
-    
+
     def test_authorised_user(self):
         """
         Tests that an authorised user can access the bookings edit page.
         """
-        self.client.force_login(User.objects.get(first_name='test'))
-        booking = Booking.objects.get(customer=User.objects.get(first_name='test'))
-        response = self.client.get(f'/bookings/detail/{booking.id}')
+        self.client.force_login(User.objects.get(first_name="test"))
+        booking = Booking.objects.get(customer=User.objects.get(first_name="test"))
+        response = self.client.get(f"/bookings/detail/{booking.id}")
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'core/bookings-detail.html')
-        self.assertEqual(response.context['booking'], booking)
-        
+        self.assertTemplateUsed(response, "core/bookings-detail.html")
+        self.assertEqual(response.context["booking"], booking)
+
     def test_edit_booking(self):
         """
         Tests that a booking can be edited with updated passenger names.
         """
-        self.client.force_login(User.objects.get(first_name='test'))
-        booking = Booking.objects.get(customer=User.objects.get(first_name='test'))
+        self.client.force_login(User.objects.get(first_name="test"))
+        booking = Booking.objects.get(customer=User.objects.get(first_name="test"))
         passenger = Passenger.objects.get(booking=booking)
         data = {
             f"first-{passenger.id}": "updated_first",
             f"last-{passenger.id}": "updated_last",
         }
-        response = self.client.post(f'/bookings/detail/edit/{booking.id}', data)
+        response = self.client.post(f"/bookings/detail/edit/{booking.id}", data)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['passengers'][0].first, 'updated_first')
-        self.assertEqual(response.context['passengers'][0].last, 'updated_last')
+        self.assertEqual(response.context["passengers"][0].first, "updated_first")
+        self.assertEqual(response.context["passengers"][0].last, "updated_last")

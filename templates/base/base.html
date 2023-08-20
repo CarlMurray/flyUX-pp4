@@ -54,7 +54,7 @@
         <link rel="stylesheet"
               href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css" />
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-        <!-- CUSTOM HTMX LOADING INDICATOR STYLES-->
+        <!-- CUSTOM HTMX LOADING INDICATOR AND FLATPICKR STYLES-->
         <style>
             .my-indicator{
                 display:none;
@@ -111,11 +111,13 @@
                 <!-- SIGNUP LOGIN CTAs-->
                 <div class="hidden md:flex shrink-0">
                     <div class="justify-end hidden sm:flex">
+                        <!-- IF LOGGED IN SHOW USER NAME -->
                         {% if user.is_authenticated %}
                             <div class="flex">
                                 <a href="#" class="text-white border-r-[1px] border-r-white pr-4">Welcome, <strong>{{ user.first_name }}</strong></a>
                                 <a href="{% url 'logout' %}" class="pl-4 text-white">Logout</a>
                             </div>
+                            <!-- IF NOT LOGGED IN ADD ?next URL -->
                         {% elif request.path == '/login/' or request.path == '/register/' %}
                             <a href="{% url 'register' %}?next={{ request.path }}"
                                class="flex items-center h-10 px-6 text-white rounded-full py-auto">Signup</a>

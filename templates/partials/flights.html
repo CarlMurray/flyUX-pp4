@@ -1,27 +1,35 @@
 {% load static %}
+<!-- CONTAINER FOR EACH LEG  -->
 <div id="{{ leg }}-flights" data-leg="{{ leg }}">
+    <!-- MESSAGES -->
     {% if messages %}
         {% for message in messages %}
-        <div class="flex items-center p-6 mb-4 text-lg text-blue-800 border border-blue-800 rounded-lg bg-blue-50" role="alert">
-            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-            </svg>
-            <span class="sr-only">Info</span>
-            <div>
-              <span class="font-medium">Oops!</span> {{message}}
+            <div class="flex items-center p-6 mb-4 text-lg text-blue-800 border border-blue-800 rounded-lg bg-blue-50"
+                 role="alert">
+                <svg class="flex-shrink-0 inline w-4 h-4 mr-3"
+                     aria-hidden="true"
+                     xmlns="http://www.w3.org/2000/svg"
+                     fill="currentColor"
+                     viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Info</span>
+                <div>
+                    <span class="font-medium">Oops!</span> {{ message }}
+                </div>
             </div>
-          </div>
         {% endfor %}
     {% endif %}
     <!-- ALT DATE SELECTOR -->
     <div class="grid items-center w-full h-20 grid-cols-5 grid-rows-1 border-2 border-gray-200 rounded-full shadow-inner">
         {% for dateitem in slider_date_list %}
+            <!-- ADD UNIQUE STYLES AN NO CLICK FOR CURRENT DATE SELECTION -->
             {% if dateitem == date %}
                 <div class="flex items-center justify-center h-full bg-white rounded-full shadow-md">
                     <div class="text-lg font-bold text-center sm:text-2xl text-primary altDate"
                          id="{{ date|date:'Y-m-d' }}">{{ date|date:'j M' }}</div>
-                    {% comment %} <div class="text-xl text-center">€{{ lowest_price|floatformat:'0' }}</div> {% endcomment %}
                 </div>
+                <!-- ADD CLICK FOR OTHER DATES -->
             {% else %}
                 <div class="cursor-pointer"
                      hx-trigger="click"
@@ -31,12 +39,11 @@
                      hx-target="#{{ leg }}-flights">
                     <div class="py-4 font-semibold text-center text-md sm:text-lg altDate"
                          id="{{ dateitem|date:'Y-m-d' }}">{{ dateitem|date:'j M' }}</div>
-                    {% comment %} <div class="text-3xl text-center">€{{ lowest_price|floatformat:'0' }}</div> {% endcomment %}
                 </div>
             {% endif %}
         {% endfor %}
     </div>
-    {% comment %} {% for dateitem in slider_date_list %}<div>{{dateitem}}</div>{% endfor %} <div>DATE: {{date}}</div> {% endcomment %}
+    <!-- LOADING INDICATOR -->
     <div id="" class="">
         <div role="status"
              id="indicator-{{ leg }}"
@@ -51,12 +58,14 @@
             </svg>
             <span class="sr-only">Loading...</span>
         </div>
+        <!-- IF THERE'S NO FLIGHTS ON SELECTED DATE -->
         {% if not flight_results %}
             <div class="flex flex-col justify-center text-center border-[1px] border-gray-300 rounded-3xl px-8 py-16 mt-6">
                 <p class="text-2xl font-bold text-primary">Oops!</p>
                 <p class="text-lg font-semibold text-text">Looks like there's no flights on that date. Please pick another date.</p>
             </div>
         {% endif %}
+        <!-- IF THERE'S FLIGHTS ON SELECTED DATE -->
         {% for flight in flight_results %}
             <!-- SHOW AVAILABLE FLIGHTS -->
             <div class="flight-card-container flex mt-6 rounded-t-[4.5rem] rounded-b-[4.5rem] flex-wrap flex-col bg-white transition-all duration-500">
@@ -68,7 +77,6 @@
                             <div class="text-xl font-bold md:text-4xl text-text">{{ flight.dep_time|time:'H:i' }}</div>
                         </div>
                         <div class="mx-8">
-                            {% comment %} <div class="text-sm font-light text-center md:text-md text-text">[Duration]</div> {% endcomment %}
                             <img src="{% static 'img/flight-duration-illo.svg' %}"
                                  alt=""
                                  width="227px"
@@ -80,7 +88,6 @@
                             <div class="text-xl font-bold md:text-4xl text-text">{{ flight.arr_time|time:'H:i' }}</div>
                         </div>
                     </div>
-                    {% comment %} <div>{{ flight.outbound_date }}</div> {% endcomment %}
                     <div class="pb-4 text-sm text-center sm:pb-0 sm:pr-4 text-text">
                         Flight no.
                         <br class="hidden sm:block">

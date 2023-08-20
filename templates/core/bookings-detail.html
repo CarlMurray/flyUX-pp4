@@ -8,10 +8,12 @@
          class="container relative items-center h-full px-5 mx-auto my-12"
          hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
         <div class="flex items-center justify-between">
+            <!-- PAGE HEADER -->
             <div>
                 <h1 class="text-2xl font-bold sm:text-3xl text-primary">Booking</h1>
                 <h2 class="font-bold sm:text-xl text-md text-text">Reference: {{ booking.get_shorthand }}</h2>
             </div>
+            <!-- CANCEL BOOKING BUTTON -->
             <button hx-swap=""
                     hx-confirm=""
                     hx-delete="/bookings/detail/{{ booking.id }}"
@@ -20,6 +22,8 @@
                 Cancel Booking
             </button>
         </div>
+        <!-- BOOKING DETAILS -->
+        <!--OUTBOUND FLIGHT -->
         <hr class="my-2">
         <div class="mb-4">
             <h3 class="mb-2 text-xl font-bold text-primary">Outbound</h3>
@@ -34,6 +38,7 @@
                 </div>
             </div>
         </div>
+        <!-- RETURN FLIGHT -->
         {% if booking.return_flight %}
             <div class="mb-4">
                 <h3 class="mb-2 text-xl font-bold text-primary">Return</h3>
@@ -49,6 +54,7 @@
                 </div>
             </div>
         {% endif %}
+        <!-- PASSENGERS -->
         <div hx-target="this" hx-swap="outerHTML" class="max-w-[400px]">
             <div class="flex items-center justify-between">
                 <h3 class="text-xl font-bold text-primary">Passengers</h3>

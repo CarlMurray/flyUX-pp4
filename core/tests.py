@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from .models import *
 from datetime import datetime
 from .views import *
+from users.models import *
 
 
 class AiportTestCase(TestCase):
@@ -419,7 +420,7 @@ class PassengerDetailsViewTestCase(TestCase):
             },
         )
         self.assertEqual(response.status_code, 302)
-        
+
     def test_valid_num_passengers(self):
         """
         Tests that passenger_details view returns 200 for valid num_passengers.
@@ -435,16 +436,16 @@ class PassengerDetailsViewTestCase(TestCase):
         session = self.client.session
         check_list = []
         for n in range(0, 10):
-            session['num_passengers'] = n
+            session["num_passengers"] = n
             session.save()
             response = self.client.get("/passenger_details/", data)
             if response.status_code == 200:
                 check_list.append(True)
             else:
                 check_list.append(False)
-        print(check_list)
-        self.assertListEqual(check_list, [False, True, True, True, True, True, True, True, True, False])
-            
+        self.assertListEqual(
+            check_list, [False, True, True, True, True, True, True, True, True, False]
+        )
 
 
 class AltDatesViewTestCase(TestCase):
@@ -567,10 +568,10 @@ class AltDatesViewTestCase(TestCase):
         Tests that same flight results as previous request are returned if invalid dates are selected.
         """
         session = self.client.session
-        session['trip_type'] = 'return'
-        session['outbound_date'] = '2023-01-05'
-        session['outbound_previous_date'] = '2023-01-05'
-        session['return_date'] = '2023-01-06'
+        session["trip_type"] = "return"
+        session["outbound_date"] = "2023-01-05"
+        session["outbound_previous_date"] = "2023-01-05"
+        session["return_date"] = "2023-01-06"
         session.save()
         data = {
             "leg": "outbound",
@@ -585,8 +586,7 @@ class AltDatesViewTestCase(TestCase):
             Flight.objects.filter(outbound_date="2023-01-05"),
             ordered=False,
         )
-        
-        
+
 
 class AboutPageViewTestCase(TestCase):
     """
@@ -598,3 +598,204 @@ class AboutPageViewTestCase(TestCase):
         response = self.client.get("/about/")
         self.assertTemplateUsed("base/about.html")
         self.assertEqual(response.status_code, 200)
+
+
+class CheckoutViewTestCase(TestCase):
+    """
+    Tests template and status code for checkout view.
+    Tests booking creation and session data.
+    """
+
+    def setUp(self):
+        Aircraft.objects.create(
+            identification="TEST123",
+            seats=100,
+            aircraft_type=Aircraft.AIRCRAFT_TYPES[0][1],
+        )
+
+        Airport.objects.bulk_create(
+            [
+                Airport(
+                    name="Origin",
+                    iata="ORG",
+                    locality="Org",
+                    region="Ogn",
+                    country="Orgtest",
+                ),
+                Airport(
+                    name="Destination",
+                    iata="DST",
+                    locality="Dest",
+                    region="Dst",
+                    country="Dsttest",
+                ),
+            ]
+        )
+
+        Flight.objects.create(
+            flight_number="UX00001",
+            origin=Airport.objects.get(iata="ORG"),
+            destination=Airport.objects.get(iata="DST"),
+            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            dep_time=datetime.now(),
+            arr_time=datetime.now(),
+            price=100,
+            aircraft=Aircraft.objects.first(),
+        )
+        Flight.objects.create(
+            flight_number="UX00002",
+            origin=Airport.objects.get(iata="DST"),
+            destination=Airport.objects.get(iata="ORG"),
+            outbound_date=datetime.strptime("2023-01-10", "%Y-%m-%d"),
+            dep_time=datetime.now(),
+            arr_time=datetime.now(),
+            price=100,
+            aircraft=Aircraft.objects.first(),
+        )
+
+        self.client = Client()
+        self.client.force_login(
+            user=User.objects.create_user(
+                email="testuser@test.com",
+                first_name="test",
+                last_name="test",
+                password="12345",
+            )
+        )
+        session = self.client.session
+        session["passengers"] = {
+            "passenger-1": {"first": "Test", "last": "McTesterson"},
+            "passenger-2": {"first": "Tester", "last": "McTesting"},
+        }
+        session["outbound_flight"] = "UX00001"
+        session["outbound_fare"] = "Plus"
+        session["num_passengers"] = 2
+        session["trip_type"] = "return"
+        session["return_flight"] = "UX00002"
+        session["return_fare"] = "Plus"
+        session["trip_email"] = "testuser@test.com"
+        session.save()
+
+    def test_booking_created_return(self):
+        """
+        Tests that booking is created with correct trip type (one-way).
+        """
+        self.assertEqual(Booking.objects.count(), 0)
+        request = self.client.post("/checkout/")
+        self.assertEqual(Booking.objects.count(), 1)
+        self.assertEqual(
+            Booking.objects.first().return_flight,
+            Flight.objects.get(flight_number="UX00002"),
+        )
+
+    def test_booking_created_oneway(self):
+        """
+        Tests that booking is created with correct trip type (one-way).
+        """
+        session = self.client.session
+        session["trip_type"] = "oneway"
+        session.save()
+
+        self.assertEqual(Booking.objects.count(), 0)
+        request = self.client.post("/checkout/")
+        self.assertEqual(Booking.objects.count(), 1)
+        self.assertEqual(Booking.objects.first().return_flight, None)
+
+    def test_template_and_response(self):
+        """
+        Tests that correct response and template used.
+        """
+        response = self.client.get("/checkout/")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed("checkout/checkout.html")
+
+
+class OrderConfirmationViewTestCase(TestCase):
+    """
+    Tests order confirmation view.
+    Tests that error is raised if user unauthorised.
+    """
+
+    def setUp(self):
+        Aircraft.objects.create(
+            identification="TEST123",
+            seats=100,
+            aircraft_type=Aircraft.AIRCRAFT_TYPES[0][1],
+        )
+
+        Airport.objects.bulk_create(
+            [
+                Airport(
+                    name="Origin",
+                    iata="ORG",
+                    locality="Org",
+                    region="Ogn",
+                    country="Orgtest",
+                ),
+                Airport(
+                    name="Destination",
+                    iata="DST",
+                    locality="Dest",
+                    region="Dst",
+                    country="Dsttest",
+                ),
+            ]
+        )
+
+        Flight.objects.create(
+            flight_number="UX00001",
+            origin=Airport.objects.get(iata="ORG"),
+            destination=Airport.objects.get(iata="DST"),
+            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            dep_time=datetime.now(),
+            arr_time=datetime.now(),
+            price=100,
+            aircraft=Aircraft.objects.first(),
+        )
+        Flight.objects.create(
+            flight_number="UX00002",
+            origin=Airport.objects.get(iata="DST"),
+            destination=Airport.objects.get(iata="ORG"),
+            outbound_date=datetime.strptime("2023-01-10", "%Y-%m-%d"),
+            dep_time=datetime.now(),
+            arr_time=datetime.now(),
+            price=100,
+            aircraft=Aircraft.objects.first(),
+        )
+        User.objects.create_user(
+            email="testuser@test.com",
+            first_name="test",
+            last_name="test",
+            password="12345",
+        )
+        self.client = Client()
+
+        Booking.objects.create(
+            outbound_flight=Flight.objects.get(flight_number="UX00001"),
+            return_flight=Flight.objects.get(flight_number="UX00002"),
+            customer=User.objects.get(first_name="test"),
+        )
+
+    def test_order_confirmation_view_context(self):
+        """
+        Tests that order confirmation view context contains correct booking.
+        """
+        self.client.force_login(user=User.objects.get(first_name="test"))
+        booking = Booking.objects.get(outbound_flight=Flight.objects.get(flight_number="UX00001"))
+        response = self.client.get(f"/order_confirmation/{booking.id}")
+        self.assertEqual(response.context["booking"], booking)
+
+    def test_unauthorised_user(self):
+        """
+        Tests that unauthorised user cannot access order confirmation page.
+        """
+        User.objects.create_user(
+            email="unauth@test.com",
+            first_name="unauth",
+            last_name="test",
+            password="12345",
+        )
+        booking = Booking.objects.get(outbound_flight=Flight.objects.get(flight_number="UX00001"))
+        self.client.force_login(user=User.objects.get(first_name="unauth"))
+        response = self.client.get(f"/order_confirmation/{booking.id}")
+        self.assertEqual(response.status_code, 403)

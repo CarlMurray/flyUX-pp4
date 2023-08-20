@@ -5,3 +5,5 @@ include =
     users/models.py
     users/views.py
     utils/altdates.py
+    blog/models.py
+    blog/views.py

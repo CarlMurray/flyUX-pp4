@@ -14,7 +14,7 @@ def logout_view(request):
 
 
 def login_view(request):
-    # STORE PREV URL FOR REDIRECT AFTER LOGIN, TRIMSS '?next='
+    # STORE PREV URL FOR REDIRECT AFTER LOGIN, TRIMS '?next='
     request.session['next_url'] = request.GET.urlencode(safe='/?=&')[5:]
     if request.user.is_authenticated:
         return redirect('home-page')
@@ -33,10 +33,7 @@ def login_view(request):
                 login(request, user)
                 return redirect(request.session['next_url'])
             else:
-                print('ERROR MSG TO BE ADDED')
-        else:
-            print('TBD')
-    print(request.session['next_url'])
+                messages.error(request, 'Invalid email or password.')
     return render(request, 'users/login.html')
 
 

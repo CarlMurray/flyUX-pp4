@@ -55,12 +55,13 @@ This section outlines the various technologies used throughout the project and t
 - [Payform](https://github.com/jondavidjohn/payform) - a JavaScript library used for formatting the Payment Details form inputs.
 
 #### Python/Django Packages
-- [Gunicorn](https://pypi.org/project/gunicorn/) - provides HTTP server
-- [psycopg2](https://pypi.org/project/psycopg2/) - provides PostgreSQL connection
-- [Pillow](https://pypi.org/project/Pillow/) - used for image processing (Model ImageField)
-- [Whitenoise](https://pypi.org/project/whitenoise/) - used for serving static files
-- [Coverage](https://pypi.org/project/coverage/) - used for testing and analysis
-- [Django Markdown Field](https://pypi.org/project/django-markdownfield/) - adds a markdown-compatible text field to admin panel (for BlogPost model)
+- [Gunicorn](https://pypi.org/project/gunicorn/) - provides HTTP server.
+- [psycopg2](https://pypi.org/project/psycopg2/) - provides PostgreSQL connection.
+- [Pillow](https://pypi.org/project/Pillow/) - used for image processing (Model ImageField).
+- [Whitenoise](https://pypi.org/project/whitenoise/) - used for serving static files.
+- [Coverage](https://pypi.org/project/coverage/) - used for testing and analysis.
+- [Django Markdown Field](https://pypi.org/project/django-markdownfield/) - adds a markdown-compatible text field to admin panel (for BlogPost model).
+- [Black](https://pypi.org/project/black/) - A PEP8 compliant code formatter.
 
 ### Infrastructural Technologies
 - [PostgreSQL](https://www.postgresql.org/) (via Digital Ocean) - used for database.

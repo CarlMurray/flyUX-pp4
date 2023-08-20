@@ -233,12 +233,14 @@ def checkout_view(request):
 
         return redirect('order-confirmation', id=booking.id)
 
-
+@login_required
 def order_confirmation_view(request, id):
     booking = Booking.objects.get(id=id)
     context = {
         'booking': booking
     }
+    if booking.customer != request.user:
+        raise PermissionDenied
     return render(request, 'core/order-confirmation.html', context)
 
 

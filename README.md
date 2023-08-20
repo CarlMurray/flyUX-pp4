@@ -66,6 +66,18 @@ This section outlines the various technologies used throughout the project and t
 - [PostgreSQL](https://www.postgresql.org/) (via Digital Ocean) - used for database.
 - [Heroku](https://www.heroku.com/) - used for hosting the application.
 
+# Testing
+## Automatic Testing
+- Automated unit tests were written for core back-end functionality of the app to test data validation and integrity, templates used, HTTP status codes, user input etc.
+- 35 tests were written in total.
+- The [`Coverage`](https://pypi.org/project/coverage/) package was used to assist in guiding test requirements. 
+- 100% coverage was achieved on the `core` models and views.
+- Future plans to write unit tests for coverage on `blog` and `users` apps.
+
+## Manual Testing
+
+
+
 # Credits
 - [Unsplash](https://unsplash.com/) - used for sourcing Blog photographic images.
 - [ChatGPT](https://openai.com/chatgpt) - used for generating all Blog text content.

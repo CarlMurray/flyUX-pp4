@@ -799,3 +799,87 @@ class OrderConfirmationViewTestCase(TestCase):
         self.client.force_login(user=User.objects.get(first_name="unauth"))
         response = self.client.get(f"/order_confirmation/{booking.id}")
         self.assertEqual(response.status_code, 403)
+
+
+class BookingsViewTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
+        Aircraft.objects.create(
+            identification="TEST123",
+            seats=100,
+            aircraft_type=Aircraft.AIRCRAFT_TYPES[0][1],
+        )
+
+        Airport.objects.bulk_create(
+            [
+                Airport(
+                    name="Origin",
+                    iata="ORG",
+                    locality="Org",
+                    region="Ogn",
+                    country="Orgtest",
+                ),
+                Airport(
+                    name="Destination",
+                    iata="DST",
+                    locality="Dest",
+                    region="Dst",
+                    country="Dsttest",
+                ),
+            ]
+        )
+
+        Flight.objects.create(
+            flight_number="UX00001",
+            origin=Airport.objects.get(iata="ORG"),
+            destination=Airport.objects.get(iata="DST"),
+            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            dep_time=datetime.now(),
+            arr_time=datetime.now(),
+            price=100,
+            aircraft=Aircraft.objects.first(),
+        )
+        Flight.objects.create(
+            flight_number="UX00002",
+            origin=Airport.objects.get(iata="DST"),
+            destination=Airport.objects.get(iata="ORG"),
+            outbound_date=datetime.strptime("2023-01-10", "%Y-%m-%d"),
+            dep_time=datetime.now(),
+            arr_time=datetime.now(),
+            price=100,
+            aircraft=Aircraft.objects.first(),
+        )
+        User.objects.create_user(
+            email="testuser@test.com",
+            first_name="test",
+            last_name="test",
+            password="12345",
+        )
+        
+        User.objects.create_user(
+            email="testuser2@test.com",
+            first_name="test2",
+            last_name="test2",
+            password="12345",
+        )
+        
+        Booking.objects.create(
+            outbound_flight=Flight.objects.get(flight_number="UX00001"),
+            return_flight=Flight.objects.get(flight_number="UX00002"),
+            customer=User.objects.get(first_name="test"),
+        )
+        
+        Booking.objects.create(
+            outbound_flight=Flight.objects.get(flight_number="UX00001"),
+            return_flight=Flight.objects.get(flight_number="UX00002"),
+            customer=User.objects.get(first_name="test2"),
+        )
+    
+    def test_bookings_view_context(self):
+        """
+        Tests that only user's bookings are returned.
+        """
+        self.client.force_login(user=User.objects.get(first_name='test'))
+        response = self.client.get('/bookings/')
+        print(response.context)
+        self.assertQuerysetEqual(response.context['bookings'], Booking.objects.filter(customer=response.context['user']))

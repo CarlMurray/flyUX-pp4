@@ -4,10 +4,8 @@
     Passenger Details
 {% endblock title %}
 {% block content %}
-    <div class="container relative flex-1 flex-grow px-5 mx-auto">
         {% if not request.user.is_authenticated %}
-            <dialog class="fixed flex w-full py-8 bg-transparent backdrop:backdrop-blur-sm">
-                <div class="container flex flex-col justify-center w-full max-w-xl p-6 mx-auto bg-white sm:p-12 rounded-3xl drop-shadow-lg">
+            <dialog class="fixed flex flex-col px-6 py-8 bg-white backdrop:backdrop-blur-sm rounded-3xl">
                     <!-- LOGIN HEADER -->
                     <h3 class="mx-auto mb-6 text-3xl font-bold text-primary">Create account</h3>
                     <!-- FORM -->
@@ -96,14 +94,19 @@
                             </p>
                         </div>
                     </form>
-                </div>
             </dialog>
             <script>
                 let modal = document.querySelector('dialog')
                 modal.showModal()
+                <!-- PREVENTS CLOSE BY ESC KEY -->
+                modal.addEventListener('cancel', (event) => {
+                    event.preventDefault();
+                });
 
             </script>
         {% endif %}
+        <div class="container relative flex-1 flex-grow px-5 mx-auto">
+
         <h1 class="mt-8 text-3xl font-bold text-text">Passenger Details</h1>
         <form action="" method="post">
             {% csrf_token %}

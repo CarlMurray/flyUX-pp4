@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from core import views as core_views
 from users import views as users_views
 from blog import views as blog_views
@@ -50,7 +50,11 @@ urlpatterns = [
     
     # BLOG
     path("blog/", blog_views.blog_view, name="blog"),
-    path("blog/<int:id>", blog_views.blog_detail, name='blog-detail')
+    path("blog/<int:id>", blog_views.blog_detail, name='blog-detail'),
+    
+    # DEBUG TOOLBAR
+    path("__debug__/", include("debug_toolbar.urls")),
+
 ]
 
 # USED TO SERVE MEDIA FILES IN DEVELOPMENT

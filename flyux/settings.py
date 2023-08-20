@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import django_on_heroku
 from pathlib import Path
 from dotenv import load_dotenv
 import os
@@ -26,13 +26,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY") 
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = (os.getenv("DEBUG") == "TRUE")
 
 # '*' TO ALLOW FOR LOCAL MOBILE TESTING
-ALLOWED_HOSTS = ['*','https://flyux-b4bb85443186.herokuapp.com/', '*.herokuapp.com', 'https://flyux.carlmurray.design/']
+ALLOWED_HOSTS = ['*', 'https://flyux-b4bb85443186.herokuapp.com/',
+                 '*.herokuapp.com', 'https://flyux.carlmurray.design/']
 
 
 # Application definition
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     "core",
     "blog",
     "markdownfield",
+    "debug_toolbar",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -52,6 +54,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -86,7 +89,6 @@ WSGI_APPLICATION = "flyux.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -95,7 +97,9 @@ DATABASES = {
         'PASSWORD': os.getenv('PASSWORD'),
         'HOST': os.getenv('HOST'),
         'PORT': os.getenv('PORT'),
-        'DATABASE_URL': os.getenv('DATABASE_URL')
+        'DATABASE_URL': os.getenv('DATABASE_URL'),
+        'CONN_MAX_AGE': 0,
+
     },
     # "local": {
     #     "ENGINE": "django.db.backends.sqlite3",
@@ -153,13 +157,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.User"
 
 # Configure Django App for Heroku.
-import django_on_heroku
 django_on_heroku.settings(locals())
 
 LOGIN_URL = 'login'
 
-CONN_MAX_AGE = 0
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

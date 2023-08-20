@@ -1,4 +1,5 @@
 asgiref==3.7.2
+autopep8==2.0.2
 black==23.7.0
 bleach==6.0.0
 click==8.1.4
@@ -7,6 +8,7 @@ coverage==7.2.7
 cssbeautifier==1.14.8
 dj-database-url==2.0.0
 Django==4.2.3
+django-debug-toolbar==4.2.0
 django-markdownfield==0.10.0
 django-on-heroku==1.1.2
 djlint==1.31.1

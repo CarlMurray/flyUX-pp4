@@ -27,7 +27,7 @@
                            id="first-{{ passenger.id }}"
                            value="{{ passenger.first }}"
                            aria-label="First name: {{ passenger.first }}"
-                           pattern="\S+"
+                           pattern="^[^\s].*$"
                            required>
                     <!-- LAST NAME INPUT -->
                     <input class="bg-transparent border-primary border-x-0 border-t-0 border-b-[1px] col-span-1"
@@ -36,7 +36,7 @@
                            id="last-{{ passenger.id }}"
                            value="{{ passenger.last }}"
                            aria-label="Last name: {{ passenger.last }}"
-                           pattern="\S+"
+                           pattern="^[^\s].*$"
                            required>
                 </li>
             {% endfor %}

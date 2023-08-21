@@ -54,6 +54,8 @@ def login_view(request):
                 messages.success(request, "Woo! You have been logged in!")
                 return redirect(request.session["next_url"])
         # ELSE, RETURN ERROR MESSAGE AND RENDER LOGIN PAGE
+            else:
+                messages.error(request, "Oops! Invalid email or password.")
         else:
             messages.error(request, "Oops! Invalid email or password.")
     return render(request, "users/login.html", {"form": form})

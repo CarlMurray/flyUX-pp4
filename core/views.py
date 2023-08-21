@@ -190,7 +190,7 @@ def alt_dates(request):
         # IF SO, RAISES ERROR AND RETURNS SAME FLIGHT RESULTS
         if datetime.strptime(
             request.session["outbound_date"], "%Y-%m-%d"
-        ) > datetime.strptime(request.session["return_date"], "%Y-%m-%d"):
+        ) >= datetime.strptime(request.session["return_date"], "%Y-%m-%d"):
             # DEFINES STRINGS FOR MESSAGE
             if leg == "outbound":
                 leg_string = "Outbound"

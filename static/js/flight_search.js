@@ -4,11 +4,15 @@ let airportsListOrigin = document.querySelector("#airports-list-origin");
 let airportsListDestination = document.querySelector("#airports-list-destination");
 let airportListItems = document.querySelectorAll('.airport-list-item')
 let dateToday = new Date();
+let dateTomorrow = new Date();
+dateTomorrow.setDate((dateToday.getDate()+1))
 let dateTodayString = dateToday.getFullYear() + "-" + (dateToday.getMonth() + 1) + "-" + dateToday.getDate()
-let enabledDates = [{from:dateTodayString, to:"2024-07-01"}]
+let dateTomorrowString = dateTomorrow.getFullYear() + "-" + (dateTomorrow.getMonth() + 1) + "-" + dateTomorrow.getDate()
+let enabledDatesFrom = [{from:dateTodayString, to:"2024-07-01"}]
+let enabledDatesTo = [{from:dateTomorrowString, to:"2024-07-01"}]
 // REQUIRED FOR FORM VALIDATION - DISABLES READONLY
-let date_picker_from = flatpickr("#flatpickr-date-outbound", {allowInput:true, enable:enabledDates});
-let date_picker_to = flatpickr("#flatpickr-date-return", {allowInput:true, enable:enabledDates});
+let date_picker_from = flatpickr("#flatpickr-date-outbound", {allowInput:true, enable:enabledDatesFrom});
+let date_picker_to = flatpickr("#flatpickr-date-return", {allowInput:true, enable:enabledDatesTo});
 
 // DISABLE USER KEY INPUT FOR FORM FIELDS
 let dateFromInput = document.querySelector('#flatpickr-date-outbound-container')

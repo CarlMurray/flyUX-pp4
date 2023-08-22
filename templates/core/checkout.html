@@ -33,11 +33,11 @@
             <!-- PAYMENT DETAILS FORM -->
             <div class="col-span-1 p-6 bg-white shadow-lg rounded-3xl">
                 <h2 class="mb-4 text-3xl font-bold text-primary ">Payment details</h2>
-                <form action="" method="post" class="grid grid-cols-2 gap-4">
+                <form method="post" class="grid grid-cols-2 gap-4">
                     {% csrf_token %}
                     <!-- CARD NAME -->
                     <input type="text"
-                           name=""
+                           name="card-name"
                            id="card-name"
                            class="hover:drop-shadow-md transition-all col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
                            placeholder="Name on card"
@@ -46,17 +46,17 @@
                            required>
                     <!-- CARD NUMBER -->
                     <input type="text"
-                           name=""
+                           name="card-number"
                            id="card-number"
                            class="hover:drop-shadow-md transition-all col-span-2 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
                            placeholder="Card number"
-                           minlength="20"
-                           maxlength="20"
+                           minlength="16"
+                           maxlength="16"
                            aria-label="Card number"
                            required>
                     <!-- CARD CVC -->
                     <input type="text"
-                           name=""
+                           name="card-cvc"
                            id="card-cvc"
                            class="hover:drop-shadow-md transition-all col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
                            placeholder="CVC"
@@ -66,7 +66,7 @@
                            required>
                     <!-- CARD EXPIRY -->
                     <input type="text"
-                           name=""
+                           name="card-expiry"
                            id="card-expiry"
                            class="hover:drop-shadow-md transition-all col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1"
                            placeholder="Expiry"
@@ -76,8 +76,6 @@
                            required>
                     <!-- PAY BUTTON -->
                     <button type="submit"
-                            name=""
-                            id=""
                             aria-label="Pay €{{ total_price }}"
                             class="cursor-pointer hover:scale-[103%] transition-all col-span-2 h-12 px-4 rounded-full  bg-primary text-white text-bold  focus:drop-shadow-md border-[1px] focus:border-primary focus:outline-0 focus:ring-0 flex-1">
                         Pay €{{ total_price }}

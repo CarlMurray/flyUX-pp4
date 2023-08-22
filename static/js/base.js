@@ -1,39 +1,50 @@
+/*
+Base script for all pages.
+Controls the hamburger menu.
+Controls django messages styles.
+*/
+
+/*
+Hambuger menu functionality.
+On click, the hamburger menu expands to show the navigation links.
+*/
 let hamburgerMenu = document.querySelector("#hamburger-menu");
 let hamburgerMenuExpanded = document.querySelector("#hamburger-menu-expanded");
-let hamburgerNavLinks = document.querySelector("#hamburger-nav-links");
 let isOpen = false;
 hamburgerMenu.addEventListener("click", function () {
   isOpen = !isOpen;
   if (isOpen === true) {
-    // hamburgerMenuExpanded.classList.remove("max-h-0");
     hamburgerMenuExpanded.classList.toggle("max-h-screen");
     hamburgerMenuExpanded.classList.toggle("p-12");
-    // hamburgerNavLinks.classList.toggle("hidden");
   } else {
-        hamburgerMenuExpanded.classList.toggle("max-h-screen");
-        hamburgerMenuExpanded.classList.toggle("p-12");
-    // hamburgerNavLinks.classList.toggle("hidden");
+    hamburgerMenuExpanded.classList.toggle("max-h-screen");
+    hamburgerMenuExpanded.classList.toggle("p-12");
   }
 });
 
-// let date_picker_from = flatpickr("#flatpickr-date-outbound", {});
-// let date_picker_to = flatpickr("#flatpickr-date-return", {});
-
+/*
+Function to hide django messages after 5 seconds.
+*/
 const hideMessage = (message) => {
-  // message.classList.add('max-h-screen')
-  message.classList.remove('-translate-y-[1000px]')
-  setTimeout(function(){ 
-    message.classList.add('opacity-0')
-//     message.classList.remove('max-h-screen')
-    setTimeout(function(){
-      message.parentElement.classList.add('hidden')
+  // TRANSLATE MESSAGE DOWN TO SCREEN
+  message.classList.remove("-translate-y-[1000px]");
+  // FADE OUT MESSAGE AFTER 5 SECONDS
+  setTimeout(function () {
+    message.classList.add("opacity-0");
+    // HIDE MESSAGE AFTER 6 SECONDS
+    setTimeout(function () {
+      message.parentElement.classList.add("hidden");
+    }, 1000);
+  }, 5000);
+};
 
-    }, 1000)
- }, 5000);
-}
-
-window.onload = (e)=>{
-  let infoMessage = document.querySelector('#message')
-
-if (infoMessage){
-hideMessage(infoMessage)}}
+/*
+When the page loads, the message is hidden after 5 seconds.
+*/
+window.onload = (e) => {
+  let infoMessage = document.querySelector("#message");
+  // IF MESSAGE EXISTS, CALL hideMessage FUNCTION
+  if (infoMessage) {
+    hideMessage(infoMessage);
+  }
+};

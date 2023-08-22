@@ -44,7 +44,7 @@
         {% endfor %}
     </div>
     <!-- LOADING INDICATOR -->
-    <div id="" class="">
+    <div>
         <div role="status"
              id="indicator-{{ leg }}"
              class="z-10 justify-center my-20 my-indicator">
@@ -78,10 +78,9 @@
                         </div>
                         <div class="mx-8">
                             <img src="{% static 'img/flight-duration-illo.svg' %}"
-                                 alt=""
-                                 width="227px"
-                                 height="27px"
-                                 class="">
+                                 alt="Plane with dashed trailing line from origin to destination"
+                                 width="227"
+                                 height="27">
                         </div>
                         <div>
                             <div class="text-xs font-semibold md:text-md text-text">{{ flight.destination }}</div>
@@ -116,13 +115,13 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <button data-leg="{{ leg }}"
+                                <div data-leg="{{ leg }}"
                                         data-flight-number="{{ flight.flight_number }}"
                                         data-fare-type="Standard"
-                                        class="p-4 bg-primary rounded-xl">
+                                        class="p-4 text-center bg-primary rounded-xl">
                                     <p class="text-2xl font-bold leading-4 text-white">€{{ flight.price }}</p>
                                     <p class="text-sm font-light text-white">per person</p>
-                                </button>
+                                </div>
                             </div>
                             <!-- PLUS FARE -->
                             <div class="flex flex-col justify-between h-full col-span-1 p-8 text-sm bg-white border-2 shadow-lg rounded-3xl md:text-md">
@@ -146,13 +145,13 @@
                                         <li class="my-4 list-disc list-inside">Reserved seat</li>
                                     </ul>
                                 </div>
-                                <button data-leg="{{ leg }}"
+                                <div data-leg="{{ leg }}"
                                         data-flight-number="{{ flight.flight_number }}"
                                         data-fare-type="Plus"
-                                        class="p-4 bg-primary rounded-xl">
+                                        class="p-4 text-center bg-primary rounded-xl">
                                     <p class="text-2xl font-bold leading-4 text-white">€{{ flight.plus_fare }}</p>
                                     <p class="text-sm font-light text-white">per person</p>
-                                </button>
+                                </div>
                             </div>
                             <!-- PREMIUM FARE -->
                             <div class="flex flex-col justify-between h-full col-span-1 p-8 text-sm bg-white border-2 shadow-lg rounded-3xl md:text-md">
@@ -177,13 +176,13 @@
                                         <li class="my-4 list-disc list-inside">Reserved seat</li>
                                     </ul>
                                 </div>
-                                <button data-leg="{{ leg }}"
+                                <div data-leg="{{ leg }}"
                                         data-flight-number="{{ flight.flight_number }}"
                                         data-fare-type="Premium"
-                                        class="p-4 bg-primary rounded-xl">
+                                        class="p-4 text-center bg-primary rounded-xl">
                                     <p class="text-2xl font-bold leading-4 text-white">€{{ flight.premium_fare }}</p>
                                     <p class="text-sm font-light text-white">per person</p>
-                                </button>
+                                </div>
                             </div>
                         </div>
                     </div>

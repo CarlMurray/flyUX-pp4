@@ -4,7 +4,7 @@
     Search Flights
 {% endblock title %}
 {% block content %}
-    <div class="">
+    <div>
         <div class="container px-5 mx-auto">
             <div>
                 <!-- OUTBOUND FLIGHTS RESULTS  -->
@@ -36,7 +36,7 @@
                 {% include 'partials/flights.html' with date=return_date slider_date_list=slider_date_list_return flight_results=flight_results_return leg='return' origin=destination destination=origin %}
             {% endif %}
             <!-- HIDDEN FORM TO SUBMIT SELECTED FLIGHTS -->
-            <form id="selected-flights" action="" method="get">
+            <form id="selected-flights" method="get">
                 <input type="hidden" name="trip_type" value="{{ trip_type }}">
                 <input type="hidden" name="selected-outbound-flight" value="">
                 <input type="hidden" name="selected-return-flight" value="">

@@ -25,7 +25,7 @@
                     <form action="{% url 'search-results' %}" method="get" autocomplete="off">
                         {% csrf_token %}
                         <!-- INNER FORM CONTAINER -->
-                        <div class="">
+                        <div>
                             <!-- RADIO INPUT CONTAINER -->
                             <div class="flex-auto col-span-4 mb-3">
                                 <fieldset class="flex gap-6">
@@ -122,7 +122,6 @@
                                 </div>
                                 <!-- PASSENGERS -->
                                 <select name="passengers"
-                                        id=""
                                         class="hover:drop-shadow-md transition-all disabled: text-gray-400 col-span-4 sm:col-span-2 md:col-span-1 h-12 px-4 rounded-full  border-gray-300 bg-white  focus:drop-shadow-md border-[1px] focus:outline-0 focus:ring-0 focus:border-primary drop-shadow-sm"
                                         aria-label="Select number of passengers"
                                         required>

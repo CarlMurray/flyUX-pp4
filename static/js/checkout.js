@@ -6,7 +6,6 @@ The script is used to validate the card number, expiry date and cvc.
 If the card details are invalid, the user is prompted to enter the correct details.
 */
 
-let cardName = document.querySelector("#card-name");
 let cardNumber = document.querySelector("#card-number");
 let cardCvc = document.querySelector("#card-cvc");
 let cardExpiry = document.querySelector("#card-expiry");

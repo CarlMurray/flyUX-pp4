@@ -6,6 +6,7 @@ The dialog contains a message asking the user to confirm the cancellation.
 If the user clicks the yes button, the htmx delete request is submitted.
 If the user clicks the no button, the dialog is hidden.
 */
+
 function confirmDelete(evt) {
   // PREVENT DEFAULT HTMX CONFIRMATION AND REQUEST
   evt.preventDefault();
@@ -20,16 +21,15 @@ function confirmDelete(evt) {
     "-translate-y-1/2"
   );
   // ADD DIALOG CONTENT
-  dialog.innerHTML =
-    "<div class='flex flex-col gap-4 justify-center p-6 w-full bg-white rounded-lg shadow-lg border-primary border-2 '>\
-    <p class='text-primary font-bold text-2xl text-center'>Cancel Booking</p>\
-    <p class='text-center font-bold'>Are you sure you want to cancel this booking? You cannot undo this action.</p>\
-    <p class='text-center'>Your card will be refunded within 7 days.</p>\
-    <div class='flex justify-center gap-2 mt-2'>\
-    <button id='no' class='dialog-btn w-auto px-4 py-2 border-primary border-[1px] bg-white text-text rounded-full transition-all hover:bg-primary hover:text-white duration-300'>No, go back</button>\
-    <button id='yes' class='dialog-btn w-auto px-4 py-2 border-primary border-2 bg-primary text-white font-bold rounded-full transition-all duration-300 hover:bg-[#FB257F]'>Yes, cancel</button>\
-    </div>\
-    </div>";
+  dialog.innerHTML = `<div class='flex flex-col gap-4 justify-center p-6 w-full bg-white rounded-lg shadow-lg border-primary border-2 '>
+    <p class='text-primary font-bold text-2xl text-center'>Cancel Booking</p>
+    <p class='text-center font-bold'>Are you sure you want to cancel this booking? You cannot undo this action.</p>
+    <p class='text-center'>Your card will be refunded within 7 days.</p>
+    <div class='flex justify-center gap-2 mt-2'>
+    <button id='no' class='dialog-btn w-auto px-4 py-2 border-primary border-[1px] bg-white text-text rounded-full transition-all hover:bg-primary hover:text-white duration-300'>No, go back</button>
+    <button id='yes' class='dialog-btn w-auto px-4 py-2 border-primary border-2 bg-primary text-white font-bold rounded-full transition-all duration-300 hover:bg-[#FB257F]'>Yes, cancel</button>
+    </div>
+    </div>`;
   // APPEND DIALOG TO CONTAINER
   container.append(dialog);
   // SHOW DIALOG
@@ -57,7 +57,7 @@ function handleClick(e, evt, dialog) {
     // HIDE DIALOG
     dialog.open = false;
   }
-};
+}
 
 /*
 Calls the confirmDelete function when the user clicks the cancel booking booking button.

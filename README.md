@@ -2,10 +2,104 @@
 
 # 📄 Project Background
 
-- This project represents an opportunity to showcase my skills in both UX design and web development, bridging the gap between form and function.
-- This Django web development project is a continuation of a UX Design project I completed during my Diploma with the UX Design Institute which goes through the full UX process from research all the way to prototyping and handover.
+## Overview
+- This Django web development project is a continuation of a UX Design project I completed during my Diploma in UX Design with the UX Design Institute which goes through the full UX process from user research all the way through to prototyping and handover.
 - The end result was a user-friendly flight booking flow which was informed by user research and prototyped to a medium fidelity in Figma.
-- Revisiting the project a year later, I am now using it as a foundation to build upon and bring it from Figma prototype, to a fully functioning Django-based web application, combining my passions for user-centric design and web development to build a holistic solution.
+- Revisiting the project a year later, I am now using it as a foundation to build upon and bring it from Figma prototype, to a fully functioning Django-based full-stack web application, combining my passions for user-centric design and web development to build a holistic solution.
+
+# Process
+
+## Problem Statement:
+
+>Your client is a start-up airline. They’re looking to create an online experience that is fast, easy and intuitive: one that’s based on a deep understanding of their target users.
+
+## Research
+- Competitive benchmarking was carried out to better understand what current industry leaders are doing and to understand common conventions and user expectations from a flight booking flow.
+- Usability testing of existing flows were carried out with users on the Aer Lingus, Ryanair and EasyJet websites to observe user behaviour, mental models, positives and pain points. 
+- This research data was used to inform my solution, which aimed to provide a simple, straight-forward, upsell-free and easy-to-use flight booking flow.
+
+## Design
+- Colour palette etc...
+## Development
+- Agile...
+
+## Data Models
+- Diagrams...
+
+
+
+# Features
+
+## CRUD Functionality
+- User CRUD functionality is primarily related to `Booking`s.
+  - Create: Users create a Booking by going through the full user flow. A `Booking` is created once the user completes checkout.
+  - Read: Users can view their created `Booking`s and relevant `Booking` details when logged in.
+  - Update: Users can edit a `Booking` by changing `Passenger` information for that `Booking`.
+  - Delete: Users can cancel a `Booking` which deletes it from the database.
+- Admin CRUD functionality exists for all Models and is done from the Django Admin dashboard.
+
+## Authentication & Authorisation
+
+
+## Navigation
+
+
+## Search
+
+
+## Flights
+
+### Alternate Dates
+
+### Fares
+
+### Edit Flights
+
+## Passengers
+
+
+## Checkout
+
+
+## Confirmation
+
+
+## Bookings
+
+### Cancel Booking
+
+### Edit Passengers
+
+
+## Blog
+
+
+## About
+
+
+# 🛣️ Roadmap
+
+<details>
+<summary>Implement seat selection as per original design</summary>
+
+![Screenshot of seat selection design](/readme/seat-selection.png)
+
+</details>
+<details>
+<summary>Implement 'Extras' screen for seat selection, baggage selection, car hire and insurance as per original design.</summary>
+
+![Screenshot of extras selection](/readme/extras-screen.png)
+
+</details>
+<details>
+<summary>Build out flights page to show prices in alternate date selector, sort options, cart and edit search</summary>
+
+![Search results screen](/readme/flight-results.png)
+
+</details>
+<br>
+
+---
 
 # 🪲 Bugs
 
@@ -107,7 +201,7 @@ This section outlines the various technologies used throughout the project and t
 | Links                 | Click on each Navigation link, CTA, button, logo, footer link                                                                                                                                  | Correct page is loaded/correct action performed, new tab opened if applicable |
 | Form validation       | Enter data into each input field, ensure only valid data is accepted                                                                                                                           | Form doesn't submit until correct data entered, error message shown           |
 | Responsiveness        | Resize viewport window from 320px upwards with Chrome Dev Tools. Test devices as detailed in [Testing Process](#testing-process)                                                               | Page layout remains intact and adapts to screen size as intended              |
-| Lighthouse            | Perform Lighthouse test on each page                                                                                                                                                           | Score of > 89 on Performance, Accessibility, Best Practices, SEO              |
+| Lighthouse            | Perform Lighthouse test on each page for the primary user flow (Booking process)                                                                                                                                                           | Score of > 89 on Performance, Accessibility, Best Practices              |
 | Browser compatibility | Test links, layout, appearance, functionality and above Tests on Chrome, Safari, Firefox and Edge. BrowserStack used to test various mobile/large format devices with recent browser versions. | Website looks and functions as intended and passes all tests above            |
 
 </details>
@@ -174,6 +268,43 @@ This section outlines the various technologies used throughout the project and t
 | Edit flight     | - Edit a flight selection                            | - When edit button clicked, flight results show and new flight can be selected                                             |
 | Confirm flights | - Select flights and confirm                         | - When confirmed, date added to session storage and request sent                                                           |                                       |
 </details>
+
+---
+
+### 🚦 Lighthouse Testing
+- All pages were tested using Lighthouse with the primary goals of identifying performance and accessibility issues and ensuring adherance to best practices. 
+- The Lighthouse test results for each step of the `core` user flow are shown below:
+<details>
+<summary>Homepage</summary>
+
+![Homepage Lighthouse test](/readme/Lighthouse-homepage.png)
+</details>
+<details>
+<summary>Flights</summary>
+
+![Flights Lighthouse test](/readme/Lighthouse-flights.png)
+</details>
+<details>
+<summary>Passengers</summary>
+
+![Passengers Lighthouse test](/readme/Lighthouse-passengers.png)
+</details>
+<details>
+<summary>Checkout</summary>
+
+![Checkout Lighthouse test](/readme/Lighthouse-summary.png)
+</details>
+<details>
+<summary>Bookings Overview</summary>
+
+![Bookings Lighthouse test](/readme/Lighthouse-bookings.png)
+</details>
+<details>
+<summary>Booking Detail</summary>
+
+![Booking Detail Lighthouse test](/readme/Lighthouse-booking-detail.png)
+</details>
+
 
 ---
 

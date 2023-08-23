@@ -2,35 +2,43 @@
 
 # 📄 Project Background
 
-## Overview
+## 👀 Overview
 - This Django web development project is a continuation of a UX Design project I completed during my Diploma in UX Design with the UX Design Institute which goes through the full UX process from user research all the way through to prototyping and handover.
 - The end result was a user-friendly flight booking flow which was informed by user research and prototyped to a medium fidelity in Figma.
 - Revisiting the project a year later, I am now using it as a foundation to build upon and bring it from Figma prototype, to a fully functioning Django-based full-stack web application, combining my passions for user-centric design and web development to build a holistic solution.
 
-# Process
+**[See here for the full UX Design case study](https://carlmurray.design/p/cmurray/03678e7f)**
 
-## Problem Statement:
+# 🏗️ Process
+
+## ❓ Problem Statement:
 
 >Your client is a start-up airline. They’re looking to create an online experience that is fast, easy and intuitive: one that’s based on a deep understanding of their target users.
 
-## Research
+## 🔎 Research
 - Competitive benchmarking was carried out to better understand what current industry leaders are doing and to understand common conventions and user expectations from a flight booking flow.
 - Usability testing of existing flows were carried out with users on the Aer Lingus, Ryanair and EasyJet websites to observe user behaviour, mental models, positives and pain points. 
 - This research data was used to inform my solution, which aimed to provide a simple, straight-forward, upsell-free and easy-to-use flight booking flow.
 
-## Design
+**[See here for the full UX Design case study](https://carlmurray.design/p/cmurray/03678e7f)**
+
+
+## 🎨 Design
 - Colour palette etc...
-## Development
+
+**[See here for the full UX Design case study](https://carlmurray.design/p/cmurray/03678e7f)**
+
+## 👨‍💻 Development
 - Agile...
 
-## Data Models
+## 🧮 Data Models
 - Diagrams...
 
 
 
-# Features
+# 🪀 Features
 
-## CRUD Functionality
+## 💩 CRUD Functionality
 - User CRUD functionality is primarily related to `Booking`s.
   - Create: Users create a Booking by going through the full user flow. A `Booking` is created once the user completes checkout.
   - Read: Users can view their created `Booking`s and relevant `Booking` details when logged in.
@@ -38,44 +46,175 @@
   - Delete: Users can cancel a `Booking` which deletes it from the database.
 - Admin CRUD functionality exists for all Models and is done from the Django Admin dashboard.
 
-## Authentication & Authorisation
+## 🔑 Authentication & Authorisation
+
+- Users can create an account from the Signup page.
+- Users can login from the Login page.
+- Authorisation is required to reach certain pages such as Bookings, Passenger Details and Checkout. Requesting these pages while unauthprised will redirect users to the Login page. 
+- If not logged in by the time a user reaches the Passenger Details page, a modal shows on screen with the Signup form. Users can also click the Login link at the bottom of the form instead, and be redirected to the Passenger Details page on successful authentication. 
+
+<details>
+<summary>Signup page</summary>
+
+![Screenshot of Signup page](/readme/signup.jpeg)
+</details>
+<details>
+<summary>Login page</summary>
+
+![Screenshot of Login page](/readme/login.jpeg)
+</details>
+<details>
+<summary>Signup modal</summary>
+
+![Screenshot of Signup modal](/readme/signup-modal.jpeg)
+</details>
+
+## 🧭 Navigation
+- Primary navigation is located in the header and is present on all pages.
+- A hamburger menu is present on mobile devices and expands to show the primary navigation links.
+
+<details>
+<summary>Navigation on homepage</summary>
+
+![Screenshot of homepage ](/readme/homepage.jpeg)
+</details>
 
 
-## Navigation
+## 🔎 Search
+- The search form is located on the homepage and allows users to search for flights by entering their origin, destination, trip type, dates and number of passengers.
+- The search form is validated on the front-end and back-end to ensure that the data entered is valid and that the search can be performed.
+- If the search is valid, the user is redirected to the Flights page where they can view the search results.
+- If the search is invalid, an error message is shown.
+
+<details>
+<summary>Homepage with search form</summary>
+
+![Screenshot of homepage](/readme/homepage.jpeg)
+</details>
+
+## ✈️ Flights
+- The Flights page shows the search results for the user's search query.
+- If there are no results, an info message is shown prompting the user to try an alternate date.
+- If there are results, the results are shown in a card format with the outbound and return flights shown in separate cards.
+- Once flights have been selected, the CTA button is enabled and the user can proceed to the next step in the booking flow. Selected flight numbers are stored in session storage and are used to populate the Order Summary page.
+<details>
+<summary>Flights</summary>
+
+![Screenshot of Flights page](/readme/flights.jpeg)
+</details>
+
+### 🗓️ Alternate Dates
+- The alternate dates feature allows users to view flight results for alternate dates to their original search query.
+- The feature works by sending an AJAX request (via htmx) to the server with the new date, and the server responds with the new flight data for that date, and new date options for the alternate date selector.
+- The new flight data is then loaded into the page and the click event listeners are re-attached to the new flight cards so that they expand when clicked, to show the fares.
+- It is not possible to select a date that is in the past. 
+- It is not possible to select a date that is before the outbound date if the trip type is return.
+
+### 💸 Fares
+- The fares are shown in a card format with the outbound and return fares shown in separate cards.
+- The user can click on a fare card to expand it and show the fare details.
+- The user can select a fare by clicking the button on the fare card.
+- Selected fare information is stored in session storage and is used to populate the Order Summary page.
+
+<details>
+<summary>Fares</summary>
+
+![Screenshot of Fares](/readme/flights-fares.jpeg)
+</details>
+
+### 🛫 Edit Flights
+- The user can edit their flight selection by clicking the "Edit" button on the fare card.
+- This reloads the previous flight search results and allows the user to select new flights.
+
+<details>
+<summary>Edit Flights</summary>
+
+![Screenshot of Edit Flights](/readme/flights-fares.jpeg)
+</details>
+
+## 👯 Passengers
+- The Passengers form is shown after the user has selected their flights.
+- The form is pre-populated with the number of passengers selected in the search form.
+- If logged in, the form is pre-populated with the user's details.
+- The "Confirm email" field is not pre-populated and must be entered by the user as a security and error prevention measure.
+
+<details>
+<summary>Passengers form</summary>
+
+![Screenshot of Passengers form](/readme/passengers.jpeg)
+</details>
+
+## 💳 Checkout
+- The Checkout page shows the Order Summary and the Payment Details form.
+- The Order Summary is populated with the flight and fare information stored in session storage.
+- For the purposes of this project, the Payment Details form is a mockup and does not process any payments. The form is lightly validated on the front-end using the Payform library with some minor modification to allow for dummy card data to be entered.
+
+<details>
+<summary>Checkout page</summary>
+
+![Screenshot of Checkout page](/readme/checkout.jpeg)
+</details>
 
 
-## Search
+## ✅ Confirmation
+- The Confirmation page shows the user's booking reference number and a confirmation message.
+- A CTA button is shown which allows the user to view their bookings.
+
+<details>
+<summary>Confirmation page</summary>
+
+![Screenshot of Confirmation page](/readme/confirmation.jpeg)
+</details>
 
 
-## Flights
+## 📜 Bookings
+- The Bookings page shows a list of the user's bookings.
+- An Edit button is shown for each booking which allows the user to edit the booking's passengers.
+- The Booking detail page shows the booking's details and the passenger details.
 
-### Alternate Dates
+<details>
+<summary>Bookings page</summary>
 
-### Fares
+![Screenshot of Bookings page](/readme/bookings.jpeg)
+</details>
 
-### Edit Flights
+### ❌ Cancel Booking
+- The user can cancel a booking by clicking the "Cancel Booking" button on the Booking detail page.
+- This deletes the booking from the database by sending an AJAX request to the server and redirects the user to the Bookings page.
+A confirmation dialog is shown to the user to confirm that they want to cancel the booking.
 
-## Passengers
+<details>
+<summary>Cancel Booking</summary>
 
-
-## Checkout
-
-
-## Confirmation
-
-
-## Bookings
-
-### Cancel Booking
-
-### Edit Passengers
-
-
-## Blog
+![Screenshot of Cancel Booking](/readme/cancel-booking.jpeg)
+</details>
 
 
-## About
+### 👥 Edit Passengers
+- The user can edit a booking's passengers by clicking the "Edit Passengers" button on the Booking detail page.
+- This sends an AJAX request (via htmx) to the server and loads the Passengers form with the booking's passenger data pre-populated.
+- The user can then edit the passenger data and submit the form to update the booking's passenger data, or cancel the edit and return to the Booking detail page.
 
+## 🌐 Blog
+- The Blog is basic in design and is not a focus of this project.
+- The Blog page shows a list of blog posts which were generated using the ChatGPT.
+- The Blog detail page shows the blog post's title, image and content.
+- New blog posts can be added via the Django Admin dashboard.
+
+<details>
+<summary>Blog page</summary>
+
+![Screenshot of Blog page](/readme/blog.jpeg)
+</details>
+
+## 🤔 About
+- The About page shows a brief description of the project and the technologies used.
+
+<details>
+<summary>About page</summary>
+
+![Screenshot of About page](/readme/about.jpeg)
+</details>
 
 # 🛣️ Roadmap
 
@@ -97,7 +236,7 @@
 ![Search results screen](/readme/flight-results.png)
 
 </details>
-<br>
+> Add password reset and "Remember me" login option 
 
 ---
 
@@ -176,6 +315,13 @@ This section outlines the various technologies used throughout the project and t
 - The [`Coverage`](https://pypi.org/project/coverage/) package was used to assist in guiding test requirements.
 - 100% coverage was achieved on the `core` models and views.
 - Future plans to write unit tests for coverage on `blog` and `users` apps.
+
+<detail>
+<summary>Test coverage report</summary>
+
+![Coverage report](/readme/test-coverage.png)
+
+</detail>
 
 ## ⚒️ Manual Testing
 

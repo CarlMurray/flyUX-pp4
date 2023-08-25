@@ -31,15 +31,22 @@
                 </div>
                 <!-- ADD CLICK FOR OTHER DATES -->
             {% else %}
-                <div class="cursor-pointer"
-                     hx-trigger="click"
-                     hx-get="alt_dates/?date={{ dateitem|date:'Y-m-d' }}&origin={{ origin }}&destination={{ destination }}&leg={{ leg }}"
-                     hx-swap="outerHTML"
-                     hx-indicator="#indicator-{{ leg }}"
-                     hx-target="#{{ leg }}-flights">
-                    <div class="py-4 font-semibold text-center text-md sm:text-lg altDate"
-                         id="{{ dateitem|date:'Y-m-d' }}">{{ dateitem|date:'j M' }}</div>
-                </div>
+                {% if dateitem < min_date or dateitem > max_date %}
+                    <div class="">
+                        <div class="py-4 font-semibold text-center text-gray-300 text-md sm:text-lg altDate"
+                             id="{{ dateitem|date:'Y-m-d' }}">{{ dateitem|date:'j M' }}</div>
+                    </div>
+                {% else %}
+                    <div class="cursor-pointer"
+                         hx-trigger="click"
+                         hx-get="alt_dates/?date={{ dateitem|date:'Y-m-d' }}&origin={{ origin }}&destination={{ destination }}&leg={{ leg }}"
+                         hx-swap="outerHTML"
+                         hx-indicator="#indicator-{{ leg }}"
+                         hx-target="#{{ leg }}-flights">
+                        <div class="py-4 font-semibold text-center text-md sm:text-lg altDate"
+                             id="{{ dateitem|date:'Y-m-d' }}">{{ dateitem|date:'j M' }}</div>
+                    </div>
+                {% endif %}
             {% endif %}
         {% endfor %}
     </div>
@@ -116,9 +123,9 @@
                                     </ul>
                                 </div>
                                 <div data-leg="{{ leg }}"
-                                        data-flight-number="{{ flight.flight_number }}"
-                                        data-fare-type="Standard"
-                                        class="p-4 text-center bg-primary rounded-xl">
+                                     data-flight-number="{{ flight.flight_number }}"
+                                     data-fare-type="Standard"
+                                     class="p-4 text-center bg-primary rounded-xl">
                                     <p class="text-2xl font-bold leading-4 text-white">€{{ flight.price }}</p>
                                     <p class="text-sm font-light text-white">per person</p>
                                 </div>
@@ -146,9 +153,9 @@
                                     </ul>
                                 </div>
                                 <div data-leg="{{ leg }}"
-                                        data-flight-number="{{ flight.flight_number }}"
-                                        data-fare-type="Plus"
-                                        class="p-4 text-center bg-primary rounded-xl">
+                                     data-flight-number="{{ flight.flight_number }}"
+                                     data-fare-type="Plus"
+                                     class="p-4 text-center bg-primary rounded-xl">
                                     <p class="text-2xl font-bold leading-4 text-white">€{{ flight.plus_fare }}</p>
                                     <p class="text-sm font-light text-white">per person</p>
                                 </div>
@@ -177,9 +184,9 @@
                                     </ul>
                                 </div>
                                 <div data-leg="{{ leg }}"
-                                        data-flight-number="{{ flight.flight_number }}"
-                                        data-fare-type="Premium"
-                                        class="p-4 text-center bg-primary rounded-xl">
+                                     data-flight-number="{{ flight.flight_number }}"
+                                     data-fare-type="Premium"
+                                     class="p-4 text-center bg-primary rounded-xl">
                                     <p class="text-2xl font-bold leading-4 text-white">€{{ flight.premium_fare }}</p>
                                     <p class="text-sm font-light text-white">per person</p>
                                 </div>

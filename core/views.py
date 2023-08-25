@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Flight, Airport, Passenger, Booking
 from datetime import datetime, timedelta
+from datetime import date as d
 from utils.altdates import create_alt_date_range
 from .forms import PassengerForm
 from django.http import HttpResponse
@@ -45,6 +46,11 @@ def search_results_view(request):
         render: Rendered search results page.
 
     """
+    max_date = datetime(2024, 7, 1)
+    min_date = datetime.today() - timedelta(days=1)
+    print(min_date)
+    print(max_date)
+
     # FOR ONE-WAY FLIGHTS
     request.session["num_passengers"] = int(request.GET["passengers"])
     request.session["trip_type"] = request.GET["trip_type"]
@@ -87,6 +93,8 @@ def search_results_view(request):
             "slider_date_list": create_alt_date_range(outbound_date),
             "slider_date_list_return": create_alt_date_range(return_date),
             "flight_results_return": flight_results_return,
+            "max_date": max_date,
+            "min_date": min_date,
         }
     # CONTEXT FOR ONE-WAY TRIP
     else:
@@ -97,6 +105,8 @@ def search_results_view(request):
             "outbound_date": datetime.strptime(outbound_date, "%Y-%m-%d"),
             "flight_results": flight_results,
             "slider_date_list": create_alt_date_range(outbound_date),
+            "max_date": max_date,
+            "min_date": min_date,
         }
     return render(request, "core/search-results.html", context)
 
@@ -172,6 +182,8 @@ def alt_dates(request):
     Returns:
         Rendered search results page with new flight results.
     """
+    max_date = datetime(2024, 7, 1)
+    min_date = datetime.today() - timedelta(days=1)
     # TELLS VIEW WHICH LEG OF THE TRIP TO SEARCH FOR
     leg = request.GET["leg"]
     # USER SELECTED DATE
@@ -220,6 +232,8 @@ def alt_dates(request):
                 "origin": flight_origin,
                 "destination": flight_destination,
                 "leg": leg,
+                "max_date": max_date,
+                "min_date": min_date,
             }
 
             return render(request, "partials/flights.html", context)
@@ -236,6 +250,8 @@ def alt_dates(request):
         "origin": flight_origin,
         "destination": flight_destination,
         "leg": leg,
+        "max_date": max_date,
+        "min_date": min_date,
     }
     # ARTIFICIAL LOADING DELAY FOR VISUAL CONSISTENCY
     time.sleep(0.5)

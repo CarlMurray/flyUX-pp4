@@ -5,6 +5,57 @@
 
 ![Cover image](/readme/cover-img.png)
 
+## Contents
+
+# Table of Contents
+
+- [Project Background](#project-background)
+- [Process](#process)
+  - [Problem Statement](#problem-statement)
+  - [Research](#research)
+  - [Design](#design)
+  - [Development](#development)
+  - [Data Models](#data-models)
+- [Features](#features)
+  - [CRUD Functionality](#crud-functionality)
+  - [Authentication & Authorisation](#authentication--authorisation)
+  - [Navigation](#navigation)
+  - [Search](#search)
+  - [Flights](#flights)
+  - [Alternate Dates](#alternate-dates)
+  - [Fares](#fares)
+  - [Baggage Policy](#baggage-policy)
+  - [Edit Flights](#edit-flights)
+  - [Passengers](#passengers)
+  - [Checkout](#checkout)
+  - [Confirmation](#confirmation)
+  - [Bookings](#bookings)
+    - [Cancel Booking](#cancel-booking)
+    - [Edit Passengers](#edit-passengers)
+  - [Blog](#blog)
+  - [About](#about)
+- [Roadmap](#roadmap)
+- [Bugs](#bugs)
+- [Technologies Used](#️technologies-used)
+  - [Core Development Technologies](#core-development-technologies)
+  - [Libraries, Frameworks and Packages](#libraries-frameworks-and-packages)
+  - [Python/Django Packages](#pythondjango-packages)
+  - [Infrastructural Technologies](#️infrastructural-technologies)
+- [Testing](#testing)
+  - [Automatic Testing](#automatic-testing)
+  - [Manual Testing](#️manual-testing)
+    - [General Testing](#general-testing)
+    - [Homepage & Search Testing](#homepage--search-testing)
+    - [Flight Search Results Testing](#️flight-search-results-testing)
+    - [Payment & Confirmation Testing](#payment--confirmation-testing)
+    - [Authorisation Testing](#authorisation-testing)
+    - [Lighthouse Testing](#lighthouse-testing)
+    - [Responsiveness Testing](#responsiveness-testing)
+- [Deployment](#deployment)
+  - [Local Deployment](#local-deployment)
+  - [Heroku Deployment](#heroku-deployment)
+  - [Environment Variables](#environment-variables)
+- [Credits](#credits)
 
 ### 👀 Overview
 
@@ -567,10 +618,11 @@ This section outlines the various technologies used throughout the project and t
 - Responsiveness was tested as per below table (go to section: [Responsiveness](#responsiveness))
 - All HTML files were passed through the W3C validator with no errors
 - All JavaScript files were passed through JSHint with no errors present.
-- The website was tested on major browsers including Chrome, Safari, Firefox and Edge as detailed in [Testing Process](#testing-process) below.
+- The website was tested on major browsers including Chrome, Safari, Firefox and Edge.
 - All user flows were tested in depth including navigating through the booking flow, viewing blog content, entering search queries, clicking CTAs and links, and form submission.
 - All forms were tested to ensure validation was present and that forms could be submitted without error
 - Lighthouse was used to test for Performance, Accessibility, Best Practices and SEO and adjustments were made to improve test results.
+- WAVE was used to test for accessibility issues and adjustments were made to improve test results.
 
 </details>
 
@@ -739,6 +791,53 @@ This section outlines the various technologies used throughout the project and t
 <br>
 <br>
 <br>
+
+# 🖥️ Deployment
+
+<details>
+
+#### 📦 Local Deployment  
+1. Clone the repository from GitHub by clicking the "Code" button and copying the URL.
+2. Open your preferred IDE and open a terminal session in the directory you want to clone the repository to.
+3. Type `git clone` followed by the URL you copied in step 1 and press enter.
+4. Install the required dependencies by typing `pip install -r requirements.txt` in the terminal.
+5. Note: The project is setup to use environment variables. You will need to set these up in your local environment. See [Environment Variables](#environment-variables) for more information.
+6. Connect your database of choice and run the migrations by typing `python manage.py migrate` in the terminal.
+7. Create a superuser by typing `python manage.py createsuperuser` in the terminal and following the prompts.
+8. Optional: Fixtures for Flight, Airport and Aircraft models are included in the project in the `fixtures` directory. To add pre-populated data to the database, run `python manage.py loaddata fixtures/[fixture_name].json`.
+9. Run the app by typing `python manage.py runserver` in the terminal and opening the URL in your browser.
+
+#### 💜 Heroku Deployment
+1. Login to the Heroku dashboard and create a new app.
+2. Connect your GitHub repository to your Heroku app.
+3. In the Settings tab, ensure that the Python Buildpack is added.
+4. Set environment variables in the Config Vars section of the Settings tab.
+5. In the Deploy tab, enable automatic deploys from your GitHub repository.
+6. Click the "Deploy Branch" button to deploy the app.
+7. Once the app has been deployed, click the "Open App" button to view the app.
+
+#### 📐 Environment Variables
+- For local deployment, you will need to create a `.env` file in the root directory of the project and set the environment variables in this file.
+- For Heroku deployment, you will need to set the environment variables through the Heroku CLI or through the Heroku dashboard under 'Config Vars'.
+- You need to define the following variables:
+  - If using a Postgres database:
+    - `DATABASE_URL` - the URL for your Postgres database.
+    - `NAME` - the name of your database.
+    - `USER` - the username for your database.
+    - `PASSWORD` - the password for your database.
+    - `HOST` - the host for your database.
+    - `PORT` - the port for your database.
+  - Django settings:
+    - `SECRET_KEY` - the secret key for your Django project.
+    - `DEBUG` - set to `True` for development, `False` for production.
+
+</details>
+  
+<br>
+<br>
+<br>
+
+---
 
 # 👋 Credits
 

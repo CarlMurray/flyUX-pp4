@@ -114,7 +114,7 @@
                         <!-- IF LOGGED IN SHOW USER NAME -->
                         {% if user.is_authenticated %}
                             <div class="flex">
-                                <a href="#" class="text-white border-r-[1px] border-r-white pr-4">Welcome, <strong>{{ user.first_name }}</strong></a>
+                                <p class="text-white border-r-[1px] border-r-white pr-4">Welcome, <strong>{{ user.first_name }}</strong></p>
                                 <a href="{% url 'logout' %}" class="pl-4 text-white">Logout</a>
                             </div>
                             <!-- IF NOT LOGGED IN ADD ?next URL -->

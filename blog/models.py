@@ -11,6 +11,7 @@ class BlogPost(models.Model):
     )
     content_rendered = RenderedMarkdownField()
     cover_image = models.ImageField(upload_to="blog_images/")
+    alt_text = models.CharField(max_length=120, default="", blank=True, null=True)
 
     def __str__(self):
         return self.title

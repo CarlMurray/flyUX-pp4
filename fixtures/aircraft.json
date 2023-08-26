@@ -1,0 +1,1 @@
+[{"model": "core.aircraft", "pk": 1, "fields": {"identification": "PY0412", "seats": 142, "aircraft_type": "b737-700"}}, {"model": "core.aircraft", "pk": 2, "fields": {"identification": "PY5024", "seats": 133, "aircraft_type": "a321-100"}}]

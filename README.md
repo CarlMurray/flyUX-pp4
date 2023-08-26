@@ -238,6 +238,22 @@ The data models for the project are shown below:
 </details>
 </details>
 
+#### 💼 Baggage Policy
+
+<details>
+
+- Links to view the airline's baggage policy are shown on the fare cards.
+- Clicking the link opens a modal with the baggage policy information.
+- The modal can be closed by pressing ESC or clicking outside of the modal.
+
+<details>
+<summary>Baggage Policy Modal</summary>
+
+![Screenshot of baggage policy modal](/readme/baggage-modal-screenshot.png)
+
+</details>
+</details>
+
 #### 🛫 Edit Flights
 
 <details>

@@ -21,19 +21,19 @@
         {% endfor %}
     {% endif %}
     <!-- ALT DATE SELECTOR -->
-    <div class="grid items-center w-full h-20 grid-cols-5 grid-rows-1 border-2 border-gray-200 rounded-full shadow-inner">
+    <div class="grid items-center w-full h-16 grid-cols-5 grid-rows-1 text-sm border-2 border-gray-200 rounded-full shadow-inner sm:h-20 sm:text-lg lg:text-xl">
         {% for dateitem in slider_date_list %}
             <!-- ADD UNIQUE STYLES AN NO CLICK FOR CURRENT DATE SELECTION -->
             {% if dateitem == date %}
                 <div class="flex items-center justify-center h-full bg-white rounded-full shadow-md">
-                    <div class="text-lg font-bold text-center sm:text-2xl text-primary altDate"
+                    <div class="font-bold text-center text-primary altDate"
                          id="{{ date|date:'Y-m-d' }}">{{ date|date:'j M' }}</div>
                 </div>
                 <!-- ADD CLICK FOR OTHER DATES -->
             {% else %}
                 {% if dateitem < min_date or dateitem > max_date %}
                     <div class="">
-                        <div class="py-4 font-semibold text-center text-gray-300 text-md sm:text-lg altDate"
+                        <div class="py-4 font-semibold text-center text-gray-300 altDate"
                              id="{{ dateitem|date:'Y-m-d' }}">{{ dateitem|date:'j M' }}</div>
                     </div>
                 {% else %}
@@ -43,7 +43,7 @@
                          hx-swap="outerHTML"
                          hx-indicator="#indicator-{{ leg }}"
                          hx-target="#{{ leg }}-flights">
-                        <div class="py-4 font-semibold text-center text-md sm:text-lg altDate"
+                        <div class="py-2 font-semibold text-center altDate {% if forloop.counter is 2 %} border-x-2 {% elif forloop.counter is 4 %} border-x-2{% endif %}"
                              id="{{ dateitem|date:'Y-m-d' }}">{{ dateitem|date:'j M' }}</div>
                     </div>
                 {% endif %}
@@ -67,7 +67,8 @@
         </div>
         <!-- IF THERE'S NO FLIGHTS ON SELECTED DATE -->
         {% if not flight_results %}
-            <div id="error-{{leg}}" class="flex flex-col justify-center text-center border-[1px] border-gray-300 rounded-3xl px-8 py-16 mt-6">
+            <div id="error-{{ leg }}"
+                 class="flex flex-col justify-center text-center border-[1px] border-gray-300 rounded-3xl px-8 py-16 mt-6">
                 <p class="text-2xl font-bold text-primary">Oops!</p>
                 <p class="text-lg font-semibold text-text">Looks like there's no flights on that date. Please pick another date.</p>
             </div>
@@ -117,8 +118,8 @@
                                             <br>
                                             <small class="ml-[23px]">40cm x 20cm x 20cm</small>
                                             <br>
-                                            <small><a href="#"
-   class="underline decoration-primary underline-offset-4 text-primary ml-[23px]">See baggage policy</a></small>
+                                            <small data-id="baggage-policy"
+                                                   class="underline decoration-primary underline-offset-4 text-primary ml-[23px] cursor-pointer">See baggage policy</small>
                                         </li>
                                     </ul>
                                 </div>
@@ -140,8 +141,8 @@
                                             <br>
                                             <small class="ml-[23px]">40cm x 20cm x 20cm</small>
                                             <br>
-                                            <small><a href="#"
-   class="underline decoration-primary underline-offset-4 text-primary ml-[23px]">See baggage policy</a></small>
+                                            <small data-id="baggage-policy"
+                                                   class="underline decoration-primary underline-offset-4 text-primary ml-[23px] cursor-pointer">See baggage policy</small>
                                         </li>
                                         <li class="my-4 list-disc list-inside">
                                             Cabin bag
@@ -170,8 +171,8 @@
                                             <br>
                                             <small class="ml-[23px]">40cm x 20cm x 20cm</small>
                                             <br>
-                                            <small><a href="#"
-   class="underline decoration-primary underline-offset-4 text-primary ml-[23px]">See baggage policy</a></small>
+                                            <small data-id="baggage-policy"
+                                                   class="underline decoration-primary underline-offset-4 text-primary ml-[23px] cursor-pointer">See baggage policy</small>
                                         </li>
                                         <li class="my-4 list-disc list-inside">20kg check-in bag</li>
                                         <li class="my-4 list-disc list-inside">

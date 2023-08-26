@@ -4,6 +4,12 @@
     Search Flights
 {% endblock title %}
 {% block content %}
+    <dialog id="baggage-policy-modal" class="shadow-2xl outline-none rounded-3xl">
+        <span id="modal-close-btn" class="absolute text-6xl transition-all duration-300 cursor-pointer hover:text-primary right-4 text-text">&times;</span>
+        <img class="p-16"
+             alt="Diagrams showing baggage allowance policy"
+             src="{% static 'img/baggage-diagram.png' %}">
+    </dialog>
     <div>
         <div class="container px-5 mx-auto">
             <div>
@@ -55,4 +61,5 @@
     <script src="https://unpkg.com/htmx.org@1.9.3"
             integrity="sha384-lVb3Rd/Ca0AxaoZg5sACe8FJKF0tnUgR2Kd7ehUOG5GCcROv5uBIZsOqovBAcWua"
             crossorigin="anonymous"></script>
+    <script src="{% static 'js/baggage-policy.js' %}"></script>
 {% endblock scripts %}

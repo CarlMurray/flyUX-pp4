@@ -67,8 +67,14 @@ const reattachOutboundListeners = function () {
 
   outboundAltDates.forEach((date) => {
     date.addEventListener("click", function (e) {
+
+      error = document.querySelector("#error-outbound");
+      if (error) {
+        error.classList.add("hidden");
+      } 
       outboundFlights.forEach((flight) => {
         flight.classList.add("hidden");
+        flight.nextElementSibling.classList.add("hidden");
       });
     });
   });
@@ -101,8 +107,13 @@ const reattachReturnListeners = function () {
 
   returnAltDates.forEach((date) => {
     date.addEventListener("click", function (e) {
+      error = document.querySelector("#error-return");
+      if (error) {
+        error.classList.add("hidden");
+      } 
       returnFlights.forEach((flight) => {
         flight.classList.add("hidden");
+        flight.nextElementSibling.classList.add("hidden");
       });
     });
   });

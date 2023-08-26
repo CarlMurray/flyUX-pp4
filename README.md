@@ -426,6 +426,7 @@ The data models for the project are shown below:
 <details>
 <summary>Code Snippet Implemented</summary>
 
+
 ```css
 .flatpickr-mobile:before {
   content: attr(placeholder);
@@ -443,6 +444,18 @@ input[type="hidden"][value]:not([value=""]) + .flatpickr-mobile:before {
 ```
 
 </details>
+
+<br>
+
+  5. When testing the alternate date selection feature, a bug was identified where the "No flights on selected date" error message would not disappear during the transition between a newly selected alternate date. Additionally, if the fares container was expanded for a flight, it would remain visible during the request when selecting a new date. The loading indicator would display during the request, but would push the error message/fares container down. The intended behaviour was for all content - including flights, fares and error messages - to be hidden during a request, and for the loading indicator to display. Some time was spent troubleshooting the `htmx` implementation, however it was found that all that needed to be done was add `classList.add('hidden')` to these elements when an alternate date was clicked, as I had done for the flight cards already in the earlier stages of development. This was a simple fix and a reminder to always ensure code is clean and well documented, as I had already forgotten how I had implemented this functionality on the flight cards by the time I was reaching the latter stages of development.
+
+<details>
+<summary>Screenshot of bug</summary>
+
+![Screenshot of bug](/readme/no-flights-bug.png)
+
+</details>
+
 </details>
 
 ---

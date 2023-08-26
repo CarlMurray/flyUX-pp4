@@ -11,7 +11,7 @@ def logout_view(request):
     """
     Summary:
         Logs out the user and redirects to home page.
-        
+
     Returns:
         redirect: Redirects to home page.
     """
@@ -24,7 +24,7 @@ def login_view(request):
     """
     Summary:
         Logs in the user and redirects to home page or previous page.
-    
+
     Returns:
         GET: Renders login page.
         POST: Logs in user and redirects to home page or previous page.
@@ -53,7 +53,7 @@ def login_view(request):
                 login(request, user)
                 messages.success(request, "Woo! You have been logged in!")
                 return redirect(request.session["next_url"])
-        # ELSE, RETURN ERROR MESSAGE AND RENDER LOGIN PAGE
+            # ELSE, RETURN ERROR MESSAGE AND RENDER LOGIN PAGE
             else:
                 messages.error(request, "Oops! Invalid email or password.")
         else:
@@ -65,7 +65,7 @@ def register_view(request):
     """
     Summary:
         Registers the user and redirects to home page or previous page.
-        
+
     Returns:
         GET: Renders register page.
         POST: Registers user and redirects to home page or previous page.
@@ -91,5 +91,7 @@ def register_view(request):
 
             # IF SUBMITTING REGISTER FORM FROM REGISTER PAGE
             return redirect(request.session["next_url"])
-    messages.error(request, "Invalid information - please check your details and try again.")
+    messages.error(
+        request, "Invalid information - please check your details and try again."
+    )
     return render(request, "users/register.html", {"form": form})

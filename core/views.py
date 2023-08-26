@@ -48,8 +48,6 @@ def search_results_view(request):
     """
     max_date = datetime(2024, 7, 1)
     min_date = datetime.today() - timedelta(days=1)
-    print(min_date)
-    print(max_date)
 
     # FOR ONE-WAY FLIGHTS
     request.session["num_passengers"] = int(request.GET["passengers"])
@@ -397,11 +395,11 @@ def bookings_detail_view(request, booking_id):
     """
     Summary:
         Renders booking detail page for a given booking.
-    
+
     Returns:
         GET: Rendered booking detail page.
         DELETE: Cancel booking and redirect to bookings page.
-        
+
     """
     booking = Booking.objects.get(id=booking_id)
     # CHECK THAT USER IS AUTHORISED TO VIEW BOOKING
@@ -428,7 +426,7 @@ def bookings_edit_view(request, booking_id):
     """
     Summary:
         Handles htmx requests to edit passenger info for a given booking.
-    
+
     Returns:
         GET: Rendered edit passenger info form.
         POST: Save edited passenger info and return updated passenger info.

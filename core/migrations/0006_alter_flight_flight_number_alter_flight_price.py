@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("core", "0005_flight_outbound_date_alter_flight_arr_time_and_more"),
     ]

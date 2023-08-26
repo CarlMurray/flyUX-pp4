@@ -6,33 +6,85 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('core', '0008_alter_flight_flight_number'),
+        ("core", "0008_alter_flight_flight_number"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Booking',
+            name="Booking",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('reference', models.UUIDField(auto_created=True)),
-                ('time_created', models.DateTimeField(auto_now_add=True, null=True)),
-                ('status_confirmed', models.BooleanField(blank=True, default=False)),
-                ('trip_email', models.EmailField(blank=True, max_length=254, null=True)),
-                ('customer', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL)),
-                ('outbound_flight', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='booking_outbound', to='core.flight')),
-                ('return_flight', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='booking_return', to='core.flight')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("reference", models.UUIDField(auto_created=True)),
+                ("time_created", models.DateTimeField(auto_now_add=True, null=True)),
+                ("status_confirmed", models.BooleanField(blank=True, default=False)),
+                (
+                    "trip_email",
+                    models.EmailField(blank=True, max_length=254, null=True),
+                ),
+                (
+                    "customer",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "outbound_flight",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="booking_outbound",
+                        to="core.flight",
+                    ),
+                ),
+                (
+                    "return_flight",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="booking_return",
+                        to="core.flight",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Passenger',
+            name="Passenger",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first', models.CharField(max_length=100)),
-                ('last', models.CharField(max_length=100)),
-                ('booking', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='core.booking')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("first", models.CharField(max_length=100)),
+                ("last", models.CharField(max_length=100)),
+                (
+                    "booking",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="core.booking",
+                    ),
+                ),
             ],
         ),
     ]

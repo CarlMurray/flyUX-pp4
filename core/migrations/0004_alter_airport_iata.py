@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("core", "0003_remove_aircraft_ac_type_aircraft_aircraft_type_and_more"),
     ]

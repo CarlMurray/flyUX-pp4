@@ -5,15 +5,14 @@ import uuid
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('core', '0010_alter_booking_reference'),
+        ("core", "0010_alter_booking_reference"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='booking',
-            name='reference',
+            model_name="booking",
+            name="reference",
             field=models.UUIDField(default=uuid.uuid4),
         ),
     ]

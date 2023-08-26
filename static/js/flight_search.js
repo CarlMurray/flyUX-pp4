@@ -96,9 +96,9 @@ let form = document.querySelector("form");
 const validateForm = function (e) {
   e.preventDefault();
   // CHECK IF RETURN DATE IS BEFORE DEPARTURE DATE
-  if (new Date(dateFromInputField.value) > new Date(dateToInputField.value)) {
+  if (new Date(dateFromInputField.value) >= new Date(dateToInputField.value)) {
     dateToInputField.setCustomValidity(
-      "Return date cannot be before departure date"
+      "Return date must be after departure date"
     );
   } else {
     dateToInputField.setCustomValidity("");

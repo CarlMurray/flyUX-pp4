@@ -47,9 +47,16 @@
     <!-- HX-TARGET FOR SWAP -->
     <div hx-target="this" hx-swap="outerHTML" class="max-w-[400px]">
         <div class="flex items-center justify-between">
-            <h3 class="text-xl font-bold text-primary">Passengers</h3>
+            <h3 class="py-2 text-xl font-bold text-primary">Passengers</h3>
+            {% if messages %}
+                {% for message in messages %}
+                    <div id="passengers-message"
+                         class="font-bold text-green-600 transition-all duration-1000 opacity-100">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
             <!-- 'EDIT' BTN USES HX-GET -->
-            <button class="rounded-full py-2 px-4 border-[1px] border-primary hover:bg-primary hover:text-white transition-all duration-300"
+            <button id="edit-button"
+                    class="{% if messages %}hidden opacity-0{% endif %} rounded-full py-2 px-4 border-[1px] border-primary hover:bg-primary hover:text-white transition-all duration-300"
                     hx-get="/bookings/detail/edit/{{ booking.id }}"
                     aria-label="Edit passengers">Edit Passengers</button>
         </div>

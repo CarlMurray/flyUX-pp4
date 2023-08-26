@@ -85,3 +85,29 @@ function checkFailedValidation(evt) {
     form.reportValidity();
   });
 }
+
+
+/*
+Listnes for htmx afterSettle event.
+If the user has successfully updated their booking, the user is shown a success message.
+*/
+window.addEventListener("htmx:afterSettle", handleMessage);
+
+function handleMessage(evt) {
+  let message = document.querySelector("#passengers-message");
+  if (message) {
+    // HIDE MESSAGE AFTER DELAY
+    setTimeout(function () {
+      message.classList.add("opacity-0");
+      message.classList.remove("opacity-100");
+      // SHOW EDIT BUTTON AFTER DELAY
+      setTimeout(function () {
+        let btn = document.querySelector("#edit-button");
+        btn.classList.remove("hidden");
+        btn.classList.remove("opacity-0");
+        btn.classList.add("opacity-100");
+        message.remove();
+      }, 1000);
+    }, 4000);
+  }
+}

@@ -443,6 +443,7 @@ def bookings_edit_view(request, booking_id):
             passenger.first = request.POST.get(f"first-{passenger.id}")
             passenger.last = request.POST.get(f"last-{passenger.id}")
             passenger.save()
+        messages.success(request, "Passenger info updated!")
     # 'GET' AND 'DELETE' REQUESTS USE SAME CONTEXT DATA
     return render(
         request,

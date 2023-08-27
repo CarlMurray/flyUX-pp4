@@ -1,9 +1,4 @@
-
-
-
-
 # Table of Contents
-- [Table of Contents](#table-of-contents)
 - [📄 Project Background](#-project-background)
     - [👀 Overview](#-overview)
 - [🔁 Process](#-process)
@@ -50,6 +45,7 @@
     - [🔒 Authorisation Testing](#-authorisation-testing)
     - [🚦 Lighthouse Testing](#-lighthouse-testing)
     - [📱 Responsiveness Testing](#-responsiveness-testing)
+    - [✅ Code Validation](#-code-validation)
 - [🖥️ Deployment](#️-deployment)
   - [📦 Local Deployment](#-local-deployment)
   - [💜 Heroku Deployment](#-heroku-deployment)
@@ -618,7 +614,7 @@ This section outlines the various technologies used throughout the project and t
 
 <details>
 
-- Responsiveness was tested as per below table (go to section: [Responsiveness](#responsiveness))
+- Responsiveness was tested as per below table (go to section: [Responsiveness](#-responsiveness-testing))
 - All HTML files were passed through the W3C validator with no errors
 - All JavaScript files were passed through JSHint with no errors present.
 - The website was tested on major browsers including Chrome, Safari, Firefox and Edge.
@@ -641,7 +637,7 @@ This section outlines the various technologies used throughout the project and t
 | Homepage loads        | Navigate to website URL                                                                                                                                                                        | Page loads < 3s, no errors                                                    |
 | Links                 | Click on each Navigation link, CTA, button, logo, footer link                                                                                                                                  | Correct page is loaded/correct action performed, new tab opened if applicable |
 | Form validation       | Enter data into each input field, ensure only valid data is accepted                                                                                                                           | Form doesn't submit until correct data entered, error message shown           |
-| Responsiveness        | Resize viewport window from 320px upwards with Chrome Dev Tools. Test devices as detailed in [Testing Process](#testing-process)                                                               | Page layout remains intact and adapts to screen size as intended              |
+| Responsiveness        | Resize viewport window from 320px upwards with Chrome Dev Tools. Test devices as detailed in [Responsiveness Testing](#-responsiveness-testing)                                                               | Page layout remains intact and adapts to screen size as intended              |
 | Lighthouse            | Perform Lighthouse test on each page for the primary user flow (Booking process)                                                                                                               | Score of > 89 on Performance, Accessibility, Best Practices                   |
 | Browser compatibility | Test links, layout, appearance, functionality and above Tests on Chrome, Safari, Firefox and Edge. BrowserStack used to test various mobile/large format devices with recent browser versions. | Website looks and functions as intended and passes all tests above            |
 
@@ -790,6 +786,23 @@ This section outlines the various technologies used throughout the project and t
 </details>
 
 ---
+
+### ✅ Code Validation
+
+<details>
+
+- All HTML pages were checked with the [W3C Markup Validation Service](https://validator.w3.org/) with no major errors present. Errors were present for `htmx` attributes, however these are valid and necessary for the functionality of the site. There were also duplicate IDs present in the HTML, however these are also valid and necessary for the functionality of the site.
+- All JavaScript files were passed through [JSHint](https://jshint.com/) with no errors present.
+- All custom coded Python files were formatted with a PEP8 complaint formatter - [Black](https://pypi.org/project/black/).
+
+- HTML Validation Examples:
+  - [Homepage](https://validator.w3.org/nu/?doc=https%3A%2F%2Fflyux.carlmurray.design%2F)
+  - [Search Results](https://validator.w3.org/nu/?doc=https%3A%2F%2Fflyux.carlmurray.design%2Fsearch_results%2F%3Fcsrfmiddlewaretoken%3D8KBZVKvX5lSOnxG31kPxxvzRddpEYACScsdbbPRenaPjeZT3OdKDnNFBofnKkoF4%26trip_type%3Dreturn%26origin%3DDublin%2B%2528DUB%2529%26destination%3DCork%2B%2528ORK%2529%26outbound_date%3D2023-08-30%26return_date%3D2023-08-31%26passengers%3D1)
+  - [Checkout](https://validator.w3.org/nu/?doc=https%3A%2F%2Fflyux.carlmurray.design%2Fcheckout)
+  - [Blog](https://validator.w3.org/nu/?doc=https%3A%2F%2Fflyux.carlmurray.design%2Fblog)
+
+
+</details>
 
 <br>
 <br>

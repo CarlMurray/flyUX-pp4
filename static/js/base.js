@@ -14,10 +14,10 @@ let isOpen = false;
 hamburgerMenu.addEventListener("click", function () {
   isOpen = !isOpen;
   if (isOpen === true) {
-    hamburgerMenuExpanded.classList.toggle("max-h-screen");
+    hamburgerMenuExpanded.classList.toggle("max-h-[999px]");
     hamburgerMenuExpanded.classList.toggle("p-12");
   } else {
-    hamburgerMenuExpanded.classList.toggle("max-h-screen");
+    hamburgerMenuExpanded.classList.toggle("max-h-[999px]");
     hamburgerMenuExpanded.classList.toggle("p-12");
   }
 });

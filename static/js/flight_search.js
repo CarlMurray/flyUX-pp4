@@ -49,11 +49,7 @@ let date_picker_to = flatpickr("#flatpickr-date-return", {
 });
 
 // DISABLE USER KEY INPUT FOR FORM FIELDS
-let dateFromInput = document.querySelector(
-  "#flatpickr-date-outbound-container"
-);
-
-// DISABLE USER KEY INPUT FOR FORM FIELDS
+let dateFromInput = document.querySelector("#flatpickr-date-outbound-container");
 let dateToInput = document.querySelector("#flatpickr-date-return-container");
 let dateFromInputField = document.querySelector("#flatpickr-date-outbound");
 let dateToInputField = document.querySelector("#flatpickr-date-return");

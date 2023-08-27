@@ -489,8 +489,9 @@ The data models for the project are shown below:
 2. The "alternate date selector" on the flight results page works by sending an AJAX request (via htmx) when an alternate date is clicked, and responding with HTML with the new flight data for the given date. When the new HTML is loaded from the response, the click event listeners need to be re-attached to the new flight card elements so that they expand when clicked, to show the fares. However, when initially trying to implement this re-attachment, an issue arose where the flight cards would not expand every second time an alternate date was selected. Following some troubleshooting, it was found that the click event listeners were compounding, thus negating each other (i.e. as if a user clicked the card twice in rapid succession). Using `console.log` and Chrome Dev Tools for debugging enabled me to see which events were firing so that the issue could be identified and solved by defining the click handler function outside of the event listner function. [Relevant Stack Overflow thread.](https://stackoverflow.com/questions/41720943/rebind-javascript-events-and-addeventlistener-fires-twice)
 3. The `Flight`s table contains 90,000 rows of data and when implementing the `Booking`s CRUD functionality, there were severe issues experienced particularly in the admin panel when trying to view/edit `Booking`s which resulted in indefinite loading times as the `Flight`s data was loaded. Django has a number of built-in solutions for this issue and a solution was implemented by defining `search_fields` and `autocomplete_fields` in the `ModelAdmin` configurations for the `Flight` and `Booking` models. [Django Documentation Reference](https://docs.djangoproject.com/en/4.2/ref/contrib/admin/#django.contrib.admin.ModelAdmin.autocomplete_fields)
 4. When testing the site on mobile, a bug was identified where the date input field placeholder text would not display. Following some research and troubleshooting, it was found that this is a known issue with Flatpickr and a workaround was found as [referenced in this JSfiddle](https://jsfiddle.net/Sova12309/7bmpy9jc/9/).
+
 <details>
-<summary>Code Snippet Implemented</summary>
+<summary>Code Snippet Implemented to fix bug #4</summary>
 
 
 ```css
@@ -513,15 +514,40 @@ input[type="hidden"][value]:not([value=""]) + .flatpickr-mobile:before {
 
 <br>
 
-  5. When testing the alternate date selection feature, a bug was identified where the "No flights on selected date" error message would not disappear during the transition between a newly selected alternate date. Additionally, if the fares container was expanded for a flight, it would remain visible during the request when selecting a new date. The loading indicator would display during the request, but would push the error message/fares container down. The intended behaviour was for all content - including flights, fares and error messages - to be hidden during a request, and for the loading indicator to display. Some time was spent troubleshooting the `htmx` implementation, however it was found that all that needed to be done was add `classList.add('hidden')` to these elements when an alternate date was clicked, as I had done for the flight cards already in the earlier stages of development. This was a simple fix and a reminder to always ensure code is clean and well documented, as I had already forgotten how I had implemented this functionality on the flight cards by the time I was reaching the latter stages of development.
-  6. When testing the site on mobile, a bug was identified where when clicking on the search form input fields (origin, destination, dates), the keyboard displayed which was not intented as the user must select from the dropdown menu/date picker. This was solved by adding `readonly` to the input fields. Future iterations of the site will allow for user keyboard input, however this was not implemented due to time constraints and potential for scope creep.
+5. When testing the alternate date selection feature, a bug was identified where the "No flights on selected date" error message would not disappear during the transition between a newly selected alternate date. Additionally, if the fares container was expanded for a flight, it would remain visible during the request when selecting a new date. The loading indicator would display during the request, but would push the error message/fares container down. The intended behaviour was for all content - including flights, fares and error messages - to be hidden during a request, and for the loading indicator to display. Some time was spent troubleshooting the `htmx` implementation, however it was found that all that needed to be done was add `classList.add('hidden')` to these elements when an alternate date was clicked, as I had done for the flight cards already in the earlier stages of development. This was a simple fix and a reminder to always ensure code is clean and well documented, as I had already forgotten how I had implemented this functionality on the flight cards by the time I was reaching the latter stages of development.
 
 <details>
-<summary>Screenshot of bug</summary>
+<summary>Screenshot of bug #5</summary>
 
 ![Screenshot of bug](/readme/no-flights-bug.png)
 
 </details>
+
+6. When testing the site on mobile, a bug was identified where when clicking on the search form input fields (origin, destination, dates), the keyboard displayed which was not intented as the user must select from the dropdown menu/date picker. This was solved by adding `readonly` to the input fields. Future iterations of the site will allow for user keyboard input, however this was not implemented due to time constraints and potential for scope creep.
+7. Fixing bug #6 resulted in a new bug where a user could submit the search form without entering any data. This was solved by adding a simple piece of logic which removes the `readonly` attribute before validating the form, to check that the input values are valid before submitting.
+
+<details>
+<summary>Code snippet added to fix bug #7</summary>
+
+```javascript
+// SEARCH FORM VALIDATION
+const validateForm = function (e) {
+  e.preventDefault();
+
+  // NEW CODE SNIPPET ADDED TO FUNCTION
+  document.querySelectorAll("input").forEach((input) => {
+    input.removeAttribute("readonly");
+  });
+
+  ...
+
+  // REST OF FUNCTION...
+  ...
+}
+
+```
+</details>
+
 
 </details>
 

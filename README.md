@@ -1,62 +1,65 @@
 
 
 
+
+# Table of Contents
+- [Table of Contents](#table-of-contents)
+- [📄 Project Background](#-project-background)
+    - [👀 Overview](#-overview)
+- [🔁 Process](#-process)
+    - [❓ Problem Statement:](#-problem-statement)
+    - [🔎 Research](#-research)
+    - [🎨 Design](#-design)
+    - [👨‍💻 Development](#-development)
+      - [📈 Link to the GitHub Project board](#-link-to-the-github-project-board)
+      - [👤 User Stories](#-user-stories)
+    - [🧮 Data Models](#-data-models)
+- [🪀 Features](#-features)
+    - [💩 CRUD Functionality](#-crud-functionality)
+    - [🔑 Authentication \& Authorisation](#-authentication--authorisation)
+    - [🧭 Navigation](#-navigation)
+    - [🔎 Search](#-search)
+    - [✈️ Flights](#️-flights)
+      - [🗓️ Alternate Dates](#️-alternate-dates)
+      - [💸 Fares](#-fares)
+      - [💼 Baggage Policy](#-baggage-policy)
+      - [🛫 Edit Flights](#-edit-flights)
+    - [👯 Passengers](#-passengers)
+    - [💳 Checkout](#-checkout)
+    - [✅ Confirmation](#-confirmation)
+    - [📜 Bookings](#-bookings)
+      - [❌ Cancel Booking](#-cancel-booking)
+      - [👥 Edit Passengers](#-edit-passengers)
+    - [🌐 Blog](#-blog)
+    - [🤔 About](#-about)
+- [🛣️ Roadmap](#️-roadmap)
+- [🪲 Bugs](#-bugs)
+- [⚙️ Technologies Used](#️-technologies-used)
+  - [💾 Core Development Technologies](#-core-development-technologies)
+  - [📚 Libraries, Frameworks and Packages](#-libraries-frameworks-and-packages)
+  - [🐍 Python/Django Packages](#-pythondjango-packages)
+  - [🖥️ Infrastructural Technologies](#️-infrastructural-technologies)
+- [🧪 Testing](#-testing)
+  - [🤖 Automatic Testing](#-automatic-testing)
+  - [⚒️ Manual Testing](#️-manual-testing)
+    - [🛰️ Overview](#️-overview)
+    - [🧪 General Testing](#-general-testing)
+    - [🏠 Homepage \& Search Testing](#-homepage--search-testing)
+    - [✈️ Flight Search Results Testing](#️-flight-search-results-testing)
+    - [💵 Payment \& Confirmation Testing](#-payment--confirmation-testing)
+    - [🔒 Authorisation Testing](#-authorisation-testing)
+    - [🚦 Lighthouse Testing](#-lighthouse-testing)
+    - [📱 Responsiveness Testing](#-responsiveness-testing)
+- [🖥️ Deployment](#️-deployment)
+  - [📦 Local Deployment](#-local-deployment)
+  - [💜 Heroku Deployment](#-heroku-deployment)
+  - [📐 Environment Variables](#-environment-variables)
+- [👋 Credits](#-credits)
+
+
 # 📄 Project Background
 
 ![Cover image](/readme/cover-img.png)
-
-# Table of Contents
-
-# Table of Contents
-
-- [📄 Project Background](#📄-project-background)
-- [🔁 Process](#🔁-process)
-  - [❓ Problem Statement](#❓-problem-statement)
-  - [🔎 Research](#🔎-research)
-  - [🎨 Design](#🎨-design)
-  - [👨‍💻 Development](#👨‍💻-development)
-  - [🧮 Data Models](#🧮-data-models)
-- [🪀 Features](#features)
-  - 💩 [CRUD Functionality](#💩-crud-functionality)
-  - 🔑 [Authentication & Authorisation](#🔑-authentication--authorisation)
-  - 🧭 [Navigation](#🧭-navigation)
-  - 🔎 [Search](#🔎-search)
-  - ✈️ [Flights](#✈️-flights)
-  - 🗓️ [Alternate Dates](#🗓️-alternate-dates)
-  - 💸 [Fares](#💸-fares)
-  - 💼 [Baggage Policy](#💼-baggage-policy)
-  - 🛫 [Edit Flights](#🛫-edit-flights)
-  - 👥 [Passengers](#👥-passengers)
-  - 💳 [Checkout](#💳-checkout)
-  - ✅ [Confirmation](#✅-confirmation)
-  - 📜 [Bookings](#📜-bookings)
-    - ❌ [Cancel Booking](#❌-cancel-booking)
-    - 👥 [Edit Passengers](#👥-edit-passengers)
-  - 🌐 [Blog](#🌐-blog)
-  - 🤔 [About](#🤔-about)
-- 🛣️ [Roadmap](#🛣️-roadmap)
-- 🪲 [Bugs](#🪲-bugs)
-- ⚙️ [Technologies Used](#️⚙️-technologies-used)
-  - 💾 [Core Development Technologies](#💾-core-development-technologies)
-  - 📚 [Libraries, Frameworks and Packages](#📚-libraries-frameworks-and-packages)
-  - 🐍 [Python/Django Packages](#🐍-pythondjango-packages)
-  - 🖥️ [Infrastructural Technologies](#️🖥️-infrastructural-technologies)
-- 🧪 [Testing](#🧪-testing)
-  - 🤖 [Automatic Testing](#🤖-automatic-testing)
-  - ⚒️ [Manual Testing](#️⚒️-manual-testing)
-    - 🛰️ [General Testing](#🛰️-general-testing)
-    - 🏠 [Homepage & Search Testing](#🏠-homepage--search-testing)
-    - ✈️ [Flight Search Results Testing](#️✈️-flight-search-results-testing)
-    - 💵 [Payment & Confirmation Testing](#💵-payment--confirmation-testing)
-    - 🔒 [Authorisation Testing](#🔒-authorisation-testing)
-    - 🚦 [Lighthouse Testing](#🚦-lighthouse-testing)
-    - 📱 [Responsiveness Testing](#📱-responsiveness-testing)
-- 🖥️ [Deployment](#🖥️-deployment)
-  - 📦 [Local Deployment](#📦-local-deployment)
-  - 💜 [Heroku Deployment](#💜-heroku-deployment)
-  - 📐 [Environment Variables](#📐-environment-variables)
-- 👋 [Credits](#👋-credits)
-
 
 ### 👀 Overview
 
@@ -128,9 +131,8 @@
 
 </details>
 
-<br>
 
---- 
+
 
 ### 🧮 Data Models
 

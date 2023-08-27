@@ -125,7 +125,7 @@ def passenger_details_view(request):
 
     #  RENDERS PAGE WITH PASSENGER FORMS
     if request.method == "GET":
-        request.session["next_url"] = request.GET.urlencode(safe="/?=&")
+        request.session["next_url"] = request.get_full_path()
         request.session["outbound_flight"] = request.GET.get("outbound_flight")
         request.session["outbound_fare"] = request.GET.get("outbound_fare")
         request.session["return_flight"] = request.GET.get("return_flight")

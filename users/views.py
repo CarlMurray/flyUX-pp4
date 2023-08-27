@@ -31,7 +31,7 @@ def login_view(request):
         Already logged in: Redirects to home page.
     """
     # STORE PREV URL FOR REDIRECT AFTER LOGIN, TRIMS '?next='
-    request.session["next_url"] = request.GET.urlencode(safe="/?=&")[5:]
+    # request.session["next_url"] = request.GET.urlencode(safe="/?=&")[5:]
     # CHECK IF USER IS ALREADY LOGGED IN AND REDIRECT TO HOME PAGE
     if request.user.is_authenticated:
         messages.info(request, "Woo! You're already logged in!")
@@ -72,7 +72,9 @@ def register_view(request):
         Next URL: Redirects to next URL.
         Already logged in: Redirects to home page.
     """
-    request.session["next_url"] = request.GET.urlencode(safe="/?=&")[5:]
+    # STORE PREV URL FOR REDIRECT AFTER LOGIN, TRIMS '?next='
+    if request.GET.get("next"):
+        request.session["next_url"] = request.GET.urlencode(safe="/?=&")[5:]
     # RETURN HOME IF USER TRIES TO REGISTER WHILE SIGNED IN
     if request.user.is_authenticated:
         return redirect("home-page")
@@ -86,9 +88,9 @@ def register_view(request):
             user = form.save()
             login(request, user)
             # IF SIGNING UP FROM PASSENGER DETAILS PAGE
-            if request.POST.get("next"):
-                return redirect("/passenger_details/?" + request.POST.get("next"))
-
+            # if request.POST.get("next"):
+            #     return redirect("/passenger_details/?" + request.POST.get("next"))
+            
             # IF SUBMITTING REGISTER FORM FROM REGISTER PAGE
             return redirect(request.session["next_url"])
     messages.error(

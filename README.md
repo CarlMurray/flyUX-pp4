@@ -1,3 +1,6 @@
+![Cover image](/readme/cover-img.png)
+
+
 # Table of Contents
 - [📄 Project Background](#-project-background)
     - [👀 Overview](#-overview)
@@ -55,7 +58,6 @@
 
 # 📄 Project Background
 
-![Cover image](/readme/cover-img.png)
 
 ### 👀 Overview
 

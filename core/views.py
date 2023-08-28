@@ -216,6 +216,7 @@ def alt_dates(request):
                 f"{leg_string} flight date must be {tense_string} {other_leg} date",
             )
             # STORES PREVIOUS DATE FOR VALIDATION
+            request.session[f"{leg}_date"] = request.session[f"{leg}_previous_date"]
             date = request.session[f"{leg}_previous_date"]
             # GETS FLIGHT RESULTS FOR PREVIOUS DATE IF RETURN DATE SELECTED IS BEFORE OUTBOUND DATE
             flight_results = Flight.objects.filter(

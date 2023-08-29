@@ -247,7 +247,7 @@ const createSelectedFlightCard = function (flight, selectedFare) {
             <div class="text-xl font-bold md:text-4xl text-text">${depTime}</div>
         </div>
         <div class="mx-8">
-        <img src="/static/img/flight-duration-illo.svg" alt="" width="227" height="27" class="">
+        <img src="https://flyux-pp4.s3.amazonaws.com/static/img/flight-duration-illo.svg" alt="" width="227" height="27" class="">
     </div>
 
         <div>

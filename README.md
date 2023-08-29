@@ -597,6 +597,7 @@ This section outlines the various technologies used throughout the project and t
 - [Django Markdown Field](https://pypi.org/project/django-markdownfield/) - adds a markdown-compatible text field to admin panel (for BlogPost model).
 - [Black](https://pypi.org/project/black/) - A PEP8 compliant code formatter.
 - [Django Debug Toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/) - used for debugging.
+- [Django Storages](https://django-storages.readthedocs.io/en/latest/) and [Boto3](https://pypi.org/project/boto3/) - used for storing static files and media files on AWS S3.
 
 </details>
 
@@ -606,6 +607,7 @@ This section outlines the various technologies used throughout the project and t
 
 - [PostgreSQL](https://www.postgresql.org/) (via Digital Ocean) - used for database.
 - [Heroku](https://www.heroku.com/) - used for hosting the application.
+- [AWS S3](https://aws.amazon.com/s3/) - used for storing static files and media files.
 
 </details>
 
@@ -860,6 +862,7 @@ This section outlines the various technologies used throughout the project and t
 5. In the Deploy tab, enable automatic deploys from your GitHub repository.
 6. Click the "Deploy Branch" button to deploy the app.
 7. Once the app has been deployed, click the "Open App" button to view the app.
+8. If using S3, you will need to set up an S3 bucket and add the environment variables to your Heroku app (see tutorial [here](https://testdriven.io/blog/storing-django-static-and-media-files-on-amazon-s3/) for reference.)
 
 #### 📐 Environment Variables
 - For local deployment, you will need to create a `.env` file in the root directory of the project and set the environment variables in this file.
@@ -875,6 +878,11 @@ This section outlines the various technologies used throughout the project and t
   - Django settings:
     - `SECRET_KEY` - the secret key for your Django project.
     - `DEBUG` - set to `True` for development, `False` for production.
+  - If using S3:
+    - `USE_S3` - set to `True` to use S3, `False` to use local storage.
+    - `AWS_ACCESS_KEY_ID` - your AWS access key ID.
+    - `AWS_SECRET_ACCESS_KEY` - your AWS secret access key.
+    - `AWS_STORAGE_BUCKET_NAME` - the name of your AWS S3 bucket.
 
 </details>
   

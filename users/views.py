@@ -31,7 +31,8 @@ def login_view(request):
         Already logged in: Redirects to home page.
     """
     # STORE PREV URL FOR REDIRECT AFTER LOGIN, TRIMS '?next='
-    # request.session["next_url"] = request.GET.urlencode(safe="/?=&")[5:]
+    if request.GET.get("next"):
+        request.session["next_url"] = request.GET.urlencode(safe="/?=&")[5:]
     # CHECK IF USER IS ALREADY LOGGED IN AND REDIRECT TO HOME PAGE
     if request.user.is_authenticated:
         messages.info(request, "Woo! You're already logged in!")

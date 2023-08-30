@@ -87,8 +87,7 @@
                 <div class="flex items-center flex-1 w-20 basis-['250px']">
                     <a href="{% url 'home-page' %}" class="w-20">
                         <img src="{% static 'img/flyux-logo.png' %}"
-                             alt="'flyUX' logo: A minimalist logo consisting of 'flyUX' text, using a modern sans-serif font, with a small illustrated airplane sweeping under the text to convey travel-inspired design."
-                              />
+                             alt="'flyUX' logo: A minimalist logo consisting of 'flyUX' text, using a modern sans-serif font, with a small illustrated airplane sweeping under the text to convey travel-inspired design." />
                     </a>
                 </div>
                 <!-- NAV ITEMS -->
@@ -114,7 +113,9 @@
                         <!-- IF LOGGED IN SHOW USER NAME -->
                         {% if user.is_authenticated %}
                             <div class="flex">
-                                <p class="text-white border-r-[1px] border-r-white pr-4">Welcome, <strong>{{ user.first_name }}</strong></p>
+                                <p class="text-white border-r-[1px] border-r-white pr-4">
+                                    Welcome, <strong>{{ user.first_name }}</strong>
+                                </p>
                                 <a href="{% url 'logout' %}" class="pl-4 text-white">Logout</a>
                             </div>
                             <!-- IF NOT LOGGED IN ADD ?next URL -->
@@ -236,6 +237,15 @@
             <script src="https://unpkg.com/htmx.org@1.9.3"
                     integrity="sha384-lVb3Rd/Ca0AxaoZg5sACe8FJKF0tnUgR2Kd7ehUOG5GCcROv5uBIZsOqovBAcWua"
                     crossorigin="anonymous"></script>
+            <script type="text/javascript">
+                        window._mfq = window._mfq || [];
+                        (function() {
+                          var mf = document.createElement("script");
+                          mf.type = "text/javascript"; mf.defer = true;
+                          mf.src = "//cdn.mouseflow.com/projects/acc2e842-4cc1-4d9b-b73b-e31321f3db18.js";
+                          document.getElementsByTagName("head")[0].appendChild(mf);
+                        })();
+            </script>
         {% endblock scripts %}
     </body>
 </html>

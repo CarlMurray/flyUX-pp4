@@ -87,6 +87,7 @@
     </div>
 {% endblock content %}
 {% block scripts %}
+{{ block.super }}
     <script src="{% static 'js/payform.js' %}"></script>
     <script src="{% static 'js/checkout.js' %}"></script>
 {% endblock scripts %}

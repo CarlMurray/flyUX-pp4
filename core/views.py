@@ -359,7 +359,8 @@ def checkout_view(request):
         passengers = request.session["passengers"].items()
         passenger_objects = []
         for passenger, name in passengers:
-            p = Passenger(first=name["first"], last=name["last"], booking=booking)
+            p = Passenger(first=name["first"],
+                          last=name["last"], booking=booking)
             passenger_objects.append(p)
             p.save()
 
@@ -386,7 +387,14 @@ def bookings_view(request):
     Summary:
         Renders bookings page for a given user.
     """
-    bookings = Booking.objects.filter(customer=request.user)
+    bookings = Booking.objects.select_related(
+        'outbound_flight__origin',
+        'return_flight__origin',
+        'return_flight__destination',
+        'outbound_flight__destination',
+        'outbound_flight',
+        'return_flight'
+    ).filter(customer=request.user)
     context = {"bookings": bookings}
     return render(request, "core/bookings.html", context)
 
@@ -402,7 +410,15 @@ def bookings_detail_view(request, booking_id):
         DELETE: Cancel booking and redirect to bookings page.
 
     """
-    booking = Booking.objects.get(id=booking_id)
+    booking = Booking.objects.select_related(
+        'customer',
+        'outbound_flight__origin',
+        'return_flight__origin',
+        'return_flight__destination',
+        'outbound_flight__destination',
+        'outbound_flight',
+        'return_flight'
+    ).get(id=booking_id)
     # CHECK THAT USER IS AUTHORISED TO VIEW BOOKING
     if request.user != booking.customer:
         raise PermissionDenied

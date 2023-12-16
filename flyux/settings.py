@@ -32,8 +32,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = (os.getenv("DEBUG") == "TRUE")
 
 # '*' TO ALLOW FOR LOCAL MOBILE TESTING
-ALLOWED_HOSTS = ['*', 'https://flyux-b4bb85443186.herokuapp.com/',
-                 '*.herokuapp.com', 'https://flyux.carlmurray.design/']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -92,15 +91,14 @@ WSGI_APPLICATION = "flyux.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('NAME'),
-        'USER': os.getenv('USER'),
-        'PASSWORD': os.getenv('PASSWORD'),
-        'HOST': os.getenv('HOST'),
-        'PORT': os.getenv('PORT'),
-        'DATABASE_URL': os.getenv('DATABASE_URL'),
-        'CONN_MAX_AGE': 0,
+        'NAME': os.environ.get('POSTGRES_NAME'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': 'db',
+        'PORT': 5432,
+    }
 
-    },
+
     # "local": {
     #     "ENGINE": "django.db.backends.sqlite3",
     #     "NAME": BASE_DIR / "db.sqlite3",
@@ -147,7 +145,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.User"
 
 # Configure Django App for Heroku.
-django_on_heroku.settings(locals())
+#django_on_heroku.settings(locals())
 
 LOGIN_URL = 'login'
 

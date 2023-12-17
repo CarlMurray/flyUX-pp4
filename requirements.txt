@@ -36,7 +36,7 @@ pycodestyle==2.11.0
 pyflakes==3.1.0
 python-dateutil==2.8.2
 python-dotenv==1.0.0
-PyYAML==6.0
+PyYAML
 regex==2023.6.3
 s3transfer==0.6.2
 shortuuid==1.0.11

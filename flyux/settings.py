@@ -34,6 +34,7 @@ DEBUG = (os.getenv("DEBUG") == "TRUE")
 # '*' TO ALLOW FOR LOCAL MOBILE TESTING
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = ['https://flyux.carlcodes.dev']
 
 # Application definition
 

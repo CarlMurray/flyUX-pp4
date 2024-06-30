@@ -88,6 +88,24 @@ WSGI_APPLICATION = "flyux.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 DATABASES = {
     'default': {
@@ -97,8 +115,8 @@ DATABASES = {
         'PASSWORD': os.getenv('PASSWORD'),
         'HOST': os.getenv('HOST'),
         'PORT': os.getenv('PORT'),
-        'DATABASE_URL': os.getenv('DATABASE_URL'),
-        'CONN_MAX_AGE': 0,
+        # 'DATABASE_URL': os.getenv('DATABASE_URL'),
+        # 'CONN_MAX_AGE': 0,
 
     },
     # "local": {

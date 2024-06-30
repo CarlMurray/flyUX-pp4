@@ -35,8 +35,8 @@ let dateTomorrowString =
   dateTomorrow.getDate();
 
 // ENABLES DATES FOR FLATPICKR
-let enabledDatesFrom = [{ from: dateTodayString, to: "2024-07-01" }];
-let enabledDatesTo = [{ from: dateTomorrowString, to: "2024-07-01" }];
+let enabledDatesFrom = [{ from: dateTodayString, to: "2025-07-01" }];
+let enabledDatesTo = [{ from: dateTomorrowString, to: "2025-07-01" }];
 
 // REQUIRED FOR FORM VALIDATION - DISABLES READONLY
 let date_picker_from = flatpickr("#flatpickr-date-outbound", {

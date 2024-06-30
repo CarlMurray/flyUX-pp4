@@ -50,7 +50,7 @@ class FlightTestCase(TestCase):
             flight_number="UX00001",
             origin=origin,
             destination=destination,
-            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-05", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -128,7 +128,7 @@ class BookingTestCase(TestCase):
             flight_number="UX00001",
             origin=Airport.objects.get(iata="ORG"),
             destination=Airport.objects.get(iata="DST"),
-            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-05", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -138,7 +138,7 @@ class BookingTestCase(TestCase):
             flight_number="UX00002",
             origin=Airport.objects.get(iata="DST"),
             destination=Airport.objects.get(iata="ORG"),
-            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-05", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -265,8 +265,8 @@ class SearchResultsViewTestCase(TestCase):
                 "trip_type": "return",
                 "origin": "(ORG)",
                 "destination": "(DST)",
-                "outbound_date": "2023-01-10",
-                "return_date": "2023-02-10",
+                "outbound_date": "2024-01-10",
+                "return_date": "2024-02-10",
             },
         )
         self.assertDictEqual(
@@ -274,10 +274,10 @@ class SearchResultsViewTestCase(TestCase):
             {
                 "num_passengers": 5,
                 "trip_type": "return",
-                "outbound_date": "2023-01-10",
-                "outbound_previous_date": "2023-01-10",
-                "return_date": "2023-02-10",
-                "return_previous_date": "2023-02-10",
+                "outbound_date": "2024-01-10",
+                "outbound_previous_date": "2024-01-10",
+                "return_date": "2024-02-10",
+                "return_previous_date": "2024-02-10",
             },
         )
 
@@ -292,7 +292,7 @@ class SearchResultsViewTestCase(TestCase):
                 "trip_type": "oneway",
                 "origin": "(ORG)",
                 "destination": "(DST)",
-                "outbound_date": "2023-01-10",
+                "outbound_date": "2024-01-10",
             },
         )
         self.assertDictEqual(
@@ -300,8 +300,8 @@ class SearchResultsViewTestCase(TestCase):
             {
                 "num_passengers": 5,
                 "trip_type": "oneway",
-                "outbound_date": "2023-01-10",
-                "outbound_previous_date": "2023-01-10",
+                "outbound_date": "2024-01-10",
+                "outbound_previous_date": "2024-01-10",
             },
         )
 
@@ -350,7 +350,7 @@ class PassengerDetailsViewTestCase(TestCase):
             flight_number="UX00001",
             origin=Airport.objects.get(iata="ORG"),
             destination=Airport.objects.get(iata="DST"),
-            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-05", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -360,7 +360,7 @@ class PassengerDetailsViewTestCase(TestCase):
             flight_number="UX00002",
             origin=Airport.objects.get(iata="DST"),
             destination=Airport.objects.get(iata="ORG"),
-            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-05", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -490,7 +490,7 @@ class AltDatesViewTestCase(TestCase):
             flight_number="UX00001",
             origin=Airport.objects.get(iata="ORG"),
             destination=Airport.objects.get(iata="DST"),
-            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-05", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -500,7 +500,7 @@ class AltDatesViewTestCase(TestCase):
             flight_number="UX00002",
             origin=Airport.objects.get(iata="DST"),
             destination=Airport.objects.get(iata="ORG"),
-            outbound_date=datetime.strptime("2023-01-10", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-10", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -515,7 +515,7 @@ class AltDatesViewTestCase(TestCase):
             "leg": "outbound",
             "origin": "(ORG)",
             "destination": "(DST)",
-            "date": "2023-01-05",
+            "date": "2024-01-05",
         }
         response = self.client.get("/search_results/alt_dates/", data)
         flight_results = response.context["flight_results"]
@@ -533,7 +533,7 @@ class AltDatesViewTestCase(TestCase):
             "leg": "outbound",
             "origin": "(ORG)",
             "destination": "(DST)",
-            "date": "2023-01-05",
+            "date": "2024-01-05",
         }
         response = self.client.get("/search_results/alt_dates/", data)
         flight_results = response.context["flight_results"]
@@ -552,18 +552,18 @@ class AltDatesViewTestCase(TestCase):
             "leg": "outbound",
             "origin": "(ORG)",
             "destination": "(DST)",
-            "date": "2023-01-05",
+            "date": "2024-01-05",
         }
         response = self.client.get("/search_results/alt_dates/", data)
         date_list = response.context["slider_date_list"]
         self.assertListEqual(
             date_list,
             [
-                datetime.strptime("2023-01-03", "%Y-%m-%d"),
-                datetime.strptime("2023-01-04", "%Y-%m-%d"),
-                datetime.strptime("2023-01-05", "%Y-%m-%d"),
-                datetime.strptime("2023-01-06", "%Y-%m-%d"),
-                datetime.strptime("2023-01-07", "%Y-%m-%d"),
+                datetime.strptime("2024-01-03", "%Y-%m-%d"),
+                datetime.strptime("2024-01-04", "%Y-%m-%d"),
+                datetime.strptime("2024-01-05", "%Y-%m-%d"),
+                datetime.strptime("2024-01-06", "%Y-%m-%d"),
+                datetime.strptime("2024-01-07", "%Y-%m-%d"),
             ],
         )
 
@@ -575,7 +575,7 @@ class AltDatesViewTestCase(TestCase):
             "leg": "outbound",
             "origin": "(ORG)",
             "destination": "(DST)",
-            "date": "2023-01-05",
+            "date": "2024-01-05",
         }
         response = self.client.get("/search_results/alt_dates/", data)
         self.assertEqual(response.status_code, 200)
@@ -587,21 +587,21 @@ class AltDatesViewTestCase(TestCase):
         """
         session = self.client.session
         session["trip_type"] = "return"
-        session["outbound_date"] = "2023-01-05"
-        session["outbound_previous_date"] = "2023-01-05"
-        session["return_date"] = "2023-01-06"
+        session["outbound_date"] = "2024-01-05"
+        session["outbound_previous_date"] = "2024-01-05"
+        session["return_date"] = "2024-01-06"
         session.save()
         data = {
             "leg": "outbound",
             "origin": "(ORG)",
             "destination": "(DST)",
-            "date": "2023-01-07",
+            "date": "2024-01-07",
         }
         response = self.client.get("/search_results/alt_dates/", data)
         flight_results = response.context["flight_results"]
         self.assertQuerysetEqual(
             flight_results,
-            Flight.objects.filter(outbound_date="2023-01-05"),
+            Flight.objects.filter(outbound_date="2024-01-05"),
             ordered=False,
         )
 
@@ -611,22 +611,22 @@ class AltDatesViewTestCase(TestCase):
         """
         session = self.client.session
         session["trip_type"] = "return"
-        session["outbound_date"] = "2023-01-05"
-        session["outbound_previous_date"] = "2023-01-05"
-        session["return_date"] = "2023-01-06"
-        session["return_previous_date"] = "2023-01-06"
+        session["outbound_date"] = "2024-01-05"
+        session["outbound_previous_date"] = "2024-01-05"
+        session["return_date"] = "2024-01-06"
+        session["return_previous_date"] = "2024-01-06"
         session.save()
         data = {
             "leg": "return",
             "origin": "(ORG)",
             "destination": "(DST)",
-            "date": "2023-01-04",
+            "date": "2024-01-04",
         }
         response = self.client.get("/search_results/alt_dates/", data)
         flight_results = response.context["flight_results"]
         self.assertQuerysetEqual(
             flight_results,
-            Flight.objects.filter(outbound_date="2023-01-06"),
+            Flight.objects.filter(outbound_date="2024-01-06"),
             ordered=False,
         )
 
@@ -679,7 +679,7 @@ class CheckoutViewTestCase(TestCase):
             flight_number="UX00001",
             origin=Airport.objects.get(iata="ORG"),
             destination=Airport.objects.get(iata="DST"),
-            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-05", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -689,7 +689,7 @@ class CheckoutViewTestCase(TestCase):
             flight_number="UX00002",
             origin=Airport.objects.get(iata="DST"),
             destination=Airport.objects.get(iata="ORG"),
-            outbound_date=datetime.strptime("2023-01-10", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-10", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -789,7 +789,7 @@ class OrderConfirmationViewTestCase(TestCase):
             flight_number="UX00001",
             origin=Airport.objects.get(iata="ORG"),
             destination=Airport.objects.get(iata="DST"),
-            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-05", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -799,7 +799,7 @@ class OrderConfirmationViewTestCase(TestCase):
             flight_number="UX00002",
             origin=Airport.objects.get(iata="DST"),
             destination=Airport.objects.get(iata="ORG"),
-            outbound_date=datetime.strptime("2023-01-10", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-10", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -880,7 +880,7 @@ class BookingsViewTestCase(TestCase):
             flight_number="UX00001",
             origin=Airport.objects.get(iata="ORG"),
             destination=Airport.objects.get(iata="DST"),
-            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-05", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -890,7 +890,7 @@ class BookingsViewTestCase(TestCase):
             flight_number="UX00002",
             origin=Airport.objects.get(iata="DST"),
             destination=Airport.objects.get(iata="ORG"),
-            outbound_date=datetime.strptime("2023-01-10", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-10", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -966,7 +966,7 @@ class BookingsDetailViewTestCase(TestCase):
             flight_number="UX00001",
             origin=Airport.objects.get(iata="ORG"),
             destination=Airport.objects.get(iata="DST"),
-            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-05", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -976,7 +976,7 @@ class BookingsDetailViewTestCase(TestCase):
             flight_number="UX00002",
             origin=Airport.objects.get(iata="DST"),
             destination=Airport.objects.get(iata="ORG"),
-            outbound_date=datetime.strptime("2023-01-10", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-10", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -1073,7 +1073,7 @@ class BookingsEditViewTestCase(TestCase):
             flight_number="UX00001",
             origin=Airport.objects.get(iata="ORG"),
             destination=Airport.objects.get(iata="DST"),
-            outbound_date=datetime.strptime("2023-01-05", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-05", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,
@@ -1083,7 +1083,7 @@ class BookingsEditViewTestCase(TestCase):
             flight_number="UX00002",
             origin=Airport.objects.get(iata="DST"),
             destination=Airport.objects.get(iata="ORG"),
-            outbound_date=datetime.strptime("2023-01-10", "%Y-%m-%d"),
+            outbound_date=datetime.strptime("2024-01-10", "%Y-%m-%d"),
             dep_time=datetime.now(),
             arr_time=datetime.now(),
             price=100,

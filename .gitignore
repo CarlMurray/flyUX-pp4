@@ -1,5 +1,6 @@
 flyux_venv
 staticfiles/
+newvenv
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5432:5432"
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      USER: postgres
+      NAME: postgres
+      HOST: db
+      PASSWORD: postgres123
+      PORT: 5432
+      USE_S3: false
+      SECRET_KEY: zx=mk5jtohq=lx65kt6u3du(klt1stmu3jdpw)f$a-)p$mt$)m
+      DEBUG: TRUE
+    depends_on:
+      - db
+    command: sh -c "
+      python manage.py migrate &&
+      python manage.py collectstatic --clear &&
+      python manage.py loaddata
+      fixtures/aircraft.json
+      fixtures/airports.json
+      fixtures/flights.json &&
+      python manage.py runserver 0.0.0.0:8000"
+    restart: on-failure

@@ -9,15 +9,15 @@ services:
     build: .
     ports:
       - "8000:8000"
+    env_file:
+      - ".env"
     environment:
       USER: postgres
       NAME: postgres
       HOST: db
-      PASSWORD: postgres123
       PORT: 5432
-      USE_S3: false
-      SECRET_KEY: zx=mk5jtohq=lx65kt6u3du(klt1stmu3jdpw)f$a-)p$mt$)m
-      DEBUG: "TRUE"
+      USE_S3: "TRUE"
+      DEBUG: "FALSE"
     depends_on:
       - db
     command: sh -c "

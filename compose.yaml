@@ -17,15 +17,16 @@ services:
       PORT: 5432
       USE_S3: false
       SECRET_KEY: zx=mk5jtohq=lx65kt6u3du(klt1stmu3jdpw)f$a-)p$mt$)m
-      DEBUG: TRUE
+      DEBUG: "TRUE"
     depends_on:
       - db
     command: sh -c "
       python manage.py migrate &&
-      python manage.py collectstatic --clear &&
+      python manage.py collectstatic --clear --noinput &&
       python manage.py loaddata
       fixtures/aircraft.json
       fixtures/airports.json
+      fixtures/blog.json
       fixtures/flights.json &&
       python manage.py runserver 0.0.0.0:8000"
     restart: on-failure

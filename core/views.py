@@ -46,7 +46,7 @@ def search_results_view(request):
         render: Rendered search results page.
 
     """
-    max_date = datetime(2025, 7, 1)
+    max_date = datetime.today() + timedelta(days=1500)
     min_date = datetime.today() - timedelta(days=1)
 
     # FOR ONE-WAY FLIGHTS
@@ -180,7 +180,7 @@ def alt_dates(request):
     Returns:
         Rendered search results page with new flight results.
     """
-    max_date = datetime(2025, 7, 1)
+    max_date = datetime.today() + timedelta(days=1500)
     min_date = datetime.today() - timedelta(days=1)
     # TELLS VIEW WHICH LEG OF THE TRIP TO SEARCH FOR
     leg = request.GET["leg"]

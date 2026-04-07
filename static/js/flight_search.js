@@ -11,7 +11,7 @@ let airportOrigin = document.querySelector("#origin");
 let airportDestination = document.querySelector("#destination");
 let airportsListOrigin = document.querySelector("#airports-list-origin");
 let airportsListDestination = document.querySelector(
-  "#airports-list-destination"
+  "#airports-list-destination",
 );
 let airportListItems = document.querySelectorAll(".airport-list-item");
 
@@ -35,8 +35,8 @@ let dateTomorrowString =
   dateTomorrow.getDate();
 
 // ENABLES DATES FOR FLATPICKR
-let enabledDatesFrom = [{ from: dateTodayString, to: "2025-07-01" }];
-let enabledDatesTo = [{ from: dateTomorrowString, to: "2025-07-01" }];
+let enabledDatesFrom = [{ from: dateTodayString, to: "2028-07-01" }];
+let enabledDatesTo = [{ from: dateTomorrowString, to: "2028-07-01" }];
 
 // REQUIRED FOR FORM VALIDATION - DISABLES READONLY
 let date_picker_from = flatpickr("#flatpickr-date-outbound", {
@@ -50,7 +50,7 @@ let date_picker_to = flatpickr("#flatpickr-date-return", {
 
 // DISABLE USER KEY INPUT FOR FORM FIELDS
 let dateFromInput = document.querySelector(
-  "#flatpickr-date-outbound-container"
+  "#flatpickr-date-outbound-container",
 );
 let dateToInput = document.querySelector("#flatpickr-date-return-container");
 let dateFromInputField = document.querySelector("#flatpickr-date-outbound");
@@ -99,7 +99,7 @@ const validateForm = function (e) {
   // CHECK IF RETURN DATE IS BEFORE DEPARTURE DATE
   if (new Date(dateFromInputField.value) >= new Date(dateToInputField.value)) {
     dateToInputField.setCustomValidity(
-      "Return date must be after departure date"
+      "Return date must be after departure date",
     );
   } else {
     dateToInputField.setCustomValidity("");
@@ -108,7 +108,7 @@ const validateForm = function (e) {
   // CHECK IF DESTINATION IS SAME AS ORIGIN
   if (airportDestination.value === airportOrigin.value) {
     airportDestination.setCustomValidity(
-      "Destination cannot be same as origin"
+      "Destination cannot be same as origin",
     );
   } else {
     airportDestination.setCustomValidity("");

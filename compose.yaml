@@ -5,6 +5,10 @@ services:
       POSTGRES_PASSWORD: postgres123
     ports:
       - "5432:5432"
+    networks:
+    - cf-network
+    hostname: flyux-db
+
   app:
     build: .
     ports:
@@ -30,3 +34,9 @@ services:
       fixtures/flights.json &&
       python manage.py runserver 0.0.0.0:8000"
     restart: on-failure
+    networks:
+    - cf-network
+    hostname: flyux-app
+networks:
+  cf-network:
+    external: true
